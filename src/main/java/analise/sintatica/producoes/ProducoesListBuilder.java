@@ -1,11 +1,11 @@
 package analise.sintatica.producoes;
 
-import analise.sintatica.ProducoesList;
+import analise.sintatica.ProducoesDaLinguagem;
 
 public class ProducoesListBuilder {
 	
-	public static ProducoesList producoesGCL(){
-		ProducoesList lista = new ProducoesList();
+	public static ProducoesDaLinguagem producoesGCL(){
+		ProducoesDaLinguagem lista = new ProducoesDaLinguagem();
 		
 		lista.add(new ProducaoIF());
 		

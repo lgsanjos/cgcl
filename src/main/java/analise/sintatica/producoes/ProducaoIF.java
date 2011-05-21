@@ -1,16 +1,28 @@
 package analise.sintatica.producoes;
 
-import analise.sintatica.ProducaoGenerica;
+import analise.sintatica.ProducaoDaLinguagem;
+import analise.sintatica.ProducaoGramatical;
 
-public class ProducaoIF extends ProducaoGenerica {
+public class ProducaoIF extends ProducaoDaLinguagem {
 
 	public ProducaoIF() {
 
-		this.getListaProducoesAceitas().add("IF |cond| THEN |exp|");
-		this.getListaProducoesAceitas().add("IF ( |cond| ) THEN |exp|");
+		ProducaoGramatical producao = new ProducaoGramatical();
+		producao.addSimbolo("IF");
+		producao.addSimbolo("cond", false);
+		producao.addSimbolo("THEN");
+		producao.addSimbolo("exp", false);
+		this.getListaProducoesAceitas().add (producao);
+		
+		producao = new ProducaoGramatical();
+		producao.addSimbolo("IF");
+		producao.addSimbolo("cond", false);
+		producao.addSimbolo("THEN");
+		producao.addSimbolo("exp", false);
+		producao.addSimbolo("ELSE");
+		producao.addSimbolo("exp", false);
+		this.getListaProducoesAceitas().add(producao);
 
-		this.getListaProducoesAceitas().add("IF |cond| THEN |exp| ELSE |exp|");
-		this.getListaProducoesAceitas().add("IF ( |cond| ) THEN |exp| ELSE |exp|");
 	}
 
 }

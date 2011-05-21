@@ -2,19 +2,18 @@ package analise.sintatica;
 
 import java.util.LinkedList;
 
-public class Producao{
+public class ProducaoGramatical{
 
 	private LinkedList<SimboloGramatical> simbolos;
     private int navegacao = 0;
 	
-	public Producao(){
+	public ProducaoGramatical(){
 		this.simbolos = new LinkedList<SimboloGramatical>();
 	}
 	
-	public Producao(LinkedList<SimboloGramatical> simbolos){
+	public ProducaoGramatical(LinkedList<SimboloGramatical> simbolos){
 		this.simbolos = simbolos;
 	}
-	
 	
 	public SimboloGramatical getFirst(){
 		this.navegacao = 1;
@@ -39,6 +38,20 @@ public class Producao{
 	    this.navegacao --;
 	    return this.simbolos.get(this.navegacao);
 	}
+	
+	public int size(){
+		return this.simbolos.size();
+	}
+	
+	public boolean addSimbolo(String lexema){
+		SimboloGramatical nova = new SimboloGramatical(true, lexema);
+		return this.simbolos.add(nova);
+	}
+	
+	public boolean addSimbolo(String lexema, boolean terminal){
+		SimboloGramatical nova = new SimboloGramatical(terminal, lexema);
+		return this.simbolos.add(nova);
+	}	
 	
 	public int getIndice(){
 		return this.navegacao;
