@@ -1,13 +1,11 @@
 package analise.sintatica.producoes;
 
-import analise.sintatica.ProducoesDaLinguagem;
-
 public class ProducoesListBuilder {
 	
-	public static ProducoesDaLinguagem producoesGCL(){
-		ProducoesDaLinguagem lista = new ProducoesDaLinguagem();
-		
-		lista.add(new ProducaoIF());
+	public static DicionarioDeRegrasProducao producoesGCL(){
+		DicionarioDeRegrasProducao lista = new DicionarioDeRegrasProducao();
+
+		lista.put("program", RegrasProducaoProgram.getInstancia() );
 		
 		return lista;
 	}

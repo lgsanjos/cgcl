@@ -3,6 +3,7 @@ package analise;
 import utils.GCLTokenTypes;
 import coretypes.Token;
 import analise.sintatica.AnaliseSintatica;
+import analise.lexica.AnaliseLexica;
 import junit.framework.TestCase;
 
 public class AnaliseSintaticaTest extends TestCase {
@@ -14,20 +15,26 @@ public class AnaliseSintaticaTest extends TestCase {
     protected void setUp() throws Exception {
     	super.setUp();
     	
-    	this.analisador = new AnaliseSintatica();
+    	this.analisador = new AnaliseSintatica( new AnaliseLexica("") );
+    	
     }	
     
-    public void testaPilhaDeTokens(){
-    	
-    	this.analisador.empilhaToken( new Token( GCLTokenTypes.Keyword , "IF"));   	
-    	assertTrue("A pilha deve conter apenas o Token IF e uma producao parcial valida.", this.analisador.isPilhaParcialmenteValida());
-    	
-    	this.analisador.empilhaToken( new Token( GCLTokenTypes.Keyword , "THEN"));
-    	assertFalse("A pilha deve conter os Token IF,THEN e NAO e uma producao parcial valida.",this.analisador.isPilhaParcialmenteValida());
-    	
-    	this.analisador.desempilhaToken();
-    	assertTrue("A pilha deve conter apenas o Token IF e uma producao parcial valida.", this.analisador.isPilhaParcialmenteValida());
+    public void incMe(Integer incMe){
+    	incMe = new Integer(2);
     }
+    
+    
+    public void testaPilhaDeTokens(){
+
+    	Integer testMe = new Integer(0);
+    	incMe(testMe);
+    	assertTrue( testMe == 1);
+    	
+    	incMe(testMe);
+    	assertTrue( testMe == 2);
+
+    }
+   
     
 
 }

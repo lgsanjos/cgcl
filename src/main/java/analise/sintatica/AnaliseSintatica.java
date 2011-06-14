@@ -1,64 +1,102 @@
 package analise.sintatica;
 
+import java.util.HashMap;
+
+import utils.GCLTokenTypes;
+
+import analise.lexica.AnaliseLexica;
+import analise.sintatica.producoes.DicionarioDeRegrasProducao;
 import analise.sintatica.producoes.ProducoesListBuilder;
+import analise.sintatica.producoes.RegrasProducaoAbstract;
+import analise.sintatica.producoes.RegrasProducaoDefinitionPart;
+import analise.sintatica.producoes.RegrasProducaoModule;
 import coretypes.Token;
 import coretypes.TokenList;
 
 public class AnaliseSintatica {
 	
 	private TokenList pilhaDeTokens;
-	private ProducoesDaLinguagem listaDeProducoes;
+	private DicionarioDeRegrasProducao listaDeProducoes;
+	private AnaliseLexica analiseLexica;
+	
+
+	public AnaliseSintatica(AnaliseLexica analiseLexica){
+		this.pilhaDeTokens = new TokenList();
+		this.limpaPilhaDeTokens();
+
+		this.listaDeProducoes = ProducoesListBuilder.producoesGCL();
+		this.analiseLexica = analiseLexica;
+	}
 	
 	private void limpaPilhaDeTokens(){
 		this.pilhaDeTokens.clear();
 	}
 	
-	private boolean isParcialmenteValidoParaAlgumaProducao(){
-		int i = 0;
-		boolean validou = false;
-		ProducaoDaLinguagem producao;
+	private boolean empilhaToken(){
 		
-		while ( (i < this.listaDeProducoes.size()) && ( !validou ) ){
-			producao = this.listaDeProducoes.get(i);
-			validou = producao.validaParcialmente(this.pilhaDeTokens);
-			i++;
+		try {
+			Token token = this.analiseLexica.getNextToken();
+			this.pilhaDeTokens.addLast(token);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
-
-		return validou;
+		
 	}
 	
-	private ProducoesDaLinguagem getProducaoValidas(){
-		ProducoesDaLinguagem lista = new ProducoesDaLinguagem();
-		ProducaoDaLinguagem producao;
+	private boolean hasTokenParaProcessar(){
+		return this.empilhaToken();
+	}
+	
+	private RegrasProducaoAbstract getProducaoQueValida(TokenList pilha){
+		HashMap<String, Integer> listaDeTokens = new HashMap<String, Integer>();
+		listaDeTokens.put("program", 1);
+		listaDeTokens.put("module", 2);
 		
-		for (int i = 0; i < this.listaDeProducoes.size(); i++){
-			producao = this.listaDeProducoes.get(i);
-			if ( producao.validaTotalmente(this.pilhaDeTokens) ){
-				lista.add(producao);
-			}
-		}
+		int i = 0;
+		
+		switch ( listaDeTokens.get(pilha.getFirst().getValue()) ){
 
-		return lista;
+			case 1: // program
+			
+				if ( RegrasProducaoModule.getInstancia().isValida(pilha, 0) ){
+					return RegrasProducaoModule.getInstancia();
+ 				}
+										
+				break;
+				
+			case 2: // module
+				// TODO: VALIDACAO TOTALMENTE ERRADA
+				while ( pilha.isEmpty() ){
+					if ( pilha.get(i).getValue().equalsIgnoreCase("module") ) {
+						if ( pilha.get(i).getTokenType() == GCLTokenTypes.Identifier ) {
+							if ( RegrasProducaoDefinitionPart.getInstancia().isValida(pilha, i) ) {
+								
+							}
+						}
+					}
+					
+				}
+				
+				// "module" "identifier" <definitionPart> [ "private"  <block> ] "."
+				
+				break;
+				
+			default: //identifier
+				
+				break;
+		
+		}		
+			
+		return null;
+		
 	}
-
-	private ProducaoDaLinguagem getUnicaProducaoValida(){
-		ProducaoDaLinguagem producao = null; 
-		ProducoesDaLinguagem lista;
-
-		lista = this.getProducaoValidas();	
-		if (lista.size() == 1){
-			producao = lista.getFirst();
-		}
-
-		return producao;
+	
+	private boolean isPilhaValidaParaUmaUnicaProducao(){		
+		return ( getProducaoQueValida(pilhaDeTokens) != null );
 	}
-
-	public AnaliseSintatica(){
-		this.pilhaDeTokens = new TokenList();
-		this.limpaPilhaDeTokens();
-
-		this.listaDeProducoes = ProducoesListBuilder.producoesGCL();
-	}
+	
 
 	public Token desempilhaToken(){
 		return this.pilhaDeTokens.removeLast();
@@ -69,20 +107,24 @@ public class AnaliseSintatica {
 		return this.pilhaDeTokens.size();
 	}
 
-	public boolean isPilhaParcialmenteValida(){
-		if ( this.pilhaDeTokens.isEmpty() ){
-			return true;
-		}
 
-		return isParcialmenteValidoParaAlgumaProducao();
-	}
 	
-	public boolean isPilhaValida(){
-		if ( this.pilhaDeTokens.isEmpty() ){
-			return true;
+	public void valida(){
+		try{
+			
+			while ( hasTokenParaProcessar() ){
+				if ( isPilhaValidaParaUmaUnicaProducao() ){
+					//getProducaoValida();
+					//geraArvore();
+					this.limpaPilhaDeTokens();
+				}
+				
+			}
+			
+		}catch(Exception e){
+			
 		}
-		
-		return (this.getUnicaProducaoValida() != null);
-	}	
+	  			
+	}
 
 }

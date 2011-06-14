@@ -1,24 +1,43 @@
 package analise.sintatica;
 
-public class SimboloGramatical {
-	private boolean terminal;
-	private String lexema;	
+public abstract class SimboloGramatical {
+	private String lexema;
+	private boolean obrigatorio = true;
 	
-	public boolean isTerminal(){
-		return this.terminal;
-	}
+	public abstract boolean isTerminal();
+	public abstract ProducaoGramatical getProducaoParaDerivar();
 	
+				
 	public String getLexema(){
 		return this.lexema;
 	}
 	
-	public SimboloGramatical(){
-		  	
+	public boolean isObrigatorio(){
+		return this.obrigatorio;
+	}
+	
+	public void setObrigatorio(){
+		this.obrigatorio = true;
+	}
+	
+	public void setOpcional(){
+		this.obrigatorio = false;
 	}	
 	
-	public SimboloGramatical(boolean terminal, String lexema){
+	public SimboloGramatical(){
+		  	
+	}
+	
+	public SimboloGramatical(String lexema){
+		this();
 		this.lexema = lexema;
-		this.terminal = terminal;		
+		this.obrigatorio = true;
+	}	
+	
+	public SimboloGramatical(String lexema, boolean obrigatorio ){
+		this();
+		this.lexema = lexema;
+		this.obrigatorio = obrigatorio;
 	}
 		
 
