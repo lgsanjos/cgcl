@@ -1,5 +1,6 @@
 package analise.sintatica.producoes;
 
+import coretypes.IndiceNumerico;
 import coretypes.TokenList;
 
 public class RegrasProducaoDefinition extends RegrasProducaoAbstract {
@@ -10,9 +11,11 @@ public class RegrasProducaoDefinition extends RegrasProducaoAbstract {
 	}
 
 	@Override
-	public boolean isValida(TokenList pilhaDeToken, int apartirDe) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
+		// <constantDef> | <variableDef> | <procedureDef> | <typedef> |<procedureDecl>
+		
+		
+		return true;
 	}
 
 }

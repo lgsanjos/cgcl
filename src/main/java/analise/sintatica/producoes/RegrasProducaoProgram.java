@@ -1,6 +1,7 @@
 package analise.sintatica.producoes;
 
 import coretypes.TokenList;
+import coretypes.IndiceNumerico;
 
 
 public class RegrasProducaoProgram extends RegrasProducaoAbstract {
@@ -18,16 +19,13 @@ public class RegrasProducaoProgram extends RegrasProducaoAbstract {
 	}
 	
 	@Override
-	public boolean isValida(TokenList pilhaDeToken, int apartirDe) {
-		int i = apartirDe;
+	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
 		boolean isValida = true;
+			
 		
-		
-		
-		while ( isValida ){
-			if ( isValida ) isValida =  pilhaDeToken.get(i).getValue().equalsIgnoreCase("begin");	
-			i++;
-		}
+		//while ( isValida ){
+		//	if ( isValida ) isValida = this.hasLexema(pilhaDeToken, apartirDe, "begin");			
+		//}
 		
 		return isValida;
 	}

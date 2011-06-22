@@ -1,5 +1,7 @@
 package analise.sintatica.producoes;
 
+import utils.GCLTokenTypes;
+import coretypes.IndiceNumerico;
 import coretypes.TokenList;
 
 public class RegrasProducaoModule extends RegrasProducaoAbstract {
@@ -10,16 +12,24 @@ public class RegrasProducaoModule extends RegrasProducaoAbstract {
 		return null;
 	}
 
-	@Override
-	public boolean isValida(TokenList pilhaDeToken, int apartirDe) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	private static RegrasProducaoModule instancia = new RegrasProducaoModule();
 	
 	public static RegrasProducaoAbstract getInstancia() {
 		return instancia;
+	}
+
+	@Override
+	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
+		// "module" "identifier" <definitionPart> [ "private"  <block> ] "."
+		boolean isValido = true;
+		
+		if ( isValido ) isValido &= this.hasLexema(pilhaDeToken, apartirDe, "module"); 
+		if ( isValido ) isValido &= this.isAnIdToken(pilhaDeToken, apartirDe); 
+		if ( isValido ) isValido &= RegrasProducaoDefinitionPart.getInstancia().isValida(pilhaDeToken, apartirDe);
+		// [ "private" <block> ]		
+		if ( isValido ) isValido &= this.hasLexema(pilhaDeToken, apartirDe, "."); 
+
+		return isValido;
 	}
 	
 

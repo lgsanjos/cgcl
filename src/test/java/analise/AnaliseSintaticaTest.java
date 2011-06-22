@@ -1,7 +1,5 @@
 package analise;
 
-import utils.GCLTokenTypes;
-import coretypes.Token;
 import analise.sintatica.AnaliseSintatica;
 import analise.lexica.AnaliseLexica;
 import junit.framework.TestCase;
@@ -19,20 +17,13 @@ public class AnaliseSintaticaTest extends TestCase {
     	
     }	
     
-    public void incMe(Integer incMe){
-    	incMe = new Integer(2);
-    }
-    
-    
-    public void testaPilhaDeTokens(){
-
-    	Integer testMe = new Integer(0);
-    	incMe(testMe);
-    	assertTrue( testMe == 1);
+    public void testaModuleBasico(){
+    	String source = "module oi begin end.";
     	
-    	incMe(testMe);
-    	assertTrue( testMe == 2);
-
+    	this.analisador = new AnaliseSintatica( new AnaliseLexica(source) );
+    	assertTrue( this.analisador.valida() );
+    	
+    	
     }
    
     

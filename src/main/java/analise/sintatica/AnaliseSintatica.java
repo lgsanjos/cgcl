@@ -1,22 +1,16 @@
 package analise.sintatica;
 
-import java.util.HashMap;
-
-import utils.GCLTokenTypes;
-
 import analise.lexica.AnaliseLexica;
-import analise.sintatica.producoes.DicionarioDeRegrasProducao;
-import analise.sintatica.producoes.ProducoesListBuilder;
-import analise.sintatica.producoes.RegrasProducaoAbstract;
-import analise.sintatica.producoes.RegrasProducaoDefinitionPart;
 import analise.sintatica.producoes.RegrasProducaoModule;
+import analise.sintatica.producoes.RegrasProducaoProgram;
+import coretypes.IndiceNumerico;
 import coretypes.Token;
 import coretypes.TokenList;
 
 public class AnaliseSintatica {
 	
 	private TokenList pilhaDeTokens;
-	private DicionarioDeRegrasProducao listaDeProducoes;
+	//private DicionarioDeRegrasProducao listaDeProducoes;
 	private AnaliseLexica analiseLexica;
 	
 
@@ -24,7 +18,7 @@ public class AnaliseSintatica {
 		this.pilhaDeTokens = new TokenList();
 		this.limpaPilhaDeTokens();
 
-		this.listaDeProducoes = ProducoesListBuilder.producoesGCL();
+		//this.listaDeProducoes = ProducoesListBuilder.producoesGCL();
 		this.analiseLexica = analiseLexica;
 	}
 	
@@ -49,52 +43,15 @@ public class AnaliseSintatica {
 		return this.empilhaToken();
 	}
 	
-	private RegrasProducaoAbstract getProducaoQueValida(TokenList pilha){
-		HashMap<String, Integer> listaDeTokens = new HashMap<String, Integer>();
-		listaDeTokens.put("program", 1);
-		listaDeTokens.put("module", 2);
+	private boolean validaSintaxeEGeraASA() {
+			
+		IndiceNumerico i = new IndiceNumerico();
 		
-		int i = 0;
-		
-		switch ( listaDeTokens.get(pilha.getFirst().getValue()) ){
 
-			case 1: // program
-			
-				if ( RegrasProducaoModule.getInstancia().isValida(pilha, 0) ){
-					return RegrasProducaoModule.getInstancia();
- 				}
-										
-				break;
+		//if ( RegrasProducaoProgram.getInstancia().isValida(pilhaDeTokens, i) ) return true;
+		if ( RegrasProducaoModule.getInstancia().isValida(pilhaDeTokens, i) ) return true;				 
 				
-			case 2: // module
-				// TODO: VALIDACAO TOTALMENTE ERRADA
-				while ( pilha.isEmpty() ){
-					if ( pilha.get(i).getValue().equalsIgnoreCase("module") ) {
-						if ( pilha.get(i).getTokenType() == GCLTokenTypes.Identifier ) {
-							if ( RegrasProducaoDefinitionPart.getInstancia().isValida(pilha, i) ) {
-								
-							}
-						}
-					}
-					
-				}
-				
-				// "module" "identifier" <definitionPart> [ "private"  <block> ] "."
-				
-				break;
-				
-			default: //identifier
-				
-				break;
-		
-		}		
-			
-		return null;
-		
-	}
-	
-	private boolean isPilhaValidaParaUmaUnicaProducao(){		
-		return ( getProducaoQueValida(pilhaDeTokens) != null );
+		return false;		
 	}
 	
 
@@ -109,20 +66,19 @@ public class AnaliseSintatica {
 
 
 	
-	public void valida(){
+	public boolean valida(){
 		try{
 			
 			while ( hasTokenParaProcessar() ){
-				if ( isPilhaValidaParaUmaUnicaProducao() ){
-					//getProducaoValida();
-					//geraArvore();
+				
+				if ( this.validaSintaxeEGeraASA() ){
 					this.limpaPilhaDeTokens();
-				}
+				}			
 				
 			}
-			
+			return true;	
 		}catch(Exception e){
-			
+			return false;
 		}
 	  			
 	}

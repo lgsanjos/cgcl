@@ -1,5 +1,6 @@
 package analise.sintatica.producoes;
 
+import coretypes.IndiceNumerico;
 import coretypes.TokenList;
 
 public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
@@ -9,18 +10,29 @@ public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public boolean isValida(TokenList pilhaDeToken, int apartirDe) {
-		int i = apartirDe;
+	
+	private boolean validaProducao(TokenList pilhaDeToken, IndiceNumerico apartirDe){
 		boolean isValida = true;
 		
+		//if (isValida) isValida = RegrasProducaoDefinition.getInstancia().isValida(pilhaDeToken, apartirDe);
+		//if (isValida) isValida = this.hasLexema(pilhaDeToken, apartirDe, ";");		
 		
-		while ( isValida ){
-			if (isValida) isValida = RegrasProducaoDefinition.getInstancia().isValida(pilhaDeToken, i);
-			if (isValida) isValida = pilhaDeToken.get(i).getValue().equals(";");
-			i++;	
-		}
+		return isValida;
+	}
+
+	@Override
+	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
+		// {<definition> ";" }
+		
+		boolean isValida = true;
+		//boolean multiplasOcorrencias = true;
+	
+		isValida = this.validaProducao(pilhaDeToken, apartirDe); 
+		
+		
+		//while ( isValida ){
+		//	isValida = this.validaProducao(pilhaDeToken, i);
+		//}
 		return isValida;
 	}
 		
