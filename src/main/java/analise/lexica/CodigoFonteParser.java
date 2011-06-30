@@ -1,5 +1,7 @@
 package analise.lexica;
 
+import analise.exceptions.EndOfBufferException;
+
 public class CodigoFonteParser {
 	
 	private String codigoFonte;
@@ -24,8 +26,8 @@ public class CodigoFonteParser {
 		do{
   		  this.contador++;			
 
-  		  if (this.contador > this.codigoFonte.length())
-		     throw new Exception("Fim do arquivo");
+  		  if (this.contador >= this.codigoFonte.length())
+		     throw new EndOfBufferException("Fim do arquivo");
 		       
 		  res = this.codigoFonte.charAt(this.contador);
 		    

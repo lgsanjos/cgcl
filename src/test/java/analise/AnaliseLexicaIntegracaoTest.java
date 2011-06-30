@@ -40,7 +40,7 @@ public class AnaliseLexicaIntegracaoTest extends TestCase {
 		assertTrue(tok.getValue().equals("."));
 		
 	}
-
+ 
     
 	public void testCarregaSearch() throws IOException, Exception{
 		InputStream input =	getClass().getClassLoader().getResourceAsStream("search.gcl");

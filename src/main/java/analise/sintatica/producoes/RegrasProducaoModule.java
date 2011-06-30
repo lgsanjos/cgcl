@@ -1,6 +1,5 @@
 package analise.sintatica.producoes;
 
-import utils.GCLTokenTypes;
 import coretypes.IndiceNumerico;
 import coretypes.TokenList;
 
@@ -26,7 +25,8 @@ public class RegrasProducaoModule extends RegrasProducaoAbstract {
 		if ( isValido ) isValido &= this.hasLexema(pilhaDeToken, apartirDe, "module"); 
 		if ( isValido ) isValido &= this.isAnIdToken(pilhaDeToken, apartirDe); 
 		if ( isValido ) isValido &= RegrasProducaoDefinitionPart.getInstancia().isValida(pilhaDeToken, apartirDe);
-		// [ "private" <block> ]		
+		
+		// [ "private" <block> ]
 		if ( isValido ) isValido &= this.hasLexema(pilhaDeToken, apartirDe, "."); 
 
 		return isValido;

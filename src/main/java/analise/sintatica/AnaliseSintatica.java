@@ -1,8 +1,7 @@
 package analise.sintatica;
 
 import analise.lexica.AnaliseLexica;
-import analise.sintatica.producoes.RegrasProducaoModule;
-import analise.sintatica.producoes.RegrasProducaoProgram;
+import analise.sintatica.producoes.*;
 import coretypes.IndiceNumerico;
 import coretypes.Token;
 import coretypes.TokenList;
@@ -46,9 +45,7 @@ public class AnaliseSintatica {
 	private boolean validaSintaxeEGeraASA() {
 			
 		IndiceNumerico i = new IndiceNumerico();
-		
-
-		//if ( RegrasProducaoProgram.getInstancia().isValida(pilhaDeTokens, i) ) return true;
+		// Deve tentar validar com todas as producoes possíveis.
 		if ( RegrasProducaoModule.getInstancia().isValida(pilhaDeTokens, i) ) return true;				 
 				
 		return false;		
@@ -64,17 +61,13 @@ public class AnaliseSintatica {
 		return this.pilhaDeTokens.size();
 	}
 
-
-	
 	public boolean valida(){
+
 		try{
-			
 			while ( hasTokenParaProcessar() ){
-				
 				if ( this.validaSintaxeEGeraASA() ){
 					this.limpaPilhaDeTokens();
 				}			
-				
 			}
 			return true;	
 		}catch(Exception e){

@@ -15,7 +15,7 @@ public class AnaliseSintaticaTest extends TestCase {
     	
     	this.analisador = new AnaliseSintatica( new AnaliseLexica("") );
     	
-    }	
+    }
     
     public void testaModuleBasico(){
     	String source = "module oi begin end.";

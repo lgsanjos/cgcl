@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import utils.GCLTokenTypes;
 
 import analise.TabelaDeSimbolos;
+import analise.exceptions.EndOfBufferException;
 import analise.exceptions.InvalidTokenException;
 import coretypes.*;;
 
@@ -36,7 +37,7 @@ public class AnaliseLexica {
               lastChar += this.parser.getNextChar();
 	  	      buffer += lastChar;
 	  	      
-		    }while( this.rules.validaLexema(buffer));
+		    }while( this.rules.validaLexema(buffer)  );
 		    buffer = buffer.substring(0, buffer.length() -1);
 		    this.parser.getLastChar();
 		    
@@ -45,9 +46,12 @@ public class AnaliseLexica {
 		    return token;
 		    
 		  }catch(InvalidTokenException e){
-			  // TODO: implementar tratamento de erro para token inválido 
 			  return null;
-		  }		
+		  }catch(EndOfBufferException e){
+			  token = this.rules.buildToken(buffer, this.parser.getLastPosicao());
+		      this.adicionaTabelaDeSimbolos(token);
+		      return token;			  
+		  }
 	}
 	
 	public void addTokenClassException(GCLTokenTypes tokenClass){

@@ -55,8 +55,16 @@ public class AnaliseLexicaRules {
 	}	
 	
 	private boolean lexemaIsNumeric(String lexema){
-		// TODO: suporte a identificacao léxica de float e real
-		return lexema.matches("[0-9]*|[-]([0-9])*");
+		boolean valido;
+		valido = lexema.startsWith("[0-9])*");
+		
+		if ( lexema.length() > 1 ) {
+			if ( Utils.countLetters(lexema, '.') <= 1) {
+				valido = valido && (lexema.indexOf(".", 1) < lexema.length() -1) ; 
+			}		
+		}
+		return valido;
+		//return lexema.matches("([0-9])*|([0-9])*[.]([0-9])*");
 	}
 	
 	
@@ -105,7 +113,7 @@ public class AnaliseLexicaRules {
 			return gen;
 		}    	
 
-		throw new InvalidTokenException("Token inválido: ".concat(lexema));
+		throw new InvalidTokenException("Token invalido: ".concat(lexema));
 	}
 	
 	
