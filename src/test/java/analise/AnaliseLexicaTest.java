@@ -1,6 +1,5 @@
 package analise;
 
-import analise.exceptions.InvalidTokenException;
 import analise.lexica.AnaliseLexica;
 import utils.GCLTokenTypes;
 import coretypes.Token;
@@ -65,12 +64,16 @@ public class AnaliseLexicaTest extends TestCase {
 	}
 
 	public void testValorReal() {
-		assertTrue(this.analisador.validaLexema("12.34567890"));
+		assertTrue(this.analisador.validaLexema("12,34567890"));
 	}
 
-	public void testValorRealComDoisPontos() {
-		assertFalse(this.analisador.validaLexema("12.345678.90"));
+	public void testValorRealComDuasVirgulas() {
+		assertFalse(this.analisador.validaLexema("1,345678,90"));
 	}
+	
+	public void testValorRealComPonto() {
+		assertFalse(this.analisador.validaLexema("1345678.90"));
+	}	
 
 	public void testValorInteiroNegativo() {
 

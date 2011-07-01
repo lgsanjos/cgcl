@@ -1,6 +1,6 @@
 package analise.sintatica.producoes;
 
-public enum ProducoesList {
+public enum ProducoesEnum {
 	program,
 	module,
 	block,

@@ -10,16 +10,19 @@ public abstract class RegrasProducaoAbstract {
 		return null;
 	}
 	
-	protected boolean isAnIdToken(TokenList pilhaDeToken, IndiceNumerico indice){
-		boolean resposta = pilhaDeToken.get( indice.getValor() ).getTokenType().equals(GCLTokenTypes.Identifier);
+	protected boolean isAnIdToken(TokenList pilhaDeToken, IndiceNumerico indice){		
+		
+		boolean resposta = (pilhaDeToken.size() > indice.getValor()) &&
+				   (pilhaDeToken.get(indice.getValor()).getTokenType().equals(GCLTokenTypes.Identifier));
 		indice.inc();
 		return resposta;
 		
 	}
 	
 	protected boolean hasLexema(TokenList pilhaDeToken, IndiceNumerico indice, String compareLexema){
-		
-		boolean resposta = pilhaDeToken.get( indice.getValor() ).getValue().equalsIgnoreCase( compareLexema );
+
+		boolean resposta = (pilhaDeToken.size() > indice.getValor()) &&
+						   (pilhaDeToken.get(indice.getValor()).getValue().equalsIgnoreCase(compareLexema));
 		indice.inc();
 		return resposta;		
 	}	

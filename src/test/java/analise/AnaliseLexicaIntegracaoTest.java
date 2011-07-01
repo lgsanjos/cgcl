@@ -40,6 +40,30 @@ public class AnaliseLexicaIntegracaoTest extends TestCase {
 		assertTrue(tok.getValue().equals("."));
 		
 	}
+	
+	public void testCarregaPrimitivasTipagensEAtribuicoes() throws IOException, Exception{		
+		InputStream input =	getClass().getClassLoader().getResourceAsStream("declaracoesDeTipos.gcl");
+		String content = Utils.convertStreamToString(input);
+
+		AnaliseLexica analisador = new AnaliseLexica(content);
+		analisador.addTokenClassException(GCLTokenTypes.Comment);
+		analisador.addTokenClassException(GCLTokenTypes.Whitespace);
+		analisador.addTokenClassException(GCLTokenTypes.EndOfLine);
+		Token token;	
+		
+		// TODO: Arrumar o assert para validar o arquivo declaracoesDeTipos.gcl
+		token = analisador.getNextToken();
+		assertTrue(token.getValue().equals("module"));
+		token = analisador.getNextToken();
+		assertTrue(token.getValue().equals("simples"));
+		token = analisador.getNextToken();
+		assertTrue(token.getValue().equals("begin"));
+		token = analisador.getNextToken();
+		assertTrue(token.getValue().equals("end"));
+		token = analisador.getNextToken();
+		assertTrue(token.getValue().equals("."));
+		
+	}	
  
     
 	public void testCarregaSearch() throws IOException, Exception{

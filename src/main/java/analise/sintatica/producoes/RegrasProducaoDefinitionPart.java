@@ -11,28 +11,12 @@ public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
 		return null;
 	}
 	
-	private boolean validaProducao(TokenList pilhaDeToken, IndiceNumerico apartirDe){
+	@Override
+	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
 		boolean isValida = true;
 		
 		//if (isValida) isValida = RegrasProducaoDefinition.getInstancia().isValida(pilhaDeToken, apartirDe);
-		//if (isValida) isValida = this.hasLexema(pilhaDeToken, apartirDe, ";");		
-		
-		return isValida;
-	}
-
-	@Override
-	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
-		// {<definition> ";" }
-		
-		boolean isValida = true;
-		//boolean multiplasOcorrencias = true;
-	
-		isValida = this.validaProducao(pilhaDeToken, apartirDe); 
-		
-		
-		//while ( isValida ){
-		//	isValida = this.validaProducao(pilhaDeToken, i);
-		//}
+		//if (isValida) isValida = this.hasLexema(pilhaDeToken, apartirDe, ";");	
 		return isValida;
 	}
 		

@@ -19,14 +19,13 @@ public class RegrasProducaoModule extends RegrasProducaoAbstract {
 
 	@Override
 	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
-		// "module" "identifier" <definitionPart> [ "private"  <block> ] "."
 		boolean isValido = true;
 		
 		if ( isValido ) isValido &= this.hasLexema(pilhaDeToken, apartirDe, "module"); 
 		if ( isValido ) isValido &= this.isAnIdToken(pilhaDeToken, apartirDe); 
 		if ( isValido ) isValido &= RegrasProducaoDefinitionPart.getInstancia().isValida(pilhaDeToken, apartirDe);
-		
-		// [ "private" <block> ]
+		/* Opcional */ if ( isValido && !this.hasLexema(pilhaDeToken, apartirDe, "private")) { apartirDe.dec(); }
+		/* Opcional */ if ( isValido) { RegrasProducaoBlock.getInstancia().isValida(pilhaDeToken, apartirDe); } 
 		if ( isValido ) isValido &= this.hasLexema(pilhaDeToken, apartirDe, "."); 
 
 		return isValido;
