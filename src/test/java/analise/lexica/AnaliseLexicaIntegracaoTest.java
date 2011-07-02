@@ -1,4 +1,4 @@
-package analise;
+package analise.lexica;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -4,6 +4,11 @@ import coretypes.IndiceNumerico;
 import coretypes.TokenList;
 
 public class RegrasProducaoDefinition extends RegrasProducaoAbstract {
+	
+	private static RegrasProducaoDefinition instancia = new RegrasProducaoDefinition();
+	public static RegrasProducaoAbstract getInstancia() {
+		return instancia;
+	}	
 
 	@Override
 	public Object geraArvoreSintaticaAbstrata() {

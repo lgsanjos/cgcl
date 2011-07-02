@@ -1,4 +1,4 @@
-package analise;
+package analise.lexica;
 
 import analise.lexica.AnaliseLexica;
 import utils.GCLTokenTypes;

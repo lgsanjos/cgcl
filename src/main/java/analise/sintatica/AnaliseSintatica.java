@@ -45,7 +45,7 @@ public class AnaliseSintatica {
 	private boolean validaSintaxeEGeraASA() {
 			
 		IndiceNumerico i = new IndiceNumerico();
-		// Deve tentar validar com todas as producoes possíveis.
+		// Deve tentar validar com todas as producoes possiveis.
 		if ( RegrasProducaoModule.getInstancia().isValida(pilhaDeTokens, i) ) return true;
 		//if ( RegrasProducaoDefinition.getInstancia().isValida(pilhaDeTokens, i) ) return true;
 		//if ( RegrasProducaoDefinitionPart.getInstancia().isValida(pilhaDeTokens, i) ) return true;

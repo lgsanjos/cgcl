@@ -5,6 +5,11 @@ import coretypes.TokenList;
 
 public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
 
+	private static RegrasProducaoDefinitionPart instancia = new RegrasProducaoDefinitionPart();
+	public static RegrasProducaoAbstract getInstancia() {
+		return instancia;
+	}	
+	
 	@Override
 	public Object geraArvoreSintaticaAbstrata() {
 		// TODO Auto-generated method stub
@@ -20,10 +25,5 @@ public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
 		return isValida;
 	}
 		
-	private static RegrasProducaoModule instancia = new RegrasProducaoModule();
-	
-	public static RegrasProducaoAbstract getInstancia() {
-		return instancia;
-	}	
 
 }
