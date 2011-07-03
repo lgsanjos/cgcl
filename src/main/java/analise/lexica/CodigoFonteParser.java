@@ -21,7 +21,7 @@ public class CodigoFonteParser {
 		return new StringBuilder(this.contador).toString();
 	}
 	
-	public char getNextChar() throws Exception{
+	public char getNextChar() throws EndOfBufferException{
 	    Character res = new Character(' ');
 		do{
   		  this.contador++;			
@@ -37,13 +37,13 @@ public class CodigoFonteParser {
 	}
 	
 	
-	public char getLastChar() throws Exception{
+	public char getLastChar() throws EndOfBufferException {
 	    Character res = new Character(' ');
 		do{
   		  this.contador--;			
 
   		  if (this.contador > this.codigoFonte.length())
-		     throw new Exception("Fim do arquivo");
+		     throw new EndOfBufferException("Fim do arquivo");
 		       
 		  res = this.codigoFonte.charAt(this.contador);
 		    

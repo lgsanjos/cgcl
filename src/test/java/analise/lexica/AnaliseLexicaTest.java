@@ -1,5 +1,7 @@
 package analise.lexica;
 
+import analise.exceptions.EndOfBufferException;
+import analise.exceptions.InvalidTokenException;
 import analise.lexica.AnaliseLexica;
 import utils.GCLTokenTypes;
 import coretypes.Token;
@@ -104,4 +106,35 @@ public class AnaliseLexicaTest extends TestCase {
 		}
 	}
 
+	public void testValidaTokenInvalidoArroba() throws EndOfBufferException {
+		assertFalse(analisador.validaLexema("begin@"));
+		
+		this.analisador = new AnaliseLexica("begin@ end.");
+		try {
+			Token token = analisador.getNextToken();
+			assertTrue(token.getValue().equalsIgnoreCase("begin"));
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+
+		// must fail
+		try {
+			analisador.getNextToken();
+		} catch( InvalidTokenException e) {
+			assertTrue(true);
+		}
+	}	
+	
+	public void testValidaTokenInvalido() throws EndOfBufferException {
+		this.analisador = new AnaliseLexica("@");
+
+		// must fail
+		try {
+			this.analisador.getNextToken();
+			fail();
+		} catch( InvalidTokenException e) {
+			assertTrue(true);
+		}		
+		
+	}		
 }

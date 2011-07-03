@@ -11,6 +11,20 @@ public class AnaliseSintaticaUnitarioTest extends AnaliseSintaticaTest {
     	assertTrue( this.analisador.valida() );	
     }
     
+    public void testaModuleBasicoComFalhaSintaticaNoFinalDaProducao(){
+    	String source = "module oi begin end;";
+    	
+    	this.analisador = this.buildAnaliseSintatica(source);
+    	assertFalse( this.analisador.valida() );	
+    }
+    
+    public void testaModuleBasicoComFalhaSintaticaNoMeioDaProducao(){
+    	String source = "module oi @ begin end.";
+    	
+    	this.analisador = this.buildAnaliseSintatica(source);
+    	assertFalse( this.analisador.valida() );	
+    }       
+    
     public void testaModuleBasicoComPrivateEQuebrasDeLinha(){
     	String source = "module testando \r\n" +
     					"private \r\n" +

@@ -57,6 +57,10 @@ public class AnaliseSintatica {
 	public Token desempilhaToken(){
 		return this.pilhaDeTokens.removeLast();
 	}
+	
+	public boolean pilhaDeTokensVazia(){
+		return this.pilhaDeTokens.isEmpty();
+	}
 
 	public int empilhaToken(Token token){
 		this.pilhaDeTokens.addLast(token);
@@ -66,12 +70,13 @@ public class AnaliseSintatica {
 	public boolean valida(){
 
 		try{
-			while ( hasTokenParaProcessar() ){
+			while ( this.hasTokenParaProcessar() ){
 				if ( this.validaSintaxeEGeraASA() ){
 					this.limpaPilhaDeTokens();
 				}			
 			}
-			return true;	
+			
+			return this.pilhaDeTokensVazia();
 		}catch(Exception e){
 			return false;
 		}

@@ -28,7 +28,8 @@ public class AnaliseLexica {
 		TabelaDeSimbolos.getInstance().add(token);
 	}
 
-	private Token getNextValidToken() throws Exception {
+	
+	private Token getNextValidToken() throws InvalidTokenException {
 		String buffer = "";
 		String lastChar;
 		Token token;
@@ -43,22 +44,20 @@ public class AnaliseLexica {
 			buffer = buffer.substring(0, buffer.length() - 1);
 			this.parser.getLastChar();
 
-			token = this.rules.buildToken(buffer, this.parser.getLastPosicao());
-			this.adicionaTabelaDeSimbolos(token);
-			return token;
-
-		} catch (InvalidTokenException e) {
-			return null;
 		} catch (EndOfBufferException e) {
-			if (buffer.length() > 0) {
-				token = this.rules.buildToken(buffer, this.parser
-						.getLastPosicao());
-				this.adicionaTabelaDeSimbolos(token);
-				return token;
-			} else {
+
+			if (buffer.length() == 0) {
 				return null;
 			}
 		}
+		
+		if ( buffer.isEmpty() ){
+			throw new InvalidTokenException("");
+		}
+		
+		token = this.rules.buildToken(buffer, this.parser.getLastPosicao());
+		this.adicionaTabelaDeSimbolos(token);
+		return token;
 	}
 
 	public void addTokenClassException(GCLTokenTypes tokenClass) {
@@ -82,7 +81,7 @@ public class AnaliseLexica {
 		return this.rules.buildToken(lexema, posicao);
 	}
 
-	public Token getNextToken() throws Exception {
+	public Token getNextToken() throws InvalidTokenException, EndOfBufferException {
 		Token token;
 		boolean condicao;
 		do {
