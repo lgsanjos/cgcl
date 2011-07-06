@@ -5,7 +5,6 @@ import coretypes.TokenList;
 
 public class RegrasProducaoBlock extends RegrasProducaoAbstract {
 
-
 	private static RegrasProducaoBlock instancia = new RegrasProducaoBlock();
 	
 	public static RegrasProducaoAbstract getInstancia() {

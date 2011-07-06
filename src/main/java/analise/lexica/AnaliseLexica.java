@@ -38,10 +38,16 @@ public class AnaliseLexica {
 			do {
 				lastChar = "";
 				lastChar += this.parser.getNextChar();
-				buffer += lastChar;
+			buffer += lastChar;
 
 			} while (this.rules.validaLexema(buffer));
+				
 			buffer = buffer.substring(0, buffer.length() - 1);
+			
+			if (buffer.isEmpty()) {
+				throw new InvalidTokenException("Invalid Token " + buffer);
+			}
+			
 			this.parser.getLastChar();
 
 		} catch (EndOfBufferException e) {

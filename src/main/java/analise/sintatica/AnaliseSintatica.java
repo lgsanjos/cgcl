@@ -9,7 +9,6 @@ import coretypes.TokenList;
 public class AnaliseSintatica {
 	
 	private TokenList pilhaDeTokens;
-	//private DicionarioDeRegrasProducao listaDeProducoes;
 	private AnaliseLexica analiseLexica;
 	
 

@@ -12,17 +12,27 @@ public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
 	
 	@Override
 	public Object geraArvoreSintaticaAbstrata() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	@Override
 	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
-		boolean isValida = true;
+		boolean producaoDefValido = true;
+		boolean pontoEVirgulaValido = true;
+		boolean isInvalido = true;
 		
-		//if (isValida) isValida = RegrasProducaoDefinition.getInstancia().isValida(pilhaDeToken, apartirDe);
-		//if (isValida) isValida = this.hasLexema(pilhaDeToken, apartirDe, ";");	
-		return isValida;
+		do {
+			producaoDefValido = RegrasProducaoDefinition.getInstancia().isValida(pilhaDeToken, apartirDe);
+			if (producaoDefValido) {
+				pontoEVirgulaValido = this.hasLexema(pilhaDeToken, apartirDe, ";");
+			}
+			
+		} while ( producaoDefValido && pontoEVirgulaValido );
+		
+		isInvalido = producaoDefValido && !pontoEVirgulaValido; 
+		
+		return !isInvalido; 
+
 	}
 		
 
