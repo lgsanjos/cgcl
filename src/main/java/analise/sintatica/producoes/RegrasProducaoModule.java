@@ -7,7 +7,6 @@ public class RegrasProducaoModule extends RegrasProducaoAbstract {
 
 	@Override
 	public Object geraArvoreSintaticaAbstrata() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
