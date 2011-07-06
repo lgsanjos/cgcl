@@ -1,13 +1,17 @@
-package analise;
+package analise.sintatica;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import utils.GCLTokenTypes;
+import utils.Utils;
 import analise.sintatica.AnaliseSintatica;
 import analise.lexica.AnaliseLexica;
 import junit.framework.TestCase;
 
 public class AnaliseSintaticaTest extends TestCase {
 	
-	private	AnaliseSintatica analisador;
+	protected	AnaliseSintatica analisador;
     
     
     @Override
@@ -18,7 +22,17 @@ public class AnaliseSintaticaTest extends TestCase {
     	
     }
     
-    private AnaliseLexica buildAnaliseLexica(String codigoFonte){
+	protected String loadResourceNamed(String name) {
+		InputStream input =	getClass().getClassLoader().getResourceAsStream(name);
+		try {
+			return Utils.convertStreamToString(input);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "";
+		}		
+	}    
+    
+    protected AnaliseLexica buildAnaliseLexica(String codigoFonte){
 		AnaliseLexica analisador = new AnaliseLexica(codigoFonte);
 		analisador.addTokenClassException(GCLTokenTypes.Comment);
 		analisador.addTokenClassException(GCLTokenTypes.Whitespace);
@@ -27,15 +41,9 @@ public class AnaliseSintaticaTest extends TestCase {
 		return analisador;
     }
     
-    public void testaModuleBasico(){
-    	String source = "module oi begin end.";
-    	
-    	this.analisador = new AnaliseSintatica( this.buildAnaliseLexica(source) );
-    	assertTrue( this.analisador.valida() );
-    	
-    	
+    protected AnaliseSintatica buildAnaliseSintatica(String codigoFonte) {
+    	return new AnaliseSintatica( this.buildAnaliseLexica(codigoFonte));
     }
-   
     
 
 }

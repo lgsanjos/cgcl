@@ -5,10 +5,12 @@ import coretypes.TokenList;
 
 public class RegrasProducaoBlock extends RegrasProducaoAbstract {
 
-	public RegrasProducaoBlock() {
-		super();
+	private static RegrasProducaoBlock instancia = new RegrasProducaoBlock();
+	
+	public static RegrasProducaoAbstract getInstancia() {
+		return instancia;
 	}
-
+	
 	@Override
 	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
 		boolean isValido = true;

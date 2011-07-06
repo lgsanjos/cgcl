@@ -11,8 +11,8 @@ begin
 
 	varReal := 23434;
 	varReal := -23434;
-	varReal := 234.34;
-	varReal := -4.34;
+	varReal := 234,34;
+	varReal := -4,34;
 	
 	varBoolean := true;
 	varBoolean := false;
