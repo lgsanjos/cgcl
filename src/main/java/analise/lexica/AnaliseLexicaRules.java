@@ -65,42 +65,42 @@ public class AnaliseLexicaRules {
 		gen.setPosicao(posicao);
 		
 		if (this.lexemaIsWhitespace(lexema)) {
-			gen.setTokenType(GCLTokenTypes.Whitespace);
+			gen.setTokenType(GCLTokenTypes.WHITESPACE);
 			return gen;
 		}
 
 		if (this.lexemaIsEndOfLine(lexema)) {
-			gen.setTokenType(GCLTokenTypes.EndOfLine);
+			gen.setTokenType(GCLTokenTypes.ENDOFLINE);
 			return gen;
 		}
 
 		if (this.lexemaIsKeyword(lexema)) {
-			gen.setTokenType(GCLTokenTypes.Keyword);
+			gen.setTokenType(GCLTokenTypes.KEYWORD);
 			return gen;
 		}
 
 		if (this.lexemaIsSymbol(lexema)) {
-			gen.setTokenType(GCLTokenTypes.Symbol);
+			gen.setTokenType(GCLTokenTypes.SYMBOL);
 			return gen;
 		}
 
 		if (this.lexemaIsNumeric(lexema)) {
-			gen.setTokenType(GCLTokenTypes.Number);
+			gen.setTokenType(GCLTokenTypes.NUMBER);
 			return gen;
 		}
 
 		if (this.lexemaIsIdentifier(lexema)) {
-			gen.setTokenType(GCLTokenTypes.Identifier);
+			gen.setTokenType(GCLTokenTypes.IDENTIFIER);
 			return gen;
 		}
 
 		if (this.lexemaIsLiteralString(lexema)) {
-			gen.setTokenType(GCLTokenTypes.Literal);
+			gen.setTokenType(GCLTokenTypes.LITERAL);
 			return gen;
 		}
 
 		if (this.lexemaIsComment(lexema)) {
-			gen.setTokenType(GCLTokenTypes.Comment);
+			gen.setTokenType(GCLTokenTypes.COMMENT);
 			return gen;
 		}
 

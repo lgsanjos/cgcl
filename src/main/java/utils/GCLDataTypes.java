@@ -2,6 +2,6 @@ package utils;
 
 public enum GCLDataTypes {
 
-	String, Integer, Float, Boolean;
+	STRING, INTEGER, FLOAT, BOOLEAN;
 	
 }

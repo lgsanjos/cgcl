@@ -14,13 +14,13 @@ public class RegrasProducaoConstantDef extends RegrasProducaoAbstract {
 		// "const" <constantName> "=" <constant>
 		boolean isValida = true;
 		if (isValida)
-			isValida &= this.proximoTokenPossuiValorETipoIgualA("const", GCLTokenTypes.Keyword);
+			isValida &= this.proximoTokenPossuiValorETipoIgualA("const", GCLTokenTypes.KEYWORD);
 		
 		if (isValida)
 			isValida &= ProducoesFactory.getProducao(ProducoesEnum.constantName).isValida();
 		
 		if (isValida)
-			isValida &= this.proximoTokenPossuiValorETipoIgualA("=", GCLTokenTypes.Symbol);
+			isValida &= this.proximoTokenPossuiValorETipoIgualA("=", GCLTokenTypes.SYMBOL);
 		
 		if (isValida)
 			isValida &= ProducoesFactory.getProducao(ProducoesEnum.constant).isValida();

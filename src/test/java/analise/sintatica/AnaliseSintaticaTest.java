@@ -34,9 +34,9 @@ public class AnaliseSintaticaTest extends TestCase {
     
     protected AnaliseLexica buildAnaliseLexica(String codigoFonte){
 		AnaliseLexica analisador = new AnaliseLexica(codigoFonte);
-		analisador.addTokenClassException(GCLTokenTypes.Comment);
-		analisador.addTokenClassException(GCLTokenTypes.Whitespace);
-		analisador.addTokenClassException(GCLTokenTypes.EndOfLine);
+		analisador.addTokenClassException(GCLTokenTypes.COMMENT);
+		analisador.addTokenClassException(GCLTokenTypes.WHITESPACE);
+		analisador.addTokenClassException(GCLTokenTypes.ENDOFLINE);
 		
 		return analisador;
     }

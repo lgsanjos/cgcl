@@ -2,7 +2,6 @@ package analise.sintatica;
 
 public class AnaliseSintaticaIntegracaoTest extends AnaliseSintaticaTest {
 	
-
 	public void testValidaArquivoSimples() {
 		String source = this.loadResourceNamed("simples.gcl");
 		

@@ -23,9 +23,9 @@ public class AnaliseLexicaIntegracaoTest extends TestCase {
 		String content = Utils.convertStreamToString(input);
 
 		AnaliseLexica analisador = new AnaliseLexica(content);
-		analisador.addTokenClassException(GCLTokenTypes.Comment);
-		analisador.addTokenClassException(GCLTokenTypes.Whitespace);
-		analisador.addTokenClassException(GCLTokenTypes.EndOfLine);
+		analisador.addTokenClassException(GCLTokenTypes.COMMENT);
+		analisador.addTokenClassException(GCLTokenTypes.WHITESPACE);
+		analisador.addTokenClassException(GCLTokenTypes.ENDOFLINE);
 		Token tok;		
 		
 		tok = analisador.getNextToken();
@@ -46,9 +46,9 @@ public class AnaliseLexicaIntegracaoTest extends TestCase {
 		String content = Utils.convertStreamToString(input);
 
 		AnaliseLexica analisador = new AnaliseLexica(content);
-		analisador.addTokenClassException(GCLTokenTypes.Comment);
-		analisador.addTokenClassException(GCLTokenTypes.Whitespace);
-		analisador.addTokenClassException(GCLTokenTypes.EndOfLine);
+		analisador.addTokenClassException(GCLTokenTypes.COMMENT);
+		analisador.addTokenClassException(GCLTokenTypes.WHITESPACE);
+		analisador.addTokenClassException(GCLTokenTypes.ENDOFLINE);
 		Token token;	
 		
 		// TODO: Arrumar o assert para validar o arquivo declaracoesDeTipos.gcl
@@ -71,9 +71,9 @@ public class AnaliseLexicaIntegracaoTest extends TestCase {
 		String content = Utils.convertStreamToString(input);
 		
 		AnaliseLexica analisador = new AnaliseLexica(content);
-		analisador.addTokenClassException(GCLTokenTypes.Comment);
-		analisador.addTokenClassException(GCLTokenTypes.Whitespace);
-		analisador.addTokenClassException(GCLTokenTypes.EndOfLine);
+		analisador.addTokenClassException(GCLTokenTypes.COMMENT);
+		analisador.addTokenClassException(GCLTokenTypes.WHITESPACE);
+		analisador.addTokenClassException(GCLTokenTypes.ENDOFLINE);
 
 		assertTrue(analisador.getNextToken().getValue().equals("module"));
 		assertTrue(analisador.getNextToken().getValue().equals("search"));

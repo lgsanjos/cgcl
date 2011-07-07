@@ -18,7 +18,7 @@ public abstract class RegrasProducaoAbstract {
 
 		boolean resposta = (pilhaDeToken.size() > indice.getValor())
 				&& (pilhaDeToken.get(indice.getValor()).getTokenType()
-						.equals(GCLTokenTypes.Identifier));
+						.equals(GCLTokenTypes.IDENTIFIER));
 		indice.inc();
 		return resposta;
 

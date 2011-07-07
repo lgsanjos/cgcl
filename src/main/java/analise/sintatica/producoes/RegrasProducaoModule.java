@@ -23,7 +23,7 @@ public class RegrasProducaoModule extends RegrasProducaoAbstract {
 			this.getIndice().dec();
 		}
 		if (isValido) ProducoesFactory.getProducao(ProducoesEnum.block).isValida();
-		if (isValido) isValido &= this.proximoTokenPossuiValorETipoIgualA(".", GCLTokenTypes.Symbol);
+		if (isValido) isValido &= this.proximoTokenPossuiValorETipoIgualA(".", GCLTokenTypes.SYMBOL);
 
 		return isValido;
 	}

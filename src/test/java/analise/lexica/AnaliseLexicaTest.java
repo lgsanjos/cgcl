@@ -23,18 +23,18 @@ public class AnaliseLexicaTest extends TestCase {
 	}
 
 	public void testValidaTokenKeywordBeginCaseInsensitive() throws Exception {
-		assertTrue(analisador.buildToken("BeGiN").getTokenType() == GCLTokenTypes.Identifier);
+		assertTrue(analisador.buildToken("BeGiN").getTokenType() == GCLTokenTypes.IDENTIFIER);
 
 	}
 
 	public void testValidaUnknownTokenKeywordBejin() throws Exception {
-		assertTrue(analisador.buildToken("BeJiN").getTokenType() == GCLTokenTypes.Identifier);
+		assertTrue(analisador.buildToken("BeJiN").getTokenType() == GCLTokenTypes.IDENTIFIER);
 	}
 
 	public void testValidaIdentifierToken() {
 		try {
 			Token id = analisador.buildToken("minhavariavel", "");
-			assertEquals(GCLTokenTypes.Identifier, id.getTokenType());
+			assertEquals(GCLTokenTypes.IDENTIFIER, id.getTokenType());
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -54,7 +54,7 @@ public class AnaliseLexicaTest extends TestCase {
 	public void testValidaLiteralStringSimples() {
 		try {
 			Token id = analisador.buildToken("'oi'", "");
-			assertEquals(GCLTokenTypes.Literal, id.getTokenType());
+			assertEquals(GCLTokenTypes.LITERAL, id.getTokenType());
 			assertEquals("'oi'", id.getValue());
 		} catch (Exception e) {
 			fail(e.getMessage());
@@ -85,11 +85,11 @@ public class AnaliseLexicaTest extends TestCase {
 		try {
 			token = this.analisador.getNextToken();
 			assertEquals("-", token.getValue());
-			assertEquals(GCLTokenTypes.Symbol, token.getTokenType());
+			assertEquals(GCLTokenTypes.SYMBOL, token.getTokenType());
 
 			token = this.analisador.getNextToken();
 			assertEquals("123", token.getValue());
-			assertEquals(GCLTokenTypes.Number, token.getTokenType());
+			assertEquals(GCLTokenTypes.NUMBER, token.getTokenType());
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -99,7 +99,7 @@ public class AnaliseLexicaTest extends TestCase {
 		try {
 			String texto = "' sdf sedf -- sdfdf @ dsf @! ! __ 33456  '";
 			Token id = analisador.buildToken(texto, "");
-			assertEquals(GCLTokenTypes.Literal, id.getTokenType());
+			assertEquals(GCLTokenTypes.LITERAL, id.getTokenType());
 			assertEquals(texto, id.getValue());
 		} catch (Exception e) {
 			fail(e.getMessage());
