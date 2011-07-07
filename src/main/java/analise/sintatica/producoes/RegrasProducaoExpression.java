@@ -1,36 +1,27 @@
 package analise.sintatica.producoes;
 
-import coretypes.IndiceNumerico;
-import coretypes.TokenList;
-
 public class RegrasProducaoExpression extends RegrasProducaoAbstract {
 
-	private static RegrasProducaoDefinitionPart instancia = new RegrasProducaoDefinitionPart();
-
-	public static RegrasProducaoDefinitionPart getInstancia() {
-		return instancia;
-	}
-	
 	@Override
 	public Object geraArvoreSintaticaAbstrata() {
 		return null;
 	}
 
 	@Override
-	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
+	public boolean isValida() {
 		// <relationalExpression> {<booleanOperator> <relationalExpression> }
 		boolean isValida = true;
 		boolean possuiOperador = true;
 		boolean possuiExpressao = true;
 		
-		isValida &= RegrasProducaoRelationalExpression.getInstancia().isValida(pilhaDeToken, apartirDe);
+		isValida &= ProducoesFactory.getProducao(ProducoesEnum.relationalExpression).isValida();
 		
 		if (isValida){
 			do {
-				possuiOperador = RegrasProducaoBooleanOperator.getInstancia().isValida(pilhaDeToken, apartirDe);
+				possuiOperador = ProducoesFactory.getProducao(ProducoesEnum.booleanOperator).isValida();
 				
 				if (possuiOperador) {
-					possuiExpressao = RegrasProducaoBooleanOperator.getInstancia().isValida(pilhaDeToken, apartirDe);
+					possuiExpressao = ProducoesFactory.getProducao(ProducoesEnum.relationalExpression).isValida();
 				}
 				
 			} while (possuiOperador);

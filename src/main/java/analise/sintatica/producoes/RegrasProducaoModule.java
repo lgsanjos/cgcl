@@ -1,16 +1,9 @@
 package analise.sintatica.producoes;
 
+import utils.GCLTokenTypes;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
-import coretypes.IndiceNumerico;
-import coretypes.TokenList;
 
 public class RegrasProducaoModule extends RegrasProducaoAbstract {
-
-	private static RegrasProducaoModule instancia = new RegrasProducaoModule();
-
-	public static RegrasProducaoAbstract getInstancia() {
-		return instancia;
-	}
 
 	@Override
 	public ArvoreSintaticaAbstrataNo geraArvoreSintaticaAbstrata() {
@@ -20,27 +13,17 @@ public class RegrasProducaoModule extends RegrasProducaoAbstract {
 	}
 
 	@Override
-	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
+	public boolean isValida() {
 		boolean isValido = true;
 
-		if (isValido)
-			isValido &= this.hasLexema(pilhaDeToken, apartirDe, "module");
-		if (isValido)
-			isValido &= this.isIdentifierToken(pilhaDeToken, apartirDe);
-		if (isValido)
-			isValido &= RegrasProducaoDefinitionPart.getInstancia().isValida(
-					pilhaDeToken, apartirDe);
-		/* Opcional */
-		if (isValido && !this.hasLexema(pilhaDeToken, apartirDe, "private")) {
-			apartirDe.dec();
+		if (isValido) isValido &= this.proximoTokenPossuiValorIgualA("module");
+		if (isValido) isValido &= this.proximoTokenEhUmIdentificador();
+		if (isValido) isValido &= ProducoesFactory.getProducao(ProducoesEnum.definitionPart).isValida();
+		if (isValido && !this.proximoTokenPossuiValorIgualA("private")) {
+			this.getIndice().dec();
 		}
-		/* Opcional */
-		if (isValido) {
-			RegrasProducaoBlock.getInstancia()
-					.isValida(pilhaDeToken, apartirDe);
-		}
-		if (isValido)
-			isValido &= this.hasLexema(pilhaDeToken, apartirDe, ".");
+		if (isValido) ProducoesFactory.getProducao(ProducoesEnum.block).isValida();
+		if (isValido) isValido &= this.proximoTokenPossuiValorETipoIgualA(".", GCLTokenTypes.Symbol);
 
 		return isValido;
 	}

@@ -6,12 +6,15 @@ import coretypes.Token;
 import coretypes.TokenList;
 
 public abstract class RegrasProducaoAbstract {
-
-	public static RegrasProducaoAbstract getInstancia() {
-		return null;
-	}
 	
-	protected boolean isIdentifierToken(TokenList pilhaDeToken, IndiceNumerico indice) {
+	private TokenList pilhaDeToken;
+	private IndiceNumerico indice;
+	
+	protected boolean proximoTokenEhUmIdentificador() {
+		return isIdentifierToken(this.getPilhaDeToken(),
+				                 this.getIndice());
+	}
+	private boolean isIdentifierToken(TokenList pilhaDeToken, IndiceNumerico indice) {
 
 		boolean resposta = (pilhaDeToken.size() > indice.getValor())
 				&& (pilhaDeToken.get(indice.getValor()).getTokenType()
@@ -20,8 +23,14 @@ public abstract class RegrasProducaoAbstract {
 		return resposta;
 
 	}
-	
-	protected boolean hasTokenWithLexemaAndType(TokenList pilhaDeToken, IndiceNumerico indice,
+
+	protected boolean proximoTokenPossuiValorETipoIgualA(String compareLexema, GCLTokenTypes compareType ) {
+		return hasTokenWithLexemaAndType(this.getPilhaDeToken(),
+										 this.getIndice(),
+										 compareLexema,
+										 compareType);
+	}	
+	private boolean hasTokenWithLexemaAndType(TokenList pilhaDeToken, IndiceNumerico indice,
 			String compareLexema, GCLTokenTypes compareType ) {
 		
 		Token tokenIndice = pilhaDeToken.get(indice.getValor());
@@ -35,7 +44,14 @@ public abstract class RegrasProducaoAbstract {
 		
 	}
 
-	protected boolean hasLexema(TokenList pilhaDeToken, IndiceNumerico indice,
+	protected boolean proximoTokenPossuiValorIgualA(String compareLexema) {
+
+		return this.hasLexema(this.getPilhaDeToken(),
+							  this.getIndice(),
+							  compareLexema);		
+		
+	}	
+	private boolean hasLexema(TokenList pilhaDeToken, IndiceNumerico indice,
 			String compareLexema) {
 
 		Token token = pilhaDeToken.get(indice.getValor());
@@ -45,8 +61,40 @@ public abstract class RegrasProducaoAbstract {
 		return resposta;
 	}
 
-	public abstract boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe);
+	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
+		boolean resposta = false;
+		TokenList estadoInicialPilhaDeToken = getPilhaDeToken();
+		IndiceNumerico estadoInicialApartirDe = getIndice();
+		
+		try {
+			this.setPilhaDeToken(pilhaDeToken);
+			this.setIndice(apartirDe);		
+			resposta = this.isValida();
+		} finally {
+			this.setPilhaDeToken(estadoInicialPilhaDeToken);
+			this.setIndice(estadoInicialApartirDe);		
+		}
+		return resposta;		
+	}
+	
+	public abstract boolean isValida();
 
 	public abstract Object geraArvoreSintaticaAbstrata();
-
+	
+	public TokenList getPilhaDeToken(){
+		return this.pilhaDeToken;
+	}
+	
+	public void setPilhaDeToken(TokenList tokens){
+		this.pilhaDeToken = tokens;
+	}	
+	
+	public IndiceNumerico getIndice(){
+		return this.indice;
+	}
+	
+	public void setIndice(IndiceNumerico indiceNumerico){
+		this.indice = indiceNumerico;
+	}	
+	
 }

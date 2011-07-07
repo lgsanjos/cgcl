@@ -1,15 +1,6 @@
 package analise.sintatica.producoes;
 
-import coretypes.IndiceNumerico;
-import coretypes.TokenList;
-
 public class RegrasProducaoConstant extends RegrasProducaoAbstract {
-
-	private static RegrasProducaoConstant instancia = new RegrasProducaoConstant();
-
-	public static RegrasProducaoConstant getInstancia() {
-		return instancia;
-	}
 
 	@Override
 	public Object geraArvoreSintaticaAbstrata() {
@@ -17,9 +8,9 @@ public class RegrasProducaoConstant extends RegrasProducaoAbstract {
 	}
 
 	@Override
-	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
+	public boolean isValida() {
 		boolean isValida = true;
-		isValida = this.isIdentifierToken(pilhaDeToken, apartirDe);
+		isValida = this.proximoTokenEhUmIdentificador();
 		return isValida;
 	}
 

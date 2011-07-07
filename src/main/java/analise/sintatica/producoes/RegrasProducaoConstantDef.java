@@ -1,16 +1,8 @@
 package analise.sintatica.producoes;
 
 import utils.GCLTokenTypes;
-import coretypes.IndiceNumerico;
-import coretypes.TokenList;
 
 public class RegrasProducaoConstantDef extends RegrasProducaoAbstract {
-
-	private static RegrasProducaoConstantDef instancia = new RegrasProducaoConstantDef();
-
-	public static RegrasProducaoConstantDef getInstancia() {
-		return instancia;
-	}
 
 	@Override
 	public Object geraArvoreSintaticaAbstrata() {
@@ -18,20 +10,20 @@ public class RegrasProducaoConstantDef extends RegrasProducaoAbstract {
 	}
 
 	@Override
-	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
+	public boolean isValida() {
 		// "const" <constantName> "=" <constant>
 		boolean isValida = true;
 		if (isValida)
-			isValida &= this.hasTokenWithLexemaAndType(pilhaDeToken, apartirDe, "const", GCLTokenTypes.Keyword);
+			isValida &= this.proximoTokenPossuiValorETipoIgualA("const", GCLTokenTypes.Keyword);
 		
 		if (isValida)
-			isValida &= RegrasProducaoConstantName.getInstancia().isValida(pilhaDeToken, apartirDe);
+			isValida &= ProducoesFactory.getProducao(ProducoesEnum.constantName).isValida();
 		
 		if (isValida)
-			isValida &= this.hasTokenWithLexemaAndType(pilhaDeToken, apartirDe, "=", GCLTokenTypes.Symbol);
+			isValida &= this.proximoTokenPossuiValorETipoIgualA("=", GCLTokenTypes.Symbol);
 		
 		if (isValida)
-			isValida &= RegrasProducaoConstant.getInstancia().isValida(pilhaDeToken, apartirDe);
+			isValida &= ProducoesFactory.getProducao(ProducoesEnum.constant).isValida();
 		
 		return false;
 	}

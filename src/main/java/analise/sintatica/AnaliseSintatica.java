@@ -16,7 +16,6 @@ public class AnaliseSintatica {
 		this.pilhaDeTokens = new TokenList();
 		this.limpaPilhaDeTokens();
 
-		//this.listaDeProducoes = ProducoesListBuilder.producoesGCL();
 		this.analiseLexica = analiseLexica;
 	}
 	
@@ -45,10 +44,14 @@ public class AnaliseSintatica {
 			
 		IndiceNumerico i = new IndiceNumerico();
 		// Deve tentar validar com todas as producoes possiveis.
-		if ( RegrasProducaoModule.getInstancia().isValida(pilhaDeTokens, i) ) return true;
-		//if ( RegrasProducaoDefinition.getInstancia().isValida(pilhaDeTokens, i) ) return true;
-		//if ( RegrasProducaoDefinitionPart.getInstancia().isValida(pilhaDeTokens, i) ) return true;
-				
+		ProducoesFactory.setEstado(pilhaDeTokens, i);
+		try {
+			if(ProducoesFactory.getProducao(ProducoesEnum.module).isValida()) return true;
+			//if ( RegrasProducaoDefinition.getInstancia().isValida(pilhaDeTokens, i) ) return true;
+			//if ( RegrasProducaoDefinitionPart.getInstancia().isValida(pilhaDeTokens, i) ) return true;
+		} finally{
+			ProducoesFactory.limpaEstado();
+		}
 		return false;		
 	}
 	
