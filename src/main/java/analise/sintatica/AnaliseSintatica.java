@@ -71,17 +71,13 @@ public class AnaliseSintatica {
 
 	public boolean valida(){
 
-		try{
-			while ( this.hasTokenParaProcessar() ){
-				if ( this.validaSintaxeEGeraASA() ){
-					this.limpaPilhaDeTokens();
-				}			
-			}
-			
-			return this.pilhaDeTokensVazia();
-		}catch(Exception e){
-			return false;
+		while ( this.hasTokenParaProcessar() ){
+			if ( this.validaSintaxeEGeraASA() ){
+				this.limpaPilhaDeTokens();
+			}			
 		}
+		
+		return this.pilhaDeTokensVazia();
 	  			
 	}
 

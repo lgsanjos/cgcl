@@ -16,11 +16,14 @@ public abstract class RegrasProducaoAbstract {
 	}
 	private boolean isIdentifierToken(TokenList pilhaDeToken, IndiceNumerico indice) {
 
-		boolean resposta = (pilhaDeToken.size() > indice.getValor())
-				&& (pilhaDeToken.get(indice.getValor()).getTokenType()
-						.equals(GCLTokenTypes.IDENTIFIER));
-		indice.inc();
-		return resposta;
+		if (pilhaDeToken.size() > indice.getValor()) {
+			Token tokenIndice = pilhaDeToken.get(indice.getValor());
+			
+			indice.inc();
+			return tokenIndice.getTokenType().equals(GCLTokenTypes.IDENTIFIER);			
+		}
+
+		return false;
 
 	}
 
@@ -33,15 +36,17 @@ public abstract class RegrasProducaoAbstract {
 	private boolean hasTokenWithLexemaAndType(TokenList pilhaDeToken, IndiceNumerico indice,
 			String compareLexema, GCLTokenTypes compareType ) {
 		
-		Token tokenIndice = pilhaDeToken.get(indice.getValor());
-		
-		boolean resposta = (pilhaDeToken.size() > indice.getValor())
-							&& (tokenIndice.getValue().equalsIgnoreCase(compareLexema))
-							&& (tokenIndice.getTokenType().equals(compareType));
+		if (pilhaDeToken.size() > indice.getValor()) {
+			Token tokenIndice = pilhaDeToken.get(indice.getValor());			
+			
+			indice.inc();
+			return (tokenIndice.getValue().equalsIgnoreCase(compareLexema))
+					&& (tokenIndice.getTokenType().equals(compareType));
 
-		indice.inc();		
-		return resposta;
+			
+		}
 		
+		return false;
 	}
 
 	protected boolean proximoTokenPossuiValorIgualA(String compareLexema) {
@@ -54,11 +59,13 @@ public abstract class RegrasProducaoAbstract {
 	private boolean hasLexema(TokenList pilhaDeToken, IndiceNumerico indice,
 			String compareLexema) {
 
-		Token token = pilhaDeToken.get(indice.getValor());
-		boolean resposta = (pilhaDeToken.size() > indice.getValor())
-							&& (token.getValue().equalsIgnoreCase(compareLexema));
-		indice.inc();
-		return resposta;
+		if (pilhaDeToken.size() > indice.getValor()) {			
+			Token token = pilhaDeToken.get(indice.getValor());
+			indice.inc();
+			return token.getValue().equalsIgnoreCase(compareLexema);			
+		}
+		
+		return false;
 	}
 
 	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
