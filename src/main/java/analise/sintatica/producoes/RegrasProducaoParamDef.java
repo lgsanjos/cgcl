@@ -2,11 +2,11 @@ package analise.sintatica.producoes;
 
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
+public class RegrasProducaoParamDef extends RegrasProducaoAbstract {
 
-public class RegrasProducaoTypedef extends RegrasProducaoAbstract {
-
+	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
-		// "typedef" <type> "identifier" 
+		// 		// ( "val" | "ref" ) <variableDef>
 		return null;
 	}
 

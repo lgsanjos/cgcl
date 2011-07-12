@@ -63,8 +63,8 @@ public class ArvoreSintaticaAbstrataNo {
 	
 	public void adicionaNoFilho(ArvoreSintaticaAbstrataNo noFilho) {
 		if (noFilho != null) {
-			noFilho.setNoPai(this);
 			this.listaDeNosFilhos.addLast(noFilho);			
+			noFilho.setNoPai(this);
 		}
 	}
 

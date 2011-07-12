@@ -6,9 +6,8 @@ public class RegrasProducaoProcedureDef extends RegrasProducaoAbstract {
 
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
+		//<procedureDecl> <block>
 		return null;
 	}
-
-
 
 }
