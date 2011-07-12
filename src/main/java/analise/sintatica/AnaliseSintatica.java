@@ -10,7 +10,7 @@ public class AnaliseSintatica {
 	
 	private TokenList pilhaDeTokens;
 	private AnaliseLexica analiseLexica;
-	
+	private ArvoreSintaticaAbstrataNo raizDaArvoreSintaticaAbstrata;
 
 	public AnaliseSintatica(AnaliseLexica analiseLexica){
 		this.pilhaDeTokens = new TokenList();
@@ -43,10 +43,18 @@ public class AnaliseSintatica {
 	private boolean validaSintaxeEGeraASA() {
 			
 		IndiceNumerico i = new IndiceNumerico();
-		// Deve tentar validar com todas as producoes possiveis.
+		ArvoreSintaticaAbstrataNo noRaiz;
+		
 		ProducoesFactory.setEstado(pilhaDeTokens, i);
 		try {
-			if(ProducoesFactory.getProducao(ProducoesEnum.module).isValida()) return true;
+			noRaiz = ProducoesFactory.getProducao(ProducoesEnum.module).validaEGeraProducao();
+			if (noRaiz != null) {
+				this.raizDaArvoreSintaticaAbstrata = noRaiz;
+				return true;
+			}
+			
+			noRaiz = ProducoesFactory.getProducao(ProducoesEnum.definition).validaEGeraProducao();
+			if (noRaiz != null) { return true; }
 			//if ( RegrasProducaoDefinition.getInstancia().isValida(pilhaDeTokens, i) ) return true;
 			//if ( RegrasProducaoDefinitionPart.getInstancia().isValida(pilhaDeTokens, i) ) return true;
 		} finally{

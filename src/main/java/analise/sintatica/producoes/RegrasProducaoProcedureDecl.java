@@ -1,15 +1,13 @@
 package analise.sintatica.producoes;
 
+import analise.sintatica.ArvoreSintaticaAbstrataNo;
+
 public class RegrasProducaoProcedureDecl extends RegrasProducaoAbstract {
 
 	@Override
-	public Object geraArvoreSintaticaAbstrata() {
-		return null;
-	}
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
 
-	@Override
-	public boolean isValida() {
-		return false;
+		return null;
 	}
 
 }

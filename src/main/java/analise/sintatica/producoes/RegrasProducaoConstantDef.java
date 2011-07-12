@@ -1,31 +1,41 @@
 package analise.sintatica.producoes;
 
+import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import utils.GCLTokenTypes;
 
 public class RegrasProducaoConstantDef extends RegrasProducaoAbstract {
 
 	@Override
-	public Object geraArvoreSintaticaAbstrata() {
-		return null;
-	}
-
-	@Override
-	public boolean isValida() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
 		// "const" <constantName> "=" <constant>
 		boolean isValida = true;
-		if (isValida)
+		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("constantDef");
+		
+		if (isValida) {
 			isValida &= this.proximoTokenPossuiValorETipoIgualA("const", GCLTokenTypes.KEYWORD);
+			raiz.adicionaNoFilho("const",this.getTokenAtual());			
+		}	
 		
-		if (isValida)
-			isValida &= ProducoesFactory.getProducao(ProducoesEnum.constantName).isValida();
+		if (isValida) {
+			ArvoreSintaticaAbstrataNo constantName;
+			constantName = ProducoesFactory.getProducao(ProducoesEnum.constantName).validaEGeraProducao();
+			isValida &= ( constantName != null);
+			raiz.adicionaNoFilho(constantName);
+		}	
 		
-		if (isValida)
+		if (isValida) {
 			isValida &= this.proximoTokenPossuiValorETipoIgualA("=", GCLTokenTypes.SYMBOL);
+			raiz.adicionaNoFilho("=", this.getTokenAtual());
+		}	
 		
-		if (isValida)
-			isValida &= ProducoesFactory.getProducao(ProducoesEnum.constant).isValida();
+		if (isValida) {
+			ArvoreSintaticaAbstrataNo constant;
+			constant = ProducoesFactory.getProducao(ProducoesEnum.constant).validaEGeraProducao();
+			isValida &= (constant != null);
+			raiz.adicionaNoFilho(constant);
+		}	
 		
-		return false;
+		return (isValida) ? raiz : null;
 	}
 
 }

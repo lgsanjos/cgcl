@@ -1,17 +1,20 @@
 package analise.sintatica.producoes;
 
+import analise.sintatica.ArvoreSintaticaAbstrataNo;
+
 public class RegrasProducaoConstant extends RegrasProducaoAbstract {
 
 	@Override
-	public Object geraArvoreSintaticaAbstrata() {
-		return null;
-	}
-
-	@Override
-	public boolean isValida() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
 		boolean isValida = true;
-		isValida = this.proximoTokenEhUmIdentificador();
-		return isValida;
+		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("const");
+		
+		if (isValida) {
+			isValida &= this.proximoTokenEhUmIdentificador();
+			raiz.adicionaNoFilho("identificador", this.getTokenAtual());
+		}
+		
+		return (isValida) ? raiz : null;
 	}
 
 }
