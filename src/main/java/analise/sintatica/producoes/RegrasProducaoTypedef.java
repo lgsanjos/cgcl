@@ -5,6 +5,7 @@ public class RegrasProducaoTypedef extends RegrasProducaoAbstract {
 
 	@Override
 	public Object geraArvoreSintaticaAbstrata() {
+		// "typedef" <type> "identifier" 
 		return null;
 	}
 

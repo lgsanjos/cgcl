@@ -23,7 +23,19 @@ public class AnaliseLexicaTest extends TestCase {
 	}
 
 	public void testValidaTokenKeywordBeginCaseInsensitive() throws Exception {
-		assertTrue(analisador.buildToken("BeGiN").getTokenType() == GCLTokenTypes.IDENTIFIER);
+		Token token = analisador.buildToken("BeGiN");
+		GCLTokenTypes id = GCLTokenTypes.KEYWORD;
+
+		assertEquals(token.getTokenType(), id);
+
+	}
+
+	public void testValidaTokenKeywordBeginCaseInsensitiveNaoEhIdentificador()
+			throws Exception {
+		Token token = analisador.buildToken("BeGiN");
+		GCLTokenTypes id = GCLTokenTypes.IDENTIFIER;
+
+		assertNotSame(token.getTokenType(), id);
 
 	}
 
@@ -72,10 +84,10 @@ public class AnaliseLexicaTest extends TestCase {
 	public void testValorRealComDuasVirgulas() {
 		assertFalse(this.analisador.validaLexema("1,345678,90"));
 	}
-	
+
 	public void testValorRealComPonto() {
 		assertFalse(this.analisador.validaLexema("1345678.90"));
-	}	
+	}
 
 	public void testValorInteiroNegativo() {
 
@@ -108,7 +120,7 @@ public class AnaliseLexicaTest extends TestCase {
 
 	public void testValidaTokenInvalidoArroba() throws EndOfBufferException {
 		assertFalse(analisador.validaLexema("begin@"));
-		
+
 		this.analisador = new AnaliseLexica("begin@ end.");
 		try {
 			Token token = analisador.getNextToken();
@@ -120,11 +132,11 @@ public class AnaliseLexicaTest extends TestCase {
 		// must fail
 		try {
 			analisador.getNextToken();
-		} catch( InvalidTokenException e) {
+		} catch (InvalidTokenException e) {
 			assertTrue(true);
 		}
-	}	
-	
+	}
+
 	public void testValidaTokenInvalido() throws EndOfBufferException {
 		this.analisador = new AnaliseLexica("@");
 
@@ -132,9 +144,84 @@ public class AnaliseLexicaTest extends TestCase {
 		try {
 			this.analisador.getNextToken();
 			fail();
-		} catch( InvalidTokenException e) {
+		} catch (InvalidTokenException e) {
+			assertTrue(true);
+		}
+
+	}
+	
+	public void testValorComDuasVirgulas2(){
+		this.analisador = new AnaliseLexica("4,32,4");
+		Token token;
+		//Implementar testValorComDuasVirgulas novamente para testar
+	}
+
+	public void testValorComDuasVirgulas() throws EndOfBufferException {
+		this.analisador = new AnaliseLexica("4,32,4");
+
+		Token token;
+
+		try {
+			token = this.analisador.getNextToken();
+
+			assertEquals("4,32", token.getValue());
+			assertEquals(GCLTokenTypes.NUMBER, token.getTokenType());
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+		
+		try {
+			token = this.analisador.getNextToken();
+			fail();
+		} catch (InvalidTokenException e) {
 			assertTrue(true);
 		}		
-		
-	}		
+
+	}
+
+	public void testTokenAll() {
+
+		this.analisador = new AnaliseLexica("begin 123 'teste' -4,32,4");
+		// / this.analisador.addTokenClassException(GCLTokenTypes.WHITESPACE);
+		Token token;
+
+		try {
+			token = this.analisador.getNextToken();
+			assertEquals("begin", token.getValue());
+			assertEquals(GCLTokenTypes.KEYWORD, token.getTokenType());
+
+			token = this.analisador.getNextToken();
+			assertEquals(" ", token.getValue());
+			assertEquals(GCLTokenTypes.WHITESPACE, token.getTokenType());
+
+			token = this.analisador.getNextToken();
+			assertEquals("123", token.getValue());
+			assertEquals(GCLTokenTypes.NUMBER, token.getTokenType());
+
+			token = this.analisador.getNextToken();
+			assertEquals(" ", token.getValue());
+			assertEquals(GCLTokenTypes.WHITESPACE, token.getTokenType());
+
+			token = this.analisador.getNextToken();
+			assertEquals("'teste'", token.getValue());
+			assertEquals(GCLTokenTypes.LITERAL, token.getTokenType());
+
+			token = this.analisador.getNextToken();
+			assertEquals(" ", token.getValue());
+			assertEquals(GCLTokenTypes.WHITESPACE, token.getTokenType());
+
+			token = this.analisador.getNextToken();
+			assertEquals("-", token.getValue());
+			assertEquals(GCLTokenTypes.SYMBOL, token.getTokenType());
+
+			token = this.analisador.getNextToken();
+
+			assertEquals("4,32,4", token.getValue());
+			assertEquals(GCLTokenTypes.NUMBER, token.getTokenType());
+
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+
+	}
 }

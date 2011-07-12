@@ -9,6 +9,7 @@ public class RegrasProducaoProcedureDef extends RegrasProducaoAbstract {
 
 	@Override
 	public boolean isValida() {
+		//<procedureDecl> <block> 
 		return false;
 	}
 

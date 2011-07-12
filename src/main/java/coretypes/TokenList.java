@@ -38,7 +38,7 @@ public class TokenList extends LinkedList<Token>  {
 		boolean achou = false;
 		int i = 0;
 		while (! achou && i < this.size()){
-			achou = ((Token) this.get(i)).getValue().equals(buscarToken.getValue()); 
+			achou = ((Token) this.get(i)).getValue().equalsIgnoreCase(buscarToken.getValue()); 
 		   i = i + 1;
 		}
 		
