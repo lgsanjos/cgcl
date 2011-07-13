@@ -4,42 +4,68 @@ import java.util.LinkedList;
 import coretypes.Token;
 
 public class ArvoreSintaticaAbstrataNo {
-	
+
 	private String nome;
 	private Token token;
 	private ArvoreSintaticaAbstrataNo noPai;
 	private LinkedList<ArvoreSintaticaAbstrataNo> listaDeNosFilhos;
-	
-	public ArvoreSintaticaAbstrataNo(String tipoDoNo, ArvoreSintaticaAbstrataNo noPai){
-		this.nome = tipoDoNo;
-		this.noPai = noPai;
+
+	public ArvoreSintaticaAbstrataNo() {
 		this.listaDeNosFilhos = new LinkedList<ArvoreSintaticaAbstrataNo>();
+	}
+
+	public ArvoreSintaticaAbstrataNo(String tipoDoNo) {
+		this();
+		this.nome = tipoDoNo;
+	}
+	
+	public ArvoreSintaticaAbstrataNo(String tipoDoNo, Token tokenAtual) {
+		this(tipoDoNo);
+		this.token = tokenAtual;
 	}
 
 	public String getNome() {
 		return nome;
 	}
 	
-	public ArvoreSintaticaAbstrataNo getNoPai(){
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public ArvoreSintaticaAbstrataNo getNoPai() {
 		return this.noPai;
 	}
-	
-	public void setNoPai(ArvoreSintaticaAbstrataNo no){
+
+	public void setNoPai(ArvoreSintaticaAbstrataNo no) {
 		this.noPai = no;
-	}	
+	}
 
 	public Token getToken() {
 		return token;
 	}
+
 	public void setToken(Token token) {
 		this.token = token;
 	}
+
 	public LinkedList<ArvoreSintaticaAbstrataNo> getListaDeNos() {
 		return listaDeNosFilhos;
 	}
+
+	public void adicionaNoFilho(String tipoDoNo, Token tokenDoNoFilho) {
+		if (tokenDoNoFilho != null) {
+			
+			ArvoreSintaticaAbstrataNo novoNo;
+			novoNo = new ArvoreSintaticaAbstrataNo(tipoDoNo, tokenDoNoFilho);
+			this.adicionaNoFilho(novoNo);		
+		}
+	}
 	
-	
-	
-		
+	public void adicionaNoFilho(ArvoreSintaticaAbstrataNo noFilho) {
+		if (noFilho != null) {
+			this.listaDeNosFilhos.addLast(noFilho);			
+			noFilho.setNoPai(this);
+		}
+	}
 
 }

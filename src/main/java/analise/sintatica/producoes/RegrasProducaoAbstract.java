@@ -1,5 +1,6 @@
 package analise.sintatica.producoes;
 
+import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import utils.GCLTokenTypes;
 import coretypes.IndiceNumerico;
 import coretypes.Token;
@@ -19,12 +20,23 @@ public abstract class RegrasProducaoAbstract {
 		if (pilhaDeToken.size() > indice.getValor()) {
 			Token tokenIndice = pilhaDeToken.get(indice.getValor());
 			
-			indice.inc();
+			this.avancaProximoToken();
 			return tokenIndice.getTokenType().equals(GCLTokenTypes.IDENTIFIER);			
 		}
 
 		return false;
 
+	}
+	
+	protected Token getTokenAtual() {
+		if (pilhaDeToken.size() > indice.getValor()) {
+			return pilhaDeToken.get(indice.getValor());
+		}		
+		return null;
+	}
+	
+	protected void avancaProximoToken() {
+		this.getIndice().inc();
 	}
 
 	protected boolean proximoTokenPossuiValorETipoIgualA(String compareLexema, GCLTokenTypes compareType ) {
@@ -39,7 +51,7 @@ public abstract class RegrasProducaoAbstract {
 		if (pilhaDeToken.size() > indice.getValor()) {
 			Token tokenIndice = pilhaDeToken.get(indice.getValor());			
 			
-			indice.inc();
+			this.avancaProximoToken();
 			return (tokenIndice.getValue().equalsIgnoreCase(compareLexema))
 					&& (tokenIndice.getTokenType().equals(compareType));
 
@@ -61,32 +73,15 @@ public abstract class RegrasProducaoAbstract {
 
 		if (pilhaDeToken.size() > indice.getValor()) {			
 			Token token = pilhaDeToken.get(indice.getValor());
-			indice.inc();
+			
+			this.avancaProximoToken();
 			return token.getValue().equalsIgnoreCase(compareLexema);			
 		}
 		
 		return false;
 	}
 
-	public boolean isValida(TokenList pilhaDeToken, IndiceNumerico apartirDe) {
-		boolean resposta = false;
-		TokenList estadoInicialPilhaDeToken = getPilhaDeToken();
-		IndiceNumerico estadoInicialApartirDe = getIndice();
-		
-		try {
-			this.setPilhaDeToken(pilhaDeToken);
-			this.setIndice(apartirDe);		
-			resposta = this.isValida();
-		} finally {
-			this.setPilhaDeToken(estadoInicialPilhaDeToken);
-			this.setIndice(estadoInicialApartirDe);		
-		}
-		return resposta;		
-	}
-	
-	public abstract boolean isValida();
-
-	public abstract Object geraArvoreSintaticaAbstrata();
+	public abstract ArvoreSintaticaAbstrataNo validaEGeraProducao();
 	
 	public TokenList getPilhaDeToken(){
 		return this.pilhaDeToken;

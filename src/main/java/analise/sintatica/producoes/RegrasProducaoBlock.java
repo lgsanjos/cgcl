@@ -1,22 +1,37 @@
 package analise.sintatica.producoes;
 
+import analise.sintatica.ArvoreSintaticaAbstrataNo;
+
 public class RegrasProducaoBlock extends RegrasProducaoAbstract {
 	
 	@Override
-	public Object geraArvoreSintaticaAbstrata() {
-		return null;
-	}
-
-	@Override
-	public boolean isValida() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
 		boolean isValido = true;
+		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("bloco");
 
-		// TODO: <definitionPart>
-		if ( isValido ) isValido &= this.proximoTokenPossuiValorIgualA("begin");
-		// TODO: <statementPart>
-		if ( isValido ) isValido &= this.proximoTokenPossuiValorIgualA("end");
+		if (isValido) {
+			ArvoreSintaticaAbstrataNo defPart;
+			defPart = ProducoesFactory.getProducao(ProducoesEnum.definitionPart).validaEGeraProducao();
+			raiz.adicionaNoFilho(defPart);
+		}
+		
+		if (isValido) {
+			isValido &= this.proximoTokenPossuiValorIgualA("begin");
+			raiz.adicionaNoFilho("begin", this.getTokenAtual());
+		}
+
+		if (isValido) {
+			ArvoreSintaticaAbstrataNo statement;
+			statement = ProducoesFactory.getProducao(ProducoesEnum.statement).validaEGeraProducao();
+			raiz.adicionaNoFilho(statement);
+		}
+		
+		if (isValido) {		
+			isValido &= this.proximoTokenPossuiValorIgualA("end");
+			raiz.adicionaNoFilho("end", this.getTokenAtual());
+		}
 	
-		return isValido;
+		return (isValido) ? raiz : null;
 	}
 
 }

@@ -1,15 +1,12 @@
 package analise.sintatica.producoes;
 
+import analise.sintatica.ArvoreSintaticaAbstrataNo;
+
 public class RegrasProducaoType extends RegrasProducaoAbstract {
 
 	@Override
-	public boolean isValida() {
-		// <typeSymbol> [ <arraytype> | <rangetype> ] | <tupletype>
-		return false;
-	}
-
-	@Override
-	public Object geraArvoreSintaticaAbstrata() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
+		//<typeSymbol> [ <arraytype> | <rangetype> ] | <tupletype>
 		return null;
 	}
 

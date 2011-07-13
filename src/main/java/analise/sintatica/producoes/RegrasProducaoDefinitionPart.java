@@ -1,27 +1,37 @@
 package analise.sintatica.producoes;
 
-public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
+import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
-	@Override
-	public Object geraArvoreSintaticaAbstrata() {
-		return null;
-	}
+public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
 	
 	@Override
-	public boolean isValida() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
 		boolean producaoDefValido = true;
 		boolean pontoEVirgulaValido = true;
 		boolean isInvalido = true;
+		boolean isValido = true;
+		
+		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("definitionPart");
+		ArvoreSintaticaAbstrataNo definitionPart;
 		
 		do {
-			producaoDefValido = ProducoesFactory.getProducao(ProducoesEnum.definition).isValida();
-			if (producaoDefValido) {
+			definitionPart = ProducoesFactory.getProducao(ProducoesEnum.definition).validaEGeraProducao();
+			producaoDefValido = (definitionPart != null);
+			
+			if (producaoDefValido) {				
 				pontoEVirgulaValido = this.proximoTokenPossuiValorIgualA(";");
+				
+				if (pontoEVirgulaValido) {					
+					raiz.adicionaNoFilho(definitionPart);
+					raiz.adicionaNoFilho(";", this.getTokenAtual());
+				}
 			}
+			
 		} while ( producaoDefValido && pontoEVirgulaValido );
 		
-		isInvalido = producaoDefValido && !pontoEVirgulaValido; 
-		return !isInvalido; 
+		isInvalido = producaoDefValido && !pontoEVirgulaValido;
+		isValido = ! isInvalido;
+		return (isValido) ? raiz : null;
 	}
 		
 

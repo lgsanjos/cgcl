@@ -6,26 +6,49 @@ import analise.sintatica.ArvoreSintaticaAbstrataNo;
 public class RegrasProducaoModule extends RegrasProducaoAbstract {
 
 	@Override
-	public ArvoreSintaticaAbstrataNo geraArvoreSintaticaAbstrata() {
-		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("module", null);
-		
-		return raiz;
-	}
-
-	@Override
-	public boolean isValida() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
 		boolean isValido = true;
+		ArvoreSintaticaAbstrataNo raiz = null;
 
-		if (isValido) isValido &= this.proximoTokenPossuiValorIgualA("module");
-		if (isValido) isValido &= this.proximoTokenEhUmIdentificador();
-		if (isValido) isValido &= ProducoesFactory.getProducao(ProducoesEnum.definitionPart).isValida();
-		if (isValido && !this.proximoTokenPossuiValorIgualA("private")) {
-			this.getIndice().dec();
+		if (isValido) {
+			isValido &= this.proximoTokenPossuiValorIgualA("module");
+			raiz = new ArvoreSintaticaAbstrataNo("module", this.getTokenAtual());	
 		}
-		if (isValido) ProducoesFactory.getProducao(ProducoesEnum.block).isValida();
-		if (isValido) isValido &= this.proximoTokenPossuiValorETipoIgualA(".", GCLTokenTypes.SYMBOL);
+		
+		if (isValido){
+			isValido &= this.proximoTokenEhUmIdentificador();
+			raiz.adicionaNoFilho("identificador", this.getTokenAtual() );
+		}
+		
+		if (isValido){
+			ArvoreSintaticaAbstrataNo defPart;
+			defPart = ProducoesFactory.getProducao(ProducoesEnum.definitionPart).validaEGeraProducao();
+			isValido &= ( defPart != null ); 
+			raiz.adicionaNoFilho(defPart);
+		}
+		
+		if (isValido) {
+			if (this.proximoTokenPossuiValorIgualA("private")) {
+				raiz.adicionaNoFilho("private", this.getTokenAtual());
+			}else{
+				this.getIndice().dec();	
+			}
+		}
+		
+		if (isValido) {
+			ArvoreSintaticaAbstrataNo block;
+			block = ProducoesFactory.getProducao(ProducoesEnum.block).validaEGeraProducao();
+			raiz.adicionaNoFilho(block);
+		}
+		
+		if (isValido) {
+			isValido &= this.proximoTokenPossuiValorETipoIgualA(".", GCLTokenTypes.SYMBOL);
+			raiz.adicionaNoFilho("simbolo", this.getTokenAtual());
+		}
 
-		return isValido;
+		raiz = (isValido) ? raiz : null;
+		return raiz;
+				
 	}
 
 }
