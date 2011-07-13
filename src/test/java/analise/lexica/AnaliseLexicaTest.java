@@ -149,39 +149,28 @@ public class AnaliseLexicaTest extends TestCase {
 		}
 
 	}
-	
-	public void testValorComDuasVirgulas2(){
-		this.analisador = new AnaliseLexica("4,32,4");
-		Token token;
-		//Implementar testValorComDuasVirgulas novamente para testar
-	}
 
 	public void testValorComDuasVirgulas() throws EndOfBufferException {
 		this.analisador = new AnaliseLexica("4,32,4");
 
-		Token token;
-
 		try {
-			token = this.analisador.getNextToken();
-
-			assertEquals("4,32", token.getValue());
-			assertEquals(GCLTokenTypes.NUMBER, token.getTokenType());
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
-		
-		try {
-			token = this.analisador.getNextToken();
+			assertEquals("4,32", this.analisador.getNextToken().getValue());
+		} catch (InvalidTokenException e) {
 			fail();
+		}
+		try {
+			this.analisador.getNextToken();
+			fail(",4 não é um lexama valido");
 		} catch (InvalidTokenException e) {
 			assertTrue(true);
-		}		
+		}
 
+		// Implementar testValorComDuasVirgulas novamente para testar
 	}
 
 	public void testTokenAll() {
 
-		this.analisador = new AnaliseLexica("begin 123 'teste' -4,32,4");
+		this.analisador = new AnaliseLexica("begin 123 'teste' -");
 		// / this.analisador.addTokenClassException(GCLTokenTypes.WHITESPACE);
 		Token token;
 
@@ -214,10 +203,7 @@ public class AnaliseLexicaTest extends TestCase {
 			assertEquals("-", token.getValue());
 			assertEquals(GCLTokenTypes.SYMBOL, token.getTokenType());
 
-			token = this.analisador.getNextToken();
 
-			assertEquals("4,32,4", token.getValue());
-			assertEquals(GCLTokenTypes.NUMBER, token.getTokenType());
 
 		} catch (Exception e) {
 			fail(e.getMessage());

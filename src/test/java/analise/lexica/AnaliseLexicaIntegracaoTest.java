@@ -6,6 +6,7 @@ import java.io.InputStream;
 import junit.framework.TestCase;
 import analise.lexica.AnaliseLexica;
 import coretypes.Token;
+import utils.GCLDataTypes;
 import utils.GCLTokenTypes;
 import utils.Utils;
 
@@ -17,6 +18,10 @@ public class AnaliseLexicaIntegracaoTest extends TestCase {
     	
     }	
 	
+    protected void assertToken(Token token, String lexema, GCLTokenTypes tokenType){
+    	assertEquals(lexema, token.getValue());
+    	assertEquals(tokenType, token.getTokenType());
+    }
     
 	public void testCarregaSimples() throws IOException, Exception{		
 		InputStream input =	getClass().getClassLoader().getResourceAsStream("simples.gcl");
@@ -52,17 +57,79 @@ public class AnaliseLexicaIntegracaoTest extends TestCase {
 		Token token;	
 		
 		// TODO: Arrumar o assert para validar o arquivo declaracoesDeTipos.gcl
-		token = analisador.getNextToken();
-		assertTrue(token.getValue().equals("module"));
-		token = analisador.getNextToken();
-		assertTrue(token.getValue().equals("simples"));
-		token = analisador.getNextToken();
-		assertTrue(token.getValue().equals("begin"));
-		token = analisador.getNextToken();
-		assertTrue(token.getValue().equals("end"));
-		token = analisador.getNextToken();
-		assertTrue(token.getValue().equals("."));
 		
+		assertToken(analisador.getNextToken(), "module", GCLTokenTypes.KEYWORD);
+		assertToken(analisador.getNextToken(), "testandoDeclaracoesEValores", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), "private", GCLTokenTypes.KEYWORD);
+		assertToken(analisador.getNextToken(), "integer", GCLTokenTypes.KEYWORD);
+		assertToken(analisador.getNextToken(), "varInteira", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), ";", GCLTokenTypes.SYMBOL);
+		
+		assertToken(analisador.getNextToken(), "real", GCLTokenTypes.KEYWORD);
+		assertToken(analisador.getNextToken(), "varReal", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), ";", GCLTokenTypes.SYMBOL);
+		
+		assertToken(analisador.getNextToken(), "Boolean", GCLTokenTypes.KEYWORD);
+		assertToken(analisador.getNextToken(), "varBoolean", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), ";", GCLTokenTypes.SYMBOL);
+		
+		
+		assertToken(analisador.getNextToken(), "string", GCLTokenTypes.IDENTIFIER); // avaliar se string é keyword
+		assertToken(analisador.getNextToken(), "varString", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), ";", GCLTokenTypes.SYMBOL);
+		
+		assertToken(analisador.getNextToken(), "begin", GCLTokenTypes.KEYWORD);
+		assertToken(analisador.getNextToken(), "varInteira", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), ":=", GCLTokenTypes.SYMBOL);
+		assertToken(analisador.getNextToken(), "123", GCLTokenTypes.NUMBER);
+		assertToken(analisador.getNextToken(), ";", GCLTokenTypes.SYMBOL);
+		
+		assertToken(analisador.getNextToken(), "varInteira", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), ":=", GCLTokenTypes.SYMBOL);
+		assertToken(analisador.getNextToken(), "-", GCLTokenTypes.SYMBOL);
+		assertToken(analisador.getNextToken(), "123", GCLTokenTypes.NUMBER);
+		assertToken(analisador.getNextToken(), ";", GCLTokenTypes.SYMBOL);
+		
+		assertToken(analisador.getNextToken(), "varReal", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), ":=", GCLTokenTypes.SYMBOL);
+		assertToken(analisador.getNextToken(), "23434", GCLTokenTypes.NUMBER);
+		assertToken(analisador.getNextToken(), ";", GCLTokenTypes.SYMBOL);
+		
+		assertToken(analisador.getNextToken(), "varReal", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), ":=", GCLTokenTypes.SYMBOL);
+		assertToken(analisador.getNextToken(), "-", GCLTokenTypes.SYMBOL);
+		assertToken(analisador.getNextToken(), "23434", GCLTokenTypes.NUMBER);
+		assertToken(analisador.getNextToken(), ";", GCLTokenTypes.SYMBOL);
+		
+		assertToken(analisador.getNextToken(), "varReal", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), ":=", GCLTokenTypes.SYMBOL);
+		assertToken(analisador.getNextToken(), "234,34", GCLTokenTypes.NUMBER);
+		assertToken(analisador.getNextToken(), ";", GCLTokenTypes.SYMBOL);
+		
+		assertToken(analisador.getNextToken(), "varReal", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), ":=", GCLTokenTypes.SYMBOL);
+		assertToken(analisador.getNextToken(), "-", GCLTokenTypes.SYMBOL);
+		assertToken(analisador.getNextToken(), "4,34", GCLTokenTypes.NUMBER);
+		assertToken(analisador.getNextToken(), ";", GCLTokenTypes.SYMBOL);
+		
+		assertToken(analisador.getNextToken(), "varBoolean", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), ":=", GCLTokenTypes.SYMBOL);
+		assertToken(analisador.getNextToken(), "true", GCLTokenTypes.KEYWORD);
+		assertToken(analisador.getNextToken(), ";", GCLTokenTypes.SYMBOL);
+		
+		assertToken(analisador.getNextToken(), "varBoolean", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), ":=", GCLTokenTypes.SYMBOL);
+		assertToken(analisador.getNextToken(), "false", GCLTokenTypes.KEYWORD);
+		assertToken(analisador.getNextToken(), ";", GCLTokenTypes.SYMBOL);
+		
+		assertToken(analisador.getNextToken(), "varString", GCLTokenTypes.IDENTIFIER);
+		assertToken(analisador.getNextToken(), ":=", GCLTokenTypes.SYMBOL);
+		assertToken(analisador.getNextToken(), "'qualquer coisa'", GCLTokenTypes.LITERAL);
+		assertToken(analisador.getNextToken(), ";", GCLTokenTypes.SYMBOL);
+		
+		assertToken(analisador.getNextToken(), "end", GCLTokenTypes.KEYWORD);
+		assertToken(analisador.getNextToken(), ".", GCLTokenTypes.SYMBOL);
+
 	}	
  
     

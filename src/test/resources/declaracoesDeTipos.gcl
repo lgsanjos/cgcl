@@ -17,6 +17,6 @@ begin
 	varBoolean := true;
 	varBoolean := false;
 	
-	varString := "qualquer coisa"; 	
+	varString := 'qualquer coisa'; 	
 
 end.

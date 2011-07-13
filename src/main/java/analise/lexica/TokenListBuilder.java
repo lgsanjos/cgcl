@@ -35,7 +35,8 @@ public class TokenListBuilder {
 		list.add(new Token(GCLTokenTypes.KEYWORD, "forall"));
 		list.add(new Token(GCLTokenTypes.KEYWORD, "llarof"));
 		list.add(new Token(GCLTokenTypes.KEYWORD, "skip"));
-
+		// Avaliar se real e string sao keywords
+		list.add(new Token(GCLTokenTypes.KEYWORD, "real"));
 		return list;
 	}
 	
