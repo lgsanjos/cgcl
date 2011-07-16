@@ -21,9 +21,9 @@ public class RegrasProducaoBlock extends RegrasProducaoAbstract {
 		}
 
 		if (isValido) {
-			ArvoreSintaticaAbstrataNo statement;
-			statement = ProducoesFactory.getProducao(ProducoesEnum.statement).validaEGeraProducao();
-			raiz.adicionaNoFilho(statement);
+			//ArvoreSintaticaAbstrataNo statement;
+			//statement = ProducoesFactory.getProducao(ProducoesEnum.statement).validaEGeraProducao();
+			//raiz.adicionaNoFilho(statement);
 		}
 		
 		if (isValido) {		

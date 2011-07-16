@@ -67,5 +67,9 @@ public class ArvoreSintaticaAbstrataNo {
 			noFilho.setNoPai(this);
 		}
 	}
+	
+	public boolean possueNosFilhos() {
+		return ( !this.listaDeNosFilhos.isEmpty() );
+	}
 
 }

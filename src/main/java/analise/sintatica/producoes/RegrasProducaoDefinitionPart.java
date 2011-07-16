@@ -13,7 +13,7 @@ public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
 		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("definitionPart");
 		ArvoreSintaticaAbstrataNo definitionPart;
-		
+
 		do {
 			definitionPart = ProducoesFactory.getProducao(ProducoesEnum.definition).validaEGeraProducao();
 			producaoDefValido = (definitionPart != null);
@@ -29,6 +29,7 @@ public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
 			
 		} while ( producaoDefValido && pontoEVirgulaValido );
 		
+		// DefinitionPart só é invalido quando não tiver o par completo de token.
 		isInvalido = producaoDefValido && !pontoEVirgulaValido;
 		isValido = ! isInvalido;
 		return (isValido) ? raiz : null;

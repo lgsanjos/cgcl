@@ -53,14 +53,13 @@ public class AnaliseSintatica {
 				return true;
 			}
 			
-			noRaiz = ProducoesFactory.getProducao(ProducoesEnum.definition).validaEGeraProducao();
-			if (noRaiz != null) { return true; }
+			//noRaiz = ProducoesFactory.getProducao(ProducoesEnum.definition).validaEGeraProducao();
 			//if ( RegrasProducaoDefinition.getInstancia().isValida(pilhaDeTokens, i) ) return true;
 			//if ( RegrasProducaoDefinitionPart.getInstancia().isValida(pilhaDeTokens, i) ) return true;
 		} finally{
 			ProducoesFactory.limpaEstado();
 		}
-		return false;		
+		return (noRaiz != null);		
 	}
 	
 

@@ -37,7 +37,7 @@ public class ProducoesFactory {
 		RegrasProducaoAbstract producao;
 		producao = instancia.listaDeProducoes.get(nomeDaProducao);
 		if (! instancia.listaDeProducoes.containsKey(nomeDaProducao)) {
-			throw new RuntimeException("Não foi localizado " + nomeDaProducao.toString() + " na fabria ProducaoFactory.");
+			throw new RuntimeException("Não foi localizado '" + nomeDaProducao.toString() + "' na fabrica ProducaoFactory.");
 		}
 		if (instancia.pilhaDeToken != null && instancia.indice != null) {
 			producao.setPilhaDeToken(instancia.pilhaDeToken);

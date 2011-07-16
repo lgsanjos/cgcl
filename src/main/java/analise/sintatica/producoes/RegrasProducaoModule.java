@@ -23,8 +23,12 @@ public class RegrasProducaoModule extends RegrasProducaoAbstract {
 		if (isValido){
 			ArvoreSintaticaAbstrataNo defPart;
 			defPart = ProducoesFactory.getProducao(ProducoesEnum.definitionPart).validaEGeraProducao();
-			isValido &= ( defPart != null ); 
-			raiz.adicionaNoFilho(defPart);
+			isValido &= ( defPart != null );
+
+			// Particularidade do defPart que é obrigatório em module porem sua gramatica permite ser vazio
+			if (defPart.possueNosFilhos()) {
+				raiz.adicionaNoFilho(defPart);
+			}	
 		}
 		
 		if (isValido) {
