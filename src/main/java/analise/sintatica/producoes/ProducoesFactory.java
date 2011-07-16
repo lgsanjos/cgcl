@@ -25,11 +25,13 @@ public class ProducoesFactory {
 		listaDeProducoes.put(ProducoesEnum.definitionPart, new RegrasProducaoDefinitionPart());
 		listaDeProducoes.put(ProducoesEnum.expression, new RegrasProducaoExpression());
 		listaDeProducoes.put(ProducoesEnum.module, new RegrasProducaoModule());
-		listaDeProducoes.put(ProducoesEnum.procedureDecl, new RegrasProducaoConstant());
-		listaDeProducoes.put(ProducoesEnum.procedureDef, new RegrasProducaoConstant());
-		listaDeProducoes.put(ProducoesEnum.relationalExpression, new RegrasProducaoConstant());
-		listaDeProducoes.put(ProducoesEnum.typedef, new RegrasProducaoConstant());
-		listaDeProducoes.put(ProducoesEnum.variableDef, new RegrasProducaoConstant());
+		listaDeProducoes.put(ProducoesEnum.procedureDecl, new RegrasProducaoProcedureDecl());
+		listaDeProducoes.put(ProducoesEnum.procedureDef, new RegrasProducaoProcedureDef());
+		listaDeProducoes.put(ProducoesEnum.relationalExpression, new RegrasProducaoRelationalExpression());
+		listaDeProducoes.put(ProducoesEnum.typedef, new RegrasProducaoTypedef());
+		listaDeProducoes.put(ProducoesEnum.variableDef, new RegrasProducaoVariableDef());
+		listaDeProducoes.put(ProducoesEnum.statementPart, new RegrasProducaoStatementPart());
+		listaDeProducoes.put(ProducoesEnum.statement, new RegrasProducaoStatement());
 		
 	}
 	

@@ -54,7 +54,7 @@ public class AnaliseLexicaRules {
 	}
 
 	private boolean lexemaIsNumeric(String lexema) {
-		return lexema.matches("([0-9])*|([0-9])*[,]([0-9])*");
+		return lexema.matches("[0-9]*|[0-9]*([,])[0-9]*");
 	}
 
 	public Token buildToken(String lexema, String posicao)
