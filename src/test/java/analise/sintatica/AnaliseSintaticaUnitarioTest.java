@@ -11,13 +11,20 @@ public class AnaliseSintaticaUnitarioTest extends AnaliseSintaticaTest {
     	assertTrue( this.analisador.valida() );	
     }
     
+    public void testaModuleBasicoComPrivate(){
+    	String source = "module oi private begin end.";
+    	
+    	this.analisador = this.buildAnaliseSintatica(source);
+    	assertTrue( this.analisador.valida() );	
+    }    
+    
     public void testaModuleBasicoComFalhaSintaticaNoFinalDaProducao(){
     	String source = "module oi begin end;";
     	
     	this.analisador = this.buildAnaliseSintatica(source);
     	assertFalse( this.analisador.valida() );	
     }
-    
+       
     public void testaModuleBasicoComFalhaSintaticaNoMeioDaProducao(){
     	String source = "module oi @ begin end.";
     	

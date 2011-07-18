@@ -1,6 +1,8 @@
 package coretypes;
 
-public class IndiceNumerico {
+import utils.Clonavel;
+
+public class IndiceNumerico implements Clonavel {
 
 	private int valor;
 	
@@ -32,5 +34,11 @@ public class IndiceNumerico {
 	public void dec() {
 		this.valor --;
 	}
+	
+   public Object clone() {
+       IndiceNumerico novo = new IndiceNumerico();
+       novo.setValor( this.getValor());
+       return novo;
+   }	
 
 }

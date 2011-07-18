@@ -11,6 +11,9 @@ public class ProducoesFactory {
 	
 	private TokenList pilhaDeToken;
 	private IndiceNumerico indice;
+	
+	private TokenList pilhaDeTokenSalvo;
+	private IndiceNumerico indiceSalvo;	
 		
 	private ProducoesFactory() {
 		
@@ -51,6 +54,20 @@ public class ProducoesFactory {
 	public static void setEstado(TokenList pilhaDeToken, IndiceNumerico indice){
 		instancia.indice = indice;
 		instancia.pilhaDeToken = pilhaDeToken;
+	}
+	
+	public static void salvaEstado() {
+		instancia.indiceSalvo = (IndiceNumerico)instancia.indice.clone();
+		instancia.pilhaDeTokenSalvo = new TokenList();
+		
+		for (int i = 0; i < instancia.pilhaDeToken.size(); i++) {
+			instancia.pilhaDeTokenSalvo.add(instancia.pilhaDeToken.get(i));
+		}
+	}
+	
+	public static void voltaEstado() {
+		instancia.indice = instancia.indiceSalvo;
+		instancia.pilhaDeToken = instancia.pilhaDeTokenSalvo;
 	}
 	
 	public static void limpaEstado(){

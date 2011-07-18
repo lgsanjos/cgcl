@@ -10,12 +10,16 @@ public class RegrasProducaoBlock extends RegrasProducaoAbstract {
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("block");
 
 		if (isValido) {
+			ProducoesFactory.salvaEstado();
+			
 			ArvoreSintaticaAbstrataNo defPart;
 			defPart = ProducoesFactory.getProducao(ProducoesEnum.definitionPart).validaEGeraProducao();
 			isValido = (defPart != null);
 			if (defPart.possueNosFilhos()) {
 				raiz.adicionaNoFilho(defPart);
-			}	
+			} else {
+				ProducoesFactory.voltaEstado();
+			}
 		}
 		
 		if (isValido) {
