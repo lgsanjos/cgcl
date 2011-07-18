@@ -6,12 +6,15 @@ public class RegrasProducaoConstant extends RegrasProducaoAbstract {
 
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
+		// <expression>
 		boolean isValida = true;
-		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("const");
+		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("constant");
 		
 		if (isValida) {
-			isValida &= this.proximoTokenEhUmIdentificador();
-			raiz.adicionaNoFilho("identificador", this.getTokenAtual());
+			ArvoreSintaticaAbstrataNo expression;
+			expression = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
+			isValida &= (expression != null);
+			raiz.adicionaNoFilho(expression);
 		}
 		
 		return (isValida) ? raiz : null;
