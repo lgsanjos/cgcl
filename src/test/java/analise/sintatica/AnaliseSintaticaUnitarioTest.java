@@ -44,7 +44,18 @@ public class AnaliseSintaticaUnitarioTest extends AnaliseSintaticaTest {
     	
     	this.analisador = this.buildAnaliseSintatica(source);
     	assertTrue( this.analisador.valida() );	
-    }    
+    }
+    
+    public void testaModuleBlocoDefinitionPartConstantDef(){
+    	String source = "module testando \r\n" +
+    					"private \r\n" +
+    					"const id = 2; \r\n" +
+    					"begin \r\n" +
+    					"end.";
+    	
+    	this.analisador = this.buildAnaliseSintatica(source);
+    	assertTrue( this.analisador.valida() );	
+    }        
 	
 
 }

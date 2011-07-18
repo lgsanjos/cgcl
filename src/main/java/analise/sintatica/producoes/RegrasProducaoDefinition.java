@@ -7,7 +7,16 @@ public class RegrasProducaoDefinition extends RegrasProducaoAbstract {
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
 		// <constantDef> | <variableDef> | <procedureDef> | <typedef> |<procedureDecl>
-		return null;
+		boolean isValido = true;
+		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("definition");
+		if (isValido) {
+			ArvoreSintaticaAbstrataNo definition;
+			definition = ProducoesFactory.getProducao(ProducoesEnum.constantDef).validaEGeraProducao();
+			isValido = (definition != null);
+			raiz.adicionaNoFilho(definition);
+		}
+		
+		return (isValido) ? raiz : null;
 	}
 
 }
