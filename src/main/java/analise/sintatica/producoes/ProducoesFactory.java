@@ -35,6 +35,10 @@ public class ProducoesFactory {
 		listaDeProducoes.put(ProducoesEnum.variableDef, new RegrasProducaoVariableDef());
 		listaDeProducoes.put(ProducoesEnum.statementPart, new RegrasProducaoStatementPart());
 		listaDeProducoes.put(ProducoesEnum.statement, new RegrasProducaoStatement());
+		listaDeProducoes.put(ProducoesEnum.booleanConstant, new RegrasProducaoBooleanConstant());
+		listaDeProducoes.put(ProducoesEnum.nextitem, new RegrasProducaoNextItem());
+		listaDeProducoes.put(ProducoesEnum.multiplyOperator, new RegrasProducaoMultiplyOperator());
+		
 		
 	}
 	

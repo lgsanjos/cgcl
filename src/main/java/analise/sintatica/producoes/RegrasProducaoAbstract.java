@@ -12,16 +12,24 @@ public abstract class RegrasProducaoAbstract {
 	private IndiceNumerico indice;
 	
 	protected boolean proximoTokenEhUmIdentificador() {
-		return isIdentifierToken(this.getPilhaDeToken(),
-				                 this.getIndice());
+		return isTokenType(this.getPilhaDeToken(),
+				           this.getIndice(),
+				           GCLTokenTypes.IDENTIFIER);
 	}
-	private boolean isIdentifierToken(TokenList pilhaDeToken, IndiceNumerico indice) {
+	
+	protected boolean proximoTokenEhUmNumero() {
+		return isTokenType(this.getPilhaDeToken(),
+				           this.getIndice(),
+				           GCLTokenTypes.NUMBER);
+	}	
+	
+	private boolean isTokenType(TokenList pilhaDeToken, IndiceNumerico indice, GCLTokenTypes tipo) {
 
 		if (pilhaDeToken.size() > indice.getValor()) {
 			Token tokenIndice = pilhaDeToken.get(indice.getValor());
 			
 			this.avancaProximoToken();
-			return tokenIndice.getTokenType().equals(GCLTokenTypes.IDENTIFIER);			
+			return tokenIndice.getTokenType().equals(tipo);			
 		}
 
 		return false;
@@ -29,8 +37,8 @@ public abstract class RegrasProducaoAbstract {
 	}
 	
 	protected Token getTokenAtual() {
-		if (pilhaDeToken.size() > indice.getValor()) {
-			return pilhaDeToken.get(indice.getValor());
+		if (pilhaDeToken.size() >= indice.getValor() - 1) {
+			return pilhaDeToken.get(indice.getValor() - 1);
 		}		
 		return null;
 	}
