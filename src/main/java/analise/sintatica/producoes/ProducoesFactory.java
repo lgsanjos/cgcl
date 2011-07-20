@@ -38,6 +38,11 @@ public class ProducoesFactory {
 		listaDeProducoes.put(ProducoesEnum.booleanConstant, new RegrasProducaoBooleanConstant());
 		listaDeProducoes.put(ProducoesEnum.nextitem, new RegrasProducaoNextItem());
 		listaDeProducoes.put(ProducoesEnum.multiplyOperator, new RegrasProducaoMultiplyOperator());
+		listaDeProducoes.put(ProducoesEnum.addingOperator, new RegrasProducaoAddingOperator());
+		listaDeProducoes.put(ProducoesEnum.emptyStatement, new RegrasProducaoEmptyStatement());
+		listaDeProducoes.put(ProducoesEnum.relationalOperator, new RegrasProducaoRelationalOperator());
+		listaDeProducoes.put(ProducoesEnum.typeSymbol, new RegrasProducaoTypeSymbol());
+		
 		
 		
 	}

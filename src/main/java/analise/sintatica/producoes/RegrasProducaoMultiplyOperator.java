@@ -25,7 +25,7 @@ public class RegrasProducaoMultiplyOperator extends RegrasProducaoAbstract {
 				}
 			}
 			
-			raiz.adicionaNoFilho("booleanConstant", this.getTokenAtual());
+			raiz.adicionaNoFilho("multiplyOperator", this.getTokenAtual());
 		}
 		
 		return (isValida) ? raiz : null;
