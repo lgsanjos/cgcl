@@ -12,10 +12,10 @@ public class RegrasProducaoNextItem extends RegrasProducaoAbstract {
 		if (isValida) {
 			
 			if ( ! this.proximoTokenEhUmIdentificador()) {
-				this.getIndice().dec();
+				this.voltaToken();
 				
 				if ( ! this.proximoTokenEhUmNumero()) {
-					this.getIndice().dec();
+					this.voltaToken();
 					isValida = false;
 				}
 			}

@@ -2,92 +2,74 @@ package analise.sintatica.producoes;
 
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import utils.GCLTokenTypes;
-import coretypes.IndiceNumerico;
 import coretypes.Token;
 import coretypes.TokenList;
 
 public abstract class RegrasProducaoAbstract {
 	
 	private TokenList pilhaDeToken;
-	private IndiceNumerico indice;
+	private int indiceSalvo = -1;
 	
 	protected boolean proximoTokenEhUmIdentificador() {
-		return isTokenType(this.getPilhaDeToken(),
-				           this.getIndice(),
-				           GCLTokenTypes.IDENTIFIER);
+		return isTokenType(this.getPilhaDeToken(), GCLTokenTypes.IDENTIFIER);
 	}
 	
 	protected boolean proximoTokenEhUmNumero() {
-		return isTokenType(this.getPilhaDeToken(),
-				           this.getIndice(),
-				           GCLTokenTypes.NUMBER);
+		return isTokenType(this.getPilhaDeToken(), GCLTokenTypes.NUMBER);
 	}	
 	
-	private boolean isTokenType(TokenList pilhaDeToken, IndiceNumerico indice, GCLTokenTypes tipo) {
-
-		if (pilhaDeToken.size() > indice.getValor()) {
-			Token tokenIndice = pilhaDeToken.get(indice.getValor());
-			
-			this.avancaProximoToken();
-			return tokenIndice.getTokenType().equals(tipo);			
+	protected void salvarIndice() {
+		if (this.indiceSalvo != -1) {
+			throw new RuntimeException("Não se pode salvar o estado duas vezes seguidas.");
 		}
-
-		return false;
-
+		this.indiceSalvo = this.pilhaDeToken.getIndice();
 	}
 	
-	protected Token getTokenAtual() {
-		if (pilhaDeToken.size() >= indice.getValor() - 1) {
-			return pilhaDeToken.get(indice.getValor() - 1);
-		}		
-		return null;
+	protected void recuperarIndice() {
+		this.pilhaDeToken.setIndice(this.indiceSalvo);
+		this.indiceSalvo = -1;
 	}
 	
-	protected void avancaProximoToken() {
-		this.getIndice().inc();
-	}
+	private boolean isTokenType(TokenList pilhaDeToken, GCLTokenTypes tipo) {
+		Token tokenIndice = this.pilhaDeToken.getProximoToken();
+		if (tokenIndice == null) {
+			return false;
+		}	
 
+		return tokenIndice.getTokenType().equals(tipo);
+	}
+	
 	protected boolean proximoTokenPossuiValorETipoIgualA(String compareLexema, GCLTokenTypes compareType ) {
-		return hasTokenWithLexemaAndType(this.getPilhaDeToken(),
-										 this.getIndice(),
-										 compareLexema,
-										 compareType);
-	}	
-	private boolean hasTokenWithLexemaAndType(TokenList pilhaDeToken, IndiceNumerico indice,
-			String compareLexema, GCLTokenTypes compareType ) {
 		
-		if (pilhaDeToken.size() > indice.getValor()) {
-			Token tokenIndice = pilhaDeToken.get(indice.getValor());			
-			
-			this.avancaProximoToken();
-			return (tokenIndice.getValue().equalsIgnoreCase(compareLexema))
-					&& (tokenIndice.getTokenType().equals(compareType));
-
-			
+		Token tokenIndice = pilhaDeToken.getProximoToken();
+		if (tokenIndice == null) {
+			return false;
 		}
 		
-		return false;
+		return (tokenIndice.getValue().equalsIgnoreCase(compareLexema)) &&
+			   (tokenIndice.getTokenType().equals(compareType));
 	}
 
 	protected boolean proximoTokenPossuiValorIgualA(String compareLexema) {
 
-		return this.hasLexema(this.getPilhaDeToken(),
-							  this.getIndice(),
-							  compareLexema);		
-		
-	}	
-	private boolean hasLexema(TokenList pilhaDeToken, IndiceNumerico indice,
-			String compareLexema) {
-
-		if (pilhaDeToken.size() > indice.getValor()) {			
-			Token token = pilhaDeToken.get(indice.getValor());
-			
-			this.avancaProximoToken();
-			return token.getValue().equalsIgnoreCase(compareLexema);			
+		Token token = pilhaDeToken.getProximoToken();
+		if (token == null) {
+			return false;
 		}
-		
-		return false;
+		return token.getValue().equalsIgnoreCase(compareLexema);
 	}
+	
+	protected Token getTokenAtual() {
+		 return pilhaDeToken.getTokenAtual();
+	}
+	
+	protected void avancaProximoToken() {
+		this.pilhaDeToken.avancaToken();
+	}
+	
+	protected void voltaToken() {
+		this.pilhaDeToken.retornaToken();
+	}	
 
 	public abstract ArvoreSintaticaAbstrataNo validaEGeraProducao();
 	
@@ -97,14 +79,6 @@ public abstract class RegrasProducaoAbstract {
 	
 	public void setPilhaDeToken(TokenList tokens){
 		this.pilhaDeToken = tokens;
-	}	
-	
-	public IndiceNumerico getIndice(){
-		return this.indice;
-	}
-	
-	public void setIndice(IndiceNumerico indiceNumerico){
-		this.indice = indiceNumerico;
 	}	
 	
 }

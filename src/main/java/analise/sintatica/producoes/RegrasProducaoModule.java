@@ -38,7 +38,7 @@ public class RegrasProducaoModule extends RegrasProducaoAbstract {
 			if (this.proximoTokenPossuiValorIgualA("private")) {
 				raiz.adicionaNoFilho("private", this.getTokenAtual());
 			}else{
-				this.getIndice().dec();	
+				this.voltaToken();
 			}
 		}
 		

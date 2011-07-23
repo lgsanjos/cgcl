@@ -13,10 +13,10 @@ public class RegrasProducaoBooleanConstant extends RegrasProducaoAbstract {
 		if (isValida) {
 			
 			if ( ! this.proximoTokenPossuiValorETipoIgualA("true", GCLTokenTypes.KEYWORD)) {
-				this.getIndice().dec();
+				this.voltaToken();
 				
 				if ( ! this.proximoTokenPossuiValorETipoIgualA("false", GCLTokenTypes.KEYWORD)) {
-					this.getIndice().dec();
+					this.voltaToken();
 					isValida = false;
 				}
 			}

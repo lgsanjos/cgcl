@@ -3,14 +3,14 @@ package analise.sintatica.producoes;
 import utils.GCLTokenTypes;
 import coretypes.Token;
 
-public class RegraProducaoNextItemTest extends RegrasProducaoTestCase {
+public class RegrasProducaoNextItemTest extends RegrasProducaoTestCase {
 
 	@Override
 	public void testCasoIdeal() {
 		Token token = new Token(GCLTokenTypes.NUMBER, "123");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.nextitem);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoNextItem");		
@@ -30,7 +30,7 @@ public class RegraProducaoNextItemTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.IDENTIFIER, "ola_eu_sou_um_id");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.nextitem);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoNextItem");		
@@ -51,7 +51,7 @@ public class RegraProducaoNextItemTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.NUMBER, "1,2");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.nextitem);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoNextItem");		

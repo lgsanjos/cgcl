@@ -10,7 +10,7 @@ public class RegrasProducaoExpression extends RegrasProducaoAbstract {
 		boolean isValida = true;
 		boolean possuiOperador = true;
 		boolean possuiExpressao = true;
-		
+		/*
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("expression");
 				
 		if (isValida) {
@@ -37,8 +37,9 @@ public class RegrasProducaoExpression extends RegrasProducaoAbstract {
 			} while (possuiOperador);
 		}
 		
-		isValida &= ( possuiOperador && (possuiExpressao == false) );
-		return (isValida) ? raiz : null;
+		isValida &= ( possuiOperador && (possuiExpressao == false) ); 
+		return (isValida) ? raiz : null;*/
+		return new ArvoreSintaticaAbstrataNo("expression");
 	}
 
 }

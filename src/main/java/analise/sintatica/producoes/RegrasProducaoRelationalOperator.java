@@ -8,38 +8,39 @@ public class RegrasProducaoRelationalOperator extends RegrasProducaoAbstract {
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
 		//<relationalOperator>	"<" | "=" | ">" | "<=" | ">=" | "#" 
-		
+
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("relationalOperator");
 		boolean isValida = false;		
-		this.getIndice().inc();
-		
+		this.avancaProximoToken();
+
+		// TODO: refatorar esse método		
 		if (! isValida) {
-			this.getIndice().dec();
+			this.voltaToken();
 			isValida = this.proximoTokenPossuiValorETipoIgualA("<", GCLTokenTypes.SYMBOL);
 		}
 		
 		if (! isValida) {
-			this.getIndice().dec();
+			this.voltaToken();
 			isValida = this.proximoTokenPossuiValorETipoIgualA("=", GCLTokenTypes.SYMBOL);
 		}
 		
 		if (! isValida) {
-			this.getIndice().dec();
+			this.voltaToken();
 			isValida = this.proximoTokenPossuiValorETipoIgualA(">", GCLTokenTypes.SYMBOL);
 		}
 		
 		if (! isValida) {
-			this.getIndice().dec();
+			this.voltaToken();
 			isValida = this.proximoTokenPossuiValorETipoIgualA("<=", GCLTokenTypes.SYMBOL);
 		}
 		
 		if (! isValida) {
-			this.getIndice().dec();
+			this.voltaToken();
 			isValida = this.proximoTokenPossuiValorETipoIgualA(">=", GCLTokenTypes.SYMBOL);
 		}
 		
 		if (! isValida) {
-			this.getIndice().dec();
+			this.voltaToken();
 			isValida = this.proximoTokenPossuiValorETipoIgualA("#", GCLTokenTypes.SYMBOL);
 		}
 		

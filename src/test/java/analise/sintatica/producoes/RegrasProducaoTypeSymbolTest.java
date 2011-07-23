@@ -11,7 +11,7 @@ public class RegrasProducaoTypeSymbolTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.KEYWORD, "integer");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.typeSymbol);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoTypeSymbol");		
@@ -31,7 +31,7 @@ public class RegrasProducaoTypeSymbolTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.KEYWORD, "string");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.typeSymbol);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoTypeSymbol");		
@@ -51,7 +51,7 @@ public class RegrasProducaoTypeSymbolTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.IDENTIFIER, "meuTipoCriadoPorMim");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.typeSymbol);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoTypeSymbol");		

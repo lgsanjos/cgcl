@@ -11,7 +11,7 @@ public class RegrasProducaoAddingOperatorTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.SYMBOL, "+");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.addingOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoAddingOperator");		
@@ -31,7 +31,7 @@ public class RegrasProducaoAddingOperatorTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.SYMBOL, "-");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.addingOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoAddingOperator");		

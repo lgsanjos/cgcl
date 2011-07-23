@@ -2,7 +2,6 @@ package analise.sintatica;
 
 import analise.lexica.AnaliseLexica;
 import analise.sintatica.producoes.*;
-import coretypes.IndiceNumerico;
 import coretypes.Token;
 import coretypes.TokenList;
 
@@ -42,10 +41,9 @@ public class AnaliseSintatica {
 	
 	private boolean validaSintaxeEGeraASA() {
 			
-		IndiceNumerico i = new IndiceNumerico();
 		ArvoreSintaticaAbstrataNo noRaiz;
 		
-		ProducoesFactory.setEstado(pilhaDeTokens, i);
+		ProducoesFactory.setEstado(pilhaDeTokens);
 		try {
 			noRaiz = ProducoesFactory.getProducao(ProducoesEnum.module).validaEGeraProducao();
 			if (noRaiz != null) {
@@ -68,7 +66,7 @@ public class AnaliseSintatica {
 	}
 	
 	public boolean pilhaDeTokensVazia(){
-		return this.pilhaDeTokens.isEmpty();
+		return this.pilhaDeTokens.estaVazia();
 	}
 
 	public int empilhaToken(Token token){

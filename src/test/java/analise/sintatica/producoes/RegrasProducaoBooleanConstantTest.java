@@ -10,7 +10,7 @@ public class RegrasProducaoBooleanConstantTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.KEYWORD, "true");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.booleanConstant);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoBooleanConstant");		
@@ -29,7 +29,7 @@ public class RegrasProducaoBooleanConstantTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.KEYWORD, "false");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.booleanConstant);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoBooleanConstant");		

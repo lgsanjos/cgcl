@@ -12,7 +12,7 @@ public class RegrasProducaoConstantNameTest extends RegrasProducaoTestCase {
 		this.pilhaDeToken.add(token);	
 
 		// define o estado na factory
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		// valida retorno da factory e gera ASA
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.constantName);

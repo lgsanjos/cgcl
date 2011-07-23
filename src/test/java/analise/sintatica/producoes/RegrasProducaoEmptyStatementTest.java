@@ -11,7 +11,7 @@ public class RegrasProducaoEmptyStatementTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.KEYWORD, "skip");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.emptyStatement);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoEmptyStatement");		

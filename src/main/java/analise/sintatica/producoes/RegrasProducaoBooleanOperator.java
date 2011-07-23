@@ -12,10 +12,10 @@ public class RegrasProducaoBooleanOperator extends RegrasProducaoAbstract {
 		if (isValida) {
 			
 			if ( ! this.proximoTokenPossuiValorETipoIgualA("&", GCLTokenTypes.SYMBOL)) {
-				this.getIndice().dec();
+				this.voltaToken();
 				
 				if ( ! this.proximoTokenPossuiValorETipoIgualA("|", GCLTokenTypes.SYMBOL)) {
-					this.getIndice().dec();
+					this.voltaToken();
 					isValida = false;						
 				}
 			}

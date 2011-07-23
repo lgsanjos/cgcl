@@ -3,14 +3,14 @@ package analise.sintatica.producoes;
 import utils.GCLTokenTypes;
 import coretypes.Token;
 
-public class RegraProducaoMultiplyOperatorTest extends RegrasProducaoTestCase {
+public class RegrasProducaoMultiplyOperatorTest extends RegrasProducaoTestCase {
 
 	@Override
 	public void testCasoIdeal() {
 		Token token = new Token(GCLTokenTypes.SYMBOL, "*");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.multiplyOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoMultiplyOperator");		
@@ -29,7 +29,7 @@ public class RegraProducaoMultiplyOperatorTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.SYMBOL, "/");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.multiplyOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoMultiplyOperator");		
@@ -48,7 +48,7 @@ public class RegraProducaoMultiplyOperatorTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.SYMBOL, "\"");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.multiplyOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoMultiplyOperator");		

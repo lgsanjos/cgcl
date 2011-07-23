@@ -26,7 +26,7 @@ public final class TabelaDeSimbolos {
 	}
 
 	public boolean contains(Token token) {
-		return this.listaSimbolos.contains(token);
+		return this.listaSimbolos.possue(token);
 	}
 
 }

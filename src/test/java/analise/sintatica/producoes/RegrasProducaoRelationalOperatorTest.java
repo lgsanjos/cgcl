@@ -12,7 +12,7 @@ public class RegrasProducaoRelationalOperatorTest extends
 		Token token = new Token(GCLTokenTypes.SYMBOL, ">");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.relationalOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoRelationalOperator");		
@@ -32,7 +32,7 @@ public class RegrasProducaoRelationalOperatorTest extends
 		Token token = new Token(GCLTokenTypes.SYMBOL, "<");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.relationalOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoRelationalOperator");		
@@ -52,7 +52,7 @@ public class RegrasProducaoRelationalOperatorTest extends
 		Token token = new Token(GCLTokenTypes.SYMBOL, "=");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.relationalOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoRelationalOperator");		
@@ -72,7 +72,7 @@ public class RegrasProducaoRelationalOperatorTest extends
 		Token token = new Token(GCLTokenTypes.SYMBOL, "<=");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.relationalOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoRelationalOperator");		
@@ -92,7 +92,7 @@ public class RegrasProducaoRelationalOperatorTest extends
 		Token token = new Token(GCLTokenTypes.SYMBOL, ">=");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.relationalOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoRelationalOperator");		
@@ -112,7 +112,7 @@ public class RegrasProducaoRelationalOperatorTest extends
 		Token token = new Token(GCLTokenTypes.SYMBOL, "#");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.relationalOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoRelationalOperator");		

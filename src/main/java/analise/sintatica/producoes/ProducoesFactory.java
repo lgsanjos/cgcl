@@ -1,7 +1,6 @@
 package analise.sintatica.producoes;
 
 import java.util.HashMap;
-import coretypes.IndiceNumerico;
 import coretypes.TokenList;
 
 public class ProducoesFactory {
@@ -10,10 +9,9 @@ public class ProducoesFactory {
 	private HashMap<ProducoesEnum, RegrasProducaoAbstract> listaDeProducoes;
 	
 	private TokenList pilhaDeToken;
-	private IndiceNumerico indice;
 	
 	private TokenList pilhaDeTokenSalvo;
-	private IndiceNumerico indiceSalvo;	
+	private boolean estadoSalvo;
 		
 	private ProducoesFactory() {
 		
@@ -42,6 +40,7 @@ public class ProducoesFactory {
 		listaDeProducoes.put(ProducoesEnum.emptyStatement, new RegrasProducaoEmptyStatement());
 		listaDeProducoes.put(ProducoesEnum.relationalOperator, new RegrasProducaoRelationalOperator());
 		listaDeProducoes.put(ProducoesEnum.typeSymbol, new RegrasProducaoTypeSymbol());
+		listaDeProducoes.put(ProducoesEnum.indexorcomp, new RegrasProducaoIndexOrComp());
 		
 		
 		
@@ -53,20 +52,21 @@ public class ProducoesFactory {
 		if (! instancia.listaDeProducoes.containsKey(nomeDaProducao)) {
 			throw new RuntimeException("Não foi localizado '" + nomeDaProducao.toString() + "' na fabrica ProducaoFactory.");
 		}
-		if (instancia.pilhaDeToken != null && instancia.indice != null) {
+		if (instancia.pilhaDeToken != null) {
 			producao.setPilhaDeToken(instancia.pilhaDeToken);
-			producao.setIndice(instancia.indice);
 		}
 		return producao; 
 	}
 	
-	public static void setEstado(TokenList pilhaDeToken, IndiceNumerico indice){
-		instancia.indice = indice;
+	public static void setEstado(TokenList pilhaDeToken){
 		instancia.pilhaDeToken = pilhaDeToken;
 	}
 	
 	public static void salvaEstado() {
-		instancia.indiceSalvo = (IndiceNumerico)instancia.indice.clone();
+		if (instancia.estadoSalvo) {
+			throw new RuntimeException("O estado da RegrasProducao já está salvo.");
+		}
+		
 		instancia.pilhaDeTokenSalvo = new TokenList();
 		
 		for (int i = 0; i < instancia.pilhaDeToken.size(); i++) {
@@ -75,13 +75,14 @@ public class ProducoesFactory {
 	}
 	
 	public static void voltaEstado() {
-		instancia.indice = instancia.indiceSalvo;
+		instancia.estadoSalvo = false;
 		instancia.pilhaDeToken = instancia.pilhaDeTokenSalvo;
+		
 	}
 	
 	public static void limpaEstado(){
-		instancia.indice = null;
-		instancia.pilhaDeToken = null;		
+		instancia.pilhaDeToken = null;
+		instancia.estadoSalvo = false;
 	}
 	
 }

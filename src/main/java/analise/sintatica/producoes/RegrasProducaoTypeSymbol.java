@@ -11,20 +11,20 @@ public class RegrasProducaoTypeSymbol extends RegrasProducaoAbstract {
 		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("typeSymbol");
 		boolean isValida = false;		
-		this.getIndice().inc();
+		this.avancaProximoToken();
 		
 		if (! isValida) {
-			this.getIndice().dec();
+			this.voltaToken();
 			isValida = this.proximoTokenPossuiValorETipoIgualA("integer", GCLTokenTypes.KEYWORD);
 		}
 		
 		if (! isValida) {
-			this.getIndice().dec();
+			this.voltaToken();
 			isValida = this.proximoTokenPossuiValorETipoIgualA("string", GCLTokenTypes.KEYWORD);
 		}
 		
 		if (! isValida) {
-			this.getIndice().dec();
+			this.voltaToken();
 			isValida = this.proximoTokenEhUmIdentificador();
 		}
 				

@@ -11,7 +11,7 @@ public class RegrasProducaoBooleanOperatorTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.SYMBOL, "&");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.booleanOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoBooleanOperator");		
@@ -31,7 +31,7 @@ public class RegrasProducaoBooleanOperatorTest extends RegrasProducaoTestCase {
 		Token token = new Token(GCLTokenTypes.SYMBOL, "|");
 		this.pilhaDeToken.add(token);
 
-		ProducoesFactory.setEstado(this.pilhaDeToken, this.indice);
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.booleanOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoBooleanOperator");		

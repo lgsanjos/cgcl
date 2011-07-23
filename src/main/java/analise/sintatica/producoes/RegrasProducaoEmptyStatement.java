@@ -13,7 +13,7 @@ public class RegrasProducaoEmptyStatement extends RegrasProducaoAbstract {
 		if (isValida) {
 			
 			if ( ! this.proximoTokenPossuiValorETipoIgualA("skip", GCLTokenTypes.KEYWORD)) {
-				this.getIndice().dec();
+				this.voltaToken();
 				isValida = false;						
 			}
 			
