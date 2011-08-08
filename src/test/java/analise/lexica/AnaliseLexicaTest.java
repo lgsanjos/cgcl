@@ -3,8 +3,8 @@ package analise.lexica;
 import analise.exceptions.EndOfBufferException;
 import analise.exceptions.InvalidTokenException;
 import analise.lexica.AnaliseLexica;
-import utils.GCLTokenTypes;
 import coretypes.Token;
+import coretypes.gcl.GCLTokenTypes;
 import junit.framework.TestCase;
 
 public class AnaliseLexicaTest extends TestCase {

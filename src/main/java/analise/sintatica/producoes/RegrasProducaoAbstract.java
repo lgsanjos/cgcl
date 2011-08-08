@@ -1,14 +1,14 @@
 package analise.sintatica.producoes;
 
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
-import utils.GCLTokenTypes;
 import coretypes.Token;
 import coretypes.TokenList;
+import coretypes.gcl.GCLTokenTypes;
 
 public abstract class RegrasProducaoAbstract {
 	
 	private TokenList pilhaDeToken;
-	private int indiceSalvo = -1;
+	private TokenList pilhaDeTokenSalva;
 	
 	protected boolean proximoTokenEhUmIdentificador() {
 		return isTokenType(this.getPilhaDeToken(), GCLTokenTypes.IDENTIFIER);
@@ -18,16 +18,22 @@ public abstract class RegrasProducaoAbstract {
 		return isTokenType(this.getPilhaDeToken(), GCLTokenTypes.NUMBER);
 	}	
 	
-	protected void salvarIndice() {
-		if (this.indiceSalvo != -1) {
+	protected void salvarIndiceTokenAtual() {
+		if (this.pilhaDeTokenSalva != null) {
 			throw new RuntimeException("Não se pode salvar o estado duas vezes seguidas.");
 		}
-		this.indiceSalvo = this.pilhaDeToken.getIndice();
+		this.pilhaDeTokenSalva = this.pilhaDeToken.clone();
 	}
 	
-	protected void recuperarIndice() {
-		this.pilhaDeToken.setIndice(this.indiceSalvo);
-		this.indiceSalvo = -1;
+	protected void descartaIndiceSalvo() {
+		this.pilhaDeTokenSalva = null;
+		
+	}
+	
+	protected void recuperarIndiceSalvo() {
+		this.pilhaDeToken = null;
+		this.pilhaDeToken = this.pilhaDeTokenSalva;
+		this.pilhaDeTokenSalva = null;
 	}
 	
 	private boolean isTokenType(TokenList pilhaDeToken, GCLTokenTypes tipo) {

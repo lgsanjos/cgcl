@@ -1,4 +1,4 @@
-package utils;
+package coretypes.gcl;
 
 
 public enum GCLTokenTypes {

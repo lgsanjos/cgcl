@@ -2,7 +2,7 @@ package analise.lexica;
 
 import coretypes.Token;
 import coretypes.TokenList;
-import utils.GCLTokenTypes;
+import coretypes.gcl.GCLTokenTypes;
 
 public class TokenListBuilder {
 	

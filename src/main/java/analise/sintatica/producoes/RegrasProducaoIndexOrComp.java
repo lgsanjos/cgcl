@@ -1,6 +1,6 @@
 package analise.sintatica.producoes;
 
-import utils.GCLTokenTypes;
+import coretypes.gcl.GCLTokenTypes;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class RegrasProducaoIndexOrComp extends RegrasProducaoAbstract {
@@ -10,6 +10,8 @@ public class RegrasProducaoIndexOrComp extends RegrasProducaoAbstract {
 		// <indexorcomp> { "."  "number" | "[" <expression> "]" }
 		
 		boolean isValido = true;
+		boolean caso1_valido = false;
+		boolean caso2_valido = false;
 		boolean possuiContrucaoCompletaValida = false;
 		ArvoreSintaticaAbstrataNo expression;
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("indexorcomp");
@@ -17,41 +19,55 @@ public class RegrasProducaoIndexOrComp extends RegrasProducaoAbstract {
 		do {
 
 			// caso 1
-				ProducoesFactory.salvaEstado();				
-				isValido &= this.proximoTokenPossuiValorETipoIgualA(".", GCLTokenTypes.SYMBOL); 
-				if (isValido) {
-					raiz.adicionaNoFilho(".", this.getTokenAtual());
-				
-					isValido &= this.proximoTokenEhUmNumero();
-					raiz.adicionaNoFilho("number", this.getTokenAtual());
-					
-					possuiContrucaoCompletaValida = true;
-				} else {
-					ProducoesFactory.voltaEstado();
-				}
-	
+			this.salvarIndiceTokenAtual();
+			caso1_valido = false;
+			isValido &= this.proximoTokenPossuiValorETipoIgualA(".", GCLTokenTypes.SYMBOL); 
+			if (isValido) {
+				raiz.adicionaNoFilho(".", this.getTokenAtual());
 			
-			// caso 2
-				ProducoesFactory.salvaEstado();
-				isValido &= this.proximoTokenPossuiValorETipoIgualA("[", GCLTokenTypes.SYMBOL);
+				isValido &= this.proximoTokenEhUmNumero();
+				raiz.adicionaNoFilho("number", this.getTokenAtual());
+				
 				if (isValido) {
-					raiz.adicionaNoFilho("[", this.getTokenAtual());
-					
-					expression = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
-					raiz.adicionaNoFilho(expression);
-					isValido &= (expression != null);
+					possuiContrucaoCompletaValida = true;
+					caso1_valido = true;
+				}	
+			}
+			
+			if (caso1_valido) {
+				this.descartaIndiceSalvo();
+			} else {
+				this.recuperarIndiceSalvo();
+			}
+
+			this.salvarIndiceTokenAtual();
+			caso2_valido = false;
+			isValido = this.proximoTokenPossuiValorETipoIgualA("[", GCLTokenTypes.SYMBOL);
+			if (isValido) {
+				raiz.adicionaNoFilho("[", this.getTokenAtual());
+				
+				expression = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
+				raiz.adicionaNoFilho(expression);
+				isValido &= (expression != null);
+				
+				if (isValido) {
+					isValido &= this.proximoTokenPossuiValorETipoIgualA("]", GCLTokenTypes.SYMBOL);
+					raiz.adicionaNoFilho("]", this.getTokenAtual());
 					
 					if (isValido) {
-						isValido &= this.proximoTokenPossuiValorETipoIgualA("]", GCLTokenTypes.SYMBOL);
-						raiz.adicionaNoFilho("]", this.getTokenAtual());
-						
 						possuiContrucaoCompletaValida = true;
-					}
-				} else {
-					ProducoesFactory.voltaEstado();
+						caso2_valido = true;
+					}	
 				}
+			}
+			
+			if (caso2_valido) {
+				this.descartaIndiceSalvo();
+			} else {
+				this.recuperarIndiceSalvo();
+			}			
 				
-		} while (isValido);	
+		} while (caso1_valido || caso2_valido);	
 						
 		return (possuiContrucaoCompletaValida) ? raiz : null;
 	}

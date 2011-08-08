@@ -1,6 +1,7 @@
 package coretypes;
 
-import utils.GCLTokenTypes;
+import coretypes.gcl.GCLTokenTypes;
+
 
 public class Token {
 

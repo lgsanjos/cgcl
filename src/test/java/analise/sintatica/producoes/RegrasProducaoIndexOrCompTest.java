@@ -1,7 +1,7 @@
 package analise.sintatica.producoes;
 
-import utils.GCLTokenTypes;
 import coretypes.Token;
+import coretypes.gcl.GCLTokenTypes;
 
 public class RegrasProducaoIndexOrCompTest extends RegrasProducaoTestCase {
 
@@ -79,10 +79,11 @@ public class RegrasProducaoIndexOrCompTest extends RegrasProducaoTestCase {
 		assertEquals(this.raiz.getNome(), "indexorcomp");
 		assertNull(this.raiz.getToken());
 		assertEquals(this.raiz.possueNosFilhos(), true);		
-		assertEquals(this.raiz.getListaDeNos().size(), 2);
+		assertEquals(this.raiz.getListaDeNos().size(), 3);
 		
 		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), tokenAbreColchete.getTokenType());
 		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), tokenAbreColchete.getValue());
+		i++; // pula expression
 		i++;
 		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), tokenFechaColchete.getTokenType());
 		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), tokenFechaColchete.getValue());		

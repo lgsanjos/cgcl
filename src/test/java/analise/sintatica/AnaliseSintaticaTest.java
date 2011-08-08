@@ -1,9 +1,12 @@
 package analise.sintatica;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 
-import utils.GCLTokenTypes;
+import coretypes.gcl.GCLTokenTypes;
+
+
 import utils.Utils;
 import analise.sintatica.AnaliseSintatica;
 import analise.lexica.AnaliseLexica;

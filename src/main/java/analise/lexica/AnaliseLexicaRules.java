@@ -1,9 +1,9 @@
 package analise.lexica;
 
-import utils.GCLTokenTypes;
 import utils.Utils;
 import coretypes.Token;
 import coretypes.TokenList;
+import coretypes.gcl.GCLTokenTypes;
 import analise.exceptions.InvalidTokenException;
 
 public class AnaliseLexicaRules {

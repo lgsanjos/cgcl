@@ -1,13 +1,14 @@
 package analise.lexica;
 
+
 import java.util.LinkedList;
 
-import utils.GCLTokenTypes;
 
 import analise.TabelaDeSimbolos;
 import analise.exceptions.EndOfBufferException;
 import analise.exceptions.InvalidTokenException;
 import coretypes.*;
+import coretypes.gcl.GCLTokenTypes;
 
 public class AnaliseLexica {
 

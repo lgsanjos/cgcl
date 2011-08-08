@@ -1,7 +1,7 @@
 package analise.sintatica.producoes;
 
+import coretypes.gcl.GCLTokenTypes;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
-import utils.GCLTokenTypes;
 
 public class RegrasProducaoConstantDef extends RegrasProducaoAbstract {
 

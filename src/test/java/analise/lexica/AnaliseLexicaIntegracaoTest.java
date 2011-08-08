@@ -1,13 +1,14 @@
 package analise.lexica;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 
 import junit.framework.TestCase;
 import analise.lexica.AnaliseLexica;
 import coretypes.Token;
-import utils.GCLDataTypes;
-import utils.GCLTokenTypes;
+import coretypes.gcl.GCLDataTypes;
+import coretypes.gcl.GCLTokenTypes;
 import utils.Utils;
 
 public class AnaliseLexicaIntegracaoTest extends TestCase {

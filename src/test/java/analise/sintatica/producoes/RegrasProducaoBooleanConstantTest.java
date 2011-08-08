@@ -1,7 +1,7 @@
 package analise.sintatica.producoes;
 
-import utils.GCLTokenTypes;
 import coretypes.Token;
+import coretypes.gcl.GCLTokenTypes;
 
 public class RegrasProducaoBooleanConstantTest extends RegrasProducaoTestCase {
 

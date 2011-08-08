@@ -1,6 +1,6 @@
 package analise.sintatica.producoes;
 
-import utils.GCLTokenTypes;
+import coretypes.gcl.GCLTokenTypes;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class RegrasProducaoModule extends RegrasProducaoAbstract {

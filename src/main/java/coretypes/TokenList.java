@@ -1,9 +1,13 @@
 package coretypes;
 
-import java.util.LinkedList;
-import utils.GCLTokenTypes;
 
-public class TokenList {
+import java.util.LinkedList;
+
+import utils.Clonavel;
+
+import coretypes.gcl.GCLTokenTypes;
+
+public class TokenList implements Clonavel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -41,7 +45,7 @@ public class TokenList {
 	}	
 	
 	public Token getTokenAtual() {
-		if (this.indice > this.size()) {
+		if (this.indice >= this.size()) {
 			return null;
 		}
 			
@@ -107,6 +111,17 @@ public class TokenList {
 		}
 
 		return achou;
+	}
+	
+	public TokenList clone() {
+		TokenList list = new TokenList();
+		list.setIndice(this.indice);
+		
+		for (int i = 0; i < this.size(); i++) {
+			list.add(this.get(i));
+		}
+		
+		return list;
 	}
 
 }
