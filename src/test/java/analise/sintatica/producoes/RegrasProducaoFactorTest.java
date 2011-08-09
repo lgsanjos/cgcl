@@ -77,10 +77,9 @@ public class RegrasProducaoFactorTest extends RegrasProducaoTestCase {
 		assertEquals(this.raiz.possueNosFilhos(), true);
 		assertEquals(this.raiz.getListaDeNos().size(), 1);
 		
-		int i = 0;
-		
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), tokenTrue.getTokenType());
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), tokenTrue.getValue());
+		ArvoreSintaticaAbstrataNo booleanConst = this.raiz.getListaDeNos().getFirst();
+		assertEquals(booleanConst.getListaDeNos().getFirst().getToken().getTokenType(), tokenTrue.getTokenType());
+		assertEquals(booleanConst.getListaDeNos().getFirst().getToken().getValue(), tokenTrue.getValue());
 	}
 	
 	public void testTilFactor() {

@@ -7,24 +7,21 @@ public class RegrasProducaoBooleanConstant extends RegrasProducaoAbstract {
 
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
-		boolean isValida = true;
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("booleanConstant");
 		
-		if (isValida) {
-			
-			if ( ! this.proximoTokenPossuiValorETipoIgualA("true", GCLTokenTypes.KEYWORD)) {
-				this.voltaToken();
-				
-				if ( ! this.proximoTokenPossuiValorETipoIgualA("false", GCLTokenTypes.KEYWORD)) {
-					this.voltaToken();
-					isValida = false;
-				}
-			}
-			
+		if (this.proximoTokenPossuiValorETipoIgualA("true", GCLTokenTypes.KEYWORD)) {
 			raiz.adicionaNoFilho("booleanConstant", this.getTokenAtual());
+			return raiz;
 		}
 		
-		return (isValida) ? raiz : null;
+		this.voltaToken();
+		
+		if (  this.proximoTokenPossuiValorETipoIgualA("false", GCLTokenTypes.KEYWORD)) {
+			raiz.adicionaNoFilho("booleanConstant", this.getTokenAtual());
+			return raiz;
+		}
+		
+		return null;
 	}
 
 }

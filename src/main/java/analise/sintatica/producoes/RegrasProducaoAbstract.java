@@ -1,5 +1,6 @@
 package analise.sintatica.producoes;
 
+import utils.Clonavel;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import coretypes.Token;
 import coretypes.TokenList;
@@ -34,6 +35,7 @@ public abstract class RegrasProducaoAbstract {
 		this.pilhaDeToken = null;
 		this.pilhaDeToken = this.pilhaDeTokenSalva;
 		this.pilhaDeTokenSalva = null;
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 	}
 	
 	private boolean isTokenType(TokenList pilhaDeToken, GCLTokenTypes tipo) {
@@ -85,6 +87,6 @@ public abstract class RegrasProducaoAbstract {
 	
 	public void setPilhaDeToken(TokenList tokens){
 		this.pilhaDeToken = tokens;
-	}	
+	}
 	
 }

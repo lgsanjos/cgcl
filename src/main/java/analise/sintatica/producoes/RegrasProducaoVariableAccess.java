@@ -7,6 +7,7 @@ public class RegrasProducaoVariableAccess extends RegrasProducaoAbstract {
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
 		boolean isValida = true;
+		this.salvarIndiceTokenAtual();
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("variableAccess");
 		
 		if (isValida) {
@@ -21,6 +22,8 @@ public class RegrasProducaoVariableAccess extends RegrasProducaoAbstract {
 				
 				if ( variableMore != null) {
 					isValida = true;
+				} else {
+					this.recuperarIndiceSalvo();
 				}
 			}
 		}

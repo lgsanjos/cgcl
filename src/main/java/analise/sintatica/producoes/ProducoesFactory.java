@@ -6,7 +6,7 @@ import coretypes.TokenList;
 public class ProducoesFactory {
 
 	private static ProducoesFactory instancia = new ProducoesFactory();
-	private HashMap<ProducoesEnum, RegrasProducaoAbstract> listaDeProducoes;
+	private HashMap<ProducoesEnum, String> listaDeProducoes;
 	
 	private TokenList pilhaDeToken;
 	
@@ -15,51 +15,63 @@ public class ProducoesFactory {
 		
 	private ProducoesFactory() {
 		
-		listaDeProducoes = new HashMap<ProducoesEnum, RegrasProducaoAbstract>();
+		listaDeProducoes = new HashMap<ProducoesEnum, String>();
 		
-		listaDeProducoes.put(ProducoesEnum.block, new RegrasProducaoBlock());
-		listaDeProducoes.put(ProducoesEnum.booleanOperator, new RegrasProducaoBooleanOperator());
-		listaDeProducoes.put(ProducoesEnum.constant, new RegrasProducaoConstant());
-		listaDeProducoes.put(ProducoesEnum.constantDef, new RegrasProducaoConstantDef());
-		listaDeProducoes.put(ProducoesEnum.constantName, new RegrasProducaoConstantName());
-		listaDeProducoes.put(ProducoesEnum.definition, new RegrasProducaoDefinition());
-		listaDeProducoes.put(ProducoesEnum.definitionPart, new RegrasProducaoDefinitionPart());
-		listaDeProducoes.put(ProducoesEnum.expression, new RegrasProducaoExpression());
-		listaDeProducoes.put(ProducoesEnum.module, new RegrasProducaoModule());
-		listaDeProducoes.put(ProducoesEnum.procedureDecl, new RegrasProducaoProcedureDecl());
-		listaDeProducoes.put(ProducoesEnum.procedureDef, new RegrasProducaoProcedureDef());
-		listaDeProducoes.put(ProducoesEnum.relationalExpression, new RegrasProducaoRelationalExpression());
-		listaDeProducoes.put(ProducoesEnum.typedef, new RegrasProducaoTypedef());
-		listaDeProducoes.put(ProducoesEnum.variableDef, new RegrasProducaoVariableDef());
-		listaDeProducoes.put(ProducoesEnum.statementPart, new RegrasProducaoStatementPart());
-		listaDeProducoes.put(ProducoesEnum.statement, new RegrasProducaoStatement());
-		listaDeProducoes.put(ProducoesEnum.booleanConstant, new RegrasProducaoBooleanConstant());
-		listaDeProducoes.put(ProducoesEnum.nextitem, new RegrasProducaoNextItem());
-		listaDeProducoes.put(ProducoesEnum.multiplyOperator, new RegrasProducaoMultiplyOperator());
-		listaDeProducoes.put(ProducoesEnum.addingOperator, new RegrasProducaoAddingOperator());
-		listaDeProducoes.put(ProducoesEnum.emptyStatement, new RegrasProducaoEmptyStatement());
-		listaDeProducoes.put(ProducoesEnum.relationalOperator, new RegrasProducaoRelationalOperator());
-		listaDeProducoes.put(ProducoesEnum.typeSymbol, new RegrasProducaoTypeSymbol());
-		listaDeProducoes.put(ProducoesEnum.indexorcomp, new RegrasProducaoIndexOrComp());
-		listaDeProducoes.put(ProducoesEnum.variableMore, new RegrasProducaoVariableMore());
-		listaDeProducoes.put(ProducoesEnum.variableAccess, new RegrasProducaoVariableAccess());
-		listaDeProducoes.put(ProducoesEnum.factor, new RegrasProducaoFactor());
-		
-		
+		listaDeProducoes.put(ProducoesEnum.block, "analise.sintatica.producoes.RegrasProducaoBlock");
+		listaDeProducoes.put(ProducoesEnum.booleanOperator, "analise.sintatica.producoes.RegrasProducaoBooleanOperator");
+		listaDeProducoes.put(ProducoesEnum.constant, "analise.sintatica.producoes.RegrasProducaoConstant");
+		listaDeProducoes.put(ProducoesEnum.constantDef, "analise.sintatica.producoes.RegrasProducaoConstantDef");
+		listaDeProducoes.put(ProducoesEnum.constantName, "analise.sintatica.producoes.RegrasProducaoConstantName");
+		listaDeProducoes.put(ProducoesEnum.definition, "analise.sintatica.producoes.RegrasProducaoDefinition");
+		listaDeProducoes.put(ProducoesEnum.definitionPart, "analise.sintatica.producoes.RegrasProducaoDefinitionPart");
+		listaDeProducoes.put(ProducoesEnum.expression, "analise.sintatica.producoes.RegrasProducaoExpression");
+		listaDeProducoes.put(ProducoesEnum.module, "analise.sintatica.producoes.RegrasProducaoModule");
+		listaDeProducoes.put(ProducoesEnum.procedureDecl, "analise.sintatica.producoes.RegrasProducaoProcedureDecl");
+		listaDeProducoes.put(ProducoesEnum.procedureDef, "analise.sintatica.producoes.RegrasProducaoProcedureDef");
+		listaDeProducoes.put(ProducoesEnum.relationalExpression, "analise.sintatica.producoes.RegrasProducaoRelationalExpression");
+		listaDeProducoes.put(ProducoesEnum.typedef, "analise.sintatica.producoes.RegrasProducaoTypedef");
+		listaDeProducoes.put(ProducoesEnum.variableDef, "analise.sintatica.producoes.RegrasProducaoVariableDef");
+		listaDeProducoes.put(ProducoesEnum.statementPart, "analise.sintatica.producoes.RegrasProducaoStatementPart");
+		listaDeProducoes.put(ProducoesEnum.statement, "analise.sintatica.producoes.RegrasProducaoStatement");
+		listaDeProducoes.put(ProducoesEnum.booleanConstant, "analise.sintatica.producoes.RegrasProducaoBooleanConstant");
+		listaDeProducoes.put(ProducoesEnum.nextitem, "analise.sintatica.producoes.RegrasProducaoNextItem");
+		listaDeProducoes.put(ProducoesEnum.multiplyOperator, "analise.sintatica.producoes.RegrasProducaoMultiplyOperator");
+		listaDeProducoes.put(ProducoesEnum.addingOperator, "analise.sintatica.producoes.RegrasProducaoAddingOperator");
+		listaDeProducoes.put(ProducoesEnum.emptyStatement, "analise.sintatica.producoes.RegrasProducaoEmptyStatement");
+		listaDeProducoes.put(ProducoesEnum.relationalOperator, "analise.sintatica.producoes.RegrasProducaoRelationalOperator");
+		listaDeProducoes.put(ProducoesEnum.typeSymbol, "analise.sintatica.producoes.RegrasProducaoTypeSymbol");
+		listaDeProducoes.put(ProducoesEnum.indexorcomp, "analise.sintatica.producoes.RegrasProducaoIndexOrComp");
+		listaDeProducoes.put(ProducoesEnum.variableMore, "analise.sintatica.producoes.RegrasProducaoVariableMore");
+		listaDeProducoes.put(ProducoesEnum.variableAccess, "analise.sintatica.producoes.RegrasProducaoVariableAccess");
+		listaDeProducoes.put(ProducoesEnum.factor, "analise.sintatica.producoes.RegrasProducaoFactor");
 		
 	}
 	
 	public static RegrasProducaoAbstract getProducao(ProducoesEnum nomeDaProducao) {
 		RegrasProducaoAbstract producao;
-		producao = instancia.listaDeProducoes.get(nomeDaProducao);
-		if (! instancia.listaDeProducoes.containsKey(nomeDaProducao)) {
-			throw new RuntimeException("Não foi localizado '" + nomeDaProducao.toString() + "' na fabrica ProducaoFactory.");
-		}
-		if (instancia.pilhaDeToken != null) {
-			producao.setPilhaDeToken(instancia.pilhaDeToken);
-		}
-		producao.descartaIndiceSalvo();
-		return producao; 
+		String nomeClasseProducao;
+		Class<?> classeProducao;
+		
+		try {
+			
+			if (! instancia.listaDeProducoes.containsKey(nomeDaProducao)) {
+				throw new RuntimeException("Não foi localizado '" + nomeDaProducao.toString() + "' na fabrica ProducaoFactory.");
+			}
+
+			nomeClasseProducao = instancia.listaDeProducoes.get(nomeDaProducao).toString();
+			classeProducao = Class.forName(nomeClasseProducao);
+			producao = (RegrasProducaoAbstract) classeProducao.newInstance();
+			
+			if (instancia.pilhaDeToken != null) {
+				producao.setPilhaDeToken(instancia.pilhaDeToken);
+			}
+			
+			return producao;
+						
+		} catch (Exception e) {
+			return null;
+		}	
+		
 	}
 	
 	public static void setEstado(TokenList pilhaDeToken){
