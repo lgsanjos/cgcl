@@ -7,7 +7,6 @@ import java.io.InputStream;
 import junit.framework.TestCase;
 import analise.lexica.AnaliseLexica;
 import coretypes.Token;
-import coretypes.gcl.GCLDataTypes;
 import coretypes.gcl.GCLTokenTypes;
 import utils.Utils;
 
@@ -55,7 +54,6 @@ public class AnaliseLexicaIntegracaoTest extends TestCase {
 		analisador.addTokenClassException(GCLTokenTypes.COMMENT);
 		analisador.addTokenClassException(GCLTokenTypes.WHITESPACE);
 		analisador.addTokenClassException(GCLTokenTypes.ENDOFLINE);
-		Token token;	
 		
 		// TODO: Arrumar o assert para validar o arquivo declaracoesDeTipos.gcl
 		

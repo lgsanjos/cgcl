@@ -1,6 +1,5 @@
 package analise.sintatica.producoes;
 
-import utils.Clonavel;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import coretypes.Token;
 import coretypes.TokenList;

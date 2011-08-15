@@ -39,11 +39,16 @@ public class ProducoesFactory {
 		listaDeProducoes.put(ProducoesEnum.addingOperator, "analise.sintatica.producoes.RegrasProducaoAddingOperator");
 		listaDeProducoes.put(ProducoesEnum.emptyStatement, "analise.sintatica.producoes.RegrasProducaoEmptyStatement");
 		listaDeProducoes.put(ProducoesEnum.relationalOperator, "analise.sintatica.producoes.RegrasProducaoRelationalOperator");
+		listaDeProducoes.put(ProducoesEnum.relationalExpression, "analise.sintatica.producoes.RegrasProducaoRelationalExpression");
 		listaDeProducoes.put(ProducoesEnum.typeSymbol, "analise.sintatica.producoes.RegrasProducaoTypeSymbol");
 		listaDeProducoes.put(ProducoesEnum.indexorcomp, "analise.sintatica.producoes.RegrasProducaoIndexOrComp");
 		listaDeProducoes.put(ProducoesEnum.variableMore, "analise.sintatica.producoes.RegrasProducaoVariableMore");
 		listaDeProducoes.put(ProducoesEnum.variableAccess, "analise.sintatica.producoes.RegrasProducaoVariableAccess");
 		listaDeProducoes.put(ProducoesEnum.factor, "analise.sintatica.producoes.RegrasProducaoFactor");
+		listaDeProducoes.put(ProducoesEnum.expressionList, "analise.sintatica.producoes.RegrasProducaoExpressionList");
+		listaDeProducoes.put(ProducoesEnum.term, "analise.sintatica.producoes.RegrasProducaoTerm");
+		listaDeProducoes.put(ProducoesEnum.simpleExpression, "analise.sintatica.producoes.RegrasProducaoSimpleExpression");
+		
 		
 	}
 	
