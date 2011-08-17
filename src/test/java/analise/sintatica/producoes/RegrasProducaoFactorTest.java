@@ -1,6 +1,8 @@
 package analise.sintatica.producoes;
 
 import java.util.LinkedList;
+
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
@@ -17,7 +19,11 @@ public class RegrasProducaoFactorTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.factor);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoFactor");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "factor");
@@ -42,7 +48,11 @@ public class RegrasProducaoFactorTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.factor);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoFactor");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "factor");
@@ -66,7 +76,11 @@ public class RegrasProducaoFactorTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.factor);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoFactor");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "factor");
@@ -90,7 +104,11 @@ public class RegrasProducaoFactorTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.factor);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoFactor");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "factor");
@@ -130,7 +148,11 @@ public class RegrasProducaoFactorTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.factor);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoFactor");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "factor");
@@ -174,7 +196,11 @@ public class RegrasProducaoFactorTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.factor);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoFactor");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "factor");

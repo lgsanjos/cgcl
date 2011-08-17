@@ -1,11 +1,12 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class RegrasProducaoExpression extends RegrasProducaoAbstract {
 
 	@Override
-	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
 
 		// <relationalExpression> {<booleanOperator> <relationalExpression> }
 		boolean isValida;

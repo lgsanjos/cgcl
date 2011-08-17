@@ -1,5 +1,6 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
 
@@ -16,7 +17,11 @@ public class RegrasProducaoRelationalOperatorTest extends
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.relationalOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoRelationalOperator");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "relationalOperator");
@@ -36,7 +41,11 @@ public class RegrasProducaoRelationalOperatorTest extends
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.relationalOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoRelationalOperator");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "relationalOperator");
@@ -56,7 +65,11 @@ public class RegrasProducaoRelationalOperatorTest extends
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.relationalOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoRelationalOperator");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "relationalOperator");
@@ -76,7 +89,11 @@ public class RegrasProducaoRelationalOperatorTest extends
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.relationalOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoRelationalOperator");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "relationalOperator");
@@ -96,7 +113,11 @@ public class RegrasProducaoRelationalOperatorTest extends
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.relationalOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoRelationalOperator");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "relationalOperator");
@@ -116,7 +137,11 @@ public class RegrasProducaoRelationalOperatorTest extends
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.relationalOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoRelationalOperator");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "relationalOperator");

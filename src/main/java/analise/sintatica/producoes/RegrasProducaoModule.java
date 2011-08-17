@@ -1,12 +1,13 @@
 package analise.sintatica.producoes;
 
 import coretypes.gcl.GCLTokenTypes;
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class RegrasProducaoModule extends RegrasProducaoAbstract {
 
 	@Override
-	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
 		boolean isValido = true;
 		ArvoreSintaticaAbstrataNo raiz = null;
 

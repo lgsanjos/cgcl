@@ -1,11 +1,12 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class RegrasProducaoBlock extends RegrasProducaoAbstract {
 	
 	@Override
-	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
 		boolean isValido = true;
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("block");
 

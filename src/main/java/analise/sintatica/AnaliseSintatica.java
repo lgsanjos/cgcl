@@ -1,5 +1,6 @@
 package analise.sintatica;
 
+import analise.exceptions.ProducaoSintaticaException;
 import analise.lexica.AnaliseLexica;
 import analise.sintatica.producoes.*;
 import coretypes.Token;
@@ -40,24 +41,23 @@ public class AnaliseSintatica {
 	}
 	
 	private boolean validaSintaxeEGeraASA() {
+
+		try {			
+			ArvoreSintaticaAbstrataNo noRaiz;
 			
-		ArvoreSintaticaAbstrataNo noRaiz;
-		
-		ProducoesFactory.setEstado(pilhaDeTokens);
-		try {
+			ProducoesFactory.setEstado(pilhaDeTokens);
 			noRaiz = ProducoesFactory.getProducao(ProducoesEnum.module).validaEGeraProducao();
 			if (noRaiz != null) {
 				this.raizDaArvoreSintaticaAbstrata = noRaiz;
 				return true;
 			}
-			
-			//noRaiz = ProducoesFactory.getProducao(ProducoesEnum.definition).validaEGeraProducao();
-			//if ( RegrasProducaoDefinition.getInstancia().isValida(pilhaDeTokens, i) ) return true;
-			//if ( RegrasProducaoDefinitionPart.getInstancia().isValida(pilhaDeTokens, i) ) return true;
-		} finally{
 			ProducoesFactory.limpaEstado();
-		}
-		return (noRaiz != null);		
+			
+		} catch(ProducaoSintaticaException e) {
+			// TODO: Implementar tratamento da exception, mostrar para o usuario.
+		}	
+		
+		return false;		
 	}
 	
 

@@ -1,5 +1,6 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
 
@@ -15,7 +16,11 @@ public class RegrasProducaoVariableAccessTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.variableAccess);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoVariableAccess");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "variableAccess");
@@ -50,7 +55,11 @@ public class RegrasProducaoVariableAccessTest extends RegrasProducaoTestCase {
 		ProducoesFactory.setEstado(this.pilhaDeToken);		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.variableMore);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoVariableMore");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "variableMore");

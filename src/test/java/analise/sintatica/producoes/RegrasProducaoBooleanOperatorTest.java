@@ -1,5 +1,6 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
 
@@ -15,7 +16,11 @@ public class RegrasProducaoBooleanOperatorTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.booleanOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoBooleanOperator");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "booleanOperator");
@@ -35,7 +40,11 @@ public class RegrasProducaoBooleanOperatorTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.booleanOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoBooleanOperator");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "booleanOperator");

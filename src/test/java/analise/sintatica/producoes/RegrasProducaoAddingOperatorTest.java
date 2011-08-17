@@ -1,5 +1,6 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
 
@@ -14,8 +15,12 @@ public class RegrasProducaoAddingOperatorTest extends RegrasProducaoTestCase {
 		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.addingOperator);
-		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoAddingOperator");		
-		this.raiz = this.producao.validaEGeraProducao();
+		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoAddingOperator");
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "addingOperator");
@@ -35,7 +40,11 @@ public class RegrasProducaoAddingOperatorTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.addingOperator);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoAddingOperator");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "addingOperator");

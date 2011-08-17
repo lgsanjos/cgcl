@@ -1,5 +1,6 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
@@ -17,7 +18,11 @@ public class RegrasProducaoSimpleExpressionTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.simpleExpression);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoSimpleExpression");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "simpleExpression");
@@ -41,7 +46,11 @@ public class RegrasProducaoSimpleExpressionTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.simpleExpression);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoSimpleExpression");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "simpleExpression");
@@ -71,7 +80,11 @@ public class RegrasProducaoSimpleExpressionTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.simpleExpression);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoSimpleExpression");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "simpleExpression");
@@ -110,7 +123,11 @@ public class RegrasProducaoSimpleExpressionTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.simpleExpression);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoSimpleExpression");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "simpleExpression");

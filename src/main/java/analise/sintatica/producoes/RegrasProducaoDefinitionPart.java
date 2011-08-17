@@ -1,11 +1,12 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
 	
 	@Override
-	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
 		boolean producaoDefValido = true;
 		boolean pontoEVirgulaValido = true;
 		boolean isInvalido = true;

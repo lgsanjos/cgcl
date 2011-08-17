@@ -1,5 +1,6 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
 
@@ -13,7 +14,11 @@ public class RegrasProducaoVariableMoreTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.variableMore);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoVariableMore");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "variableMore");
@@ -45,7 +50,11 @@ public class RegrasProducaoVariableMoreTest extends RegrasProducaoTestCase {
 		ProducoesFactory.setEstado(this.pilhaDeToken);		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.variableMore);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoVariableMore");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "variableMore");
@@ -71,7 +80,11 @@ public class RegrasProducaoVariableMoreTest extends RegrasProducaoTestCase {
 		ProducoesFactory.setEstado(this.pilhaDeToken);		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.variableMore);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoVariableMore");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "variableMore");

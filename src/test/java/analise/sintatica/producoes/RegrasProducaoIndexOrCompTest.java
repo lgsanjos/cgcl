@@ -1,5 +1,6 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
 
@@ -17,7 +18,11 @@ public class RegrasProducaoIndexOrCompTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.indexorcomp);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoIndexOrComp");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "indexorcomp");
@@ -47,7 +52,11 @@ public class RegrasProducaoIndexOrCompTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.indexorcomp);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoIndexOrComp");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "indexorcomp");
@@ -63,7 +72,6 @@ public class RegrasProducaoIndexOrCompTest extends RegrasProducaoTestCase {
 	}	
 	
 	public void testCasoComExpressaoVazia() {
-		int i = 0;	
 		Token tokenAbreColchete = new Token(GCLTokenTypes.SYMBOL, "[");
 		Token tokenFechaColchete = new Token(GCLTokenTypes.SYMBOL, "]");		
 		this.pilhaDeToken.add(tokenAbreColchete);
@@ -73,7 +81,11 @@ public class RegrasProducaoIndexOrCompTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.indexorcomp);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoIndexOrComp");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNull(this.raiz);
 	}	
@@ -95,7 +107,11 @@ public class RegrasProducaoIndexOrCompTest extends RegrasProducaoTestCase {
 		
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.indexorcomp);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoIndexOrComp");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		assertNotNull(this.raiz);
 		assertEquals(this.raiz.getNome(), "indexorcomp");

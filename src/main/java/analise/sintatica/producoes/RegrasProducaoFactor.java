@@ -6,7 +6,7 @@ import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 
-	private ArvoreSintaticaAbstrataNo checkVariableAccess() {
+	private ArvoreSintaticaAbstrataNo checkVariableAccess() throws ProducaoSintaticaException {
 		
 		this.salvarIndiceTokenAtual();
 		ArvoreSintaticaAbstrataNo raiz;

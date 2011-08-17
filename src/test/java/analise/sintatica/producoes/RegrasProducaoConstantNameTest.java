@@ -1,5 +1,6 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
 
@@ -7,17 +8,18 @@ public class RegrasProducaoConstantNameTest extends RegrasProducaoTestCase {
 	
 	public void testCasoIdeal() {
 
-		// Prepara lista de tokens
 		Token token = new Token(GCLTokenTypes.IDENTIFIER, "id");
 		this.pilhaDeToken.add(token);	
 
-		// define o estado na factory
 		ProducoesFactory.setEstado(this.pilhaDeToken);
 		
-		// valida retorno da factory e gera ASA
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.constantName);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoConstantName");		
-		this.raiz = this.producao.validaEGeraProducao();
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
 		
 		
 		// valida ASA
