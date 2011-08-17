@@ -1,6 +1,7 @@
 package analise.sintatica.producoes;
 
 import java.util.HashMap;
+
 import coretypes.TokenList;
 
 public class ProducoesFactory {
@@ -66,7 +67,7 @@ public class ProducoesFactory {
 			nomeClasseProducao = instancia.listaDeProducoes.get(nomeDaProducao).toString();
 			classeProducao = Class.forName(nomeClasseProducao);
 			producao = (RegrasProducaoAbstract) classeProducao.newInstance();
-			
+
 			if (instancia.pilhaDeToken != null) {
 				producao.setPilhaDeToken(instancia.pilhaDeToken);
 			}

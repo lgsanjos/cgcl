@@ -26,7 +26,7 @@ public class RegrasProducaoExpressionListTest extends RegrasProducaoTestCase {
 		assertEquals(this.raiz.getNome(), "expressionList");
 		assertNull(this.raiz.getToken());
 		assertEquals(this.raiz.possueNosFilhos(), true);
-		assertEquals(this.raiz.getListaDeNos().size(), 3);
+		assertEquals(this.raiz.getListaDeNos().size(), 1);
 		
 		ArvoreSintaticaAbstrataNo expression;
 		expression = this.raiz.getListaDeNos().getFirst();
@@ -34,7 +34,7 @@ public class RegrasProducaoExpressionListTest extends RegrasProducaoTestCase {
 		assertEquals(expression.getNome(), "expression");
 		assertNull(expression.getToken());
 		assertEquals(expression.possueNosFilhos(), true);
-		assertEquals(expression.getListaDeNos().size(), 3);
+		assertEquals(expression.getListaDeNos().size(), 1);
 		
 	}
 	
@@ -72,7 +72,7 @@ public class RegrasProducaoExpressionListTest extends RegrasProducaoTestCase {
 		assertEquals(expression.getNome(), "expression");
 		assertNull(expression.getToken());
 		assertEquals(expression.possueNosFilhos(), true);
-		assertEquals(expression.getListaDeNos().size(), 3);
+		assertEquals(expression.getListaDeNos().size(), 1);
 		
 		i++;
 		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), tokenVirgula.getValue());
@@ -84,7 +84,7 @@ public class RegrasProducaoExpressionListTest extends RegrasProducaoTestCase {
 		assertEquals(expression.getNome(), "expression");
 		assertNull(expression.getToken());
 		assertEquals(expression.possueNosFilhos(), true);
-		assertEquals(expression.getListaDeNos().size(), 3);		
+		assertEquals(expression.getListaDeNos().size(), 1);		
 		
 	}	
 	

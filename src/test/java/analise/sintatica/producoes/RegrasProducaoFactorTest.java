@@ -149,8 +149,7 @@ public class RegrasProducaoFactorTest extends RegrasProducaoTestCase {
 		assertEquals(expression.getNome(), "expression");
 		assertNull(expression.getToken());
 		assertEquals(expression.possueNosFilhos(), true);
-		assertEquals(expression.getListaDeNos().size(), 3);
-		// Nao valida a expression, pois já há teste para ela
+		assertEquals(expression.getListaDeNos().size(), 1);
 		
 		i++;
 		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), tokenFechaParenteses.getTokenType());
@@ -160,7 +159,6 @@ public class RegrasProducaoFactorTest extends RegrasProducaoTestCase {
 
 	// "[" <expressionList> "]"
 	public void testComExpressionList() {
-		// "(" <expression> ")"
 		Token tokenAbreColchete = new Token(GCLTokenTypes.SYMBOL, "[");
 		Token tokenDois = new Token(GCLTokenTypes.NUMBER, "2");
 		Token tokenMaiorIgual = new Token(GCLTokenTypes.SYMBOL, ">=");
@@ -202,5 +200,6 @@ public class RegrasProducaoFactorTest extends RegrasProducaoTestCase {
 		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), tokenFechaColchete.getTokenType());
 		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), tokenFechaColchete.getValue());
 		
-	}	
+	}
+	
 }

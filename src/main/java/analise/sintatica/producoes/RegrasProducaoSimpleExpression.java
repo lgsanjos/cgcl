@@ -1,10 +1,11 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class RegrasProducaoSimpleExpression extends RegrasProducaoAbstract {
 	
-	private boolean reconheceProducaoTermAddTerm(ArvoreSintaticaAbstrataNo raiz) {
+	private boolean reconheceProducaoTermAddTerm(ArvoreSintaticaAbstrataNo raiz) throws ProducaoSintaticaException {
 		this.salvarIndiceTokenAtual();
 		
 		ArvoreSintaticaAbstrataNo term;
@@ -44,7 +45,7 @@ public class RegrasProducaoSimpleExpression extends RegrasProducaoAbstract {
 	}
 
 	@Override
-	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
 		// ( "+" | "-" )  <term> { <addingOperator> <term>} | <term> { <addingOperator> <term>}
 
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("simpleExpression");
@@ -53,6 +54,10 @@ public class RegrasProducaoSimpleExpression extends RegrasProducaoAbstract {
 		this.salvarIndiceTokenAtual();
 
 		this.avancaProximoToken();
+		if (this.getTokenAtual() == null) {
+			return null;
+		}
+		
 		if ( (this.getTokenAtual().getValue() == "+") || (this.getTokenAtual().getValue() == "-") ) {
 			raiz.adicionaNoFilho(this.getTokenAtual().getValue(), this.getTokenAtual());
 			this.descartaIndiceSalvo();

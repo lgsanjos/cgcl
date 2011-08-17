@@ -1,6 +1,7 @@
 package analise.sintatica.producoes;
 
 import coretypes.gcl.GCLTokenTypes;
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class RegrasProducaoFactor extends RegrasProducaoAbstract {
@@ -38,7 +39,7 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 		return null;
 	}
 	
-	private ArvoreSintaticaAbstrataNo checkBooleanConstant() {
+	private ArvoreSintaticaAbstrataNo checkBooleanConstant() throws ProducaoSintaticaException {
 		this.salvarIndiceTokenAtual();
 		
 		ArvoreSintaticaAbstrataNo raiz;
@@ -55,7 +56,7 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 		return null;
 	}
 	
-	private ArvoreSintaticaAbstrataNo checkExpressionList() {
+	private ArvoreSintaticaAbstrataNo checkExpressionList() throws ProducaoSintaticaException {
 
 		this.salvarIndiceTokenAtual();
 		ArvoreSintaticaAbstrataNo raiz;
@@ -80,7 +81,7 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 		return null;		
 	}
 	
-	private ArvoreSintaticaAbstrataNo checkExpression() {
+	private ArvoreSintaticaAbstrataNo checkExpression() throws ProducaoSintaticaException {
 
 		this.salvarIndiceTokenAtual(); 
 		ArvoreSintaticaAbstrataNo raiz;
@@ -105,7 +106,7 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 		return null;		
 	}
 	
-	private ArvoreSintaticaAbstrataNo checkTilFactor() {
+	private ArvoreSintaticaAbstrataNo checkTilFactor() throws ProducaoSintaticaException {
 		this.salvarIndiceTokenAtual(); 
 		ArvoreSintaticaAbstrataNo raiz;
 		raiz = new ArvoreSintaticaAbstrataNo("factor");
@@ -127,7 +128,7 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 	}
 	
 	@Override
-	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
 
 		ArvoreSintaticaAbstrataNo raiz;
 		
@@ -167,8 +168,7 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 			return raiz;
 		}
 		
-		return null;
-		
+		throw new ProducaoSintaticaException("Erro sintático: " + this.getTokenAtual().getPosicao());		
 	}
 
 }

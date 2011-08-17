@@ -1,7 +1,7 @@
 package analise.sintatica.producoes;
 
-import coretypes.gcl.GCLTokenTypes;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
+import coretypes.gcl.GCLTokenTypes;
 
 public class RegrasProducaoRelationalOperator extends RegrasProducaoAbstract {
 
@@ -10,7 +10,9 @@ public class RegrasProducaoRelationalOperator extends RegrasProducaoAbstract {
 		//<relationalOperator>	"<" | "=" | ">" | "<=" | ">=" | "#" 
 
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("relationalOperator");
-		boolean isValida = false;		
+		boolean isValida = false;
+		
+		this.salvarIndiceTokenAtual();
 		this.avancaProximoToken();
 
 		// TODO: refatorar esse método		
@@ -44,8 +46,14 @@ public class RegrasProducaoRelationalOperator extends RegrasProducaoAbstract {
 			isValida = this.proximoTokenPossuiValorETipoIgualA("#", GCLTokenTypes.SYMBOL);
 		}
 		
+		if (! isValida) {
+			this.recuperarIndiceSalvo();
+			return null;
+		}
+		
+		this.descartaIndiceSalvo();
 		raiz.adicionaNoFilho("relationalOperator", this.getTokenAtual());
-		return (isValida) ? raiz : null;
+		return raiz;
 	}
 
 }

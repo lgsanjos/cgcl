@@ -1,5 +1,6 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import coretypes.Token;
 import coretypes.TokenList;
@@ -27,7 +28,8 @@ public abstract class RegrasProducaoAbstract {
 	
 	protected void descartaIndiceSalvo() {
 		this.pilhaDeTokenSalva = null;
-		
+		ProducoesFactory.limpaEstado();
+		ProducoesFactory.setEstado(this.pilhaDeToken);
 	}
 	
 	protected void recuperarIndiceSalvo() {
@@ -78,7 +80,7 @@ public abstract class RegrasProducaoAbstract {
 		this.pilhaDeToken.retornaToken();
 	}	
 
-	public abstract ArvoreSintaticaAbstrataNo validaEGeraProducao();
+	public abstract ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException;
 	
 	public TokenList getPilhaDeToken(){
 		return this.pilhaDeToken;

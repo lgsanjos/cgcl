@@ -17,6 +17,7 @@ public class RegrasProducaoVariableMore extends RegrasProducaoAbstract {
 		// caso 1 - "[" <expression> "]"  <indexorcomp>
 		if (isCaso1Valido) {			
 			isCaso1Valido = false;
+			
 			this.salvarIndiceTokenAtual();
 			ArvoreSintaticaAbstrataNo expr;
 			ArvoreSintaticaAbstrataNo indexorcomp;
@@ -30,10 +31,10 @@ public class RegrasProducaoVariableMore extends RegrasProducaoAbstract {
 				
 					if (this.proximoTokenPossuiValorETipoIgualA("]", GCLTokenTypes.SYMBOL)) {
 						raiz.adicionaNoFilho("]", this.getTokenAtual());
-						
 						indexorcomp = ProducoesFactory.getProducao(ProducoesEnum.indexorcomp).validaEGeraProducao(); 
 						if (indexorcomp != null) {
 							raiz.adicionaNoFilho(indexorcomp);
+							this.descartaIndiceSalvo();
 							isCaso1Valido = true;
 						}	
 					}				

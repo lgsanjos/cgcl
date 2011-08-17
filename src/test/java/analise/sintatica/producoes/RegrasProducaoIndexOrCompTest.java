@@ -75,18 +75,7 @@ public class RegrasProducaoIndexOrCompTest extends RegrasProducaoTestCase {
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoIndexOrComp");		
 		this.raiz = this.producao.validaEGeraProducao();
 		
-		assertNotNull(this.raiz);
-		assertEquals(this.raiz.getNome(), "indexorcomp");
-		assertNull(this.raiz.getToken());
-		assertEquals(this.raiz.possueNosFilhos(), true);		
-		assertEquals(this.raiz.getListaDeNos().size(), 3);
-		
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), tokenAbreColchete.getTokenType());
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), tokenAbreColchete.getValue());
-		i++; // pula expression
-		i++;
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), tokenFechaColchete.getTokenType());
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), tokenFechaColchete.getValue());		
+		assertNull(this.raiz);
 	}	
 	
 	public void testCasoComExpressaoSimples() {

@@ -48,17 +48,10 @@ public class RegrasProducaoVariableMoreTest extends RegrasProducaoTestCase {
 		this.raiz = this.producao.validaEGeraProducao();
 		
 		assertNotNull(this.raiz);
-		
-		/* ToDo: avaliar o retorno da expressao e finalizar os asserts */
 		assertEquals(this.raiz.getNome(), "variableMore");
 		assertNull(this.raiz.getToken());
 		assertEquals(this.raiz.possueNosFilhos(), true);
 		assertEquals(this.raiz.getListaDeNos().size(), 2);
-		
-		assertEquals(this.raiz.getListaDeNos().getFirst().getToken().getTokenType(), tokenPontoFinal.getTokenType());
-		assertEquals(this.raiz.getListaDeNos().getFirst().getToken().getValue(), tokenPontoFinal.getValue());
-		assertEquals(this.raiz.getListaDeNos().getLast().getToken().getTokenType(), tokenNumero.getTokenType());
-		assertEquals(this.raiz.getListaDeNos().getLast().getToken().getValue(), tokenNumero.getValue()); 
 			
 	}
 	
