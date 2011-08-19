@@ -56,6 +56,7 @@ public class RegrasProducaoSimpleExpression extends RegrasProducaoAbstract {
 		this.avancaProximoToken();
 		if (this.getTokenAtual() == null) {
 			return null;
+			// TODO: Adicionar throw exception
 		}
 		
 		if ( (this.getTokenAtual().getValue() == "+") || (this.getTokenAtual().getValue() == "-") ) {
@@ -72,6 +73,7 @@ public class RegrasProducaoSimpleExpression extends RegrasProducaoAbstract {
 			return null;
 		} else {
 			this.descartaIndiceSalvo();
+			// TODO: add throw exception
 		}
 		
 		return raiz;

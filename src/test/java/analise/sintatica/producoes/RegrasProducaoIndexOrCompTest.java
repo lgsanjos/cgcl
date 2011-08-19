@@ -82,16 +82,15 @@ public class RegrasProducaoIndexOrCompTest extends RegrasProducaoTestCase {
 		this.producao = ProducoesFactory.getProducao(ProducoesEnum.indexorcomp);
 		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoIndexOrComp");		
 		try {
-			this.raiz = this.producao.validaEGeraProducao();	
+			this.raiz = this.producao.validaEGeraProducao();
+			fail("Deveria ter disparado ProducaoSintaticaException");
 		} catch (ProducaoSintaticaException e) {
-			fail(e.getMessage());
+			assertNull(this.raiz);
 		}
 		
-		assertNull(this.raiz);
 	}	
 	
 	public void testCasoComExpressaoSimples() {
-		int i = 0;
 		Token tokenAbreColchete = new Token(GCLTokenTypes.SYMBOL, "[");
 		Token tokenDez = new Token(GCLTokenTypes.NUMBER, "10");
 		Token tokenMaior = new Token(GCLTokenTypes.SYMBOL, ">");
@@ -119,17 +118,12 @@ public class RegrasProducaoIndexOrCompTest extends RegrasProducaoTestCase {
 		assertEquals(this.raiz.possueNosFilhos(), true);		
 		assertEquals(this.raiz.getListaDeNos().size(), 3);
 
+		int i = 0;
 		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), tokenAbreColchete.getTokenType());
 		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), tokenAbreColchete.getValue());
 		i++;
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), tokenDez.getTokenType());
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), tokenDez.getValue());
-		i++;
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), tokenMaior.getTokenType());
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), tokenMaior.getValue());
-		i++;
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), tokenUm.getTokenType());
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), tokenUm.getValue());
+		assertNull(this.raiz.getListaDeNos().get(i).getToken());
+		assertEquals(this.raiz.getListaDeNos().get(i).getNome(), "expression");
 		i++;
 		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), tokenFechaColchete.getTokenType());
 		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), tokenFechaColchete.getValue());		

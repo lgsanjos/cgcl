@@ -48,6 +48,7 @@ public class RegrasProducaoRelationalOperator extends RegrasProducaoAbstract {
 		
 		if (! isValida) {
 			this.recuperarIndiceSalvo();
+			//TODO: add throw exception
 			return null;
 		}
 		

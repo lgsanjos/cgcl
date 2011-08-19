@@ -24,14 +24,24 @@ public class RegrasProducaoVariableMore extends RegrasProducaoAbstract {
 			ArvoreSintaticaAbstrataNo indexorcomp;
 			
 			if (this.proximoTokenPossuiValorETipoIgualA("[", GCLTokenTypes.SYMBOL)) {
-				raiz.adicionaNoFilho("[", this.getTokenAtual());
+				raiz.adicionaNoFilho(this.getTokenAtual().getValue(), this.getTokenAtual());
+				
+				this.descartaIndiceSalvo();
+				this.salvarIndiceTokenAtual();
 				
 				expr = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
 				if (expr != null) {
 					raiz.adicionaNoFilho(expr);
-				
+
+					this.descartaIndiceSalvo();
+					this.salvarIndiceTokenAtual();
+					
 					if (this.proximoTokenPossuiValorETipoIgualA("]", GCLTokenTypes.SYMBOL)) {
-						raiz.adicionaNoFilho("]", this.getTokenAtual());
+						raiz.adicionaNoFilho(this.getTokenAtual().getValue(), this.getTokenAtual());
+						
+						this.descartaIndiceSalvo();
+						this.salvarIndiceTokenAtual();
+						
 						indexorcomp = ProducoesFactory.getProducao(ProducoesEnum.indexorcomp).validaEGeraProducao(); 
 						if (indexorcomp != null) {
 							raiz.adicionaNoFilho(indexorcomp);
@@ -57,9 +67,15 @@ public class RegrasProducaoVariableMore extends RegrasProducaoAbstract {
 				if (this.proximoTokenPossuiValorETipoIgualA(".", GCLTokenTypes.SYMBOL)) {
 					raiz.adicionaNoFilho(".", this.getTokenAtual());
 					
+					this.descartaIndiceSalvo();
+					this.salvarIndiceTokenAtual();					
+					
 					next = ProducoesFactory.getProducao(ProducoesEnum.nextitem).validaEGeraProducao();
 					if (next != null) {
 						raiz.adicionaNoFilho(next);
+						
+						this.descartaIndiceSalvo();
+						this.salvarIndiceTokenAtual();						
 					
 						indexorcomp = ProducoesFactory.getProducao(ProducoesEnum.indexorcomp).validaEGeraProducao(); 
 						if (indexorcomp != null) {

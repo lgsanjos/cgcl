@@ -28,13 +28,12 @@ public class RegrasProducaoVariableMoreTest extends RegrasProducaoTestCase {
 	}
 	
 	public void testComExpressaoEIndexOrComp() {
-		// "[" <expression> "]"
+		// "[" <expression> "] <indexorcomp>" 
 		Token tokenAbreColchete = new Token(GCLTokenTypes.SYMBOL, "[");
 		Token tokenDez = new Token(GCLTokenTypes.NUMBER, "10");
 		Token tokenMaior = new Token(GCLTokenTypes.SYMBOL, ">");
 		Token tokenUm = new Token(GCLTokenTypes.NUMBER, "1");
 		Token tokenFechaColchete = new Token(GCLTokenTypes.SYMBOL, "]");
-		// <indexorcomp>
 		Token tokenPontoFinal = new Token(GCLTokenTypes.SYMBOL, ".");
 		Token tokenNumero = new Token(GCLTokenTypes.NUMBER, "123");
 		
@@ -43,7 +42,6 @@ public class RegrasProducaoVariableMoreTest extends RegrasProducaoTestCase {
 		this.pilhaDeToken.add(tokenMaior);
 		this.pilhaDeToken.add(tokenUm);
 		this.pilhaDeToken.add(tokenFechaColchete);
-		
 		this.pilhaDeToken.add(tokenPontoFinal);
 		this.pilhaDeToken.add(tokenNumero);
 		
@@ -60,7 +58,7 @@ public class RegrasProducaoVariableMoreTest extends RegrasProducaoTestCase {
 		assertEquals(this.raiz.getNome(), "variableMore");
 		assertNull(this.raiz.getToken());
 		assertEquals(this.raiz.possueNosFilhos(), true);
-		assertEquals(this.raiz.getListaDeNos().size(), 2);
+		assertEquals(this.raiz.getListaDeNos().size(), 4);
 			
 	}
 	

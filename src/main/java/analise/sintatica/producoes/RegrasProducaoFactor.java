@@ -58,19 +58,27 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 	
 	private ArvoreSintaticaAbstrataNo checkExpressionList() throws ProducaoSintaticaException {
 
-		this.salvarIndiceTokenAtual();
 		ArvoreSintaticaAbstrataNo raiz;
 		raiz = new ArvoreSintaticaAbstrataNo("factor");
+		this.salvarIndiceTokenAtual();
 		
 		if (this.proximoTokenPossuiValorETipoIgualA("[", GCLTokenTypes.SYMBOL)) {
 			raiz.adicionaNoFilho("[", this.getTokenAtual());
+			
+			this.descartaIndiceSalvo();
+			this.salvarIndiceTokenAtual();
 			
 			ArvoreSintaticaAbstrataNo expressionList = ProducoesFactory.getProducao(ProducoesEnum.expressionList).validaEGeraProducao();
 			raiz.adicionaNoFilho(expressionList);
 			
 			if (expressionList != null) {
+				
+				this.descartaIndiceSalvo();
+				this.salvarIndiceTokenAtual();
+				
 				if (this.proximoTokenPossuiValorETipoIgualA("]", GCLTokenTypes.SYMBOL)) {
 					raiz.adicionaNoFilho("]", this.getTokenAtual());
+					this.descartaIndiceSalvo();
 					return raiz;
 				}				
 			}
