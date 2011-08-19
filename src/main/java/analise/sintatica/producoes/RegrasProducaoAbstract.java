@@ -78,7 +78,15 @@ public abstract class RegrasProducaoAbstract {
 	
 	protected void voltaToken() {
 		this.pilhaDeToken.retornaToken();
-	}	
+	}
+	
+	protected ArvoreSintaticaAbstrataNo validaEGeraProducaoDadoProducao(ProducoesEnum nomeDaProducao) throws ProducaoSintaticaException {
+		ArvoreSintaticaAbstrataNo raiz;
+		raiz = ProducoesFactory.getProducao(nomeDaProducao).validaEGeraProducao();
+		this.setPilhaDeToken(ProducoesFactory.getEstado());
+		return raiz;
+		
+	}
 
 	public abstract ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException;
 	
@@ -89,5 +97,6 @@ public abstract class RegrasProducaoAbstract {
 	public void setPilhaDeToken(TokenList tokens){
 		this.pilhaDeToken = tokens;
 	}
+	
 	
 }

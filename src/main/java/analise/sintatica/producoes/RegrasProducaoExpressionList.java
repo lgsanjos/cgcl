@@ -15,28 +15,25 @@ public class RegrasProducaoExpressionList extends RegrasProducaoAbstract {
 		ArvoreSintaticaAbstrataNo expression = null;
 
 		this.salvarIndiceTokenAtual();
-		try {
-			expression = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
-			raiz.adicionaNoFilho(expression);
-		} finally {
-			if (expression == null) {
-				this.recuperarIndiceSalvo();
-				return null;
-			} else {
-				this.descartaIndiceSalvo();
-			}
+		expression = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
+		raiz.adicionaNoFilho(expression);
+		if (expression == null) {
+			this.recuperarIndiceSalvo();
+			return null;
 		}
+		
+		this.descartaIndiceSalvo();
 
 		// { "," <expression> }
 		do {
-			this.salvarIndiceTokenAtual();		
 			isValido = false;
-
+			this.salvarIndiceTokenAtual();
+			
 			if ( this.proximoTokenPossuiValorETipoIgualA(",", GCLTokenTypes.SYMBOL) ) {
 				Token virgula = this.getTokenAtual();
-				ArvoreSintaticaAbstrataNo novaExpressao = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
+				ArvoreSintaticaAbstrataNo novaExpressao = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expression);
 				
-				if (novaExpressao != null) {
+				if (novaExpressao != null) {				
 					raiz.adicionaNoFilho(",", virgula);
 					raiz.adicionaNoFilho(novaExpressao);
 					this.descartaIndiceSalvo();

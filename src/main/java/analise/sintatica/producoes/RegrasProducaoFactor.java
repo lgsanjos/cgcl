@@ -68,7 +68,7 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 			this.descartaIndiceSalvo();
 			this.salvarIndiceTokenAtual();
 			
-			ArvoreSintaticaAbstrataNo expressionList = ProducoesFactory.getProducao(ProducoesEnum.expressionList).validaEGeraProducao();
+			ArvoreSintaticaAbstrataNo expressionList = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expressionList);
 			raiz.adicionaNoFilho(expressionList);
 			
 			if (expressionList != null) {

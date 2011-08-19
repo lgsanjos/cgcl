@@ -84,6 +84,10 @@ public class ProducoesFactory {
 		instancia.pilhaDeToken = pilhaDeToken;
 	}
 	
+	public static TokenList getEstado() {
+		return instancia.pilhaDeToken;
+	}
+	
 	public static void salvaEstado() {
 		if (instancia.estadoSalvo) {
 			throw new RuntimeException("O estado da RegrasProducao já está salvo.");
