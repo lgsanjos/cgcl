@@ -176,7 +176,8 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 			return raiz;
 		}
 		
-		throw new ProducaoSintaticaException("Erro sintático: " + this.getTokenAtual().getPosicao());		
+		return null;
+		//throw new ProducaoSintaticaException("Erro sintático: " + this.getTokenAtual().getPosicao());		
 	}
 
 }

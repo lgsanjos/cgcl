@@ -7,29 +7,26 @@ public class RegrasProducaoVariableAccess extends RegrasProducaoAbstract {
 
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
-		boolean isValida = true;
-		this.salvarIndiceTokenAtual();
+		// "identifier" <variableMore>
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("variableAccess");
 		
-		if (isValida) {
-			isValida = false;
+		this.salvarIndiceTokenAtual();			
+		if (this.proximoTokenEhUmIdentificador()) {		
+			raiz.adicionaNoFilho("identificador", this.getTokenAtual());
 			
-			if (this.proximoTokenEhUmIdentificador()) {
-				
-				raiz.adicionaNoFilho("identificador", this.getTokenAtual());
-				ArvoreSintaticaAbstrataNo variableMore;
-				variableMore = ProducoesFactory.getProducao(ProducoesEnum.variableMore).validaEGeraProducao();
+			ArvoreSintaticaAbstrataNo variableMore;
+			variableMore = this.validaEGeraProducaoDadoProducao(ProducoesEnum.variableMore);
+			
+			if ( variableMore != null) {
 				raiz.adicionaNoFilho(variableMore);
-				
-				if ( variableMore != null) {
-					isValida = true;
-				} else {
-					this.recuperarIndiceSalvo();
-				}
+				this.descartaIndiceSalvo();
+				return raiz;
 			}
 		}
 		
-		return (isValida) ? raiz : null;
+		this.recuperarIndiceSalvo();
+		// TODO: throw exception
+		return null;		
 	}
 
 }

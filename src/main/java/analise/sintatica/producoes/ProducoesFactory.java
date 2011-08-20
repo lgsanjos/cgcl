@@ -49,7 +49,11 @@ public class ProducoesFactory {
 		listaDeProducoes.put(ProducoesEnum.expressionList, "analise.sintatica.producoes.RegrasProducaoExpressionList");
 		listaDeProducoes.put(ProducoesEnum.term, "analise.sintatica.producoes.RegrasProducaoTerm");
 		listaDeProducoes.put(ProducoesEnum.simpleExpression, "analise.sintatica.producoes.RegrasProducaoSimpleExpression");
-		
+		listaDeProducoes.put(ProducoesEnum.argumentList, "analise.sintatica.producoes.RegrasProducaoArgumentList");
+		listaDeProducoes.put(ProducoesEnum.callStatement, "analise.sintatica.producoes.RegrasProducaoCallStatement");
+		listaDeProducoes.put(ProducoesEnum.returnStatement, "analise.sintatica.producoes.RegrasProducaoReturnStatement");
+		listaDeProducoes.put(ProducoesEnum.emptyStatement, "analise.sintatica.producoes.RegrasProducaoEmptyStatement");
+		listaDeProducoes.put(ProducoesEnum.variableAccessList, "analise.sintatica.producoes.RegrasProducaoVariableAccessList");
 		
 	}
 	

@@ -7,20 +7,20 @@ public class RegrasProducaoEmptyStatement extends RegrasProducaoAbstract {
 
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
-		boolean isValida = true;
+
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("emptyStatement");
 		
-		if (isValida) {
-			
-			if ( ! this.proximoTokenPossuiValorETipoIgualA("skip", GCLTokenTypes.KEYWORD)) {
-				this.voltaToken();
-				isValida = false;						
-			}
-			
+		this.salvarIndiceTokenAtual();
+		if (this.proximoTokenPossuiValorETipoIgualA("skip", GCLTokenTypes.KEYWORD)) {
 			raiz.adicionaNoFilho("skip", this.getTokenAtual());
+			this.descartaIndiceSalvo();
+			return raiz;
 		}
+			
+		this.recuperarIndiceSalvo();
 		
-		return (isValida) ? raiz : null;
+		// TODO: throw exception (avaliar se precisa)
+		return null;
 	}
 
 }

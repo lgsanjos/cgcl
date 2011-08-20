@@ -95,8 +95,29 @@ public class RegrasProducaoExpressionListTest extends RegrasProducaoTestCase {
 		assertEquals(expression.possueNosFilhos(), true);
 		assertEquals(expression.getListaDeNos().size(), 1);		
 		
-	}	
+	}
 	
+	public void testCasoComUmaExpressionEUmaVirgula() {
+		Token tokenDois = new Token(GCLTokenTypes.NUMBER, "2");
+		Token tokenMaiorIgual = new Token(GCLTokenTypes.SYMBOL, ">=");
+		Token tokenUm = new Token(GCLTokenTypes.NUMBER, "1");
+		Token tokenVirgula = new Token(GCLTokenTypes.SYMBOL, ",");
+		this.pilhaDeToken.add(tokenDois);
+		this.pilhaDeToken.add(tokenMaiorIgual);
+		this.pilhaDeToken.add(tokenUm);
+		this.pilhaDeToken.add(tokenVirgula);
+		
+		ProducoesFactory.setEstado(this.pilhaDeToken);
+		
+		this.producao = ProducoesFactory.getProducao(ProducoesEnum.expressionList);
+		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoExpressionList");		
+		try {
+			this.raiz = this.producao.validaEGeraProducao();
+			fail("Deveria ter dado excecao");
+		} catch (ProducaoSintaticaException e) {
+			assertNull(this.raiz);
+		}
+	}
 	
 
 }
