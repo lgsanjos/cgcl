@@ -8,17 +8,21 @@ public class RegrasProducaoConstant extends RegrasProducaoAbstract {
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
 		// <expression>
-		boolean isValida = true;
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("constant");
 		
-		if (isValida) {
-			ArvoreSintaticaAbstrataNo expression;
-			expression = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
-			isValida &= (expression != null);
+		this.salvarIndiceTokenAtual();
+
+		ArvoreSintaticaAbstrataNo expression;
+		expression = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expression);
+		if (expression != null) {
 			raiz.adicionaNoFilho(expression);
+			this.descartaIndiceSalvo();
+			return raiz;
 		}
 		
-		return (isValida) ? raiz : null;
+		this.recuperarIndiceSalvo();
+		// TODO: throw exception
+		return null;
 	}
 
 }

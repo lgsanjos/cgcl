@@ -138,5 +138,40 @@ public class RegrasProducaoExpressionTest extends RegrasProducaoTestCase {
 		
 		
 		}
+	
+	public void testUmUnicoValorInteiro() {
+
+		Token tokenDois = new Token(GCLTokenTypes.NUMBER, "2");
+		this.pilhaDeToken.add(tokenDois);
+		
+		ProducoesFactory.setEstado(this.pilhaDeToken);
+		
+		this.producao = ProducoesFactory.getProducao(ProducoesEnum.expression);
+		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoExpression");		
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
+		
+		assertNotNull(this.raiz);
+		assertEquals(this.raiz.getNome(), "expression");
+		assertNull(this.raiz.getToken());
+		assertEquals(this.raiz.possueNosFilhos(), true);
+		assertEquals(this.raiz.getListaDeNos().size(), 1);
+
+		ArvoreSintaticaAbstrataNo relationalExpression;
+		relationalExpression = this.raiz.getListaDeNos().getFirst();
+		
+		assertNotNull(relationalExpression);
+		assertEquals(relationalExpression.getNome(), "relationalExpression");
+		assertNull(relationalExpression.getToken());
+		assertEquals(relationalExpression.possueNosFilhos(), true);
+		assertEquals(relationalExpression.getListaDeNos().size(), 1);		
+		
+		int i = 0;
+		assertEquals(relationalExpression.getListaDeNos().get(i).getNome(), "simpleExpression");	
+		
+	}
 		
 }

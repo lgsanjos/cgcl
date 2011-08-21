@@ -64,7 +64,9 @@ public class ProducoesFactory {
 		listaDeProducoes.put(ProducoesEnum.doStatement, "analise.sintatica.producoes.RegrasProducaoDoStatement");
 		listaDeProducoes.put(ProducoesEnum.forStatement, "analise.sintatica.producoes.RegrasProducaoForStatement");
 		listaDeProducoes.put(ProducoesEnum.variableList, "analise.sintatica.producoes.RegrasProducaoVariableList");
-		
+		listaDeProducoes.put(ProducoesEnum.rangetype, "analise.sintatica.producoes.RegrasProducaoRangeType");
+		listaDeProducoes.put(ProducoesEnum.arraytype, "analise.sintatica.producoes.RegrasProducaoArrayType");
+		listaDeProducoes.put(ProducoesEnum.tupletype, "analise.sintatica.producoes.RegrasProducaoTupleType");
 		
 	}
 	

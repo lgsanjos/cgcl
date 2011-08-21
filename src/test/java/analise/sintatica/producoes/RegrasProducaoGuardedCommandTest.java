@@ -1,7 +1,6 @@
 package analise.sintatica.producoes;
 
 import analise.exceptions.ProducaoSintaticaException;
-import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
 
