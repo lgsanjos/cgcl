@@ -71,5 +71,9 @@ public class ArvoreSintaticaAbstrataNo {
 	public boolean possueNosFilhos() {
 		return ( !this.listaDeNosFilhos.isEmpty() );
 	}
+	
+	public int quatidadeNosFilhos(){
+		return (this.listaDeNosFilhos.size());
+	}
 
 }
