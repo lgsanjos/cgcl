@@ -32,7 +32,6 @@ public class ProducoesFactory {
 		listaDeProducoes.put(ProducoesEnum.relationalExpression, "analise.sintatica.producoes.RegrasProducaoRelationalExpression");
 		listaDeProducoes.put(ProducoesEnum.typedef, "analise.sintatica.producoes.RegrasProducaoTypedef");
 		listaDeProducoes.put(ProducoesEnum.variableDef, "analise.sintatica.producoes.RegrasProducaoVariableDef");
-		listaDeProducoes.put(ProducoesEnum.statementPart, "analise.sintatica.producoes.RegrasProducaoStatementPart");
 		listaDeProducoes.put(ProducoesEnum.statement, "analise.sintatica.producoes.RegrasProducaoStatement");
 		listaDeProducoes.put(ProducoesEnum.booleanConstant, "analise.sintatica.producoes.RegrasProducaoBooleanConstant");
 		listaDeProducoes.put(ProducoesEnum.nextitem, "analise.sintatica.producoes.RegrasProducaoNextItem");
@@ -54,6 +53,18 @@ public class ProducoesFactory {
 		listaDeProducoes.put(ProducoesEnum.returnStatement, "analise.sintatica.producoes.RegrasProducaoReturnStatement");
 		listaDeProducoes.put(ProducoesEnum.emptyStatement, "analise.sintatica.producoes.RegrasProducaoEmptyStatement");
 		listaDeProducoes.put(ProducoesEnum.variableAccessList, "analise.sintatica.producoes.RegrasProducaoVariableAccessList");
+		listaDeProducoes.put(ProducoesEnum.readStatement, "analise.sintatica.producoes.RegrasProducaoReadStatement");
+		listaDeProducoes.put(ProducoesEnum.writeItem, "analise.sintatica.producoes.RegrasProducaoWriteItem");
+		listaDeProducoes.put(ProducoesEnum.writeStatement, "analise.sintatica.producoes.RegrasProducaoWriteStatement");
+		listaDeProducoes.put(ProducoesEnum.assignStatement, "analise.sintatica.producoes.RegrasProducaoAssignStatement");
+		listaDeProducoes.put(ProducoesEnum.guardedCommand, "analise.sintatica.producoes.RegrasProducaoGuardedCommand");
+		listaDeProducoes.put(ProducoesEnum.guardedCommandList, "analise.sintatica.producoes.RegrasProducaoGuardedCommandList");
+		listaDeProducoes.put(ProducoesEnum.statementPart, "analise.sintatica.producoes.RegrasProducaoStatementPart");
+		listaDeProducoes.put(ProducoesEnum.ifStatement, "analise.sintatica.producoes.RegrasProducaoIfStatement");
+		listaDeProducoes.put(ProducoesEnum.doStatement, "analise.sintatica.producoes.RegrasProducaoDoStatement");
+		listaDeProducoes.put(ProducoesEnum.forStatement, "analise.sintatica.producoes.RegrasProducaoForStatement");
+		listaDeProducoes.put(ProducoesEnum.variableList, "analise.sintatica.producoes.RegrasProducaoVariableList");
+		
 		
 	}
 	

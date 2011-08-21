@@ -61,6 +61,10 @@ public class ArvoreSintaticaAbstrataNo {
 		}
 	}
 	
+	public void adicionaNoFilho(Token tokenDoNoFilho) {
+		this.adicionaNoFilho(tokenDoNoFilho.getValue(), tokenDoNoFilho);
+	}
+	
 	public void adicionaNoFilho(ArvoreSintaticaAbstrataNo noFilho) {
 		if (noFilho != null) {
 			this.listaDeNosFilhos.addLast(noFilho);			

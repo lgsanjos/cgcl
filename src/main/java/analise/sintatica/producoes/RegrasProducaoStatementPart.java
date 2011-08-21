@@ -16,7 +16,9 @@ public class RegrasProducaoStatementPart extends RegrasProducaoAbstract {
 		ArvoreSintaticaAbstrataNo statementPart;
 
 		do {
-			statementPart = ProducoesFactory.getProducao(ProducoesEnum.statement).validaEGeraProducao();
+			this.salvarIndiceTokenAtual();
+			
+			statementPart = this.validaEGeraProducaoDadoProducao(ProducoesEnum.statement);
 			statementValido = (statementPart != null);
 			
 			if (statementValido) {				
@@ -25,7 +27,12 @@ public class RegrasProducaoStatementPart extends RegrasProducaoAbstract {
 				if (pontoEVirgulaValido) {					
 					raiz.adicionaNoFilho(statementPart);
 					raiz.adicionaNoFilho(";", this.getTokenAtual());
+					this.descartaIndiceSalvo();
 				}
+			}
+			
+			if (! statementValido || ! pontoEVirgulaValido) {
+				this.recuperarIndiceSalvo();
 			}
 			
 		} while ( statementValido && pontoEVirgulaValido );

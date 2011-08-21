@@ -15,6 +15,10 @@ public abstract class RegrasProducaoAbstract {
 		return isTokenType(this.getPilhaDeToken(), GCLTokenTypes.IDENTIFIER);
 	}
 	
+	protected boolean proximotokenEhUmaString() {
+		return isTokenType(this.getPilhaDeToken(), GCLTokenTypes.LITERAL);
+	}
+	
 	protected boolean proximoTokenEhUmNumero() {
 		return isTokenType(this.getPilhaDeToken(), GCLTokenTypes.NUMBER);
 	}	
@@ -82,7 +86,8 @@ public abstract class RegrasProducaoAbstract {
 	
 	protected ArvoreSintaticaAbstrataNo validaEGeraProducaoDadoProducao(ProducoesEnum nomeDaProducao) throws ProducaoSintaticaException {
 		ArvoreSintaticaAbstrataNo raiz;
-		raiz = ProducoesFactory.getProducao(nomeDaProducao).validaEGeraProducao();
+		RegrasProducaoAbstract producao = ProducoesFactory.getProducao(nomeDaProducao);
+		raiz = producao.validaEGeraProducao();
 		this.setPilhaDeToken(ProducoesFactory.getEstado());
 		return raiz;
 		
