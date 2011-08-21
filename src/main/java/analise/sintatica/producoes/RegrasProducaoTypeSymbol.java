@@ -10,9 +10,10 @@ public class RegrasProducaoTypeSymbol extends RegrasProducaoAbstract {
 		// <typeSymbol> "integer" | "Boolean"  | "identifier" 
 		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("typeSymbol");
-		boolean isValida = false;		
+		boolean isValida = false;
+		this.salvarIndiceTokenAtual();
+
 		this.avancaProximoToken();
-		
 		if (! isValida) {
 			this.voltaToken();
 			isValida = this.proximoTokenPossuiValorETipoIgualA("integer", GCLTokenTypes.KEYWORD);
@@ -25,11 +26,28 @@ public class RegrasProducaoTypeSymbol extends RegrasProducaoAbstract {
 		
 		if (! isValida) {
 			this.voltaToken();
+			isValida = this.proximoTokenPossuiValorETipoIgualA("boolean", GCLTokenTypes.KEYWORD);
+		}
+		
+		if (! isValida) {
+			this.voltaToken();
+			isValida = this.proximoTokenPossuiValorETipoIgualA("real", GCLTokenTypes.KEYWORD);
+		}		
+		
+		if (! isValida) {
+			this.voltaToken();
 			isValida = this.proximoTokenEhUmIdentificador();
 		}
-				
-		raiz.adicionaNoFilho("typeSymbol", this.getTokenAtual());
-		return (isValida) ? raiz : null;
+		
+		if (isValida) {
+			this.descartaIndiceSalvo();
+			raiz.adicionaNoFilho("typeSymbol", this.getTokenAtual());
+			return raiz;
+		}
+		
+		// TODO: throw exception
+		this.recuperarIndiceSalvo();
+		return null;
 	}
 
 }

@@ -13,7 +13,7 @@ public class RegrasProducaoExpression extends RegrasProducaoAbstract {
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("expression");
 			
 		this.salvarIndiceTokenAtual();
-		ArvoreSintaticaAbstrataNo relational = ProducoesFactory.getProducao(ProducoesEnum.relationalExpression).validaEGeraProducao();
+		ArvoreSintaticaAbstrataNo relational = this.validaEGeraProducaoDadoProducao(ProducoesEnum.relationalExpression);
 		raiz.adicionaNoFilho(relational);
 		if (relational == null) {
 			this.recuperarIndiceSalvo();
