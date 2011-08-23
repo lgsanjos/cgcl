@@ -7,33 +7,31 @@ public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
 	
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
-		boolean producaoDefValido = true;
-		boolean pontoEVirgulaValido = true;
-		boolean isInvalido = true;
 		boolean isValido = true;
 		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("definitionPart");
-		ArvoreSintaticaAbstrataNo definitionPart;
-
 		do {
-			definitionPart = ProducoesFactory.getProducao(ProducoesEnum.definition).validaEGeraProducao();
-			producaoDefValido = (definitionPart != null);
+			this.salvarIndiceTokenAtual();
+			isValido = false;			
 			
-			if (producaoDefValido) {				
-				pontoEVirgulaValido = this.proximoTokenPossuiValorIgualA(";");
+			ArvoreSintaticaAbstrataNo definitionPart = this.validaEGeraProducaoDadoProducao(ProducoesEnum.definition);
+			if (definitionPart != null) {
 				
-				if (pontoEVirgulaValido) {					
+				if (this.proximoTokenPossuiValorIgualA(";")) {
 					raiz.adicionaNoFilho(definitionPart);
-					raiz.adicionaNoFilho(";", this.getTokenAtual());
+					raiz.adicionaNoFilho(this.getTokenAtual());
+					this.descartaIndiceSalvo();
+					isValido = true;
 				}
 			}
 			
-		} while ( producaoDefValido && pontoEVirgulaValido );
+			if ( ! isValido) {
+				this.recuperarIndiceSalvo();
+			}
+			
+		} while ( isValido );
 		
-		// DefinitionPart só é invalido quando não tiver o par completo de token.
-		isInvalido = producaoDefValido && !pontoEVirgulaValido;
-		isValido = ! isInvalido;
-		return (isValido) ? raiz : null;
+		return raiz;
 	}
 		
 

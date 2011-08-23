@@ -12,6 +12,8 @@ public class RegrasProducaoConstantDef extends RegrasProducaoAbstract {
 		boolean isValida = true;
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("constantDef");
 		
+		this.salvarIndiceTokenAtual();
+		
 		if (isValida) {
 			isValida &= this.proximoTokenPossuiValorETipoIgualA("const", GCLTokenTypes.KEYWORD);
 			raiz.adicionaNoFilho("const",this.getTokenAtual());			
@@ -19,7 +21,7 @@ public class RegrasProducaoConstantDef extends RegrasProducaoAbstract {
 		
 		if (isValida) {
 			ArvoreSintaticaAbstrataNo constantName;
-			constantName = ProducoesFactory.getProducao(ProducoesEnum.constantName).validaEGeraProducao();
+			constantName = this.validaEGeraProducaoDadoProducao(ProducoesEnum.constantName);
 			isValida &= ( constantName != null);
 			raiz.adicionaNoFilho(constantName);
 		}	
@@ -31,12 +33,17 @@ public class RegrasProducaoConstantDef extends RegrasProducaoAbstract {
 		
 		if (isValida) {
 			ArvoreSintaticaAbstrataNo constant;
-			constant = ProducoesFactory.getProducao(ProducoesEnum.constant).validaEGeraProducao();
-			isValida &= (constant != null);
-			raiz.adicionaNoFilho(constant);
+			constant = this.validaEGeraProducaoDadoProducao(ProducoesEnum.constant);
+			if (constant != null) {
+				raiz.adicionaNoFilho(constant);
+				this.descartaIndiceSalvo();
+				return raiz;
+			}	
 		}	
 		
-		return (isValida) ? raiz : null;
+		this.recuperarIndiceSalvo();
+		// TODO: throw exception
+		return  null;
 	}
 
 }

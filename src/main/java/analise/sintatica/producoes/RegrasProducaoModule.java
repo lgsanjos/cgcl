@@ -8,54 +8,54 @@ public class RegrasProducaoModule extends RegrasProducaoAbstract {
 
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
-		boolean isValido = true;
-		ArvoreSintaticaAbstrataNo raiz = null;
+		// "module" "identifier" <definitionPart> [ "private" ] [ <block> ] "."  
+		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("module");
 
-		if (isValido) {
-			isValido &= this.proximoTokenPossuiValorIgualA("module");
-			raiz = new ArvoreSintaticaAbstrataNo("module", this.getTokenAtual());	
-		}
-		
-		if (isValido){
-			isValido &= this.proximoTokenEhUmIdentificador();
-			raiz.adicionaNoFilho("identificador", this.getTokenAtual() );
-		}
-		
-		if (isValido){
-			ProducoesFactory.salvaEstado();
-			
-			ArvoreSintaticaAbstrataNo defPart;
-			defPart = ProducoesFactory.getProducao(ProducoesEnum.definitionPart).validaEGeraProducao();
-			isValido &= ( defPart != null );
-			// Particularidade do definitionPart
-			if (defPart.possueNosFilhos()) {
-				raiz.adicionaNoFilho(defPart);
-			} else {
-				ProducoesFactory.voltaEstado();				
+		this.salvarIndiceTokenAtual();
+		if (this.proximoTokenPossuiValorETipoIgualA("module", GCLTokenTypes.KEYWORD)) {
+			raiz.adicionaNoFilho(this.getTokenAtual());
+
+			if (this.proximoTokenEhUmIdentificador()) {
+				raiz.adicionaNoFilho(this.getTokenAtual());
+
+				ArvoreSintaticaAbstrataNo definitionPart = this.validaEGeraProducaoDadoProducao(ProducoesEnum.definitionPart);
+				if (definitionPart != null) {
+					raiz.adicionaNoFilho(definitionPart);
+
+					this.descartaIndiceSalvo();
+					this.salvarIndiceTokenAtual();
+
+					if (this.proximoTokenPossuiValorETipoIgualA("private", GCLTokenTypes.KEYWORD)) {
+						raiz.adicionaNoFilho(this.getTokenAtual());
+						this.descartaIndiceSalvo();
+					} else {
+						this.recuperarIndiceSalvo();
+					}
+					
+					this.salvarIndiceTokenAtual();
+
+					ArvoreSintaticaAbstrataNo block = this.validaEGeraProducaoDadoProducao(ProducoesEnum.block);
+					if (block != null) {
+						raiz.adicionaNoFilho(block);
+						this.descartaIndiceSalvo();
+					} else {
+						this.recuperarIndiceSalvo();
+					}
+					
+					this.salvarIndiceTokenAtual();
+					
+					if (this.proximoTokenPossuiValorETipoIgualA(".", GCLTokenTypes.SYMBOL)) {
+						raiz.adicionaNoFilho(this.getTokenAtual());
+						this.descartaIndiceSalvo();
+						return raiz;						
+					}
+				}
 			}
 		}
 		
-		if (isValido) {
-			if (this.proximoTokenPossuiValorIgualA("private")) {
-				raiz.adicionaNoFilho("private", this.getTokenAtual());
-			}else{
-				this.voltaToken();
-			}
-		}
-		
-		if (isValido) {
-			ArvoreSintaticaAbstrataNo block;
-			block = ProducoesFactory.getProducao(ProducoesEnum.block).validaEGeraProducao();
-			raiz.adicionaNoFilho(block);
-		}
-		
-		if (isValido) {
-			isValido &= this.proximoTokenPossuiValorETipoIgualA(".", GCLTokenTypes.SYMBOL);
-			raiz.adicionaNoFilho("simbolo", this.getTokenAtual());
-		}
-
-		raiz = (isValido) ? raiz : null;
-		return raiz;
+		this.recuperarIndiceSalvo();
+		// TODO throw exception
+		return null;
 				
 	}
 

@@ -31,7 +31,6 @@ public class ProducoesFactory {
 		listaDeProducoes.put(ProducoesEnum.procedureDef, "analise.sintatica.producoes.RegrasProducaoProcedureDef");
 		listaDeProducoes.put(ProducoesEnum.relationalExpression, "analise.sintatica.producoes.RegrasProducaoRelationalExpression");
 		listaDeProducoes.put(ProducoesEnum.typedef, "analise.sintatica.producoes.RegrasProducaoTypedef");
-		listaDeProducoes.put(ProducoesEnum.variableDef, "analise.sintatica.producoes.RegrasProducaoVariableDef");
 		listaDeProducoes.put(ProducoesEnum.statement, "analise.sintatica.producoes.RegrasProducaoStatement");
 		listaDeProducoes.put(ProducoesEnum.booleanConstant, "analise.sintatica.producoes.RegrasProducaoBooleanConstant");
 		listaDeProducoes.put(ProducoesEnum.nextitem, "analise.sintatica.producoes.RegrasProducaoNextItem");
@@ -67,6 +66,11 @@ public class ProducoesFactory {
 		listaDeProducoes.put(ProducoesEnum.rangetype, "analise.sintatica.producoes.RegrasProducaoRangeType");
 		listaDeProducoes.put(ProducoesEnum.arraytype, "analise.sintatica.producoes.RegrasProducaoArrayType");
 		listaDeProducoes.put(ProducoesEnum.tupletype, "analise.sintatica.producoes.RegrasProducaoTupleType");
+		listaDeProducoes.put(ProducoesEnum.type, "analise.sintatica.producoes.RegrasProducaoType");
+		listaDeProducoes.put(ProducoesEnum.typedef, "analise.sintatica.producoes.RegrasProducaoTypeDef");
+		listaDeProducoes.put(ProducoesEnum.variableDef, "analise.sintatica.producoes.RegrasProducaoVariableDef");
+		listaDeProducoes.put(ProducoesEnum.constantDef, "analise.sintatica.producoes.RegrasProducaoConstantDef");
+		listaDeProducoes.put(ProducoesEnum.block, "analise.sintatica.producoes.RegrasProducaoBlock");
 		
 	}
 	

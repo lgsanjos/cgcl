@@ -7,39 +7,34 @@ public class RegrasProducaoBlock extends RegrasProducaoAbstract {
 	
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
-		boolean isValido = true;
+		// <definitionPart> "begin" <statementPart> "end" 
+		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("block");
 
-		if (isValido) {
-			ProducoesFactory.salvaEstado();
-			
-			ArvoreSintaticaAbstrataNo defPart;
-			defPart = ProducoesFactory.getProducao(ProducoesEnum.definitionPart).validaEGeraProducao();
-			isValido = (defPart != null);
-			if (defPart.possueNosFilhos()) {
-				raiz.adicionaNoFilho(defPart);
-			} else {
-				ProducoesFactory.voltaEstado();
+		this.salvarIndiceTokenAtual();
+		ArvoreSintaticaAbstrataNo defintionPart = this.validaEGeraProducaoDadoProducao(ProducoesEnum.definitionPart);
+		if (defintionPart != null) {
+
+			raiz.adicionaNoFilho(defintionPart);
+			if (this.proximoTokenPossuiValorIgualA("begin")) {
+				raiz.adicionaNoFilho(this.getTokenAtual());
+				
+				ArvoreSintaticaAbstrataNo statementPart = this.validaEGeraProducaoDadoProducao(ProducoesEnum.statementPart);
+				if (statementPart != null) {
+					raiz.adicionaNoFilho(statementPart);
+					
+					if (this.proximoTokenPossuiValorIgualA("end")) {
+						raiz.adicionaNoFilho(this.getTokenAtual());
+						this.descartaIndiceSalvo();
+						return raiz;
+					}
+				}
 			}
 		}
 		
-		if (isValido) {
-			isValido &= this.proximoTokenPossuiValorIgualA("begin");
-			raiz.adicionaNoFilho("begin", this.getTokenAtual());
-		}
-
-		if (isValido) {
-			ArvoreSintaticaAbstrataNo statement;
-			statement = ProducoesFactory.getProducao(ProducoesEnum.statementPart).validaEGeraProducao();
-			raiz.adicionaNoFilho(statement);
-		}
-		
-		if (isValido) {		
-			isValido &= this.proximoTokenPossuiValorIgualA("end");
-			raiz.adicionaNoFilho("end", this.getTokenAtual());
-		}
-	
-		return (isValido) ? raiz : null;
+		this.recuperarIndiceSalvo();
+		// TODO: throw exception
+		return null;
 	}
 
 }

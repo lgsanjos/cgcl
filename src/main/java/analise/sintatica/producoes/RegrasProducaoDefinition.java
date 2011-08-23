@@ -8,16 +8,47 @@ public class RegrasProducaoDefinition extends RegrasProducaoAbstract {
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
 		// <constantDef> | <variableDef> | <procedureDef> | <typedef> |<procedureDecl>
-		boolean isValido = true;
+		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("definition");
-		if (isValido) {
-			ArvoreSintaticaAbstrataNo definition;
-			definition = ProducoesFactory.getProducao(ProducoesEnum.constantDef).validaEGeraProducao();
-			isValido = (definition != null);
-			raiz.adicionaNoFilho(definition);
+		
+		this.salvarIndiceTokenAtual();
+		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.constantDef));
+		if (raiz.possueNosFilhos()) {
+			return raiz;
 		}
 		
-		return (isValido) ? raiz : null;
+		this.recuperarIndiceSalvo();
+		this.salvarIndiceTokenAtual();
+		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.variableDef));
+		if (raiz.possueNosFilhos()) {
+			return raiz;
+		}
+		
+		this.recuperarIndiceSalvo();
+		this.salvarIndiceTokenAtual();
+		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.procedureDef));
+		if (raiz.possueNosFilhos()) {
+			return raiz;
+		}
+
+		this.recuperarIndiceSalvo();
+		this.salvarIndiceTokenAtual();
+		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.typedef));
+		if (raiz.possueNosFilhos()) {
+			return raiz;
+		}
+		
+		this.recuperarIndiceSalvo();
+		this.salvarIndiceTokenAtual();
+		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.procedureDecl));
+		if (raiz.possueNosFilhos()) {
+			return raiz;
+		}		
+		
+		
+		this.recuperarIndiceSalvo();
+		// TODO: throw exception
+		return null;
 	}
 
 }

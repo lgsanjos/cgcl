@@ -76,10 +76,11 @@ public class AnaliseSintatica {
 
 	public boolean valida(){
 
-		while ( this.hasTokenParaProcessar() ){
-			if ( this.validaSintaxeEGeraASA() ){
-				this.limpaPilhaDeTokens();
-			}			
+		while (this.hasTokenParaProcessar()) {
+		}
+			
+		if ( this.validaSintaxeEGeraASA() ){
+			this.limpaPilhaDeTokens();
 		}
 		
 		return this.pilhaDeTokensVazia();
