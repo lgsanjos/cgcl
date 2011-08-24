@@ -18,6 +18,7 @@ public class RegrasProducaoRelationalExpression extends RegrasProducaoAbstract {
 		simpleExpression = ProducoesFactory.getProducao(ProducoesEnum.simpleExpression).validaEGeraProducao();
 		if ( simpleExpression == null) {
 			this.recuperarIndiceSalvo();
+			this.throwProducaoSintaticaException("relationalExpression");
 			return null;
 		}
 		
@@ -37,6 +38,7 @@ public class RegrasProducaoRelationalExpression extends RegrasProducaoAbstract {
 				this.descartaIndiceSalvo();
 			} else {
 				this.recuperarIndiceSalvo();
+				this.throwProducaoSintaticaException("relationalExpression");
 				return null;
 			}
 			

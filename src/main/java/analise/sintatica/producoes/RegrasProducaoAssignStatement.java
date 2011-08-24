@@ -32,7 +32,7 @@ public class RegrasProducaoAssignStatement extends RegrasProducaoAbstract {
 		}
 			
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("assignStatement");
 		return null;
 	}
 

@@ -21,7 +21,7 @@ public class RegrasProducaoConstant extends RegrasProducaoAbstract {
 		}
 		
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("constant");
 		return null;
 	}
 

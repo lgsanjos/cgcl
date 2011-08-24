@@ -1,29 +1,29 @@
 package analise.sintatica.producoes;
 
 import coretypes.gcl.GCLTokenTypes;
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class RegrasProducaoBooleanOperator extends RegrasProducaoAbstract {
 
-	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
-		boolean isValida = true;
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
+		// "&" | "|"
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("booleanOperator");
 		
-		if (isValida) {
-			
-			if ( ! this.proximoTokenPossuiValorETipoIgualA("&", GCLTokenTypes.SYMBOL)) {
-				this.voltaToken();
-				
-				if ( ! this.proximoTokenPossuiValorETipoIgualA("|", GCLTokenTypes.SYMBOL)) {
-					this.voltaToken();
-					isValida = false;						
-				}
+		this.salvarIndiceTokenAtual();
+
+		if (this.proximoTokenPossuiValorETipoIgualA("&", GCLTokenTypes.SYMBOL)) {
+
+			if (this.proximoTokenPossuiValorETipoIgualA("|", GCLTokenTypes.SYMBOL)) {
+				raiz.adicionaNoFilho("booleanOperator", this.getTokenAtual());
+				this.descartaIndiceSalvo();
+				return raiz;
 			}
-			
-			raiz.adicionaNoFilho("booleanOperator", this.getTokenAtual());
 		}
-		
-		return (isValida) ? raiz : null;
+			
+		this.recuperarIndiceSalvo();
+		this.throwProducaoSintaticaException("booleanOperator");
+		return null;
 	}
 
 

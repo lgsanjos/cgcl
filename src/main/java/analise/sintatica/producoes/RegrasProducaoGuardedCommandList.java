@@ -19,7 +19,7 @@ public class RegrasProducaoGuardedCommandList extends RegrasProducaoAbstract {
 		guardedCommand = this.validaEGeraProducaoDadoProducao(ProducoesEnum.guardedCommand);
 		if (guardedCommand == null) {
 			this.recuperarIndiceSalvo();
-			// TODO: throw exception
+			this.throwProducaoSintaticaException("guardedCommandList");
 			return null;
 		}
 		

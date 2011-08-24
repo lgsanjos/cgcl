@@ -29,7 +29,7 @@ public class RegrasProducaoTypeDef extends RegrasProducaoAbstract {
 		}
 		
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("typeDef");
 		return null;
 	}
 

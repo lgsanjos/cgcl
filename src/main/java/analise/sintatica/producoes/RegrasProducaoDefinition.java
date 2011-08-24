@@ -47,7 +47,7 @@ public class RegrasProducaoDefinition extends RegrasProducaoAbstract {
 		
 		
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("definition");
 		return null;
 	}
 

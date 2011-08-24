@@ -24,7 +24,7 @@ public class RegrasProducaoVariableDef extends RegrasProducaoAbstract {
 		}
 		
 		this.recuperarIndiceSalvo();
-		// TODO: Throw exception
+		this.throwProducaoSintaticaException("variableDef");
 		return null;
 	}
 

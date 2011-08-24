@@ -33,7 +33,7 @@ public class RegrasProducaoGuardedCommand extends RegrasProducaoAbstract {
 		}
 
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("guardedCommand");
 		return null;
 	}
 

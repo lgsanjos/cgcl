@@ -92,6 +92,10 @@ public abstract class RegrasProducaoAbstract {
 		return raiz;
 		
 	}
+	
+	protected void throwProducaoSintaticaException(String producao) throws ProducaoSintaticaException {
+		throw new ProducaoSintaticaException(producao, this.getTokenAtual().getPosicaoLinha(), this.getTokenAtual().getPosicaoColuna());		
+	}
 
 	public abstract ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException;
 	

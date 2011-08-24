@@ -18,7 +18,7 @@ public class RegrasProducaoProcedureDecl extends RegrasProducaoAbstract {
 		if (isValida)
 			isValida &= this.proximoTokenPossuiValorETipoIgualA("=",GCLTokenTypes.SYMBOL);
 		*/
-		//Falta ParamPart
+		// TODO high implementar esse metodo e seus testes
 		return null;
 	}
 

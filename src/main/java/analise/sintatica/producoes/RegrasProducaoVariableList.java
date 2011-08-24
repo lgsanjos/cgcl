@@ -19,7 +19,7 @@ public class RegrasProducaoVariableList extends RegrasProducaoAbstract {
 			this.descartaIndiceSalvo();
 		} else {
 			this.recuperarIndiceSalvo();
-			// TODO: throw exception
+			this.throwProducaoSintaticaException("variableList");
 			return null;
 		}
 		

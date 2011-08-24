@@ -1,12 +1,13 @@
 package analise.sintatica.producoes;
 
 import coretypes.gcl.GCLTokenTypes;
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class RegrasProducaoTypeSymbol extends RegrasProducaoAbstract {
 
 	@Override
-	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
 		// <typeSymbol> "integer" | "Boolean"  | "identifier" 
 		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("typeSymbol");
@@ -45,8 +46,8 @@ public class RegrasProducaoTypeSymbol extends RegrasProducaoAbstract {
 			return raiz;
 		}
 		
-		// TODO: throw exception
 		this.recuperarIndiceSalvo();
+		this.throwProducaoSintaticaException("typeSymbol");
 		return null;
 	}
 

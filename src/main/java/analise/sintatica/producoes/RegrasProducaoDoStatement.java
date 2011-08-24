@@ -30,7 +30,7 @@ public class RegrasProducaoDoStatement extends RegrasProducaoAbstract {
 		}
 		
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("doStatement");
 		return null;
 	}
 

@@ -19,6 +19,7 @@ public class RegrasProducaoExpressionList extends RegrasProducaoAbstract {
 		raiz.adicionaNoFilho(expression);
 		if (expression == null) {
 			this.recuperarIndiceSalvo();
+			this.throwProducaoSintaticaException("expressionList");
 			return null;
 		}
 		

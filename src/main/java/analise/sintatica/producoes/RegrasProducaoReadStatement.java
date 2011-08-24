@@ -29,7 +29,7 @@ public class RegrasProducaoReadStatement extends RegrasProducaoAbstract {
 		}
 
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("readExpression");
 		return null;
 	}
 

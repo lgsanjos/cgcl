@@ -28,8 +28,8 @@ public class RegrasProducaoCallStatement extends RegrasProducaoAbstract {
 					this.descartaIndiceSalvo();
 				} else {
 					this.recuperarIndiceSalvo();
+					this.throwProducaoSintaticaException("callStatement");
 					return null;
-					// TODO: throw except
 				}
 			} else {
 				this.recuperarIndiceSalvo();

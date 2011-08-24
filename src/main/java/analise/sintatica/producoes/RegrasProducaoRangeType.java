@@ -48,7 +48,7 @@ public class RegrasProducaoRangeType extends RegrasProducaoAbstract {
 		}
 		
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("rangeType");
 		return null;
 	}
 

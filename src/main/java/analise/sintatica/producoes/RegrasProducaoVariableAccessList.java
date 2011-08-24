@@ -19,7 +19,7 @@ public class RegrasProducaoVariableAccessList extends RegrasProducaoAbstract {
 		
 		if (variableAccess == null) {
 			this.recuperarIndiceSalvo();
-			// TODO: throw exception
+			this.throwProducaoSintaticaException("variableAccessList");
 			return null;
 		}
 		

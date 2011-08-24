@@ -28,7 +28,7 @@ public class RegrasProducaoReturnStatement extends RegrasProducaoAbstract {
 		}
 		
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("returnStatement");
 		return null;
 	}
 

@@ -17,8 +17,8 @@ public class RegrasProducaoExpression extends RegrasProducaoAbstract {
 		raiz.adicionaNoFilho(relational);
 		if (relational == null) {
 			this.recuperarIndiceSalvo();
+			this.throwProducaoSintaticaException("expression");
 			return null;
-			//throw new ProducaoSintaticaException("Erro sintatico em ");
 		}
 		
 		this.descartaIndiceSalvo();

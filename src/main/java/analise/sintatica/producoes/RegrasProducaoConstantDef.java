@@ -42,7 +42,7 @@ public class RegrasProducaoConstantDef extends RegrasProducaoAbstract {
 		}	
 		
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("constantDef");
 		return  null;
 	}
 

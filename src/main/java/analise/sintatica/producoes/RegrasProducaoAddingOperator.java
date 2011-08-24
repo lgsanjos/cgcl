@@ -1,30 +1,28 @@
 package analise.sintatica.producoes;
 
 import coretypes.gcl.GCLTokenTypes;
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class RegrasProducaoAddingOperator extends RegrasProducaoAbstract {
 
 	@Override
-	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
-		boolean isValida = true;
-		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("addingOperator");
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
+		// "+" | "-"
 		
-		if (isValida) {
-			
-			if ( ! this.proximoTokenPossuiValorETipoIgualA("+", GCLTokenTypes.SYMBOL)) {
-				this.voltaToken();
-				
-				if ( ! this.proximoTokenPossuiValorETipoIgualA("-", GCLTokenTypes.SYMBOL)) {
-					this.voltaToken();
-					isValida = false;						
-				}
-			}
-			
-			raiz.adicionaNoFilho("addingOperator", this.getTokenAtual());
+		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("addingOperator");
+		this.salvarIndiceTokenAtual();
+		
+		if ((this.proximoTokenPossuiValorETipoIgualA("+", GCLTokenTypes.SYMBOL)) ||
+				(this.proximoTokenPossuiValorETipoIgualA("-", GCLTokenTypes.SYMBOL))) {
+				raiz.adicionaNoFilho(this.getTokenAtual());
+				this.descartaIndiceSalvo();
+				return raiz;
 		}
 		
-		return (isValida) ? raiz : null;
+		this.recuperarIndiceSalvo();
+		this.throwProducaoSintaticaException("booleanOperator");
+		return null;
 	}
 
 }

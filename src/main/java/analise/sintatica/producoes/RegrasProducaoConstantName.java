@@ -1,11 +1,12 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class RegrasProducaoConstantName extends RegrasProducaoAbstract {
 
 	@Override
-	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("constantName");
 		
 		this.salvarIndiceTokenAtual();
@@ -16,7 +17,7 @@ public class RegrasProducaoConstantName extends RegrasProducaoAbstract {
 		}	
 		
 		this.descartaIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("constantName");
 		return null;
 	}
 

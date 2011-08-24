@@ -54,7 +54,7 @@ public class RegrasProducaoModule extends RegrasProducaoAbstract {
 		}
 		
 		this.recuperarIndiceSalvo();
-		// TODO throw exception
+		this.throwProducaoSintaticaException("module");
 		return null;
 				
 	}

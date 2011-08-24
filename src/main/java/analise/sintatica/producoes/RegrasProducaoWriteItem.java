@@ -29,7 +29,7 @@ public class RegrasProducaoWriteItem extends RegrasProducaoAbstract {
 		}
 		
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("writeItem");
 		return null;
 	}
 

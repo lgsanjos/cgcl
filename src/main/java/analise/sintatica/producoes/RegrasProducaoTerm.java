@@ -17,6 +17,7 @@ public class RegrasProducaoTerm extends RegrasProducaoAbstract {
 		
 		if (factor == null) {
 			this.recuperarIndiceSalvo();
+			this.throwProducaoSintaticaException("term");
 			return null;
 		}
 		

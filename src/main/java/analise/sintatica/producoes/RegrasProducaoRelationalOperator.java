@@ -1,60 +1,32 @@
 package analise.sintatica.producoes;
 
+import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
-import coretypes.gcl.GCLTokenTypes;
 
 public class RegrasProducaoRelationalOperator extends RegrasProducaoAbstract {
 
 	@Override
-	public ArvoreSintaticaAbstrataNo validaEGeraProducao() {
+	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
 		//<relationalOperator>	"<" | "=" | ">" | "<=" | ">=" | "#" 
 
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("relationalOperator");
-		boolean isValida = false;
+		String[] simbolosAceitos = {"<","=", ">", "<=", ">=", "#"};
 		
 		this.salvarIndiceTokenAtual();
-		this.avancaProximoToken();
 
-		// TODO: refatorar esse método		
-		if (! isValida) {
-			this.voltaToken();
-			isValida = this.proximoTokenPossuiValorETipoIgualA("<", GCLTokenTypes.SYMBOL);
-		}
+		this.avancaProximoToken();
 		
-		if (! isValida) {
-			this.voltaToken();
-			isValida = this.proximoTokenPossuiValorETipoIgualA("=", GCLTokenTypes.SYMBOL);
-		}
-		
-		if (! isValida) {
-			this.voltaToken();
-			isValida = this.proximoTokenPossuiValorETipoIgualA(">", GCLTokenTypes.SYMBOL);
-		}
-		
-		if (! isValida) {
-			this.voltaToken();
-			isValida = this.proximoTokenPossuiValorETipoIgualA("<=", GCLTokenTypes.SYMBOL);
-		}
-		
-		if (! isValida) {
-			this.voltaToken();
-			isValida = this.proximoTokenPossuiValorETipoIgualA(">=", GCLTokenTypes.SYMBOL);
-		}
-		
-		if (! isValida) {
-			this.voltaToken();
-			isValida = this.proximoTokenPossuiValorETipoIgualA("#", GCLTokenTypes.SYMBOL);
-		}
-		
-		if (! isValida) {
-			this.recuperarIndiceSalvo();
-			//TODO: add throw exception
-			return null;
+		for ( int i = 0; i < simbolosAceitos.length; i++) {
+			if ( this.getTokenAtual().getValue().equalsIgnoreCase(simbolosAceitos[i]) ) {
+				raiz.adicionaNoFilho(this.getTokenAtual());
+				this.descartaIndiceSalvo();
+				return raiz;
+			}
 		}
 		
 		this.descartaIndiceSalvo();
-		raiz.adicionaNoFilho("relationalOperator", this.getTokenAtual());
-		return raiz;
+		this.throwProducaoSintaticaException("relationalOperator");
+		return null;
 	}
 
 }

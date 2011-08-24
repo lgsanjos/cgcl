@@ -33,7 +33,7 @@ public class RegrasProducaoBlock extends RegrasProducaoAbstract {
 		}
 		
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("block");
 		return null;
 	}
 

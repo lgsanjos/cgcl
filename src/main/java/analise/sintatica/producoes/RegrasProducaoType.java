@@ -11,7 +11,6 @@ public class RegrasProducaoType extends RegrasProducaoAbstract {
 		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("type");
 		
-		
 		this.salvarIndiceTokenAtual();
 		
 		ArvoreSintaticaAbstrataNo tupleType = this.validaEGeraProducaoDadoProducao(ProducoesEnum.tupletype);
@@ -27,7 +26,7 @@ public class RegrasProducaoType extends RegrasProducaoAbstract {
 		ArvoreSintaticaAbstrataNo typeSymbol = this.validaEGeraProducaoDadoProducao(ProducoesEnum.typeSymbol);
 		if (typeSymbol == null) {
 			this.recuperarIndiceSalvo();
-			// TODO: throw exception
+			this.throwProducaoSintaticaException("type");
 			return null;
 		}			
 
@@ -53,7 +52,7 @@ public class RegrasProducaoType extends RegrasProducaoAbstract {
 		}
 		
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("type");
 		return null;
 	}
 

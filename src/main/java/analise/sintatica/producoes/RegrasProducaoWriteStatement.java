@@ -25,8 +25,8 @@ public class RegrasProducaoWriteStatement extends RegrasProducaoAbstract {
 				this.descartaIndiceSalvo();
 			}
 		} else {
-			// TODO: throw exception
 			this.recuperarIndiceSalvo();
+			this.throwProducaoSintaticaException("writeStatement");
 			return null;
 		}
 		

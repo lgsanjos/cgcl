@@ -8,7 +8,7 @@ public class RegrasProducaoIndexOrComp extends RegrasProducaoAbstract {
 
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
-		// <indexorcomp> { "."  "number" | "[" <expression> "]" }
+		// { "."  "number" | "[" <expression> "]" }
 		
 		boolean isValido = true;
 		boolean caso1_valido = false;
@@ -70,6 +70,13 @@ public class RegrasProducaoIndexOrComp extends RegrasProducaoAbstract {
 				
 		} while (caso1_valido || caso2_valido);	
 						
-		return (possuiContrucaoCompletaValida) ? raiz : null;
+		if (possuiContrucaoCompletaValida) {
+			this.descartaIndiceSalvo();
+			return raiz;
+		}
+		
+		this.throwProducaoSintaticaException("indexorcomp");
+		return null;
+		
 	}
 }

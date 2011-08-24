@@ -55,8 +55,8 @@ public class RegrasProducaoSimpleExpression extends RegrasProducaoAbstract {
 
 		this.avancaProximoToken();
 		if (this.getTokenAtual() == null) {
+			this.throwProducaoSintaticaException("simpleExpression");
 			return null;
-			// TODO: Adicionar throw exception
 		}
 		
 		if ( (this.getTokenAtual().getValue() == "+") || (this.getTokenAtual().getValue() == "-") ) {
@@ -70,12 +70,11 @@ public class RegrasProducaoSimpleExpression extends RegrasProducaoAbstract {
 		
 		if (! isValida) {
 			this.recuperarIndiceSalvo();
+			this.throwProducaoSintaticaException("simpleExpression");
 			return null;
-		} else {
-			this.descartaIndiceSalvo();
-			// TODO: add throw exception
 		}
-		
+
+		this.descartaIndiceSalvo();	
 		return raiz;
 	}
 

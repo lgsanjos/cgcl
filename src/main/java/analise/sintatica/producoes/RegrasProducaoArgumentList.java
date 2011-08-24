@@ -42,7 +42,7 @@ public class RegrasProducaoArgumentList extends RegrasProducaoAbstract {
 		
 		if (! isValida) {
 			this.recuperarIndiceSalvo();
-			// disparar excecao
+			this.throwProducaoSintaticaException("argumentList");
 			return null;
 		}
 		 

@@ -28,6 +28,14 @@ public class Token {
 	public String getPosicao() {
 		return posicao;
 	}
+	
+	public String getPosicaoLinha() {
+		return this.posicao.substring(0, this.posicao.indexOf("x"));
+	}
+	
+	public String getPosicaoColuna() {
+		return this.posicao.substring(this.posicao.indexOf("x"), 0);
+	}
 
 	public void setPosicao(String posicao) {
 		this.posicao = posicao;
@@ -41,22 +49,19 @@ public class Token {
 		this.tokenType = tokenType;
 		this.posicao = posicao;
 		this.value = valorString;
-
 	}
 
 	public Token(GCLTokenTypes type, String valorString) {
 		this.setTokenType(type);
 		this.value = valorString;
 		this.posicao = "";
-
 	}
-
+	
 	public boolean equals(Token token) {
 		boolean res = true;
 		res = res && (this.getValue() == token.getValue());
 		res = res && (this.getTokenType() == token.getTokenType());
 		return res;
-
 	}
 
 }

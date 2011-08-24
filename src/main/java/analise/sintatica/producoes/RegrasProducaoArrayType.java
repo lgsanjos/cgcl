@@ -34,7 +34,7 @@ public class RegrasProducaoArrayType extends RegrasProducaoAbstract {
 		
 		if (! isValida) {
 			this.recuperarIndiceSalvo();
-			// TODO: throw exception
+			this.throwProducaoSintaticaException("arrayType");
 			return null;
 		}
 		

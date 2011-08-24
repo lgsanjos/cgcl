@@ -57,7 +57,7 @@ public class RegrasProducaoTupleType extends RegrasProducaoAbstract {
 		}
 		
 		this.recuperarIndiceSalvo();
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("tupleType");
 		return null;
 	}
 

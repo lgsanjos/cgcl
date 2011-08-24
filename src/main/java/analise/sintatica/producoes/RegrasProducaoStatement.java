@@ -58,7 +58,7 @@ public class RegrasProducaoStatement extends RegrasProducaoAbstract {
 			return raiz;
 		}		
 		
-		// TODO: throw exception
+		this.throwProducaoSintaticaException("statement");
 		return null;
 	}
 

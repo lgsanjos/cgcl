@@ -26,23 +26,14 @@ public class RegrasProducaoVariableMore extends RegrasProducaoAbstract {
 			if (this.proximoTokenPossuiValorETipoIgualA("[", GCLTokenTypes.SYMBOL)) {
 				raiz.adicionaNoFilho(this.getTokenAtual().getValue(), this.getTokenAtual());
 				
-				this.descartaIndiceSalvo();
-				this.salvarIndiceTokenAtual();
-				
-				expr = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
+				expr = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expression);
 				if (expr != null) {
 					raiz.adicionaNoFilho(expr);
 
-					this.descartaIndiceSalvo();
-					this.salvarIndiceTokenAtual();
-					
 					if (this.proximoTokenPossuiValorETipoIgualA("]", GCLTokenTypes.SYMBOL)) {
 						raiz.adicionaNoFilho(this.getTokenAtual().getValue(), this.getTokenAtual());
 						
-						this.descartaIndiceSalvo();
-						this.salvarIndiceTokenAtual();
-						
-						indexorcomp = ProducoesFactory.getProducao(ProducoesEnum.indexorcomp).validaEGeraProducao(); 
+						indexorcomp = this.validaEGeraProducaoDadoProducao(ProducoesEnum.indexorcomp); 
 						if (indexorcomp != null) {
 							raiz.adicionaNoFilho(indexorcomp);
 							this.descartaIndiceSalvo();
@@ -67,17 +58,11 @@ public class RegrasProducaoVariableMore extends RegrasProducaoAbstract {
 				if (this.proximoTokenPossuiValorETipoIgualA(".", GCLTokenTypes.SYMBOL)) {
 					raiz.adicionaNoFilho(".", this.getTokenAtual());
 					
-					this.descartaIndiceSalvo();
-					this.salvarIndiceTokenAtual();					
-					
-					next = ProducoesFactory.getProducao(ProducoesEnum.nextitem).validaEGeraProducao();
+					next = this.validaEGeraProducaoDadoProducao(ProducoesEnum.nextitem);
 					if (next != null) {
 						raiz.adicionaNoFilho(next);
 						
-						this.descartaIndiceSalvo();
-						this.salvarIndiceTokenAtual();						
-					
-						indexorcomp = ProducoesFactory.getProducao(ProducoesEnum.indexorcomp).validaEGeraProducao(); 
+						indexorcomp = this.validaEGeraProducaoDadoProducao(ProducoesEnum.indexorcomp); 
 						if (indexorcomp != null) {
 							raiz.adicionaNoFilho(indexorcomp);
 							isCaso2Valido = true;
@@ -93,8 +78,13 @@ public class RegrasProducaoVariableMore extends RegrasProducaoAbstract {
 		}
 		
 		isCaso3Valido = (!isCaso1Valido && !isCaso2Valido);
+		if (isCaso1Valido || isCaso2Valido || isCaso3Valido) {
+			this.descartaIndiceSalvo();
+			return raiz;
+		}
 
-		return (isCaso1Valido || isCaso2Valido || isCaso3Valido) ? raiz : null;
+		this.throwProducaoSintaticaException("variableMore");
+		return null;
 	}
 
 }

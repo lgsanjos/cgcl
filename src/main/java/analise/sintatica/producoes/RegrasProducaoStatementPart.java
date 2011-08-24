@@ -10,7 +10,6 @@ public class RegrasProducaoStatementPart extends RegrasProducaoAbstract {
 		boolean statementValido = true;
 		boolean pontoEVirgulaValido = true;
 		boolean isInvalido = true;
-		boolean isValido = true;
 		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("statementPart");
 		ArvoreSintaticaAbstrataNo statementPart;
@@ -39,8 +38,13 @@ public class RegrasProducaoStatementPart extends RegrasProducaoAbstract {
 		
 		// statementPart só é invalido quando não tiver o par completo de token.
 		isInvalido = statementValido && !pontoEVirgulaValido;
-		isValido = ! isInvalido;
-		return (isValido) ? raiz : null;
+		
+		if (isInvalido) {
+			this.throwProducaoSintaticaException("statementPart");
+			return null;
+		}
+		
+		return raiz;
 	}
 
 }
