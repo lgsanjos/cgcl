@@ -13,18 +13,19 @@ public class RegrasProducaoRelationalOperator extends RegrasProducaoAbstract {
 		String[] simbolosAceitos = {"<","=", ">", "<=", ">=", "#"};
 		
 		this.salvarIndiceTokenAtual();
-
 		this.avancaProximoToken();
 		
-		for ( int i = 0; i < simbolosAceitos.length; i++) {
-			if ( this.getTokenAtual().getValue().equalsIgnoreCase(simbolosAceitos[i]) ) {
-				raiz.adicionaNoFilho(this.getTokenAtual());
-				this.descartaIndiceSalvo();
-				return raiz;
+		if (this.getTokenAtual() != null) {
+			for ( int i = 0; i < simbolosAceitos.length; i++) {
+				if ( this.getTokenAtual().getValue().equalsIgnoreCase(simbolosAceitos[i]) ) {
+					raiz.adicionaNoFilho(this.getTokenAtual());
+					this.descartaIndiceSalvo();
+					return raiz;
+				}
 			}
 		}
 		
-		this.descartaIndiceSalvo();
+		this.recuperarIndiceSalvo();
 		this.throwProducaoSintaticaException("relationalOperator");
 		return null;
 	}

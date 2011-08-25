@@ -7,42 +7,32 @@ public class RegrasProducaoStatementPart extends RegrasProducaoAbstract {
 
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
-		boolean statementValido = true;
-		boolean pontoEVirgulaValido = true;
-		boolean isInvalido = true;
+		boolean isValida = true;
 		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("statementPart");
 		ArvoreSintaticaAbstrataNo statementPart;
 
 		do {
+			
 			this.salvarIndiceTokenAtual();
-			
-			statementPart = this.validaEGeraProducaoDadoProducao(ProducoesEnum.statement);
-			statementValido = (statementPart != null);
-			
-			if (statementValido) {				
-				pontoEVirgulaValido = this.proximoTokenPossuiValorIgualA(";");
-				
-				if (pontoEVirgulaValido) {					
+			try {
+				isValida = false;
+				statementPart = this.validaEGeraProducaoDadoProducao(ProducoesEnum.statement);
+				if (this.proximoTokenPossuiValorIgualA(";")) {
 					raiz.adicionaNoFilho(statementPart);
-					raiz.adicionaNoFilho(";", this.getTokenAtual());
+					raiz.adicionaNoFilho(this.getTokenAtual());
 					this.descartaIndiceSalvo();
+					isValida = true;
 				}
+			} catch (ProducaoSintaticaException e) {
+				//
 			}
 			
-			if (! statementValido || ! pontoEVirgulaValido) {
+			if (! isValida) {
 				this.recuperarIndiceSalvo();
 			}
 			
-		} while ( statementValido && pontoEVirgulaValido );
-		
-		// statementPart só é invalido quando não tiver o par completo de token.
-		isInvalido = statementValido && !pontoEVirgulaValido;
-		
-		if (isInvalido) {
-			this.throwProducaoSintaticaException("statementPart");
-			return null;
-		}
+		} while ( isValida );	
 		
 		return raiz;
 	}
