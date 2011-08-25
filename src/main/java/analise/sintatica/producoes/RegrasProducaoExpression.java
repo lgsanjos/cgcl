@@ -28,20 +28,14 @@ public class RegrasProducaoExpression extends RegrasProducaoAbstract {
 			this.salvarIndiceTokenAtual();
 			isValida = false;
 			
-			ArvoreSintaticaAbstrataNo booleanOperator = ProducoesFactory.getProducao(ProducoesEnum.booleanOperator).validaEGeraProducao();
-			if (booleanOperator != null) {
-				
-				ArvoreSintaticaAbstrataNo relationalExp = ProducoesFactory.getProducao(ProducoesEnum.relationalExpression).validaEGeraProducao();
-				if (relationalExp != null) {
-					raiz.adicionaNoFilho(booleanOperator);
-					raiz.adicionaNoFilho(relationalExp);
-					isValida = true;
-					this.descartaIndiceSalvo();
-				}				
-				
-			}
-			
-			if (! isValida) {
+			try {
+				ArvoreSintaticaAbstrataNo booleanOperator = this.validaEGeraProducaoDadoProducao(ProducoesEnum.booleanOperator);
+				ArvoreSintaticaAbstrataNo relationalExp = this.validaEGeraProducaoDadoProducao(ProducoesEnum.relationalExpression);
+				raiz.adicionaNoFilho(booleanOperator);
+				raiz.adicionaNoFilho(relationalExp);
+				this.descartaIndiceSalvo();
+				isValida = true;					
+			} catch (ProducaoSintaticaException e) {
 				this.recuperarIndiceSalvo();
 			}
 			

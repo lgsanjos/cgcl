@@ -8,31 +8,25 @@ public class RegrasProducaoSimpleExpression extends RegrasProducaoAbstract {
 	private boolean reconheceProducaoTermAddTerm(ArvoreSintaticaAbstrataNo raiz) throws ProducaoSintaticaException {
 		this.salvarIndiceTokenAtual();
 		
-		ArvoreSintaticaAbstrataNo term;
-		term = ProducoesFactory.getProducao(ProducoesEnum.term).validaEGeraProducao();
-		if (term == null) {
-			this.recuperarIndiceSalvo();
-			return false;
-		}
-		this.descartaIndiceSalvo();
+		ArvoreSintaticaAbstrataNo term = this.validaEGeraProducaoDadoProducao(ProducoesEnum.term);
 		raiz.adicionaNoFilho(term);
+		this.descartaIndiceSalvo();
 		
 		boolean isValido;
 		do {
 			this.salvarIndiceTokenAtual();
 			isValido = false;
 
-			ArvoreSintaticaAbstrataNo addOperator;
-			addOperator = ProducoesFactory.getProducao(ProducoesEnum.addingOperator).validaEGeraProducao();
-			if ( addOperator != null ) {
+			try {
+				ArvoreSintaticaAbstrataNo addOperator = this.validaEGeraProducaoDadoProducao(ProducoesEnum.addingOperator);
 				ArvoreSintaticaAbstrataNo novoTerm;	
-				novoTerm = ProducoesFactory.getProducao(ProducoesEnum.term).validaEGeraProducao();
-				if ( novoTerm != null ) {
-					isValido = true;
-					raiz.adicionaNoFilho(addOperator);
-					raiz.adicionaNoFilho(novoTerm);
-					this.descartaIndiceSalvo();
-				}
+				novoTerm = this.validaEGeraProducaoDadoProducao(ProducoesEnum.term);
+				raiz.adicionaNoFilho(addOperator);
+				raiz.adicionaNoFilho(novoTerm);
+				this.descartaIndiceSalvo();
+				isValido = true;
+			} catch (ProducaoSintaticaException e) {
+				//
 			}
 			
 			if (! isValido ) {

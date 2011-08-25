@@ -13,45 +13,44 @@ public class RegrasProducaoType extends RegrasProducaoAbstract {
 		
 		this.salvarIndiceTokenAtual();
 		
-		ArvoreSintaticaAbstrataNo tupleType = this.validaEGeraProducaoDadoProducao(ProducoesEnum.tupletype);
-		if (tupleType != null) {
+		try {
+			ArvoreSintaticaAbstrataNo tupleType = this.validaEGeraProducaoDadoProducao(ProducoesEnum.tupletype);
 			raiz.adicionaNoFilho(tupleType);
 			this.descartaIndiceSalvo();
-			return raiz;
+			return raiz;		
+		} catch (ProducaoSintaticaException e) {
+			this.recuperarIndiceSalvo();
 		}
 		
-		this.recuperarIndiceSalvo();		
-		this.salvarIndiceTokenAtual();
+		this.salvarIndiceTokenAtual();		
 		
-		ArvoreSintaticaAbstrataNo typeSymbol = this.validaEGeraProducaoDadoProducao(ProducoesEnum.typeSymbol);
-		if (typeSymbol == null) {
-			this.recuperarIndiceSalvo();
+		try {
+			ArvoreSintaticaAbstrataNo typeSymbol = this.validaEGeraProducaoDadoProducao(ProducoesEnum.typeSymbol);
+			raiz.adicionaNoFilho(typeSymbol);
+		} catch (ProducaoSintaticaException e) {
 			this.throwProducaoSintaticaException("type");
-			return null;
-		}			
+		}
 
-		raiz.adicionaNoFilho(typeSymbol);
-		this.descartaIndiceSalvo();		
-		this.salvarIndiceTokenAtual();
 		
-		ArvoreSintaticaAbstrataNo arrayType = this.validaEGeraProducaoDadoProducao(ProducoesEnum.arraytype);
-		if (arrayType != null) {
+		try {
+			ArvoreSintaticaAbstrataNo arrayType = this.validaEGeraProducaoDadoProducao(ProducoesEnum.arraytype);
 			raiz.adicionaNoFilho(arrayType);
 			this.descartaIndiceSalvo();
-			return raiz;	
-		} 		
+			return raiz;
+		} catch (ProducaoSintaticaException e) {
+			// tenta o segundo caso
+			this.recuperarIndiceSalvo();
+		}
 		
-		this.recuperarIndiceSalvo();
-		this.salvarIndiceTokenAtual();
-				
-		ArvoreSintaticaAbstrataNo rangeType = this.validaEGeraProducaoDadoProducao(ProducoesEnum.rangetype);
-		if (rangeType != null) {
+		try {
+			ArvoreSintaticaAbstrataNo rangeType = this.validaEGeraProducaoDadoProducao(ProducoesEnum.rangetype);
 			raiz.adicionaNoFilho(rangeType);
 			this.descartaIndiceSalvo();
 			return raiz;				
+		} catch ( ProducaoSintaticaException e) {
+			this.recuperarIndiceSalvo();
 		}
 		
-		this.recuperarIndiceSalvo();
 		this.throwProducaoSintaticaException("type");
 		return null;
 	}

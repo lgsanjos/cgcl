@@ -1,5 +1,7 @@
 package analise.sintatica.producoes;
 
+import javax.management.RuntimeErrorException;
+
 import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import coretypes.Token;
@@ -31,12 +33,19 @@ public abstract class RegrasProducaoAbstract {
 	}
 	
 	protected void descartaIndiceSalvo() {
+		if (this.pilhaDeToken == null) {
+			throw new RuntimeException("Nao se pode descartar um estado não salvo.");
+		}
+		
 		this.pilhaDeTokenSalva = null;
 		ProducoesFactory.limpaEstado();
 		ProducoesFactory.setEstado(this.pilhaDeToken);
 	}
 	
 	protected void recuperarIndiceSalvo() {
+		if (this.pilhaDeToken == null) {
+			throw new RuntimeException("Nao se pode recuperar um estado não salvo.");
+		}
 		this.pilhaDeToken = null;
 		this.pilhaDeToken = this.pilhaDeTokenSalva;
 		this.pilhaDeTokenSalva = null;
@@ -73,6 +82,9 @@ public abstract class RegrasProducaoAbstract {
 	}
 	
 	protected Token getTokenAtual() {
+		if (this.pilhaDeToken.getIndice() == -1 ) {
+			return this.pilhaDeToken.get(0);
+		}
 		 return pilhaDeToken.getTokenAtual();
 	}
 	
@@ -94,7 +106,12 @@ public abstract class RegrasProducaoAbstract {
 	}
 	
 	protected void throwProducaoSintaticaException(String producao) throws ProducaoSintaticaException {
-		throw new ProducaoSintaticaException(producao, this.getTokenAtual().getPosicaoLinha(), this.getTokenAtual().getPosicaoColuna());		
+		if (this.getTokenAtual() != null) {
+			throw new ProducaoSintaticaException(producao, this.getTokenAtual().getPosicaoLinha(), this.getTokenAtual().getPosicaoColuna());
+		} else {
+			notify();
+			//throw new ProducaoSintaticaException(producao);
+		}
 	}
 
 	public abstract ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException;

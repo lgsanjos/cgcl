@@ -1,6 +1,5 @@
 package analise.sintatica.producoes;
 
-import coretypes.gcl.GCLTokenTypes;
 import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
@@ -11,17 +10,23 @@ public class RegrasProducaoAddingOperator extends RegrasProducaoAbstract {
 		// "+" | "-"
 		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("addingOperator");
-		this.salvarIndiceTokenAtual();
+		String[] sinais = { "+", "-"};		
 		
-		if ((this.proximoTokenPossuiValorETipoIgualA("+", GCLTokenTypes.SYMBOL)) ||
-				(this.proximoTokenPossuiValorETipoIgualA("-", GCLTokenTypes.SYMBOL))) {
-				raiz.adicionaNoFilho(this.getTokenAtual());
-				this.descartaIndiceSalvo();
-				return raiz;
-		}
+		this.salvarIndiceTokenAtual();
+		this.avancaProximoToken();
+		
+		if (this.getTokenAtual() != null) {
+			for (int i = 0; i < sinais.length; i++) {
+				if (this.getTokenAtual().getValue() == sinais[i]) {
+					this.descartaIndiceSalvo();
+					raiz.adicionaNoFilho(this.getTokenAtual());
+					return raiz;
+				}
+			}
+		}	
 		
 		this.recuperarIndiceSalvo();
-		this.throwProducaoSintaticaException("booleanOperator");
+		this.throwProducaoSintaticaException("addingOperator");
 		return null;
 	}
 

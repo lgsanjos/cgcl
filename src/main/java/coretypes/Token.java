@@ -30,11 +30,19 @@ public class Token {
 	}
 	
 	public String getPosicaoLinha() {
-		return this.posicao.substring(0, this.posicao.indexOf("x"));
+		if (this.posicao.indexOf("x") > 0) {
+			//return this.posicao.substring(0, this.posicao.indexOf("x"));
+		}
+		
+		return "";
 	}
 	
 	public String getPosicaoColuna() {
-		return this.posicao.substring(this.posicao.indexOf("x"), 0);
+		if (this.posicao.indexOf("x") > 0) {
+			//return this.posicao.substring(this.posicao.indexOf("x"), 0);
+		}
+	
+		return "";		
 	}
 
 	public void setPosicao(String posicao) {

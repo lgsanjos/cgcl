@@ -18,14 +18,15 @@ public class RegrasProducaoWriteItem extends RegrasProducaoAbstract {
 		}
 		
 		this.recuperarIndiceSalvo();
+		this.salvarIndiceTokenAtual();
 		
-		ArvoreSintaticaAbstrataNo expression;
-		expression = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expression);
-		if (expression != null) {
-			
+		try {
+			ArvoreSintaticaAbstrataNo expression = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expression);
 			this.descartaIndiceSalvo();
 			raiz.adicionaNoFilho(expression);
 			return raiz;
+		} catch(ProducaoSintaticaException e) {
+			//
 		}
 		
 		this.recuperarIndiceSalvo();

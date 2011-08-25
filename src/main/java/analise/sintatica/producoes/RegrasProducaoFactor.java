@@ -13,13 +13,13 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 		raiz = new ArvoreSintaticaAbstrataNo("factor");
 		
 		ArvoreSintaticaAbstrataNo varAccess;
-		varAccess = ProducoesFactory.getProducao(ProducoesEnum.variableAccess).validaEGeraProducao();
-		if (varAccess != null) {
+		try{
+			varAccess = ProducoesFactory.getProducao(ProducoesEnum.variableAccess).validaEGeraProducao();
 			raiz.adicionaNoFilho(varAccess);
 			return raiz;
-		}
-
-		this.recuperarIndiceSalvo();
+		} catch(ProducaoSintaticaException e) {
+			this.recuperarIndiceSalvo();
+		}	
 		return null;
 	}
 	
@@ -46,13 +46,13 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 		raiz = new ArvoreSintaticaAbstrataNo("factor");
 		
 		ArvoreSintaticaAbstrataNo booleanConstant;
-		booleanConstant = ProducoesFactory.getProducao(ProducoesEnum.booleanConstant).validaEGeraProducao();
-		if (booleanConstant != null) {
+		try {
+			booleanConstant = ProducoesFactory.getProducao(ProducoesEnum.booleanConstant).validaEGeraProducao();
 			raiz.adicionaNoFilho(booleanConstant);
 			return raiz;
-		}
-
-		this.recuperarIndiceSalvo();
+		} catch (ProducaoSintaticaException e) {
+			this.recuperarIndiceSalvo();
+		}	
 		return null;
 	}
 	
@@ -65,22 +65,17 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 		if (this.proximoTokenPossuiValorETipoIgualA("[", GCLTokenTypes.SYMBOL)) {
 			raiz.adicionaNoFilho("[", this.getTokenAtual());
 			
-			this.descartaIndiceSalvo();
-			this.salvarIndiceTokenAtual();
-			
-			ArvoreSintaticaAbstrataNo expressionList = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expressionList);
-			raiz.adicionaNoFilho(expressionList);
-			
-			if (expressionList != null) {
-				
-				this.descartaIndiceSalvo();
-				this.salvarIndiceTokenAtual();
+			try {
+				ArvoreSintaticaAbstrataNo expressionList = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expressionList);
+				raiz.adicionaNoFilho(expressionList);
 				
 				if (this.proximoTokenPossuiValorETipoIgualA("]", GCLTokenTypes.SYMBOL)) {
 					raiz.adicionaNoFilho("]", this.getTokenAtual());
 					this.descartaIndiceSalvo();
 					return raiz;
 				}				
+			} catch (ProducaoSintaticaException e) {
+				//
 			}
 
 		}
@@ -98,14 +93,15 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 		if (this.proximoTokenPossuiValorETipoIgualA("(", GCLTokenTypes.SYMBOL)) {
 			raiz.adicionaNoFilho("(", this.getTokenAtual());
 			
-			ArvoreSintaticaAbstrataNo expression = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
-			raiz.adicionaNoFilho(expression);
-			
-			if (expression != null) {
+			try {
+				ArvoreSintaticaAbstrataNo expression = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
+				raiz.adicionaNoFilho(expression);
 				if (this.proximoTokenPossuiValorETipoIgualA(")", GCLTokenTypes.SYMBOL)) {
 					raiz.adicionaNoFilho(")", this.getTokenAtual());
 					return raiz;
 				}				
+			} catch (ProducaoSintaticaException e) {
+				//
 			}
 
 		}
@@ -122,11 +118,12 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 		if (this.proximoTokenPossuiValorETipoIgualA("~", GCLTokenTypes.SYMBOL)) {
 			raiz.adicionaNoFilho("~", this.getTokenAtual());
 			
-			ArvoreSintaticaAbstrataNo factor = ProducoesFactory.getProducao(ProducoesEnum.factor).validaEGeraProducao();
-			raiz.adicionaNoFilho(factor);
-			
-			if (factor != null) {
+			try {
+				ArvoreSintaticaAbstrataNo factor = ProducoesFactory.getProducao(ProducoesEnum.factor).validaEGeraProducao();
+				raiz.adicionaNoFilho(factor);
 				return raiz;
+			} catch (ProducaoSintaticaException e) {
+				//
 			}
 
 		}

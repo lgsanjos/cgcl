@@ -1,6 +1,5 @@
 package analise.sintatica.producoes;
 
-import coretypes.gcl.GCLTokenTypes;
 import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
@@ -8,31 +7,22 @@ public class RegrasProducaoMultiplyOperator extends RegrasProducaoAbstract {
 
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
-		boolean isValida = true;
+		// "*" | "/" | "\" 
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("multiplyOperator");
+		String[] sinais = { "*", "/", "\"" };		
 		
-		if (isValida) {
-			
-			if ( ! this.proximoTokenPossuiValorETipoIgualA("*", GCLTokenTypes.SYMBOL)) {
-				this.voltaToken();
-				
-				if ( ! this.proximoTokenPossuiValorETipoIgualA("/", GCLTokenTypes.SYMBOL)) {
-					this.voltaToken();
-					
-					if ( ! this.proximoTokenPossuiValorETipoIgualA("\"", GCLTokenTypes.SYMBOL)) {
-						this.voltaToken();
-						isValida = false;						
-					}
+		this.salvarIndiceTokenAtual();
+		this.avancaProximoToken();
+		
+		if (this.getTokenAtual() != null) {	
+			for (int i = 0; i < sinais.length; i++) {
+				if (this.getTokenAtual().getValue() == sinais[i]) {
+					this.descartaIndiceSalvo();
+					raiz.adicionaNoFilho(this.getTokenAtual());
+					return raiz;
 				}
 			}
-			
-			raiz.adicionaNoFilho("multiplyOperator", this.getTokenAtual());
-		}
-		
-		if (isValida) {
-			this.descartaIndiceSalvo();
-			return raiz;
-		}
+		}	
 		
 		this.recuperarIndiceSalvo();
 		this.throwProducaoSintaticaException("multiplyOperator");

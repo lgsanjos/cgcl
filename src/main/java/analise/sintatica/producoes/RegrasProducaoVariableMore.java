@@ -26,20 +26,24 @@ public class RegrasProducaoVariableMore extends RegrasProducaoAbstract {
 			if (this.proximoTokenPossuiValorETipoIgualA("[", GCLTokenTypes.SYMBOL)) {
 				raiz.adicionaNoFilho(this.getTokenAtual().getValue(), this.getTokenAtual());
 				
-				expr = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expression);
-				if (expr != null) {
+				try {
+					expr = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expression);
 					raiz.adicionaNoFilho(expr);
 
 					if (this.proximoTokenPossuiValorETipoIgualA("]", GCLTokenTypes.SYMBOL)) {
 						raiz.adicionaNoFilho(this.getTokenAtual().getValue(), this.getTokenAtual());
 						
-						indexorcomp = this.validaEGeraProducaoDadoProducao(ProducoesEnum.indexorcomp); 
-						if (indexorcomp != null) {
+						try {
+							indexorcomp = this.validaEGeraProducaoDadoProducao(ProducoesEnum.indexorcomp); 
 							raiz.adicionaNoFilho(indexorcomp);
 							this.descartaIndiceSalvo();
 							isCaso1Valido = true;
-						}	
+						} catch (ProducaoSintaticaException e) {
+							//
+						}
 					}				
+				} catch (ProducaoSintaticaException e) {
+					//
 				}
 			}
 		}			
@@ -57,16 +61,15 @@ public class RegrasProducaoVariableMore extends RegrasProducaoAbstract {
 				
 				if (this.proximoTokenPossuiValorETipoIgualA(".", GCLTokenTypes.SYMBOL)) {
 					raiz.adicionaNoFilho(".", this.getTokenAtual());
-					
-					next = this.validaEGeraProducaoDadoProducao(ProducoesEnum.nextitem);
-					if (next != null) {
+					try {
+						next = this.validaEGeraProducaoDadoProducao(ProducoesEnum.nextitem);
 						raiz.adicionaNoFilho(next);
 						
 						indexorcomp = this.validaEGeraProducaoDadoProducao(ProducoesEnum.indexorcomp); 
-						if (indexorcomp != null) {
-							raiz.adicionaNoFilho(indexorcomp);
-							isCaso2Valido = true;
-						}				
+						raiz.adicionaNoFilho(indexorcomp);
+						isCaso2Valido = true;
+					} catch (ProducaoSintaticaException e) {
+						//
 					}
 				}		
 			}

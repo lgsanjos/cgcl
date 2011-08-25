@@ -47,10 +47,14 @@ public class RegrasProducaoIndexOrComp extends RegrasProducaoAbstract {
 			if (isValido) {
 				raiz.adicionaNoFilho("[", this.getTokenAtual());
 				
-				expression = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
-				raiz.adicionaNoFilho(expression);
-				isValido &= (expression != null);
-				
+				try {
+					expression = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
+					raiz.adicionaNoFilho(expression);
+					isValido &= (expression != null);
+				} catch (ProducaoSintaticaException e) {
+					isValido = false;
+				}
+			
 				if (isValido) {
 					isValido &= this.proximoTokenPossuiValorETipoIgualA("]", GCLTokenTypes.SYMBOL);
 					raiz.adicionaNoFilho("]", this.getTokenAtual());

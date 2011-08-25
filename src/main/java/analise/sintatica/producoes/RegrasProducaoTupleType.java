@@ -20,39 +20,37 @@ public class RegrasProducaoTupleType extends RegrasProducaoAbstract {
 				
 			ArvoreSintaticaAbstrataNo typeSymbol1;
 			typeSymbol1 = this.validaEGeraProducaoDadoProducao(ProducoesEnum.typeSymbol);
-			if ( typeSymbol1 != null) {
-				raiz.adicionaNoFilho(typeSymbol1);
-				this.descartaIndiceSalvo();
+			raiz.adicionaNoFilho(typeSymbol1);
+			this.descartaIndiceSalvo();
 				
-				do {
-					
-					isValida = false;
-					this.salvarIndiceTokenAtual();
-					
-					if (this.proximoTokenPossuiValorETipoIgualA(",", GCLTokenTypes.SYMBOL)) {
-						Token tokenVirgula = this.getTokenAtual();
-						
-						ArvoreSintaticaAbstrataNo typeSymbol2;
-						typeSymbol2 = this.validaEGeraProducaoDadoProducao(ProducoesEnum.typeSymbol);
-						if ( typeSymbol2 != null) {
-							raiz.adicionaNoFilho(tokenVirgula);
-							raiz.adicionaNoFilho(typeSymbol2);
-							this.descartaIndiceSalvo();
-							isValida = true;
-						}
-					}
-					
-					if (! isValida) {
-						this.recuperarIndiceSalvo();
-					}
-					
-				} while (isValida);
+			do {
 				
-				if (this.proximoTokenPossuiValorETipoIgualA("]", GCLTokenTypes.SYMBOL)) {
-					raiz.adicionaNoFilho(this.getTokenAtual());
-					this.descartaIndiceSalvo();
-					return raiz;
+				isValida = false;
+				this.salvarIndiceTokenAtual();
+				
+				if (this.proximoTokenPossuiValorETipoIgualA(",", GCLTokenTypes.SYMBOL)) {
+					Token tokenVirgula = this.getTokenAtual();
+					
+					ArvoreSintaticaAbstrataNo typeSymbol2;
+					typeSymbol2 = this.validaEGeraProducaoDadoProducao(ProducoesEnum.typeSymbol);
+					if ( typeSymbol2 != null) {
+						raiz.adicionaNoFilho(tokenVirgula);
+						raiz.adicionaNoFilho(typeSymbol2);
+						this.descartaIndiceSalvo();
+						isValida = true;
+					}
 				}
+				
+				if (! isValida) {
+					this.recuperarIndiceSalvo();
+				}
+				
+			} while (isValida);
+			
+			if (this.proximoTokenPossuiValorETipoIgualA("]", GCLTokenTypes.SYMBOL)) {
+				raiz.adicionaNoFilho(this.getTokenAtual());
+				this.descartaIndiceSalvo();
+				return raiz;
 			}
 		}
 		

@@ -13,35 +13,25 @@ public class RegrasProducaoRelationalExpression extends RegrasProducaoAbstract {
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("relationalExpression");
 		
 		this.salvarIndiceTokenAtual();
-		
-		ArvoreSintaticaAbstrataNo simpleExpression;
-		simpleExpression = ProducoesFactory.getProducao(ProducoesEnum.simpleExpression).validaEGeraProducao();
-		if ( simpleExpression == null) {
+		try {
+			ArvoreSintaticaAbstrataNo simpleExpression = this.validaEGeraProducaoDadoProducao(ProducoesEnum.simpleExpression);
+			this.descartaIndiceSalvo();
+			raiz.adicionaNoFilho(simpleExpression);
+		} catch (ProducaoSintaticaException e) {	
 			this.recuperarIndiceSalvo();
 			this.throwProducaoSintaticaException("relationalExpression");
-			return null;
 		}
 		
-		this.descartaIndiceSalvo();
-		raiz.adicionaNoFilho(simpleExpression);
-		
+	
 		this.salvarIndiceTokenAtual();
-		ArvoreSintaticaAbstrataNo relationalOperator;
-		
-		relationalOperator = ProducoesFactory.getProducao(ProducoesEnum.relationalOperator).validaEGeraProducao();
-		
-		if (relationalOperator != null) {
-			ArvoreSintaticaAbstrataNo novaSimpleExpression = ProducoesFactory.getProducao(ProducoesEnum.simpleExpression).validaEGeraProducao();
-			if (novaSimpleExpression != null) {
-				raiz.adicionaNoFilho(relationalOperator);
-				raiz.adicionaNoFilho(novaSimpleExpression);
-				this.descartaIndiceSalvo();
-			} else {
-				this.recuperarIndiceSalvo();
-				this.throwProducaoSintaticaException("relationalExpression");
-				return null;
-			}
-			
+		try {
+			ArvoreSintaticaAbstrataNo relationalOperator = this.validaEGeraProducaoDadoProducao(ProducoesEnum.relationalOperator);
+			ArvoreSintaticaAbstrataNo novaSimpleExpression = this.validaEGeraProducaoDadoProducao(ProducoesEnum.simpleExpression);
+			raiz.adicionaNoFilho(relationalOperator);
+			raiz.adicionaNoFilho(novaSimpleExpression);
+			this.descartaIndiceSalvo();
+		} catch (ProducaoSintaticaException e) {
+			//
 		}
 		
 		return raiz;

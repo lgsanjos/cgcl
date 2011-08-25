@@ -10,37 +10,32 @@ public class RegrasProducaoTerm extends RegrasProducaoAbstract {
 		// <factor> {<multiplyOperator> <factor>}
 		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("term");
-		ArvoreSintaticaAbstrataNo factor;
+		ArvoreSintaticaAbstrataNo factor = null;
 		
 		this.salvarIndiceTokenAtual();
-		factor = ProducoesFactory.getProducao(ProducoesEnum.factor).validaEGeraProducao();
-		
-		if (factor == null) {
+		try {
+			factor = this.validaEGeraProducaoDadoProducao(ProducoesEnum.factor);
+			raiz.adicionaNoFilho(factor);
+			this.descartaIndiceSalvo();			
+		} catch (ProducaoSintaticaException e) {
 			this.recuperarIndiceSalvo();
 			this.throwProducaoSintaticaException("term");
-			return null;
 		}
-		
-		raiz.adicionaNoFilho(factor);
-		this.descartaIndiceSalvo();
-		
+			
 		boolean isValida;
 		do {
 			isValida = false;
 			
-			ArvoreSintaticaAbstrataNo mult;
-			mult = ProducoesFactory.getProducao(ProducoesEnum.multiplyOperator).validaEGeraProducao();
-			if (mult != null) {
-				ArvoreSintaticaAbstrataNo novoFactor;
-				novoFactor = ProducoesFactory.getProducao(ProducoesEnum.factor).validaEGeraProducao();
-				if (novoFactor != null) {
-					isValida = true;
-					raiz.adicionaNoFilho(mult);
-					raiz.adicionaNoFilho(novoFactor);
-					this.descartaIndiceSalvo();
-				} else {
-					this.recuperarIndiceSalvo();
-				}
+			try {
+				this.salvarIndiceTokenAtual();
+				ArvoreSintaticaAbstrataNo mult = this.validaEGeraProducaoDadoProducao(ProducoesEnum.multiplyOperator);
+				ArvoreSintaticaAbstrataNo novoFactor = this.validaEGeraProducaoDadoProducao(ProducoesEnum.factor);
+				raiz.adicionaNoFilho(mult);
+				raiz.adicionaNoFilho(novoFactor);
+				this.descartaIndiceSalvo();
+				isValida = true;					
+			} catch (ProducaoSintaticaException e) {
+				this.recuperarIndiceSalvo();				
 			}
 			
 			
