@@ -8,47 +8,29 @@ public class RegrasProducaoTypeSymbol extends RegrasProducaoAbstract {
 
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
-		// <typeSymbol> "integer" | "Boolean"  | "identifier" 
+		// "integer" | "Boolean"  | "identifier" 
+		
 		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("typeSymbol");
-		boolean isValida = false;
+		String[] simbolos = { "integer", "string", "boolean", "real"};		
+		
 		this.salvarIndiceTokenAtual();
-
 		this.avancaProximoToken();
-		if (! isValida) {
-			this.voltaToken();
-			isValida = this.proximoTokenPossuiValorETipoIgualA("integer", GCLTokenTypes.KEYWORD);
-		}
 		
-		if (! isValida) {
-			this.voltaToken();
-			isValida = this.proximoTokenPossuiValorETipoIgualA("string", GCLTokenTypes.KEYWORD);
-		}
-		
-		if (! isValida) {
-			this.voltaToken();
-			isValida = this.proximoTokenPossuiValorETipoIgualA("boolean", GCLTokenTypes.KEYWORD);
-		}
-		
-		if (! isValida) {
-			this.voltaToken();
-			isValida = this.proximoTokenPossuiValorETipoIgualA("real", GCLTokenTypes.KEYWORD);
-		}		
-		
-		if (! isValida) {
-			this.voltaToken();
-			isValida = this.proximoTokenEhUmIdentificador();
-		}
-		
-		if (isValida) {
-			this.descartaIndiceSalvo();
-			raiz.adicionaNoFilho("typeSymbol", this.getTokenAtual());
-			return raiz;
-		}
+		if (this.getTokenAtual() != null) {
+			for (int i = 0; i < simbolos.length; i++) {
+				if (this.getTokenAtual().getValue() == simbolos[i]) {
+					this.descartaIndiceSalvo();
+					raiz.adicionaNoFilho(this.getTokenAtual());
+					return raiz;
+				}
+			}
+		}	
 		
 		this.recuperarIndiceSalvo();
 		this.throwProducaoSintaticaException("typeSymbol");
 		return null;
+		
 	}
 
 }

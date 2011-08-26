@@ -13,50 +13,68 @@ public class RegrasProducaoStatement extends RegrasProducaoAbstract {
 		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("statement");
 		
-		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.emptyStatement));
-		if (raiz.possueNosFilhos()) {
+		try {
+			raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.emptyStatement));
 			return raiz;
+		} catch (ProducaoSintaticaException e) {
+			//
 		}
 		
-		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.readStatement));
-		if (raiz.possueNosFilhos()) {
+		try {
+			raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.readStatement));
 			return raiz;
+		} catch (ProducaoSintaticaException e) {
+			//
 		}
 		
+		try {
 		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.writeStatement));
-		if (raiz.possueNosFilhos()) {
 			return raiz;
+		} catch (ProducaoSintaticaException e) {
+			//
 		}
 		
-		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.assignStatement));
-		if (raiz.possueNosFilhos()) {
+		try {
+			raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.assignStatement));
 			return raiz;
+		} catch (ProducaoSintaticaException e) {
+			//
 		}
 		
-		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.returnStatement));
-		if (raiz.possueNosFilhos()) {
+		try {
+			raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.returnStatement));
 			return raiz;
-		}
-		
-		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.callStatement));
-		if (raiz.possueNosFilhos()) {
-			return raiz;
-		}
-		
-		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.ifStatement));
-		if (raiz.possueNosFilhos()) {
-			return raiz;
+		} catch (ProducaoSintaticaException e) {
+			//
 		}
 
-		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.doStatement));
-		if (raiz.possueNosFilhos()) {
+		try {
+			raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.callStatement));
 			return raiz;
+		} catch (ProducaoSintaticaException e) {
+			//
 		}
 		
-		raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.forStatement));
-		if (raiz.possueNosFilhos()) {
+		try {
+			raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.ifStatement));
 			return raiz;
-		}		
+		} catch (ProducaoSintaticaException e) {
+			//
+		}
+
+		try {
+			raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.doStatement));
+			return raiz;
+		} catch (ProducaoSintaticaException e) {
+			//
+		}
+		
+		try {
+			raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.forStatement));
+			return raiz;
+		} catch (ProducaoSintaticaException e) {
+			//
+		}	
 		
 		this.throwProducaoSintaticaException("statement");
 		return null;

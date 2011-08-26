@@ -15,7 +15,7 @@ public class RegrasProducaoExpressionList extends RegrasProducaoAbstract {
 		ArvoreSintaticaAbstrataNo expression = null;
 
 		this.salvarIndiceTokenAtual();
-		expression = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
+		expression = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expression);
 		raiz.adicionaNoFilho(expression);
 		if (expression == null) {
 			this.recuperarIndiceSalvo();

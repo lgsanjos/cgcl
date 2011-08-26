@@ -49,6 +49,7 @@ public class RegrasProducaoSimpleExpression extends RegrasProducaoAbstract {
 
 		this.avancaProximoToken();
 		if (this.getTokenAtual() == null) {
+			this.recuperarIndiceSalvo();
 			this.throwProducaoSintaticaException("simpleExpression");
 			return null;
 		}
