@@ -70,7 +70,8 @@ public class ProducoesFactory {
 		listaDeProducoes.put(ProducoesEnum.typedef, "analise.sintatica.producoes.RegrasProducaoTypeDef");
 		listaDeProducoes.put(ProducoesEnum.variableDef, "analise.sintatica.producoes.RegrasProducaoVariableDef");
 		listaDeProducoes.put(ProducoesEnum.constantDef, "analise.sintatica.producoes.RegrasProducaoConstantDef");
-		listaDeProducoes.put(ProducoesEnum.block, "analise.sintatica.producoes.RegrasProducaoBlock");
+		listaDeProducoes.put(ProducoesEnum.paramDef, "analise.sintatica.producoes.RegrasProducaoParamDef");
+		listaDeProducoes.put(ProducoesEnum.paramPart, "analise.sintatica.producoes.RegrasProducaoParamPart");
 		
 	}
 	

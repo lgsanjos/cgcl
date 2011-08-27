@@ -13,9 +13,8 @@ public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
 		do {
 			this.salvarIndiceTokenAtual();
 			isValido = false;			
-			
-			ArvoreSintaticaAbstrataNo definitionPart = this.validaEGeraProducaoDadoProducao(ProducoesEnum.definition);
-			if (definitionPart != null) {
+			try {
+				ArvoreSintaticaAbstrataNo definitionPart = this.validaEGeraProducaoDadoProducao(ProducoesEnum.definition);
 				
 				if (this.proximoTokenPossuiValorIgualA(";")) {
 					raiz.adicionaNoFilho(definitionPart);
@@ -23,6 +22,8 @@ public class RegrasProducaoDefinitionPart extends RegrasProducaoAbstract {
 					this.descartaIndiceSalvo();
 					isValido = true;
 				}
+			} catch (ProducaoSintaticaException e) {
+				isValido = false;
 			}
 			
 			if ( ! isValido) {

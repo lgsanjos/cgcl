@@ -19,6 +19,9 @@ public class RegrasProducaoBlock extends RegrasProducaoAbstract {
 			if (this.proximoTokenPossuiValorIgualA("begin")) {
 				raiz.adicionaNoFilho(this.getTokenAtual());
 				
+				this.descartaIndiceSalvo();
+				this.salvarIndiceTokenAtual();
+				
 				ArvoreSintaticaAbstrataNo statementPart = this.validaEGeraProducaoDadoProducao(ProducoesEnum.statementPart);
 				if (statementPart != null) {
 					raiz.adicionaNoFilho(statementPart);

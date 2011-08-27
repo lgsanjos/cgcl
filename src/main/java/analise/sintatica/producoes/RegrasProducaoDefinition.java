@@ -38,6 +38,7 @@ public class RegrasProducaoDefinition extends RegrasProducaoAbstract {
 			this.recuperarIndiceSalvo();
 		}
 		
+		this.salvarIndiceTokenAtual();
 		try{
 			raiz.adicionaNoFilho(this.validaEGeraProducaoDadoProducao(ProducoesEnum.typedef));
 			this.descartaIndiceSalvo();
@@ -56,7 +57,6 @@ public class RegrasProducaoDefinition extends RegrasProducaoAbstract {
 		}
 		
 		
-		this.recuperarIndiceSalvo();
 		this.throwProducaoSintaticaException("definition");
 		return null;
 	}

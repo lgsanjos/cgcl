@@ -1,7 +1,5 @@
 package analise.sintatica.producoes;
 
-import javax.management.RuntimeErrorException;
-
 import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import coretypes.Token;
@@ -69,7 +67,7 @@ public abstract class RegrasProducaoAbstract {
 		}
 		
 		return (tokenIndice.getValue().equalsIgnoreCase(compareLexema)) &&
-			   (tokenIndice.getTokenType().equals(compareType));
+				(tokenIndice.getTokenType().equals(compareType));
 	}
 
 	protected boolean proximoTokenPossuiValorIgualA(String compareLexema) {
