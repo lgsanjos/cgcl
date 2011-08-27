@@ -71,7 +71,7 @@ public class ArvoreSintaticaAbstrataTest extends AnaliseSintaticaTest {
 	}
 	
 	public void testPrintSimplesPacasIntegracao() {
-		String source = this.loadResourceNamed("simples.gcl");
+		String source = this.loadResourceNamed("simples_pacas.gcl");
 		
 		this.analisador = this.buildAnaliseSintatica(source);
 		ArvoreSintaticaAbstrataNo raiz =  this.analisador.gerarArvore();
@@ -80,7 +80,7 @@ public class ArvoreSintaticaAbstrataTest extends AnaliseSintaticaTest {
 		arv.setRaiz(raiz);
 
 		String printGerado = arv.print();
-		String printTemplate = this.loadResourceNamed("asa_simples.txt");
+		String printTemplate = this.loadResourceNamed("asa_simplesPacas.txt");
 		boolean assertTemplateIgual;
 		assertTemplateIgual = printGerado.trim().equalsIgnoreCase(
 				printTemplate.trim());
