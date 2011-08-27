@@ -87,4 +87,17 @@ public class AnaliseSintatica {
 	  			
 	}
 
+	public ArvoreSintaticaAbstrataNo gerarArvore(){
+
+		while (this.hasTokenParaProcessar()) {
+		}
+			
+		if ( this.validaSintaxeEGeraASA() ){
+			this.limpaPilhaDeTokens();
+		}
+		
+		return raizDaArvoreSintaticaAbstrata;
+	  			
+	}
+
 }
