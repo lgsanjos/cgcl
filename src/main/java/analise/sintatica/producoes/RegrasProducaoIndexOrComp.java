@@ -48,7 +48,7 @@ public class RegrasProducaoIndexOrComp extends RegrasProducaoAbstract {
 				raiz.adicionaNoFilho("[", this.getTokenAtual());
 				
 				try {
-					expression = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
+					expression = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expression);
 					raiz.adicionaNoFilho(expression);
 					isValido &= (expression != null);
 				} catch (ProducaoSintaticaException e) {

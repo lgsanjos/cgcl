@@ -25,12 +25,15 @@ public class RegrasProducaoType extends RegrasProducaoAbstract {
 		try {
 			ArvoreSintaticaAbstrataNo typeSymbol = this.validaEGeraProducaoDadoProducao(ProducoesEnum.typeSymbol);
 			raiz.adicionaNoFilho(typeSymbol);
+			this.descartaIndiceSalvo();
 		} catch (ProducaoSintaticaException e) {
+			this.recuperarIndiceSalvo();
 			this.throwProducaoSintaticaException("type");
 		}
 
 		
 		try {
+			this.salvarIndiceTokenAtual();
 			ArvoreSintaticaAbstrataNo arrayType = this.validaEGeraProducaoDadoProducao(ProducoesEnum.arraytype);
 			raiz.adicionaNoFilho(arrayType);
 			this.descartaIndiceSalvo();
@@ -41,6 +44,7 @@ public class RegrasProducaoType extends RegrasProducaoAbstract {
 		}
 		
 		try {
+			this.salvarIndiceTokenAtual();
 			ArvoreSintaticaAbstrataNo rangeType = this.validaEGeraProducaoDadoProducao(ProducoesEnum.rangetype);
 			raiz.adicionaNoFilho(rangeType);
 			this.descartaIndiceSalvo();

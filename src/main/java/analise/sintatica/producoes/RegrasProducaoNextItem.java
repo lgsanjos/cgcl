@@ -10,13 +10,20 @@ public class RegrasProducaoNextItem extends RegrasProducaoAbstract {
 
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("nextItem");
 
+		this.salvarIndiceTokenAtual();
+		
 		if (this.proximoTokenEhUmIdentificador()) {
-			if (this.proximoTokenEhUmNumero()) {
-				raiz.adicionaNoFilho("nextItem", this.getTokenAtual());
-				this.descartaIndiceSalvo();
-				return raiz;
-			}
+			raiz.adicionaNoFilho("identificador", this.getTokenAtual());
+			this.descartaIndiceSalvo();
+			return raiz;
 		}
+		
+		this.recuperarIndiceSalvo();
+		if (this.proximoTokenEhUmNumero()) {
+			raiz.adicionaNoFilho(this.getTokenAtual());
+			this.descartaIndiceSalvo();
+			return raiz;
+		}		
 		
 		this.recuperarIndiceSalvo();
 		this.throwProducaoSintaticaException("nextItem");

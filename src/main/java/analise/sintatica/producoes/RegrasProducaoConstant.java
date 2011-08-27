@@ -10,14 +10,14 @@ public class RegrasProducaoConstant extends RegrasProducaoAbstract {
 		// <expression>
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("constant");
 		
-		this.salvarIndiceTokenAtual();
-
-		ArvoreSintaticaAbstrataNo expression;
-		expression = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expression);
-		if (expression != null) {
+		try {
+			this.salvarIndiceTokenAtual();
+			ArvoreSintaticaAbstrataNo expression = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expression);
 			raiz.adicionaNoFilho(expression);
 			this.descartaIndiceSalvo();
 			return raiz;
+		} catch (ProducaoSintaticaException e) {
+			
 		}
 		
 		this.recuperarIndiceSalvo();

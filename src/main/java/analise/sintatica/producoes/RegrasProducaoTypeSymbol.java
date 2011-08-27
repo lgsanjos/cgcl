@@ -1,6 +1,5 @@
 package analise.sintatica.producoes;
 
-import coretypes.gcl.GCLTokenTypes;
 import analise.exceptions.ProducaoSintaticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
@@ -9,8 +8,7 @@ public class RegrasProducaoTypeSymbol extends RegrasProducaoAbstract {
 	@Override
 	public ArvoreSintaticaAbstrataNo validaEGeraProducao() throws ProducaoSintaticaException {
 		// "integer" | "Boolean"  | "identifier" 
-		
-		
+				
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("typeSymbol");
 		String[] simbolos = { "integer", "string", "boolean", "real"};		
 		
@@ -19,13 +17,22 @@ public class RegrasProducaoTypeSymbol extends RegrasProducaoAbstract {
 		
 		if (this.getTokenAtual() != null) {
 			for (int i = 0; i < simbolos.length; i++) {
-				if (this.getTokenAtual().getValue() == simbolos[i]) {
+				if (this.getTokenAtual().getValue().equalsIgnoreCase(simbolos[i])) {
 					this.descartaIndiceSalvo();
 					raiz.adicionaNoFilho(this.getTokenAtual());
 					return raiz;
 				}
 			}
-		}	
+		}
+		
+		this.recuperarIndiceSalvo();
+		this.salvarIndiceTokenAtual();
+		
+		if (this.proximoTokenEhUmIdentificador()) {
+			this.descartaIndiceSalvo();
+			raiz.adicionaNoFilho("identificador", this.getTokenAtual());
+			return raiz;
+		}
 		
 		this.recuperarIndiceSalvo();
 		this.throwProducaoSintaticaException("typeSymbol");

@@ -20,12 +20,12 @@ public class RegrasProducaoArgumentList extends RegrasProducaoAbstract {
 			this.descartaIndiceSalvo();
 			this.salvarIndiceTokenAtual();
 			
-			ArvoreSintaticaAbstrataNo expressionList;
-			expressionList = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expressionList);
-			if (expressionList != null) {
+			try {
+				ArvoreSintaticaAbstrataNo expressionList;
+				expressionList = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expressionList);
 				raiz.adicionaNoFilho(expressionList);
 				this.descartaIndiceSalvo();
-			} else {
+			} catch(ProducaoSintaticaException e) {
 				this.recuperarIndiceSalvo();
 			}
 			

@@ -86,15 +86,15 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 	
 	private ArvoreSintaticaAbstrataNo checkExpression() throws ProducaoSintaticaException {
 
+		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("factor");
+		
 		this.salvarIndiceTokenAtual(); 
-		ArvoreSintaticaAbstrataNo raiz;
-		raiz = new ArvoreSintaticaAbstrataNo("factor");
 		
 		if (this.proximoTokenPossuiValorETipoIgualA("(", GCLTokenTypes.SYMBOL)) {
 			raiz.adicionaNoFilho("(", this.getTokenAtual());
 			
 			try {
-				ArvoreSintaticaAbstrataNo expression = ProducoesFactory.getProducao(ProducoesEnum.expression).validaEGeraProducao();
+				ArvoreSintaticaAbstrataNo expression = this.validaEGeraProducaoDadoProducao(ProducoesEnum.expression);
 				raiz.adicionaNoFilho(expression);
 				if (this.proximoTokenPossuiValorETipoIgualA(")", GCLTokenTypes.SYMBOL)) {
 					raiz.adicionaNoFilho(")", this.getTokenAtual());

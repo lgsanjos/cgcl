@@ -26,16 +26,23 @@ public class RegrasProducaoRelationalExpression extends RegrasProducaoAbstract {
 		this.salvarIndiceTokenAtual();
 		try {
 			ArvoreSintaticaAbstrataNo relationalOperator = this.validaEGeraProducaoDadoProducao(ProducoesEnum.relationalOperator);
-			ArvoreSintaticaAbstrataNo novaSimpleExpression = this.validaEGeraProducaoDadoProducao(ProducoesEnum.simpleExpression);
 			raiz.adicionaNoFilho(relationalOperator);
+		} catch(ProducaoSintaticaException e) {
+			this.recuperarIndiceSalvo();
+			return raiz;
+		}
+			
+			
+		try {
+			ArvoreSintaticaAbstrataNo novaSimpleExpression = this.validaEGeraProducaoDadoProducao(ProducoesEnum.simpleExpression);
 			raiz.adicionaNoFilho(novaSimpleExpression);
 			this.descartaIndiceSalvo();
-		} catch (ProducaoSintaticaException e) {
-			//
+		} catch (ProducaoSintaticaException exp) {
+			this.recuperarIndiceSalvo();
+			this.throwProducaoSintaticaException("relationalExpression");
 		}
 		
 		return raiz;
 	}
-	
 
 }

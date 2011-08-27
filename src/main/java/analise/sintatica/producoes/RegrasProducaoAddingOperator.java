@@ -17,7 +17,7 @@ public class RegrasProducaoAddingOperator extends RegrasProducaoAbstract {
 		
 		if (this.getTokenAtual() != null) {
 			for (int i = 0; i < sinais.length; i++) {
-				if (this.getTokenAtual().getValue() == sinais[i]) {
+				if (this.getTokenAtual().getValue().equalsIgnoreCase(sinais[i])) {
 					this.descartaIndiceSalvo();
 					raiz.adicionaNoFilho(this.getTokenAtual());
 					return raiz;
