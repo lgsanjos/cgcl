@@ -1,5 +1,3 @@
 module
-  keyword.module
-  identifier.simples
-  
-
+  KEYWORD.module
+  IDENTIFIER.simplesPacas

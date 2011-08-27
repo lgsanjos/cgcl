@@ -46,7 +46,6 @@ public class AnaliseSintaticaTest extends TestCase {
     
     protected AnaliseSintatica buildAnaliseSintatica(String codigoFonte) {
     	return new AnaliseSintatica( this.buildAnaliseLexica(codigoFonte));
-    }
-    
+    }    
 
 }
