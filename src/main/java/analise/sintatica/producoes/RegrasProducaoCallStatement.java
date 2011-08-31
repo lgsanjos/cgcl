@@ -45,7 +45,8 @@ public class RegrasProducaoCallStatement extends RegrasProducaoAbstract {
 			}			
 		}
 		
-		this.recuperarIndiceSalvo();		
+		this.recuperarIndiceSalvo();
+		this.throwProducaoSintaticaException("callStatement");
 		return null;
 	}
 

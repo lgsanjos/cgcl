@@ -80,6 +80,9 @@ public abstract class RegrasProducaoAbstract {
 	}
 	
 	protected Token getTokenAtual() {
+		if (this.pilhaDeToken == null) {
+			this.pilhaDeToken = null;
+		}
 		if (this.pilhaDeToken.getIndice() == -1 ) {
 			return this.pilhaDeToken.get(0);
 		}

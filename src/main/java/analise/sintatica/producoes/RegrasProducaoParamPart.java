@@ -34,16 +34,18 @@ public class RegrasProducaoParamPart extends RegrasProducaoAbstract {
 				isValida = false;
 				this.salvarIndiceTokenAtual();
 				
-				if (this.proximoTokenPossuiValorETipoIgualA(",", GCLTokenTypes.SYMBOL)) {
+				if (this.proximoTokenPossuiValorETipoIgualA(";", GCLTokenTypes.SYMBOL)) {
 					Token tokenVirgula = this.getTokenAtual();
 					
-					ArvoreSintaticaAbstrataNo paramDef2;
-					paramDef2 = this.validaEGeraProducaoDadoProducao(ProducoesEnum.paramDef);
-					if ( paramDef2 != null) {
+					try {
+						ArvoreSintaticaAbstrataNo paramDef2;
+						paramDef2 = this.validaEGeraProducaoDadoProducao(ProducoesEnum.paramDef);
 						raiz.adicionaNoFilho(tokenVirgula);
 						raiz.adicionaNoFilho(paramDef2);
 						this.descartaIndiceSalvo();
-						isValida = true;
+						isValida = true;						
+					} catch( ProducaoSintaticaException e) {
+						isValida = false;
 					}
 				}
 				
@@ -52,6 +54,8 @@ public class RegrasProducaoParamPart extends RegrasProducaoAbstract {
 				}
 				
 			} while (isValida);
+			
+			this.salvarIndiceTokenAtual();
 			
 			if (this.proximoTokenPossuiValorETipoIgualA(")", GCLTokenTypes.SYMBOL)) {
 				raiz.adicionaNoFilho(this.getTokenAtual());

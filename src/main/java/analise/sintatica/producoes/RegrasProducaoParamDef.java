@@ -13,8 +13,13 @@ public class RegrasProducaoParamDef extends RegrasProducaoAbstract {
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("paramDef");
 		
 		this.salvarIndiceTokenAtual();
-		if (this.proximoTokenPossuiValorETipoIgualA("val", GCLTokenTypes.KEYWORD) || 
-				this.proximoTokenPossuiValorETipoIgualA("ref", GCLTokenTypes.KEYWORD)) {
+		this.avancaProximoToken();
+		if (this.getTokenAtual() == null) {
+			this.recuperarIndiceSalvo();
+			this.throwProducaoSintaticaException("paramDef");			
+		}
+		
+		if (this.getTokenAtual().getValue().equals("val") || this.getTokenAtual().getValue().equals("ref")) {
 			raiz.adicionaNoFilho(this.getTokenAtual());
 			
 			ArvoreSintaticaAbstrataNo variableDef = this.validaEGeraProducaoDadoProducao(ProducoesEnum.variableDef);
