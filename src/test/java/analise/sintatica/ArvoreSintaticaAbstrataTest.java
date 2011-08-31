@@ -1,5 +1,7 @@
 package analise.sintatica;
 
+import analise.exceptions.InvalidTokenException;
+import analise.exceptions.ProducaoSintaticaException;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
 
@@ -9,10 +11,10 @@ public class ArvoreSintaticaAbstrataTest extends AnaliseSintaticaTest {
 
 		ArvoreSintaticaAbstrataNo raiz;
 		raiz = new ArvoreSintaticaAbstrataNo("module");
-		raiz.adicionaNoFilho("module", new Token(GCLTokenTypes.KEYWORD,"module"));
-		raiz.adicionaNoFilho("identificador", new Token(
-				GCLTokenTypes.IDENTIFIER, "simplesPacas"));
-
+		raiz.adicionaNoFilho("module", new Token(GCLTokenTypes.KEYWORD,	"module"));
+		raiz.adicionaNoFilho("identificador", new Token(GCLTokenTypes.IDENTIFIER, "simplesPacas"));
+		raiz.adicionaNoFilho(".", new Token(GCLTokenTypes.SYMBOL, "."));
+		
 		ArvoreSintaticaAbstrata arv = new ArvoreSintaticaAbstrata();
 		arv.setRaiz(raiz);
 
@@ -22,8 +24,6 @@ public class ArvoreSintaticaAbstrataTest extends AnaliseSintaticaTest {
 		assertTemplateIgual = printGerado.trim().equalsIgnoreCase(
 				printTemplate.trim());
 		assertTrue(assertTemplateIgual);
-		// assertTemplateIgual = printGerado.
-		// assertEquals(printGerado, printTemplate);
 	}
 
 	public void testPrintSimples() {
@@ -55,36 +55,55 @@ public class ArvoreSintaticaAbstrataTest extends AnaliseSintaticaTest {
 
 	public void testPrintSimplesIntegracao() {
 		String source = this.loadResourceNamed("simples.gcl");
-		
+
 		this.analisador = this.buildAnaliseSintatica(source);
-		ArvoreSintaticaAbstrataNo raiz =  this.analisador.gerarArvore();
+		// ArvoreSintaticaAbstrataNo raiz = this.analisador.gerarArvore();
 
-		ArvoreSintaticaAbstrata arv = new ArvoreSintaticaAbstrata();
-		arv.setRaiz(raiz);
+		try {
+			ArvoreSintaticaAbstrataNo raiz = this.analisador.gerarArvore();
+			ArvoreSintaticaAbstrata arv = new ArvoreSintaticaAbstrata();
+			arv.setRaiz(raiz);
 
-		String printGerado = arv.print();
-		String printTemplate = this.loadResourceNamed("asa_simples.txt");
-		boolean assertTemplateIgual;
-		assertTemplateIgual = printGerado.trim().equalsIgnoreCase(
-				printTemplate.trim());
-		assertTrue(assertTemplateIgual);
+			String printGerado = arv.print();
+			String printTemplate = this.loadResourceNamed("asa_simples.txt");
+			boolean assertTemplateIgual;
+			assertTemplateIgual = printGerado.trim().equalsIgnoreCase(
+					printTemplate.trim());
+			assertTrue(assertTemplateIgual);
+
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		}
+
 	}
-	
+
 	public void testPrintSimplesPacasIntegracao() {
 		String source = this.loadResourceNamed("simples_pacas.gcl");
-		
+
 		this.analisador = this.buildAnaliseSintatica(source);
-		ArvoreSintaticaAbstrataNo raiz =  this.analisador.gerarArvore();
 
-		ArvoreSintaticaAbstrata arv = new ArvoreSintaticaAbstrata();
-		arv.setRaiz(raiz);
+		try {
+			ArvoreSintaticaAbstrataNo raiz = this.analisador.gerarArvore();
 
-		String printGerado = arv.print();
-		String printTemplate = this.loadResourceNamed("asa_simplesPacas.txt");
-		boolean assertTemplateIgual;
-		assertTemplateIgual = printGerado.trim().equalsIgnoreCase(
-				printTemplate.trim());
-		assertTrue(assertTemplateIgual);
+			ArvoreSintaticaAbstrata arv = new ArvoreSintaticaAbstrata();
+			arv.setRaiz(raiz);
+
+			String printGerado = arv.print();
+			String printTemplate = this
+					.loadResourceNamed("asa_simplesPacas.txt");
+			boolean assertTemplateIgual;
+			assertTemplateIgual = printGerado.trim().equalsIgnoreCase(
+					printTemplate.trim());
+			assertTrue(assertTemplateIgual);
+
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		}
+
 	}
 
 }

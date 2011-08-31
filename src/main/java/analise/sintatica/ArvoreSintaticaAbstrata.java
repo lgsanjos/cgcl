@@ -18,9 +18,7 @@ public class ArvoreSintaticaAbstrata {
 		printNo(no, identacao);
 		for (int i = 0; i < no.quatidadeNosFilhos(); i++) {
 			printNosFilhos(no.getListaDeNos().get(i), identacao + 2);
-
 		}
-
 	}
 
 	private void printNo(ArvoreSintaticaAbstrataNo no, Integer identacao) {

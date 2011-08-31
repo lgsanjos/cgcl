@@ -1,5 +1,6 @@
 package analise.sintatica;
 
+import analise.exceptions.InvalidTokenException;
 import analise.exceptions.ProducaoSintaticaException;
 import analise.lexica.AnaliseLexica;
 import analise.sintatica.producoes.*;
@@ -23,26 +24,20 @@ public class AnaliseSintatica {
 		this.pilhaDeTokens.clear();
 	}
 	
-	private boolean empilhaToken(){
+	private boolean empilhaToken() throws InvalidTokenException {
 		
-		try {
-			Token token = this.analiseLexica.getNextToken();
-			this.pilhaDeTokens.addLast(token);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+		Token token = this.analiseLexica.getNextToken();
+		this.pilhaDeTokens.addLast(token);
+		return true;
 		
 	}
 	
-	private boolean hasTokenParaProcessar(){
+	private boolean hasTokenParaProcessar() throws InvalidTokenException{
 		return this.empilhaToken();
 	}
 	
-	private boolean validaSintaxeEGeraASA() {
+	private boolean validaSintaxeEGeraASA() throws ProducaoSintaticaException {
 
-		try {			
 			ArvoreSintaticaAbstrataNo noRaiz;
 			
 			ProducoesFactory.setEstado(pilhaDeTokens);
@@ -52,10 +47,6 @@ public class AnaliseSintatica {
 				return true;
 			}
 			ProducoesFactory.limpaEstado();
-			
-		} catch(ProducaoSintaticaException e) {
-			// TODO: Implementar tratamento da exception, mostrar para o usuario.
-		}	
 		
 		return false;		
 	}
@@ -74,11 +65,10 @@ public class AnaliseSintatica {
 		return this.pilhaDeTokens.size();
 	}
 
-	public boolean valida(){
+	public boolean valida() throws ProducaoSintaticaException, InvalidTokenException {
 
 		while (this.hasTokenParaProcessar()) {
 		}
-			
 		if ( this.validaSintaxeEGeraASA() ){
 			this.limpaPilhaDeTokens();
 		}
@@ -87,15 +77,9 @@ public class AnaliseSintatica {
 	  			
 	}
 
-	public ArvoreSintaticaAbstrataNo gerarArvore(){
+	public ArvoreSintaticaAbstrataNo gerarArvore() throws ProducaoSintaticaException, InvalidTokenException{
 
-		while (this.hasTokenParaProcessar()) {
-		}
-			
-		if ( this.validaSintaxeEGeraASA() ){
-			this.limpaPilhaDeTokens();
-		}
-		
+		this.valida();
 		return raizDaArvoreSintaticaAbstrata;
 	  			
 	}

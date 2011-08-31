@@ -28,37 +28,25 @@ public class AnaliseLexica {
 	}
 
 	
-	private Token getNextValidToken() throws InvalidTokenException {
+	private Token getNextValidToken() throws InvalidTokenException, EndOfBufferException {
 		String buffer = "";
 		String lastChar;
 		Token token;
 
-		try {
-			do {
-				lastChar = "";
-				lastChar += this.parser.getNextChar();
-				buffer += lastChar;
-			} while (this.rules.validaLexema(buffer));
-				
-			buffer = buffer.substring(0, buffer.length() - 1);
+		do {
+			lastChar = "";
+			lastChar += this.parser.getNextChar();
+			buffer += lastChar;
+		} while (this.rules.validaLexema(buffer));
 			
-			if (buffer.length() == 0) {
-				throw new InvalidTokenException("Invalid Token " + buffer);
-			}
-			
-			this.parser.getLastChar();
-
-		} catch (EndOfBufferException e) {
-
-			if (buffer.length() == 0) {
-				return null;
-			}
+		buffer = buffer.substring(0, buffer.length() - 1);
+		
+		if (buffer.length() == 0) {
+			throw new InvalidTokenException("Não foi possível reconhecer o token: " + buffer);
 		}
 		
-		if ( buffer.length() == 0 ){
-			throw new InvalidTokenException("");
-		}
-		
+		this.parser.getLastChar();
+
 		token = this.rules.buildToken(buffer, this.parser.getLastPosicao());
 		this.adicionaTabelaDeSimbolos(token);
 		return token;
@@ -85,14 +73,17 @@ public class AnaliseLexica {
 		return this.rules.buildToken(lexema, posicao);
 	}
 
-	public Token getNextToken() throws InvalidTokenException, EndOfBufferException {
+	public Token getNextToken() throws InvalidTokenException {
 		Token token;
 		boolean condicao;
-		do {
-			token = this.getNextValidToken();
-			condicao = this.ignoreTokenClasses.contains(token.getTokenType());
-		} while (condicao);
-
+		try {
+		  do {
+		      token = this.getNextValidToken();
+			  condicao = this.ignoreTokenClasses.contains(token.getTokenType());
+		  } while (condicao);
+		} catch (EndOfBufferException e) {
+			return null;
+		}
 		return token;
 	}
 
