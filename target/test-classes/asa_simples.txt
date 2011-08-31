@@ -1,7 +1,0 @@
-module
-  keyword.module
-  identifier.simples
-  block
-    keyword.begin
-    keyword.end
-  symbol..
