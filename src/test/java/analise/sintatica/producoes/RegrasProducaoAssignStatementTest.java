@@ -53,9 +53,83 @@ public class RegrasProducaoAssignStatementTest extends RegrasProducaoTestCase {
 		i++;
 		assertNull(this.raiz.getListaDeNos().get(i).getToken());
 		assertEquals(this.raiz.getListaDeNos().get(i).getNome(), "expressionList");	
-		
-		
 
 	}
+	
+	public void testAtribuicaoDeString() {
+		Token tokenId = new Token(GCLTokenTypes.IDENTIFIER, "ident");
+		Token tokenRecebe = new Token(GCLTokenTypes.SYMBOL, ":=");
+		Token tokenString = new Token(GCLTokenTypes.LITERAL, "'minha string'");
+
+		this.pilhaDeToken.add(tokenId);
+		this.pilhaDeToken.add(tokenRecebe);
+		this.pilhaDeToken.add(tokenString);
+		
+		ProducoesFactory.setEstado(this.pilhaDeToken);
+		
+		this.producao = ProducoesFactory.getProducao(ProducoesEnum.assignStatement);
+		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoAssignStatement");		
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
+
+		assertNotNull(this.raiz);
+		assertEquals(this.raiz.getNome(), "assignStatement");
+		assertNull(this.raiz.getToken());
+		assertEquals(this.raiz.possueNosFilhos(), true);
+		assertEquals(this.raiz.getListaDeNos().size(), 3);
+		
+		int i = 0;
+		assertNull(this.raiz.getListaDeNos().get(i).getToken());
+		assertEquals(this.raiz.getListaDeNos().get(i).getNome(), "variableAccessList");				
+		
+		i++;
+		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), ":=");
+		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), GCLTokenTypes.SYMBOL);
+		
+		i++;
+		assertNull(this.raiz.getListaDeNos().get(i).getToken());
+		assertEquals(this.raiz.getListaDeNos().get(i).getNome(), "expressionList");
+	}
+	
+	public void testAtribuicaoDeTipoReal() {
+		Token tokenId = new Token(GCLTokenTypes.IDENTIFIER, "ident");
+		Token tokenRecebe = new Token(GCLTokenTypes.SYMBOL, ":=");
+		Token tokenReal = new Token(GCLTokenTypes.NUMBER, "1,4");
+
+		this.pilhaDeToken.add(tokenId);
+		this.pilhaDeToken.add(tokenRecebe);
+		this.pilhaDeToken.add(tokenReal);
+		
+		ProducoesFactory.setEstado(this.pilhaDeToken);
+		
+		this.producao = ProducoesFactory.getProducao(ProducoesEnum.assignStatement);
+		assertEquals(this.producao.getClass().getName(), "analise.sintatica.producoes.RegrasProducaoAssignStatement");		
+		try {
+			this.raiz = this.producao.validaEGeraProducao();	
+		} catch (ProducaoSintaticaException e) {
+			fail(e.getMessage());
+		}
+
+		assertNotNull(this.raiz);
+		assertEquals(this.raiz.getNome(), "assignStatement");
+		assertNull(this.raiz.getToken());
+		assertEquals(this.raiz.possueNosFilhos(), true);
+		assertEquals(this.raiz.getListaDeNos().size(), 3);
+		
+		int i = 0;
+		assertNull(this.raiz.getListaDeNos().get(i).getToken());
+		assertEquals(this.raiz.getListaDeNos().get(i).getNome(), "variableAccessList");				
+		
+		i++;
+		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), ":=");
+		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), GCLTokenTypes.SYMBOL);
+		
+		i++;
+		assertNull(this.raiz.getListaDeNos().get(i).getToken());
+		assertEquals(this.raiz.getListaDeNos().get(i).getNome(), "expressionList");
+	}	
 
 }

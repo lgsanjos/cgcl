@@ -13,6 +13,14 @@ public class RegrasProducaoRelationalExpression extends RegrasProducaoAbstract {
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("relationalExpression");
 		
 		this.salvarIndiceTokenAtual();
+		if (this.proximotokenEhUmaString()) {
+			this.descartaIndiceSalvo();
+			raiz.adicionaNoFilho(this.getTokenAtual());
+			return raiz;
+		} 
+		this.recuperarIndiceSalvo();
+		
+		this.salvarIndiceTokenAtual();
 		try {
 			ArvoreSintaticaAbstrataNo simpleExpression = this.validaEGeraProducaoDadoProducao(ProducoesEnum.simpleExpression);
 			this.descartaIndiceSalvo();

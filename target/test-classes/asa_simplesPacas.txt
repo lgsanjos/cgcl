@@ -1,4 +1,0 @@
-module
-  KEYWORD.module
-  IDENTIFIER.simplesPacas
-  SYMBOL..
