@@ -1,5 +1,8 @@
 package analise.sintatica;
 
+import analise.exceptions.InvalidTokenException;
+import analise.exceptions.ProducaoSintaticaException;
+
 
 public class AnaliseSintaticaUnitarioTest extends AnaliseSintaticaTest {
 	
@@ -8,28 +11,56 @@ public class AnaliseSintaticaUnitarioTest extends AnaliseSintaticaTest {
     	String source = "module oi begin end.";
     	
     	this.analisador = this.buildAnaliseSintatica(source);
-    	assertTrue( this.analisador.valida() );	
+    	//assertTrue( this.analisador.valida() );	
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
     }
     
     public void testaModuleBasicoComPrivate(){
     	String source = "module oi private begin end.";
     	
     	this.analisador = this.buildAnaliseSintatica(source);
-    	assertTrue( this.analisador.valida() );	
+    	//assertTrue( this.analisador.valida() );	
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
     }    
     
     public void testaModuleBasicoComFalhaSintaticaNoFinalDaProducao(){
     	String source = "module oi begin end;";
     	
     	this.analisador = this.buildAnaliseSintatica(source);
-    	assertFalse( this.analisador.valida() );	
+    	//assertFalse( this.analisador.valida() );	
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
     }
        
     public void testaModuleBasicoComFalhaSintaticaNoMeioDaProducao(){
     	String source = "module oi @ begin end.";
     	
     	this.analisador = this.buildAnaliseSintatica(source);
-    	assertFalse( this.analisador.valida() );	
+    	//assertFalse( this.analisador.valida() );	
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
     }       
     
     public void testaModuleBasicoComPrivateEQuebrasDeLinha(){
@@ -39,7 +70,13 @@ public class AnaliseSintaticaUnitarioTest extends AnaliseSintaticaTest {
     					"end.";
     	
     	this.analisador = this.buildAnaliseSintatica(source);
-    	assertTrue( this.analisador.valida() );	
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
     }    
    
     public void testaModuleBasicoComPrivateEComentarios(){
@@ -50,7 +87,13 @@ public class AnaliseSintaticaUnitarioTest extends AnaliseSintaticaTest {
     					"end.";
     	
     	this.analisador = this.buildAnaliseSintatica(source);
-    	assertTrue( this.analisador.valida() );	
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 	
     }
     
     public void testaModuleBlocoDefinitionPartConstantDef(){
@@ -61,7 +104,13 @@ public class AnaliseSintaticaUnitarioTest extends AnaliseSintaticaTest {
     					"end.";
     	
     	this.analisador = this.buildAnaliseSintatica(source);
-    	assertTrue( this.analisador.valida() );	
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
     }        
 	
 

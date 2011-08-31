@@ -15,30 +15,28 @@ public class ArvoreSintaticaAbstrata {
 
 	private void printNosFilhos(ArvoreSintaticaAbstrataNo no, Integer identacao) {
 
-		printNo(no,identacao);
+		printNo(no, identacao);
 		for (int i = 0; i < no.quatidadeNosFilhos(); i++) {
-			printNosFilhos(no.getListaDeNos().get(i),identacao+2);
-
+			printNosFilhos(no.getListaDeNos().get(i), identacao + 2);
 		}
-
 	}
 
 	private void printNo(ArvoreSintaticaAbstrataNo no, Integer identacao) {
 		String espaco = "";
-	    for (int i=0; i<identacao;i++){
-	    	espaco = espaco + " ";
-	    }
-		
-		
+		for (int i = 0; i < identacao; i++) {
+			espaco = espaco + " ";
+		}
+
 		if (no.possueNosFilhos()) {
-			
+
 			printBuffer = printBuffer + espaco + no.getNome();
-			printBuffer = (printBuffer + "\n");		
+			printBuffer = (printBuffer + "\n");
 		} else {
 			if (no.getToken() != null) {
-				printBuffer = (printBuffer + espaco + no.getToken().getTokenType() + "." + no.getToken().getValue());
-				printBuffer = (printBuffer + "\n");	
-				
+				printBuffer = (printBuffer + espaco
+						+ no.getToken().getTokenType() + "." + no.getToken().getValue());
+				printBuffer = (printBuffer + "\n");
+
 			}
 		}
 
@@ -46,7 +44,10 @@ public class ArvoreSintaticaAbstrata {
 
 	public String print() {
 		this.printBuffer = "";
-		this.printNosFilhos(this.raiz,0);
+		if (this.raiz != null) {
+			this.printNosFilhos(this.raiz, 0);
+		} 
+
 		return this.printBuffer;
 
 	}

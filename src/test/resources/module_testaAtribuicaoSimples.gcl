@@ -1,0 +1,5 @@
+module testaAtribuicaoSimples
+private
+  a := 1;
+  b := 'string';
+end.  
