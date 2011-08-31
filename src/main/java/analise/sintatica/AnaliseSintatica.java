@@ -27,6 +27,10 @@ public class AnaliseSintatica {
 	private boolean empilhaToken() throws InvalidTokenException {
 		
 		Token token = this.analiseLexica.getNextToken();
+		
+		if (token == null) {
+			return false;
+		}
 		this.pilhaDeTokens.addLast(token);
 		return true;
 		
