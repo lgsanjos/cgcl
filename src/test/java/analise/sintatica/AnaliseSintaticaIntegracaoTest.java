@@ -42,6 +42,19 @@ public class AnaliseSintaticaIntegracaoTest extends AnaliseSintaticaTest {
 		} catch (ProducaoSintaticaException ep) {
 			fail(ep.getMessage());
 		} 
+	}
+	
+	public void testValidaArquivoAtribuicaoSimples() {
+		String source = this.loadResourceNamed("module_testaAtribuicaoSimples.gcl");
+		
+		this.analisador = this.buildAnaliseSintatica(source);
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
 	}	
 	
 }

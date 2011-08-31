@@ -21,6 +21,8 @@ public class RegrasProducaoType extends RegrasProducaoAbstract {
 			this.recuperarIndiceSalvo();
 		}
 		
+		// ---------------------
+		
 		this.salvarIndiceTokenAtual();		
 		try {
 			ArvoreSintaticaAbstrataNo typeSymbol = this.validaEGeraProducaoDadoProducao(ProducoesEnum.typeSymbol);
@@ -39,7 +41,6 @@ public class RegrasProducaoType extends RegrasProducaoAbstract {
 			this.descartaIndiceSalvo();
 			return raiz;
 		} catch (ProducaoSintaticaException e) {
-			// tenta o segundo caso
 			this.recuperarIndiceSalvo();
 		}
 		
@@ -53,8 +54,7 @@ public class RegrasProducaoType extends RegrasProducaoAbstract {
 			this.recuperarIndiceSalvo();
 		}
 		
-		this.throwProducaoSintaticaException("type");
-		return null;
+		return raiz;
 	}
 
 }

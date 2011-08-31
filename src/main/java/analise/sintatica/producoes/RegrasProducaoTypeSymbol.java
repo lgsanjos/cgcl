@@ -18,8 +18,8 @@ public class RegrasProducaoTypeSymbol extends RegrasProducaoAbstract {
 		if (this.getTokenAtual() != null) {
 			for (int i = 0; i < simbolos.length; i++) {
 				if (this.getTokenAtual().getValue().equalsIgnoreCase(simbolos[i])) {
-					this.descartaIndiceSalvo();
 					raiz.adicionaNoFilho(this.getTokenAtual());
+					this.descartaIndiceSalvo();					
 					return raiz;
 				}
 			}

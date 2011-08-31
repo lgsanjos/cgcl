@@ -54,7 +54,7 @@ public class RegrasProducaoSimpleExpression extends RegrasProducaoAbstract {
 			return null;
 		}
 		
-		if ( (this.getTokenAtual().getValue() == "+") || (this.getTokenAtual().getValue() == "-") ) {
+		if ( (this.getTokenAtual().getValue().equals("+")) || (this.getTokenAtual().getValue().equals("-"))) {
 			raiz.adicionaNoFilho(this.getTokenAtual().getValue(), this.getTokenAtual());
 			this.descartaIndiceSalvo();
 		} else {
