@@ -1,0 +1,7 @@
+module teste_assignment
+begin
+  soma.tudo();
+  divide.tudo();
+  subtrai();
+  b := tudo.somatoria();
+end

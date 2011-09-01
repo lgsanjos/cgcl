@@ -1,0 +1,12 @@
+module atribuicaoGuarded
+
+	proc procAninhada()
+	begin
+	  skip;
+	  skip;
+	  skip;
+	end;
+	
+begin
+	skip;
+end. 
