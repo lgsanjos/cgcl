@@ -2,5 +2,5 @@ module atribuicaoGuarded
 private
   [integer, boolean] variavel;
 begin
-	variavel := [1, true] 
+	variavel := [1, true];
 end. 

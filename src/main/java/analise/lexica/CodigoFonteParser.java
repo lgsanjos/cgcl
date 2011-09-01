@@ -23,7 +23,7 @@ public class CodigoFonteParser {
 	
 	public char getNextChar() throws EndOfBufferException{
 	    Character res = new Character(' ');
-		do{
+		do {
   		  this.contador++;			
 
   		  if (this.contador >= this.codigoFonte.length())
@@ -31,7 +31,7 @@ public class CodigoFonteParser {
 		       
 		  res = this.codigoFonte.charAt(this.contador);
 		    
-		}while(res == '\t');
+		} while (res == '\t');
       	return res;
       	
 	}
