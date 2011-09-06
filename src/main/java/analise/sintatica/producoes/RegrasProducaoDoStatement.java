@@ -11,13 +11,17 @@ public class RegrasProducaoDoStatement extends RegrasProducaoAbstract {
 		// "do" <guardedCommandList> "od" 
 		
 		ArvoreSintaticaAbstrataNo raiz = new ArvoreSintaticaAbstrataNo("doStatement");
+		ArvoreSintaticaAbstrataNo guardedCommandList = null;
 		
 		this.salvarIndiceTokenAtual();
 		if (this.proximoTokenPossuiValorETipoIgualA("do", GCLTokenTypes.KEYWORD)) {
 			raiz.adicionaNoFilho(this.getTokenAtual().getValue(), this.getTokenAtual());
 			
-			ArvoreSintaticaAbstrataNo guardedCommandList;
-			guardedCommandList = this.validaEGeraProducaoDadoProducao(ProducoesEnum.guardedCommandList);
+			try {
+				guardedCommandList = this.validaEGeraProducaoDadoProducao(ProducoesEnum.guardedCommandList);
+			} catch (ProducaoSintaticaException e) {
+			  //	
+			}
 			if (guardedCommandList != null) {
 				raiz.adicionaNoFilho(guardedCommandList);
 				

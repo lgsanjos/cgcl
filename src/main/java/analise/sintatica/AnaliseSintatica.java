@@ -1,7 +1,10 @@
 package analise.sintatica;
 
+import java.util.LinkedList;
+
 import analise.exceptions.InvalidTokenException;
 import analise.exceptions.ProducaoSintaticaException;
+import analise.exceptions.ProducaoSintaticaLoggedException;
 import analise.lexica.AnaliseLexica;
 import analise.sintatica.producoes.*;
 import coretypes.Token;
@@ -42,19 +45,25 @@ public class AnaliseSintatica {
 	
 	private boolean validaSintaxeEGeraASA() throws ProducaoSintaticaException {
 
-			ArvoreSintaticaAbstrataNo noRaiz;
+		ArvoreSintaticaAbstrataNo noRaiz;
 			
-			ProducoesFactory.setEstado(pilhaDeTokens);
-			noRaiz = ProducoesFactory.getProducao(ProducoesEnum.module).validaEGeraProducao();
-			if (noRaiz != null) {
-				this.raizDaArvoreSintaticaAbstrata = noRaiz;
-				return true;
-			}
-			ProducoesFactory.limpaEstado();
-		
+		ProducoesFactory.setEstado(pilhaDeTokens);
+		noRaiz = ProducoesFactory.getProducao(ProducoesEnum.module).validaEGeraProducao();
+		if (noRaiz != null) {
+			this.raizDaArvoreSintaticaAbstrata = noRaiz;
+			return true;
+		}
+		ProducoesFactory.limpaEstado();
 		return false;		
 	}
 	
+	public String getLastException() {
+		return ProducaoSintaticaLoggedException.getLastException();
+	}
+	
+	public LinkedList<String> getExceptionLog() {
+		return ProducaoSintaticaLoggedException.getAllExceptions();
+	}	
 
 	public Token desempilhaToken(){
 		return this.pilhaDeTokens.removeLast();
@@ -78,7 +87,6 @@ public class AnaliseSintatica {
 		}
 		
 		return this.pilhaDeTokensVazia();
-	  			
 	}
 
 	public ArvoreSintaticaAbstrataNo gerarArvore() throws ProducaoSintaticaException, InvalidTokenException{

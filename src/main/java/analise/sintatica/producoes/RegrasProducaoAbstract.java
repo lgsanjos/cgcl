@@ -108,10 +108,12 @@ public abstract class RegrasProducaoAbstract {
 	
 	protected void throwProducaoSintaticaException(String producao) throws ProducaoSintaticaException {
 		if (this.getTokenAtual() != null) {
-			throw new ProducaoSintaticaException(producao, this.getTokenAtual().getPosicaoLinha(), this.getTokenAtual().getPosicaoColuna());
+			throw new ProducaoSintaticaException(producao,
+					this.getTokenAtual().getPosicaoLinha(),
+					this.getTokenAtual().getPosicaoColuna(),
+					this.getTokenAtual().getValue());
 		} else {
-			notify();
-			//throw new ProducaoSintaticaException(producao);
+			throw new ProducaoSintaticaException(producao);
 		}
 	}
 
