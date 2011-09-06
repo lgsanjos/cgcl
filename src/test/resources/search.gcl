@@ -1,7 +1,7 @@
 module search  
 private 
 	const size = 10;  
-	typedef integer range [1..size] sizer;
+	typedef integer range [1 to size] sizer;
 	typedef integer array [sizer] elements;
 	sizer j;
 	elements A;

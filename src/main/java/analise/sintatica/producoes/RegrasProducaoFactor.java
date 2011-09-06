@@ -14,7 +14,7 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 		
 		ArvoreSintaticaAbstrataNo varAccess;
 		try{
-			varAccess = ProducoesFactory.getProducao(ProducoesEnum.variableAccess).validaEGeraProducao();
+			varAccess = this.validaEGeraProducaoDadoProducao(ProducoesEnum.variableAccess);
 			raiz.adicionaNoFilho(varAccess);
 			return raiz;
 		} catch(ProducaoSintaticaException e) {
@@ -47,7 +47,7 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 		
 		ArvoreSintaticaAbstrataNo booleanConstant;
 		try {
-			booleanConstant = ProducoesFactory.getProducao(ProducoesEnum.booleanConstant).validaEGeraProducao();
+			booleanConstant = this.validaEGeraProducaoDadoProducao(ProducoesEnum.booleanConstant);
 			raiz.adicionaNoFilho(booleanConstant);
 			return raiz;
 		} catch (ProducaoSintaticaException e) {
@@ -119,7 +119,7 @@ public class RegrasProducaoFactor extends RegrasProducaoAbstract {
 			raiz.adicionaNoFilho("~", this.getTokenAtual());
 			
 			try {
-				ArvoreSintaticaAbstrataNo factor = ProducoesFactory.getProducao(ProducoesEnum.factor).validaEGeraProducao();
+				ArvoreSintaticaAbstrataNo factor = this.validaEGeraProducaoDadoProducao(ProducoesEnum.factor);
 				raiz.adicionaNoFilho(factor);
 				return raiz;
 			} catch (ProducaoSintaticaException e) {

@@ -94,6 +94,45 @@ public class AnaliseSintaticaIntegracaoTest extends AnaliseSintaticaTest {
 		} catch (ProducaoSintaticaException ep) {
 			fail(ep.getMessage());
 		} 
-	}	
+	}
+	
+	public void testValidaArquivo_ModuleDoStatement() {
+		String source = this.loadResourceNamed("module_doStatement.gcl");
+		
+		this.analisador = this.buildAnaliseSintatica(source);
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
+	}
+	
+	public void testValidaArquivo_DoStatementComplexo() {
+		String source = this.loadResourceNamed("module_doStatementComplexo.gcl");
+		
+		this.analisador = this.buildAnaliseSintatica(source);
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
+	}
+	
+	public void testValidaArquivo_IfStatementComplexo() {
+		String source = this.loadResourceNamed("module_ifStatementComplexo.gcl");
+		
+		this.analisador = this.buildAnaliseSintatica(source);
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
+	}		
 	
 }

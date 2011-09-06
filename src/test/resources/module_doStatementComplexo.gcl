@@ -12,5 +12,5 @@ begin
 				i := i+1; 
 		fi; 
 	od; 
-	result = [found, where];
+	result := [found, where];
 end. 

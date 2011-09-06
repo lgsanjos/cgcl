@@ -26,7 +26,7 @@ public class RegrasProducaoRangeType extends RegrasProducaoAbstract {
 				if (constant != null) {
 					raiz.adicionaNoFilho(constant);
 					
-					if (this.proximoTokenPossuiValorETipoIgualA("..", GCLTokenTypes.SYMBOL)) {
+					if (this.proximoTokenPossuiValorETipoIgualA("to", GCLTokenTypes.KEYWORD)) {
 						raiz.adicionaNoFilho(this.getTokenAtual());
 						
 						ArvoreSintaticaAbstrataNo constant2;

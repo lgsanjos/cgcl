@@ -10,7 +10,7 @@ begin
 	if result.1 -> write x, ' can be found at ', result.2;  
 	[] ~result.1 -> write x, ' not found'; 
 	fi; 
-	
+
 	if result.2 = 1 -> 
 			found := true; 
 			where := i;

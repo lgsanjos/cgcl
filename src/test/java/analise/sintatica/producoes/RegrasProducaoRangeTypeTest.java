@@ -13,7 +13,7 @@ public class RegrasProducaoRangeTypeTest extends RegrasProducaoTestCase {
 		Token tokenRange = new Token(GCLTokenTypes.KEYWORD, "range");
 		Token tokenAbreColchete = new Token(GCLTokenTypes.SYMBOL, "[");
 		Token tokenDois = new Token(GCLTokenTypes.NUMBER, "2");
-		Token tokenDoisPontos = new Token(GCLTokenTypes.SYMBOL, "..");
+		Token tokenDoisPontos = new Token(GCLTokenTypes.KEYWORD, "to");
 		Token tokenUm = new Token(GCLTokenTypes.NUMBER, "1");
 		Token tokenFechaColchete = new Token(GCLTokenTypes.SYMBOL, "]");
 		this.pilhaDeToken.add(tokenRange);
@@ -51,8 +51,8 @@ public class RegrasProducaoRangeTypeTest extends RegrasProducaoTestCase {
 		assertEquals(this.raiz.getListaDeNos().get(i).getNome(), "constant");
 		
 		i++;
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), "..");
-		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), GCLTokenTypes.SYMBOL);
+		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getValue(), "to");
+		assertEquals(this.raiz.getListaDeNos().get(i).getToken().getTokenType(), GCLTokenTypes.KEYWORD);
 		
 		i++;
 		assertEquals(this.raiz.getListaDeNos().get(i).getNome(), "constant");

@@ -51,7 +51,7 @@ public class RegrasProducaoTypeTest extends RegrasProducaoTestCase {
 		Token tokenRange = new Token(GCLTokenTypes.KEYWORD, "range");
 		Token tokenAbreColchete = new Token(GCLTokenTypes.SYMBOL, "[");
 		Token tokenDois = new Token(GCLTokenTypes.NUMBER, "2");
-		Token tokenDoisPontos = new Token(GCLTokenTypes.SYMBOL, "..");
+		Token tokenDoisPontos = new Token(GCLTokenTypes.KEYWORD, "to");
 		Token tokenUm = new Token(GCLTokenTypes.NUMBER, "1");
 		Token tokenFechaColchete = new Token(GCLTokenTypes.SYMBOL, "]");
 		this.pilhaDeToken.add(token);
