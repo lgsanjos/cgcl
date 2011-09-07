@@ -9,6 +9,7 @@ public class ProducaoSintaticaLoggedException extends Exception {
 	
 	public ProducaoSintaticaLoggedException(String message) {
 		super(message);
+		System.out.println(message);
 		ProducaoSintaticaLoggedException.log.add(message); 
 	}
 	

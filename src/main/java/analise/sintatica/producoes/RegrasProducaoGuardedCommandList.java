@@ -15,8 +15,12 @@ public class RegrasProducaoGuardedCommandList extends RegrasProducaoAbstract {
 		boolean isValida;
 		
 		this.salvarIndiceTokenAtual();
-		ArvoreSintaticaAbstrataNo guardedCommand;
-		guardedCommand = this.validaEGeraProducaoDadoProducao(ProducoesEnum.guardedCommand);
+		ArvoreSintaticaAbstrataNo guardedCommand = null;
+		try {
+			guardedCommand = this.validaEGeraProducaoDadoProducao(ProducoesEnum.guardedCommand);
+		} catch (ProducaoSintaticaException e) {
+			//
+		}
 		if (guardedCommand == null) {
 			this.recuperarIndiceSalvo();
 			this.throwProducaoSintaticaException("guardedCommandList");

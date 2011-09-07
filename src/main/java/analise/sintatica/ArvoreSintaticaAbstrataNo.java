@@ -79,5 +79,9 @@ public class ArvoreSintaticaAbstrataNo {
 	public int quatidadeNosFilhos(){
 		return (this.listaDeNosFilhos.size());
 	}
+	
+	public String print() {
+		return "";
+	}
 
 }

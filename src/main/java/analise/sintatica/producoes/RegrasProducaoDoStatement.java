@@ -20,7 +20,7 @@ public class RegrasProducaoDoStatement extends RegrasProducaoAbstract {
 			try {
 				guardedCommandList = this.validaEGeraProducaoDadoProducao(ProducoesEnum.guardedCommandList);
 			} catch (ProducaoSintaticaException e) {
-			  //	
+			  	
 			}
 			if (guardedCommandList != null) {
 				raiz.adicionaNoFilho(guardedCommandList);
