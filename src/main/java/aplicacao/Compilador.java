@@ -9,7 +9,7 @@ public class Compilador {
 	  System.out.println("Trabalho de Compiladores 2011");
 	  System.out.println("Professor: Anderson Faustino da Silva");
 	  System.out.println("Aluno: Luiz Guilherme S. Anjos RA: 45220");
-	  System.out.println("");
+	  System.out.println("Aluno: Fabrício Noda RA: 39854");
 	  System.out.println("*******************************************");
 	}
 	

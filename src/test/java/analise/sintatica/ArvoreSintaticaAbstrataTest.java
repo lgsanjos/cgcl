@@ -99,5 +99,25 @@ public class ArvoreSintaticaAbstrataTest extends AnaliseSintaticaTest {
 		}
 
 	}
+	public void testPrintNoSimples() {
+
+		ArvoreSintaticaAbstrataNo raiz;
+		raiz = new ArvoreSintaticaAbstrataNo("module");
+		raiz.adicionaNoFilho("module", new Token(GCLTokenTypes.KEYWORD,	"module"));
+		raiz.adicionaNoFilho("identificador", new Token(GCLTokenTypes.IDENTIFIER, "simples"));
+		ArvoreSintaticaAbstrataNo block = new ArvoreSintaticaAbstrataNo("block");
+		raiz.adicionaNoFilho(block);
+		block.adicionaNoFilho("begin",new Token(GCLTokenTypes.KEYWORD, "begin"));
+		block.adicionaNoFilho("end", new Token(GCLTokenTypes.KEYWORD, "end"));
+		raiz.adicionaNoFilho(".", new Token(GCLTokenTypes.SYMBOL, "."));
+
+		String printGerado = raiz.print();
+		String printTemplate = this.loadResourceNamed("asa_simples.txt");
+		boolean assertTemplateIgual;
+		
+		assertTemplateIgual = printGerado.trim().equalsIgnoreCase(printTemplate.trim());
+		assertTrue(assertTemplateIgual);
+
+	}
 
 }
