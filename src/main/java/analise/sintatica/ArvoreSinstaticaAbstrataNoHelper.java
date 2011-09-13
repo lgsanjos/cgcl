@@ -1,18 +1,10 @@
 package analise.sintatica;
 
-public class ArvoreSintaticaAbstrata {
-
-	private ArvoreSintaticaAbstrataNo raiz;
-	private String printBuffer;
-
-	public ArvoreSintaticaAbstrataNo getRaiz() {
-		return raiz;
-	}
-
-	public void setRaiz(ArvoreSintaticaAbstrataNo raiz) {
-		this.raiz = raiz;
-	}
-
+public class ArvoreSinstaticaAbstrataNoHelper {
+	
+	private static ArvoreSinstaticaAbstrataNoHelper instancia = new ArvoreSinstaticaAbstrataNoHelper(); 
+	private static String printBuffer;
+	
 	private void printNosFilhos(ArvoreSintaticaAbstrataNo no, Integer identacao) {
 
 		printNo(no, identacao);
@@ -40,16 +32,14 @@ public class ArvoreSintaticaAbstrata {
 			}
 		}
 
-	}
-
-	public String print() {
-		this.printBuffer = "";
-		if (this.raiz != null) {
-			this.printNosFilhos(this.raiz, 0);
+	}	
+	
+	public static String printNosFilhos(ArvoreSintaticaAbstrataNo raiz) {
+		printBuffer = "";
+		if (raiz != null) {
+			instancia.printNosFilhos(raiz, 0);
 		} 
-
-		return this.printBuffer;
-
+		return printBuffer;		
 	}
-
+	
 }

@@ -1,7 +1,9 @@
 package utils;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,12 +14,11 @@ import java.io.Writer;
 public class Utils {
 
 	public static String getCurrentPath(Object from){
-		return System.getProperty("user.dir") + "\\";
+		return System.getProperty("user.dir");
 		//return "/" + from.getClass().getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
 	}
 	
-	public static String loadFromFile(String filePath)
-	 				throws java.io.IOException {
+	public static String loadFromFile(String filePath) throws java.io.IOException {
 		
 	        StringBuffer fileData = new StringBuffer(1000);
 	        BufferedReader reader = new BufferedReader(
@@ -68,5 +69,16 @@ public class Utils {
         }
         
         return counter;
+    }
+    
+	public static void saveToFile(String content, String filename) {
+    	try {
+    		filename = (Utils.getCurrentPath(System.out) + "/output/" +  filename.trim());
+    		BufferedWriter out = new BufferedWriter(new FileWriter(filename));
+    		out.write(content);
+    		out.close();
+    	} catch (IOException e) {
+    		
+    	}
     }
 }

@@ -1,15 +1,14 @@
 package analise.exceptions;
 
-import java.util.LinkedList;
+import coretypes.StringList;
 
 public class ProducaoSintaticaLoggedException extends Exception {
 
 	private static final long serialVersionUID = 1L;
-	private static LinkedList<String> log = new LinkedList<String>();
+	private static StringList log = new StringList();
 	
 	public ProducaoSintaticaLoggedException(String message) {
 		super(message);
-		System.out.println(message);
 		ProducaoSintaticaLoggedException.log.add(message); 
 	}
 	
@@ -17,7 +16,7 @@ public class ProducaoSintaticaLoggedException extends Exception {
 		return ProducaoSintaticaLoggedException.log.getLast();
 	}
 	
-	public static LinkedList<String> getAllExceptions() {
+	public static StringList getAllExceptions() {
 		return ProducaoSintaticaLoggedException.log;
 	}	
 

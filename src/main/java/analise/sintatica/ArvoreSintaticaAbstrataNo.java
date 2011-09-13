@@ -81,7 +81,7 @@ public class ArvoreSintaticaAbstrataNo {
 	}
 	
 	public String print() {
-		return "";
+		return ArvoreSinstaticaAbstrataNoHelper.printNosFilhos(this);
 	}
 
 }

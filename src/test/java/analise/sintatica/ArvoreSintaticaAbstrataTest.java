@@ -15,10 +15,7 @@ public class ArvoreSintaticaAbstrataTest extends AnaliseSintaticaTest {
 		raiz.adicionaNoFilho("identificador", new Token(GCLTokenTypes.IDENTIFIER, "simplesPacas"));
 		raiz.adicionaNoFilho(".", new Token(GCLTokenTypes.SYMBOL, "."));
 		
-		ArvoreSintaticaAbstrata arv = new ArvoreSintaticaAbstrata();
-		arv.setRaiz(raiz);
-
-		String printGerado = arv.print();
+		String printGerado = raiz.print();
 		String printTemplate = this.loadResourceNamed("asa_simplesPacas.txt");
 		boolean assertTemplateIgual;
 		assertTemplateIgual = printGerado.trim().equalsIgnoreCase(printTemplate.trim());
@@ -37,10 +34,7 @@ public class ArvoreSintaticaAbstrataTest extends AnaliseSintaticaTest {
 		block.adicionaNoFilho("end", new Token(GCLTokenTypes.KEYWORD, "end"));
 		raiz.adicionaNoFilho(".", new Token(GCLTokenTypes.SYMBOL, "."));
 
-		ArvoreSintaticaAbstrata arv = new ArvoreSintaticaAbstrata();
-		arv.setRaiz(raiz);
-
-		String printGerado = arv.print();
+		String printGerado = raiz.print();
 		String printTemplate = this.loadResourceNamed("asa_simples.txt");
 		boolean assertTemplateIgual;
 		
@@ -57,10 +51,8 @@ public class ArvoreSintaticaAbstrataTest extends AnaliseSintaticaTest {
 
 		try {
 			ArvoreSintaticaAbstrataNo raiz = this.analisador.gerarArvore();
-			ArvoreSintaticaAbstrata arv = new ArvoreSintaticaAbstrata();
-			arv.setRaiz(raiz);
 
-			String printGerado = arv.print();
+			String printGerado = raiz.print();
 			String printTemplate = this.loadResourceNamed("asa_simples.txt");
 			boolean assertTemplateIgual;
 			assertTemplateIgual = printGerado.trim().equalsIgnoreCase(
@@ -82,10 +74,8 @@ public class ArvoreSintaticaAbstrataTest extends AnaliseSintaticaTest {
 
 		try {
 			ArvoreSintaticaAbstrataNo raiz = this.analisador.gerarArvore();
-			ArvoreSintaticaAbstrata arv = new ArvoreSintaticaAbstrata();
-			arv.setRaiz(raiz);
 
-			String printGerado = arv.print();
+			String printGerado = raiz.print();
 			String printTemplate = this.loadResourceNamed("asa_simplesPacas.txt");
 			
 			boolean assertTemplateIgual;
