@@ -9,8 +9,6 @@ import coretypes.gcl.GCLTokenTypes;
 
 public class TokenList implements Clonavel {
 
-	private static final long serialVersionUID = 1L;
-
 	private GCLTokenTypes tokenType;
 	private int indice = -1;
 	private LinkedList<Token> lista; 
