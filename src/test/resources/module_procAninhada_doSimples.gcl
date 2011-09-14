@@ -1,0 +1,14 @@
+module atribuicaoGuarded
+
+	proc search ()
+	  integer i;
+	begin
+	  i := 0;
+	  do i < 10 ->
+	    i := i + 1;
+	  od;
+	end;
+	
+begin
+	skip;
+end. 

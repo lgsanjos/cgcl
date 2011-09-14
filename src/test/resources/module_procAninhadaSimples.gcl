@@ -1,6 +1,6 @@
 module atribuicaoGuarded
 
-	proc procAninhada()
+	proc search ()
 	begin
 	  skip;
 	  skip;

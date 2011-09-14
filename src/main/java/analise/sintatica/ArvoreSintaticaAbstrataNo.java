@@ -80,43 +80,10 @@ public class ArvoreSintaticaAbstrataNo {
 	public int quatidadeNosFilhos() {
 		return (this.listaDeNosFilhos.size());
 	}
-
-	private void printNosFilhos(ArvoreSintaticaAbstrataNo no, Integer identacao) {
-
-		printNo(no, identacao);
-		for (int i = 0; i < no.quatidadeNosFilhos(); i++) {
-			printNosFilhos(no.getListaDeNos().get(i), identacao + 2);
-		}
-	}
-
-	private void printNo(ArvoreSintaticaAbstrataNo no, Integer identacao) {
-		String espaco = "";
-		for (int i = 0; i < identacao; i++) {
-			espaco = espaco + " ";
-		}
-
-		if (no.possueNosFilhos()) {
-
-			printBuffer = printBuffer + espaco + no.getNome();
-			printBuffer = (printBuffer + "\n");
-		} else {
-			if (no.getToken() != null) {
-				printBuffer = (printBuffer + espaco
-						+ no.getToken().getTokenType() + "." + no.getToken()
-						.getValue());
-				printBuffer = (printBuffer + "\n");
-
-			}
-		}
-
-	}
-
+	
 	public String print() {
-		this.printBuffer = "";
-
-		this.printNosFilhos(this, 0);
-
-		return this.printBuffer;
+		return ArvoreSinstaticaAbstrataNoHelper.printNosFilhos(this);
 	}
+
 
 }

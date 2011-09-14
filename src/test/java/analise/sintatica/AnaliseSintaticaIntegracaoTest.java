@@ -133,6 +133,71 @@ public class AnaliseSintaticaIntegracaoTest extends AnaliseSintaticaTest {
 		} catch (ProducaoSintaticaException ep) {
 			fail(ep.getMessage());
 		} 
-	}		
+	}
 	
+	public void testValidaArquivo_doComplexo2() {
+		String source = this.loadResourceNamed("module_doComplexo2.gcl");
+		
+		this.analisador = this.buildAnaliseSintatica(source);
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
+	}
+
+	public void testValidaArquivo_procAninhadaSimples() {
+		String source = this.loadResourceNamed("module_procAninhadaSimples.gcl");
+		
+		this.analisador = this.buildAnaliseSintatica(source);
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
+	}	
+	
+	public void testValidaArquivo_procAninhadaComplexa() {
+		String source = this.loadResourceNamed("module_procAninhadaComplexo.gcl");
+		
+		this.analisador = this.buildAnaliseSintatica(source);
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
+	}
+	
+	public void testValidaArquivo_procAninhada_doSimples() {
+		String source = this.loadResourceNamed("module_procAninhada_doSimples.gcl");
+		
+		this.analisador = this.buildAnaliseSintatica(source);
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
+	}
+	
+	public void testValidaArquivo_procAninhada_doComplexa() {
+		String source = this.loadResourceNamed("module_procAninhada_doComplexa.gcl");
+		
+		this.analisador = this.buildAnaliseSintatica(source);
+		try {
+			assertTrue(this.analisador.valida());
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		} 
+	}	
+
 }
