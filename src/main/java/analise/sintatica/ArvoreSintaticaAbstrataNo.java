@@ -13,7 +13,7 @@ public class ArvoreSintaticaAbstrataNo {
 
 	public ArvoreSintaticaAbstrataNo() {
 		this.listaDeNosFilhos = new LinkedList<ArvoreSintaticaAbstrataNo>();
-	}
+	} 
 
 	public ArvoreSintaticaAbstrataNo(String tipoDoNo) {
 		this();
