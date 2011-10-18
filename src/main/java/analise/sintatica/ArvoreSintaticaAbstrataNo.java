@@ -1,6 +1,7 @@
 package analise.sintatica;
 
 import java.util.LinkedList;
+
 import coretypes.Token;
 
 public class ArvoreSintaticaAbstrataNo {
@@ -9,7 +10,6 @@ public class ArvoreSintaticaAbstrataNo {
 	private Token token;
 	private ArvoreSintaticaAbstrataNo noPai;
 	private LinkedList<ArvoreSintaticaAbstrataNo> listaDeNosFilhos;
-	private String printBuffer;
 
 	public ArvoreSintaticaAbstrataNo() {
 		this.listaDeNosFilhos = new LinkedList<ArvoreSintaticaAbstrataNo>();
