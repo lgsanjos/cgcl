@@ -1,11 +1,11 @@
 package analise.lexica;
 
+import junit.framework.TestCase;
 import analise.exceptions.EndOfBufferException;
 import analise.exceptions.InvalidTokenException;
 import analise.lexica.AnaliseLexica;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
-import junit.framework.TestCase;
 
 public class AnaliseLexicaTest extends TestCase {
 

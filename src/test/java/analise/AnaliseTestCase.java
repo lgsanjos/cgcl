@@ -1,18 +1,17 @@
-package analise.sintatica;
-
+package analise;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import junit.framework.TestCase;
+import utils.Utils;
+import analise.lexica.AnaliseLexica;
+import analise.semantica.AnalisadorSemantico;
+import analise.sintatica.AnaliseSintatica;
+import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import coretypes.gcl.GCLTokenTypes;
 
-
-import utils.Utils;
-import analise.sintatica.AnaliseSintatica;
-import analise.lexica.AnaliseLexica;
-import junit.framework.TestCase;
-
-public class AnaliseSintaticaTest extends TestCase {
+public class AnaliseTestCase extends TestCase {
 	
 	protected	AnaliseSintatica analisador;
     
@@ -46,6 +45,17 @@ public class AnaliseSintaticaTest extends TestCase {
     
     protected AnaliseSintatica buildAnaliseSintatica(String codigoFonte) {
     	return new AnaliseSintatica( this.buildAnaliseLexica(codigoFonte));
-    }    
+    }
+    
+    protected AnalisadorSemantico buildAnalisadorSemantico(String codigoFonte) {
+    	ArvoreSintaticaAbstrataNo no;
+    	try {
+			no = this.buildAnaliseSintatica(codigoFonte).gerarArvore();
+			return new AnalisadorSemantico(no);
+		} catch (Exception e) {
+			return null;
+		}
+    	
+    }
 
 }

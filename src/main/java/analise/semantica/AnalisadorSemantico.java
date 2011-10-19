@@ -6,29 +6,46 @@ import analise.exceptions.AnaliseSemanticaException;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import analise.semantica.validacoes.*;
 
-public class AnaliseSemantica {
+public class AnalisadorSemantico {
 	
+	private final ArvoreSintaticaAbstrataNo no;
 	private StringList ListaDeErros;
 	private LinkedList<AnaliseSemanticaAcaoAbstrata> acoes;
 	
-	public AnaliseSemantica() {
+	public AnalisadorSemantico(ArvoreSintaticaAbstrataNo no) {
 		this.ListaDeErros = new StringList();
+
+		this.acoes = new LinkedList<AnaliseSemanticaAcaoAbstrata>();
+		this.acoes.add(new AnaliseSemanticaAdicionaTabelaDeSimbolos());
+		
+		this.no = no;
+	}
+	
+	public AnalisadorSemantico() {
+		this(null);
+	}
+	
+	
+	public void analisaNo() {
+		if (this.no != null)
+			this.analisaNo(this.no);
 	}
 	
 	private void analisaNo(ArvoreSintaticaAbstrataNo no) {
-		
-		for (int i = 0; i <= this.acoes.size(); i++) {
+		for (AnaliseSemanticaAcaoAbstrata acao : this.acoes) {
 			try {
-				this.acoes.get(i).executa(no);
+				acao.executa(no);
 			} catch (AnaliseSemanticaException e) {
 				this.ListaDeErros.add(e.getMessage());
 			}
 		}
+		
+		for (ArvoreSintaticaAbstrataNo noFilho : no.getListaDeNos()) {
+			this.analisaNo(noFilho);
+		}		
 	}
 	
 	private void navegaNaArvore(ArvoreSintaticaAbstrataNo raiz) {
-
-		ArvoreSintaticaAbstrataNo no = raiz;
 		this.analisaNo(no);
 		
 		for (int i = 0; i <= no.quatidadeNosFilhos(); i++ ) {
@@ -37,7 +54,6 @@ public class AnaliseSemantica {
 	}
 		
 	public boolean analisarASA(ArvoreSintaticaAbstrataNo raiz) {
-		
 		this.ListaDeErros.clear();
 		this.navegaNaArvore(raiz);
 		

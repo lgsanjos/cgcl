@@ -1,9 +1,10 @@
 package analise.sintatica;
 
+import analise.AnaliseTestCase;
 import analise.exceptions.InvalidTokenException;
 import analise.exceptions.ProducaoSintaticaException;
 
-public class AnaliseSintaticaIntegracaoTest extends AnaliseSintaticaTest {
+public class AnaliseSintaticaIntegracaoTest extends AnaliseTestCase {
 	
 	public void testValidaArquivo_Simples() {
 		String source = this.loadResourceNamed("simples.gcl");

@@ -1,11 +1,12 @@
 package analise.sintatica;
 
+import analise.AnaliseTestCase;
 import analise.exceptions.InvalidTokenException;
 import analise.exceptions.ProducaoSintaticaException;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
 
-public class ArvoreSintaticaAbstrataTest extends AnaliseSintaticaTest {
+public class ArvoreSintaticaAbstrataTest extends AnaliseTestCase {
 
 	public void testPrintSimplesPacas() {
 

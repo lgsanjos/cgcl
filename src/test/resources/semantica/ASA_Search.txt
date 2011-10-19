@@ -137,6 +137,7 @@ module
                   variableList
                     IDENTIFIER.result
               SYMBOL.)
+          block
             definitionPart
               definition
                 variableDef
