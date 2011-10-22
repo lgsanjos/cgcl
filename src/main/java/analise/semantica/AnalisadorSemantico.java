@@ -1,10 +1,11 @@
 package analise.semantica;
 
 import java.util.LinkedList;
-import coretypes.StringList;
+
 import analise.exceptions.AnaliseSemanticaException;
-import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import analise.semantica.validacoes.*;
+import analise.sintatica.ArvoreSintaticaAbstrataNo;
+import coretypes.StringList;
 
 public class AnalisadorSemantico {
 	
@@ -13,10 +14,12 @@ public class AnalisadorSemantico {
 	private LinkedList<AnaliseSemanticaAcaoAbstrata> acoes;
 	
 	public AnalisadorSemantico(ArvoreSintaticaAbstrataNo no) {
+		
 		this.ListaDeErros = new StringList();
 
 		this.acoes = new LinkedList<AnaliseSemanticaAcaoAbstrata>();
-		this.acoes.add(new AnaliseSemanticaAdicionaTabelaDeSimbolos());
+		this.acoes.add(new AnaliseSemanticaControlaEscopo());
+		this.acoes.add(new AnaliseSemanticaAddConstants());
 		
 		this.no = no;
 	}
@@ -25,13 +28,12 @@ public class AnalisadorSemantico {
 		this(null);
 	}
 	
-	
-	public void analisaNo() {
-		if (this.no != null)
-			this.analisaNo(this.no);
+	public StringList getListaDeErros() {
+		return this.ListaDeErros;
 	}
-	
-	private void analisaNo(ArvoreSintaticaAbstrataNo no) {
+		
+	private void analisarArvoreDadoNo(ArvoreSintaticaAbstrataNo no) {
+
 		for (AnaliseSemanticaAcaoAbstrata acao : this.acoes) {
 			try {
 				acao.executa(no);
@@ -41,23 +43,22 @@ public class AnalisadorSemantico {
 		}
 		
 		for (ArvoreSintaticaAbstrataNo noFilho : no.getListaDeNos()) {
-			this.analisaNo(noFilho);
+			this.analisarArvoreDadoNo(noFilho);
 		}		
 	}
-	
-	private void navegaNaArvore(ArvoreSintaticaAbstrataNo raiz) {
-		this.analisaNo(no);
 		
-		for (int i = 0; i <= no.quatidadeNosFilhos(); i++ ) {
-			this.navegaNaArvore(no.getListaDeNos().get(i));
-		}
-	}
-		
-	public boolean analisarASA(ArvoreSintaticaAbstrataNo raiz) {
+	public boolean analisarArvoreApartirDaRaiz(ArvoreSintaticaAbstrataNo raiz) {
 		this.ListaDeErros.clear();
-		this.navegaNaArvore(raiz);
+		this.analisarArvoreDadoNo(raiz);
 		
 		return this.ListaDeErros.isEmpty();
 	}
+	
+	public boolean analisar() {
+		if (this.no != null)
+			return this.analisarArvoreApartirDaRaiz(this.no);
+		
+		return false;
+	}	
 
 }

@@ -1,13 +1,9 @@
 package analise.lexica;
 
-
 import java.util.LinkedList;
-
-
-import analise.TabelaDeSimbolos;
 import analise.exceptions.EndOfBufferException;
 import analise.exceptions.InvalidTokenException;
-import coretypes.*;
+import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
 
 public class AnaliseLexica {
@@ -23,11 +19,6 @@ public class AnaliseLexica {
 
 	}
 
-	private void adicionaTabelaDeSimbolos(Token token) {
-		TabelaDeSimbolos.getInstance().add(token);
-	}
-
-	
 	private Token getNextValidToken() throws InvalidTokenException, EndOfBufferException {
 		String buffer = "";
 		String lastChar;
@@ -55,7 +46,6 @@ public class AnaliseLexica {
 		}
 			
 		token = this.rules.buildToken(buffer, this.parser.getLastPosicao());
-		this.adicionaTabelaDeSimbolos(token);
 		return token;
 	}
 
