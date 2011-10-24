@@ -19,11 +19,15 @@ public class AnalisadorSemantico {
 
 		this.acoes = new LinkedList<AnaliseSemanticaAcaoAbstrata>();
 		this.acoes.add(new AnaliseSemanticaControlaEscopo());
+		this.acoes.add(new AnaliseSemanticaAddProcedures());
 		this.acoes.add(new AnaliseSemanticaAddConstants());
-		
+		this.acoes.add(new AnaliseSemanticaAddVariaveis());
+		this.acoes.add(new AnaliseSemanticaVerificaVariaveis());
+		this.acoes.add(new AnaliseSemanticaVerificaProcedures());
+
 		this.no = no;
 	}
-	
+
 	public AnalisadorSemantico() {
 		this(null);
 	}
@@ -41,10 +45,10 @@ public class AnalisadorSemantico {
 				this.ListaDeErros.add(e.getMessage());
 			}
 		}
-		
+
 		for (ArvoreSintaticaAbstrataNo noFilho : no.getListaDeNos()) {
 			this.analisarArvoreDadoNo(noFilho);
-		}		
+		}
 	}
 		
 	public boolean analisarArvoreApartirDaRaiz(ArvoreSintaticaAbstrataNo raiz) {

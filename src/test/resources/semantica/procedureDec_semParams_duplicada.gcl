@@ -1,0 +1,15 @@
+module search  
+private
+	integer minhaVariavel;
+	
+	proc minhaProcedure()
+	begin
+	end;
+	
+	proc minhaProcedure()
+	begin
+	end;
+	
+begin
+	-- test search  
+end.

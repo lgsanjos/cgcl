@@ -10,6 +10,7 @@ public class AnaliseSemanticaControlaEscopo extends
 	@Override
 	public void executa(ArvoreSintaticaAbstrataNo no) throws AnaliseSemanticaException {
 
+		// procedureDef
 		if (no.getNome().equalsIgnoreCase("block")) {
 			TabelaDeSimbolos.getInstance().addMarcadorDeEscopo();
 		}

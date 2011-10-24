@@ -10,8 +10,15 @@ public class AnalisadorSemanticoTest extends AnaliseTestCase {
 		analisador.analisar();
 		
 		assertEquals(0, analisador.getListaDeErros().size());
-		
 	}
+	
+	public void testFalhaComConstantNameDuplicado() {
+		String codigoFonte = this.loadResourceNamed("semantica/constantName_duplicado.gcl");
+		AnalisadorSemantico analisador = this.buildAnalisadorSemantico(codigoFonte);
+		analisador.analisar();
+		
+		assertEquals(1, analisador.getListaDeErros().size());
+	}	
 	
 	public void testDeclararVariavelInteger() {
 		String codigoFonte = this.loadResourceNamed("semantica/variableDec_integer.gcl");
@@ -35,8 +42,70 @@ public class AnalisadorSemanticoTest extends AnaliseTestCase {
 		analisador.analisar();
 		
 		assertEquals(0, analisador.getListaDeErros().size());
+	}
+	
+	public void testDeclararProcedureSemParametros() {
+		String codigoFonte = this.loadResourceNamed("semantica/procedureDec_semParams.gcl");
+		AnalisadorSemantico analisador = this.buildAnalisadorSemantico(codigoFonte);
+		analisador.analisar();
+		
+		assertEquals(0, analisador.getListaDeErros().size());
+	}
+	
+	public void testFalhaAoDeclararProcedureSemParametrosDuplicada() {
+		String codigoFonte = this.loadResourceNamed("semantica/procedureDec_semParams_duplicada.gcl");
+		AnalisadorSemantico analisador = this.buildAnalisadorSemantico(codigoFonte);
+		analisador.analisar();
+		
+		assertEquals(1, analisador.getListaDeErros().size());
 	}	
 	
+	public void testDeclararProcedureComParametros() {
+		String codigoFonte = this.loadResourceNamed("semantica/procedureDec_comParams.gcl");
+		AnalisadorSemantico analisador = this.buildAnalisadorSemantico(codigoFonte);
+		analisador.analisar();
+		
+		assertEquals(0, analisador.getListaDeErros().size());
+	}
 	
+	public void testDeclararProcedureComParametrosEVariaveis() {
+		String codigoFonte = this.loadResourceNamed("semantica/procedureDec_comParams_comVariaveis.gcl");
+		AnalisadorSemantico analisador = this.buildAnalisadorSemantico(codigoFonte);
+		analisador.analisar();
+		
+		assertEquals(0, analisador.getListaDeErros().size());
+	}	
+	
+	public void testProcComVariavelDeMesmoNomeEscopoAcima() {
+		String codigoFonte = this.loadResourceNamed("semantica/procComVariavelDeMesmoNomeEscopoAcima.gcl");
+		AnalisadorSemantico analisador = this.buildAnalisadorSemantico(codigoFonte);
+		analisador.analisar();
+		
+		assertEquals(0, analisador.getListaDeErros().size());
+	}	
+
+	public void testFalhaAssignmentDeVariavelNaoDeclarada() {
+		String codigoFonte = this.loadResourceNamed("semantica/assignmentVariavelNaoDeclarada.gcl");
+		AnalisadorSemantico analisador = this.buildAnalisadorSemantico(codigoFonte);
+		analisador.analisar();
+		
+		assertEquals(1, analisador.getListaDeErros().size());
+	}		
+	
+	public void testFalhaChamadaDeProcedureNaoDeclarada() {
+		String codigoFonte = this.loadResourceNamed("semantica/callProcNaoDeclarada.gcl");
+		AnalisadorSemantico analisador = this.buildAnalisadorSemantico(codigoFonte);
+		analisador.analisar();
+		
+		assertEquals(1, analisador.getListaDeErros().size());
+	}	
+	
+	public void testFalhaChamadaDeProcedureComParametrosErrados() {
+		String codigoFonte = this.loadResourceNamed("semantica/callProcedureComParamsErrados.gcl");
+		AnalisadorSemantico analisador = this.buildAnalisadorSemantico(codigoFonte);
+		analisador.analisar();
+		
+		assertEquals(1, analisador.getListaDeErros().size());
+	}	
 
 }
