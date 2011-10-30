@@ -69,7 +69,7 @@ public class ArvoreSintaticaAbstrataTest extends AnaliseTestCase {
 	}
 
 	public void testPrintSimplesPacasIntegracao() {
-		String source = this.loadResourceNamed("simples_pacas.gcl");
+		String source = this.loadResourceNamed("semantica/simples_pacas.gcl");
 
 		this.analisador = this.buildAnaliseSintatica(source);
 
@@ -108,6 +108,25 @@ public class ArvoreSintaticaAbstrataTest extends AnaliseTestCase {
 		
 		assertTemplateIgual = printGerado.trim().equalsIgnoreCase(printTemplate.trim());
 		assertTrue(assertTemplateIgual);
+
+	}
+	
+	public void testPrintOperacaoMatematicaIntegracao() {
+		String source = this.loadResourceNamed("semantica/operacaoMatematica.gcl");
+
+		this.analisador = this.buildAnaliseSintatica(source);
+
+		try {
+			ArvoreSintaticaAbstrataNo raiz = this.analisador.gerarArvore();
+
+			String printGerado = raiz.print();
+			System.out.println(printGerado);
+			
+		} catch (InvalidTokenException et) {
+			fail(et.getMessage());
+		} catch (ProducaoSintaticaException ep) {
+			fail(ep.getMessage());
+		}
 
 	}
 
