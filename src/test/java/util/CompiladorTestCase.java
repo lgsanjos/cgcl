@@ -1,4 +1,4 @@
-package analise;
+package util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,10 +11,9 @@ import analise.sintatica.AnaliseSintatica;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import coretypes.gcl.GCLTokenTypes;
 
-public class AnaliseTestCase extends TestCase {
+public class CompiladorTestCase extends TestCase {
 	
-	protected	AnaliseSintatica analisador;
-    
+	protected AnaliseSintatica analisador;
     
     @Override
     protected void setUp() throws Exception {

@@ -1,49 +1,66 @@
 package codigoIntermediario.construcoesIntermediarias;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import codigoIntermediario.CodigoIntermediario;
+
+import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import coretypes.Token;
 import coretypes.gcl.GCLTokenTypes;
-import analise.sintatica.ArvoreSintaticaAbstrataNo;
 
 public class ConstrucaoIntermediariaAtribuicao extends ConstrucaoIntermediaria {
 
 	private static ConstrucaoIntermediariaAtribuicao instancia;
 	private ConstrucaoIntermediariaAtribuicao() {
 		super();
-		instancia = new ConstrucaoIntermediariaAtribuicao(); 
 	}
 	
 	public static ConstrucaoIntermediariaAtribuicao getInstancia() {
+		if (instancia == null)
+			instancia = new ConstrucaoIntermediariaAtribuicao();
+		
 		return instancia;
 	}
 	
-	private void extraiVariaveisDeVariableAccessList(ArvoreSintaticaAbstrataNo variableAccessList) {
+	private List<String> extraiVariaveisDeVariableAccessList(ArvoreSintaticaAbstrataNo variableAccessList) {
+		
+		List<String> variaveisTemp = new LinkedList<String>();
 		
 		for (ArvoreSintaticaAbstrataNo no : variableAccessList.getListaDeNos()) {
 			if (no.getNome().equalsIgnoreCase("variableAccess")) {
 				Token id = no.getListaDeNos().getFirst().getToken();
-				if (id != null && id.getTokenType() == GCLTokenTypes.IDENTIFIER) {
-					id.getValue();
-					// TODO: Verificar como estruturar as variaveis para retorno
-				}
+				if (id != null && id.getTokenType() == GCLTokenTypes.IDENTIFIER)
+					variaveisTemp.add(id.getValue());					
 			}
 		}
+		return variaveisTemp;
 	}
 	
-	private void processaExpressionList(ArvoreSintaticaAbstrataNo expressionList) {
+	private List<String> processaExpressionList(ArvoreSintaticaAbstrataNo expressionList) {
+		
+		List<String> variaveisTemporarias = new LinkedList<String>();
 		
 		for (ArvoreSintaticaAbstrataNo expression : expressionList.getListaDeNos()) {
-			
-			if (expression.getNome().equalsIgnoreCase("expression")) {
-				ConstrucaoIntermediariaExpression.getInstancia().traduz(expression);
-			}
-			
+			if (expression.getNome().equalsIgnoreCase("expression")) 
+				variaveisTemporarias.add(ConstrucaoIntermediariaExpression.getInstancia().traduz(expression));
 		}
+		
+		return variaveisTemporarias;
 	}	
 	
 	@Override
-	public void traduz(ArvoreSintaticaAbstrataNo no) {
-		this.extraiVariaveisDeVariableAccessList(no.getListaDeNos().getFirst());
-		this.processaExpressionList(no.getListaDeNos().getLast());
+	public String traduz(ArvoreSintaticaAbstrataNo no) {
+		List<String> listaVariaveis, listaExpressoes;
+
+		listaVariaveis = this.extraiVariaveisDeVariableAccessList(no.getListaDeNos().getFirst());
+		listaExpressoes = this.processaExpressionList(no.getListaDeNos().getLast());
+		
+		for (int i = 0; i < listaVariaveis.size() && i < listaExpressoes.size(); i++) {
+			CodigoIntermediario.add(":=", listaExpressoes.get(i), "", listaVariaveis.get(i));
+		}
+		
+		return "";
 	}	
 	
 	

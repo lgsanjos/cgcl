@@ -10,10 +10,12 @@ public class ConstrucaoIntermediariaExpression extends ConstrucaoIntermediaria {
 	
 	private ConstrucaoIntermediariaExpression() {
 		super();
-		instancia = new ConstrucaoIntermediariaExpression(); 
 	}
 	
 	public static ConstrucaoIntermediariaExpression getInstancia() {
+		if (instancia == null)
+			instancia = new ConstrucaoIntermediariaExpression();
+		
 		return instancia;
 	}
 	
@@ -63,7 +65,7 @@ public class ConstrucaoIntermediariaExpression extends ConstrucaoIntermediaria {
 	private String extraiOperadorDeAddingOperator(ArvoreSintaticaAbstrataNo addingOperator) {
 		
 		if (! addingOperator.getNome().equalsIgnoreCase("addingOperator"))
-			return "";
+			return ""; //TODO: throw exception
 		
 		return addingOperator.getListaDeNos().getFirst().getToken().getValue();
 	}
@@ -81,35 +83,80 @@ public class ConstrucaoIntermediariaExpression extends ConstrucaoIntermediaria {
 		
 	}
 	
-	private void processaRelationalOperator(ArvoreSintaticaAbstrataNo relationalOperator) {
+	private String processaRelationalOperator(ArvoreSintaticaAbstrataNo relationalOperator) {
 		// TODO: verificar o q deve ser feito com esse operador
+		return "";
 	}
 	
-	private void processaRelationalExpression(ArvoreSintaticaAbstrataNo relationalExpression) {
+	private String processaRelationalExpression(ArvoreSintaticaAbstrataNo relationalExpression) {
 		
-		for (ArvoreSintaticaAbstrataNo no : relationalExpression.getListaDeNos()) {
-			if (no.getNome().equalsIgnoreCase("simpleExpression"))
-				this.processaSimpleExpression(no);
+		String exp1 = "";
+		String exp2 = "";
+		String operador = "";
+		ArvoreSintaticaAbstrataNo no;
+		
+		no = relationalExpression.getListaDeNos().get(0);
+		if (no.getNome().equalsIgnoreCase("simpleExpression"))
+			exp1 = this.processaSimpleExpression(no);
+
+		if (relationalExpression.getListaDeNos().size() >= 3) {
 			
+			no = relationalExpression.getListaDeNos().get(1);	
 			if (no.getNome().equalsIgnoreCase("relationalOperator"))
-				this.processaRelationalOperator(no);			
+				operador = this.processaRelationalOperator(no);
+		
+			no = relationalExpression.getListaDeNos().get(2);
+			if (no.getNome().equalsIgnoreCase("simpleExpression"))
+				exp2 = this.processaSimpleExpression(no);
+			
+			return CodigoIntermediario.add(operador, exp1, exp2);
+		
 		}
+		
+		return exp1;
+		
 	}
 	
 	@Override
-	public void traduz(ArvoreSintaticaAbstrataNo expression) {
-		
-		for (ArvoreSintaticaAbstrataNo no : expression.getListaDeNos()) {
-			
-			if (no.getNome().equalsIgnoreCase("relationalExpression")) {
-				this.processaRelationalExpression(no);
-			}
-			
-			if (no.getNome().equalsIgnoreCase("booleanOperator")) {
-				//
-			}					
-		}
+	public String traduz(ArvoreSintaticaAbstrataNo expression) {
 
+		int i = 0;
+		ArvoreSintaticaAbstrataNo no;
+		String exp1 = "";
+		String exp2 = "";
+		String operador = "";
+		String ultimoTemporario = "";
+
+		no = expression.getListaDeNos().get(i);
+		if (no != null && no.getNome().equalsIgnoreCase("relationalExpression"))
+			exp1 = this.processaRelationalExpression(no);
+		
+		do {
+			i++;
+			if (expression.getListaDeNos().size() <= i) break;
+				
+			no = expression.getListaDeNos().get(i);
+			if (no != null && no.getNome().equalsIgnoreCase("booleanOperator"))
+				operador = this.processaRelationalOperator(no);
+			
+			i++;
+			if (expression.getListaDeNos().size() <= i) break;
+			no = expression.getListaDeNos().get(i);
+			if (no != null && no.getNome().equalsIgnoreCase("relationalExpression"))
+				exp2 = this.processaRelationalExpression(no);			
+			
+			ultimoTemporario = CodigoIntermediario.add(operador, exp1, exp2);
+			exp1 = ultimoTemporario;
+			exp2 = "";
+			operador = "";			
+			
+		} while ( i < expression.getListaDeNos().size());
+		
+		if (! ultimoTemporario.isEmpty())
+			return ultimoTemporario;
+		
+		return exp1;
+		
 	}
 
 }

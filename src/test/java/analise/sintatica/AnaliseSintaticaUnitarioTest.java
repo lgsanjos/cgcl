@@ -1,11 +1,11 @@
 package analise.sintatica;
 
-import analise.AnaliseTestCase;
+import analise.CompiladorTestCase;
 import analise.exceptions.InvalidTokenException;
 import analise.exceptions.ProducaoSintaticaException;
 
 
-public class AnaliseSintaticaUnitarioTest extends AnaliseTestCase {
+public class AnaliseSintaticaUnitarioTest extends CompiladorTestCase {
 	
 	
     public void testaModuleBasico(){

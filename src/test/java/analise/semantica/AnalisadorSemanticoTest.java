@@ -1,8 +1,8 @@
 package analise.semantica;
 
-import analise.AnaliseTestCase;
+import analise.CompiladorTestCase;
 
-public class AnalisadorSemanticoTest extends AnaliseTestCase {
+public class AnalisadorSemanticoTest extends CompiladorTestCase {
 	
 	public void testAddTSConstantName() {
 		String codigoFonte = this.loadResourceNamed("semantica/constantName.gcl");
