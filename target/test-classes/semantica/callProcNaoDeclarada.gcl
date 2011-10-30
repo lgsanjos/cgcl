@@ -1,0 +1,10 @@
+module search  
+private
+	integer minhaVariavel;
+	proc minhaProcedure()
+	begin
+	end;
+	
+begin
+	essaProcedureNaoFoiDeclarada();  
+end.

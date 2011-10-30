@@ -1,0 +1,16 @@
+module doStatementComplexo
+begin
+	i:= 1;
+	m := size;
+	found := false;
+	do i <= m -> 
+		if B[i] = target -> 
+				found := true; 
+				where := i;
+				i := m + 1;
+		[]  B[i] # target -> 
+				i := i+1; 
+		fi; 
+	od; 
+	result := [found, where];
+end. 

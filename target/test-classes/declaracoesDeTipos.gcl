@@ -1,0 +1,17 @@
+module testandoDeclaracoesEValores
+private
+	integer varInteira;
+	real varReal;
+	Boolean varBoolean;
+	string varString;	 
+begin
+	varInteira := 123;
+	varInteira := -123;
+	varReal := 23434;
+	varReal := -23434;
+	varReal := 234,34;
+	varReal := -4,34;
+	varBoolean := true;
+	varBoolean := false;
+	varString := 'qualquer coisa'; 	
+end. 

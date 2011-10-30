@@ -1,0 +1,21 @@
+module ifStatementComplexo
+private
+  [boolean, integer] result;
+  String x;
+  integer target;
+  integer where, i;
+begin
+    result := [true, 2];
+	x := 'something';
+	if result.1 -> write x, ' can be found at ', result.2;  
+	[] ~result.1 -> write x, ' not found'; 
+	fi; 
+
+	if result.2 = 1 -> 
+			found := true; 
+			where := i;
+			i := m + 1;
+	[]  result.2 # target -> 
+			i := i+1; 
+	fi; 	
+end. 

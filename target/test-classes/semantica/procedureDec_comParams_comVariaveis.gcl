@@ -1,0 +1,12 @@
+module search  
+private
+	integer minhaVariavel;
+	
+	proc minhaProcedure(val integer numero; ref string texto)
+		real num;
+	begin
+	end;
+	
+begin
+	-- test search  
+end.

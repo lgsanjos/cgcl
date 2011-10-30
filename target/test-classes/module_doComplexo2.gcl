@@ -1,0 +1,9 @@
+module doComplexo2
+begin
+	do x#0 -> search(x,A, result); 
+		if result.1 -> write x, ' can be found at ', result.2;  
+		[] ~result.1 -> write x, ' not found'; 
+		fi; 
+		read x; 
+	od;
+end.	
