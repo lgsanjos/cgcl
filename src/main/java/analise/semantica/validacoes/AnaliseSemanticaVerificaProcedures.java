@@ -33,7 +33,7 @@ public class AnaliseSemanticaVerificaProcedures extends	AnaliseSemanticaAcaoAbst
 							contadorDeParametros ++;
 					}
 					
-					if (((SimboloFuncao) proc).getParametros().size() == contadorDeParametros)
+					if (((SimboloFuncao) proc).getParametros().size() != contadorDeParametros)
 						throw new AnaliseSemanticaException("Quantidade de parametros inválidos para o procedimento: " +  procIdentifier.getValue());	
 				}	
 			}
