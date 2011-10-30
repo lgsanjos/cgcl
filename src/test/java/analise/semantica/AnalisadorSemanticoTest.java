@@ -106,6 +106,7 @@ public class AnalisadorSemanticoTest extends AnaliseTestCase {
 		analisador.analisar();
 		
 		assertEquals(1, analisador.getListaDeErros().size());
+		assertEquals("Quantidade de parametros inválidos para o procedimento: minhaProcedure", analisador.getListaDeErros().getFirst());
 	}	
 
 }
