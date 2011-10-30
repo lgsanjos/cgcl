@@ -9,7 +9,7 @@ import coretypes.StringList;
 
 public class AnalisadorSemantico {
 	
-	private final ArvoreSintaticaAbstrataNo no;
+	private ArvoreSintaticaAbstrataNo no;
 	private StringList ListaDeErros;
 	private LinkedList<AnaliseSemanticaAcaoAbstrata> acoes;
 	
@@ -53,7 +53,8 @@ public class AnalisadorSemantico {
 		
 	public boolean analisarArvoreApartirDaRaiz(ArvoreSintaticaAbstrataNo raiz) {
 		this.ListaDeErros.clear();
-		this.analisarArvoreDadoNo(raiz);
+		this.no = raiz;
+		this.analisarArvoreDadoNo(this.no);
 		
 		return this.ListaDeErros.isEmpty();
 	}
@@ -63,6 +64,10 @@ public class AnalisadorSemantico {
 			return this.analisarArvoreApartirDaRaiz(this.no);
 		
 		return false;
-	}	
+	}
+	
+	public ArvoreSintaticaAbstrataNo getArvoreSintaticaAnotada() {
+		return this.no;
+	}
 
 }

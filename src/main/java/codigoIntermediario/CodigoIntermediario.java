@@ -15,6 +15,10 @@ public class CodigoIntermediario {
 		return instancia;
 	}
 	
+	public static LinkedList<ConstrucaoDeQuatroEnderecos> getCodigo() {
+		return getInstancia().pilha;
+	}
+	
 	public static String add(String operador, String elementoEsquerda, String elementoDireita) {
 		String resultado = VariaveisTemporarias.geraVariavelTemporaria();
 		CodigoIntermediario.add(operador, elementoEsquerda, elementoDireita, resultado);
@@ -33,5 +37,10 @@ public class CodigoIntermediario {
 	public static void add(ConstrucaoDeQuatroEnderecos linha) {
 		instancia.pilha.add(linha);
 	}
+	
+	public static void limpar() {
+		instancia.pilha.clear();
+	}
+	
 
 }

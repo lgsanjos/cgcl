@@ -5,7 +5,9 @@ import codigoIntermediario.construcoesIntermediarias.ConstrucaoIntermediariaAtri
 
 public class GeradorDeCodigoIntermediario {
 	
-	public GeradorDeCodigoIntermediario() {
+	private static GeradorDeCodigoIntermediario instance; 
+	
+	private GeradorDeCodigoIntermediario() {
 		super();
 	}
 	
@@ -31,9 +33,12 @@ public class GeradorDeCodigoIntermediario {
 			this.percorreAvoreSintatica(no);
 	}
 
-	public String traduz(ArvoreSintaticaAbstrataNo noRaiz) {
-		this.percorreAvoreSintatica(noRaiz);
-		return "";
+	public static void traduz(ArvoreSintaticaAbstrataNo noRaiz) {
+		if (instance == null)
+			instance = new GeradorDeCodigoIntermediario();
+		
+		CodigoIntermediario.limpar();
+		instance.percorreAvoreSintatica(noRaiz);
 	}
 
 }
