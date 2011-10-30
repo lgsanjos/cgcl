@@ -15,9 +15,10 @@ public class CodigoIntermediario {
 		return instancia;
 	}
 	
-	public static void add(String operador, String elementoEsquerda, String elementoDireita) {
-		String resultado = "";
+	public static String add(String operador, String elementoEsquerda, String elementoDireita) {
+		String resultado = VariaveisTemporarias.geraVariavelTemporaria();
 		CodigoIntermediario.add(operador, elementoEsquerda, elementoDireita, resultado);
+		return resultado;
 	}
 	
 	public static void add(String operador, String elementoEsquerda, String elementoDireita, String resultado) {

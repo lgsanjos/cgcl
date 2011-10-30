@@ -37,29 +37,47 @@ public class ConstrucaoIntermediariaExpression extends ConstrucaoIntermediaria {
 	}
 	
 	private boolean factorEhMultiplicacao(ArvoreSintaticaAbstrataNo factor) {
-		return factor.getListaDeNos().size() > 1;
+		for (ArvoreSintaticaAbstrataNo no : factor.getListaDeNos()) 
+			if (no.getNome().equalsIgnoreCase("multiplyOperator"))
+				return true;
+				
+		return false;		
+	}
+	
+	private String processaMultiplicacao(ArvoreSintaticaAbstrataNo term) {
+		String term1 = this.processaFactor(term.getListaDeNos().get(0));
+		String operador = term.getListaDeNos().get(1).getListaDeNos().getFirst().getToken().getValue();
+		String term2 = this.processaFactor(term.getListaDeNos().get(2));
+		return CodigoIntermediario.add(operador, term1, term2);
 	}
 	
 	private String extraiValorDeUmTerm(ArvoreSintaticaAbstrataNo term) {
 		
 		if (factorEhMultiplicacao(term)) {
-			// gerar um temp
-			// processar a multiplicacao
-			return "";			
+			return this.processaMultiplicacao(term);
 		} else {
 			return this.processaFactor(term.getListaDeNos().getFirst());
 		}	
 	}
 	
+	private String extraiOperadorDeAddingOperator(ArvoreSintaticaAbstrataNo addingOperator) {
+		
+		if (! addingOperator.getNome().equalsIgnoreCase("addingOperator"))
+			return "";
+		
+		return addingOperator.getListaDeNos().getFirst().getToken().getValue();
+	}
+	
 	private String processaSimpleExpression(ArvoreSintaticaAbstrataNo simpleExpression) {
 		
-		if (simpleExpression.getListaDeNos().size() != 3) return;
+		if (simpleExpression.getListaDeNos().size() != 3)
+			return "";
 		
 		String term1 = this.extraiValorDeUmTerm(simpleExpression.getListaDeNos().get(0));
-		String operador = "+";
+		String operador = this.extraiOperadorDeAddingOperator(simpleExpression.getListaDeNos().get(1));
 		String term2 = this.extraiValorDeUmTerm(simpleExpression.getListaDeNos().get(2));
 		
-		CodigoIntermediario.add(operador, term1, term2, resultado);
+		return CodigoIntermediario.add(operador, term1, term2);
 		
 	}
 	

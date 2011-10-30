@@ -1,19 +1,12 @@
 package codigoIntermediario;
 
-import java.util.LinkedList;
-
-import codigoIntermediario.construcoesIntermediarias.ConstrucaoIntermediaria;
-import codigoIntermediario.construcoesIntermediarias.ConstrucaoIntermediariaAtribuicao;
-
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
+import codigoIntermediario.construcoesIntermediarias.ConstrucaoIntermediariaAtribuicao;
 
 public class GeradorDeCodigoIntermediario {
 	
-	private LinkedList<ConstrucaoIntermediaria> construcoes;
-	
 	public GeradorDeCodigoIntermediario() {
 		super();
-		this.construcoes = new LinkedList<ConstrucaoIntermediaria>();
 	}
 	
 	private void processaNo(ArvoreSintaticaAbstrataNo no) {
