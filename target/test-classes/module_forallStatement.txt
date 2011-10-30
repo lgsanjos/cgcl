@@ -1,6 +1,0 @@
-module forallStatement
-begin
-	forall j ->
-		read A[j];
-	llarof; 
-end.

@@ -1,7 +1,0 @@
-module operacaoMatematica
-  integer a;
-  integer b;
-begin
-  a := 1 + 3 * 5;
-
-end.

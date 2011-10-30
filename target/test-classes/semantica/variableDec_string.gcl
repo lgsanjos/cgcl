@@ -1,6 +1,0 @@
-module search  
-private
-	string minhaVariavelString;
-begin
-	-- test search  
-end.

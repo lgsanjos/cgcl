@@ -1,8 +1,0 @@
-module blockAssignmnet
-begin
-  a := 1;
-  b := 2;
-  c := true;
-  d := -2;
-  e := (2 + 2) / 4;
-end. 

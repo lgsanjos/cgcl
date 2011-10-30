@@ -1,7 +1,0 @@
-module search  
-private
-	integer minhaVariavel;
-begin
-	variavelNaoDeclarada, essaTbmNao, minhaVariavel := 2;
-	-- test search  
-end.

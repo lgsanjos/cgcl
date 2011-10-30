@@ -1,8 +1,0 @@
-module testaAtribuicaoSimples
-private
-  integer a;
-  string b;
-begin
-  a := 1;
-  b := 'string';
-end.  

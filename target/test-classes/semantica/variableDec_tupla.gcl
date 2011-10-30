@@ -1,6 +1,0 @@
-module search  
-private
-	[Boolean, string, integer] minhaTupla;
-begin
-	-- test search  
-end.

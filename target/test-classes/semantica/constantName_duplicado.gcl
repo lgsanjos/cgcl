@@ -1,7 +1,0 @@
-module search  
-private
-	const size = 10;
-	const size = 5;
-begin
-	-- test search  
-end.
