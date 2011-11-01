@@ -1,7 +1,7 @@
 package codigoIntermediario.construcoesIntermediarias;
 
-import codigoIntermediario.CodigoIntermediario;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
+import codigoIntermediario.CodigoIntermediario;
 import coretypes.Token;
 
 public class ConstrucaoIntermediariaExpression extends ConstrucaoIntermediaria {
@@ -163,7 +163,7 @@ public class ConstrucaoIntermediariaExpression extends ConstrucaoIntermediaria {
 			
 		} while ( i < expression.getListaDeNos().size());
 		
-		if (! ultimoTemporario.isEmpty())
+		if (ultimoTemporario.length() > 0)
 			return ultimoTemporario;
 		
 		return exp1;

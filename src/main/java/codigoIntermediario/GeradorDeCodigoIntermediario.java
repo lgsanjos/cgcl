@@ -2,6 +2,7 @@ package codigoIntermediario;
 
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import codigoIntermediario.construcoesIntermediarias.ConstrucaoIntermediariaAtribuicao;
+import codigoIntermediario.construcoesIntermediarias.ConstrucaoIntermediariaIfStatement;
 
 public class GeradorDeCodigoIntermediario {
 	
