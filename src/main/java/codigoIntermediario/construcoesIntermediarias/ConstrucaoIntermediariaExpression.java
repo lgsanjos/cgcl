@@ -84,7 +84,10 @@ public class ConstrucaoIntermediariaExpression extends ConstrucaoIntermediaria {
 	}
 	
 	private String processaRelationalOperator(ArvoreSintaticaAbstrataNo relationalOperator) {
-		// TODO: verificar o q deve ser feito com esse operador
+		
+		if (relationalOperator.getNome().equalsIgnoreCase("relationalOperator"))
+			return relationalOperator.getListaDeNos().getFirst().getToken().getValue();
+		
 		return "";
 	}
 	
@@ -117,6 +120,14 @@ public class ConstrucaoIntermediariaExpression extends ConstrucaoIntermediaria {
 		
 	}
 	
+	private String processaBooleanOperator(ArvoreSintaticaAbstrataNo booleanOperator) {
+		
+		if (booleanOperator.getNome().equalsIgnoreCase("booleanOperator"))
+			return booleanOperator.getListaDeNos().getFirst().getToken().getValue();
+		
+		return "";
+	}
+	
 	@Override
 	public String traduz(ArvoreSintaticaAbstrataNo expression) {
 
@@ -137,7 +148,7 @@ public class ConstrucaoIntermediariaExpression extends ConstrucaoIntermediaria {
 				
 			no = expression.getListaDeNos().get(i);
 			if (no != null && no.getNome().equalsIgnoreCase("booleanOperator"))
-				operador = this.processaRelationalOperator(no);
+				operador = this.processaBooleanOperator(no);
 			
 			i++;
 			if (expression.getListaDeNos().size() <= i) break;

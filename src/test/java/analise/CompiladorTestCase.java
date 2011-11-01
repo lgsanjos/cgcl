@@ -52,6 +52,7 @@ public class CompiladorTestCase extends TestCase {
 			no = this.buildAnaliseSintatica(codigoFonte).gerarArvore();
 			return new AnalisadorSemantico(no);
 		} catch (Exception e) {
+			fail("Falha: " + e.getMessage());
 			return null;
 		}
     	

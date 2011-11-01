@@ -35,13 +35,12 @@ public class GeracaoDeCodigoIntermediarioTest extends CompiladorTestCase {
 	
 	public void testSimpleExpressionComBooleanOperator() {
 		LinkedList<ConstrucaoDeQuatroEnderecos> codigoIntermediario;
-		gerarCodigoIntermediarioDoArquivo("codigoIntermediario/operacaoMatematica.gcl");
+		gerarCodigoIntermediarioDoArquivo("codigoIntermediario/booleanOperator.gcl");
 		codigoIntermediario = CodigoIntermediario.getCodigo();
 		
-		assertEquals(3, codigoIntermediario.size());
-		assertEquals("*", codigoIntermediario.get(0).getOperador());
-		assertEquals("+", codigoIntermediario.get(1).getOperador());
-		assertEquals(":=", codigoIntermediario.get(2).getOperador());
+		assertEquals(2, codigoIntermediario.size());
+		assertEquals(">=", codigoIntermediario.get(0).getOperador());
+		assertEquals(":=", codigoIntermediario.get(1).getOperador());
 	}	
 
 }

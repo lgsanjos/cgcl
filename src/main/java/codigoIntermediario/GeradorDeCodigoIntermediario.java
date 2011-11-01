@@ -13,12 +13,11 @@ public class GeradorDeCodigoIntermediario {
 	
 	private void processaNo(ArvoreSintaticaAbstrataNo no) {
 		
-		if (no.getNome().equalsIgnoreCase("assignStatement")) {
+		if (no.getNome().equalsIgnoreCase("assignStatement")) 
 			ConstrucaoIntermediariaAtribuicao.getInstancia().traduz(no);
-		}
-		
-		if (no.getNome().equalsIgnoreCase("ifStatement")) {
-		}
+
+		if (no.getNome().equalsIgnoreCase("ifStatement"))
+			ConstrucaoIntermediariaIfStatement.getInstancia().traduz(no);
 		
 		if (no.getNome().equalsIgnoreCase("writeStatement")) {
 		}
