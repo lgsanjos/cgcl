@@ -19,6 +19,7 @@ public class AnaliseLexicaTest extends TestCase {
 	}
 
 	public void testValidaTokenKeywordBegin() {
+		assertEquals( 1 % 3, 1);
 		assertTrue(analisador.validaLexema("begin"));
 	}
 
