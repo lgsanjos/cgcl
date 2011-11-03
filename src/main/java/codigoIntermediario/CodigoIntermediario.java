@@ -49,6 +49,18 @@ public class CodigoIntermediario {
 		return label;
 	}
 	
+	public static void addNoOperation() {
+		add("nop","", "", "");
+	}
+	
+	public static void addParam(String parametro) {
+		add("param",parametro,"","");
+	}
+	
+	public static void addCall(String nomeProcedimento, Integer quantidadeDeParametros) {
+       add("call", nomeProcedimento, Integer.toString(quantidadeDeParametros), "");
+	}
+	
 	public static void limpar() {
 		instancia.pilha.clear();
 	}
