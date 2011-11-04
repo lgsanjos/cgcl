@@ -1,0 +1,11 @@
+module helloWorld 
+private 
+	proc printTexto (val integer numero)
+	begin
+		write 'Hello -> ', numero, 'world';
+	end;
+	
+begin
+	printTexto(2);
+	skip;
+end. 

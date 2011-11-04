@@ -72,6 +72,15 @@ public class ConstrucaoIntermediariaExpression extends ConstrucaoIntermediaria {
 	
 	private String processaSimpleExpression(ArvoreSintaticaAbstrataNo simpleExpression) {
 		
+		if (simpleExpression.getListaDeNos().size() == 0) {
+			return ""; // TODO throw exception
+		}
+		
+		if (simpleExpression.getListaDeNos().size() == 1) {
+			 String term = this.extraiValorDeUmTerm(simpleExpression.getListaDeNos().getFirst());
+			 return CodigoIntermediario.addAssignment(term);
+		}
+		
 		if (simpleExpression.getListaDeNos().size() != 3)
 			return "";
 		

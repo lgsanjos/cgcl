@@ -20,20 +20,23 @@ public class ConstrucaoIntermediariaWriteStatement extends ConstrucaoIntermediar
 	@Override
 	public String traduz(ArvoreSintaticaAbstrataNo no) {
 		if (no.getNome().equalsIgnoreCase("writeStatement")) {
+			String parametroImpressao = "";
 			for (ArvoreSintaticaAbstrataNo write : no.getListaDeNos()) {
 				if (write.getNome().equalsIgnoreCase("writeItem")) {
-					String parametroImpressao;
 					
 					ArvoreSintaticaAbstrataNo writeItemFilho = write.getListaDeNos().getFirst();
 					if (writeItemFilho.getNome().equalsIgnoreCase("expression")) {
-						parametroImpressao = ConstrucaoIntermediariaExpression.getInstancia().traduz(writeItemFilho);
+						// id ou numero
+						String var = ConstrucaoIntermediariaExpression.getInstancia().traduz(writeItemFilho);
+						CodigoIntermediario.addParam(var);
+						parametroImpressao += "%d";
 					} else {
-						parametroImpressao = writeItemFilho.getToken().getValue();
+						// string
+						parametroImpressao += writeItemFilho.getToken().getValue();
 					}
-					
-					CodigoIntermediario.addWriteStatement(parametroImpressao);
 				}
 			}
+			CodigoIntermediario.addWriteStatement(parametroImpressao);
 		}
 		
 		return "";

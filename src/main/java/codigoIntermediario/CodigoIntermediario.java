@@ -1,6 +1,8 @@
 package codigoIntermediario;
 
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 public class CodigoIntermediario {
 	
@@ -15,8 +17,8 @@ public class CodigoIntermediario {
 		return instancia;
 	}
 
-	public static LinkedList<ConstrucaoDeQuatroEnderecos> getCodigo() {
-		return getInstancia().pilha;
+	public static List<ConstrucaoDeQuatroEnderecos> getCodigo() {
+		return Collections.unmodifiableList(getInstancia().pilha);
 	}
 
 	public static String add(String operador, String elementoEsquerda, String elementoDireita) {
@@ -53,6 +55,10 @@ public class CodigoIntermediario {
 		add("nop","", "", "");
 	}
 	
+	public static String addAssignment(String value) {
+		return add(":=", value, "");
+	}
+	
 	public static void addParam(String parametro) {
 		add("param",parametro,"","");
 	}
@@ -61,9 +67,25 @@ public class CodigoIntermediario {
        add("call", nomeProcedimento, Integer.toString(quantidadeDeParametros), "");
 	}
 	
+	public static void addWriteStatement(String texto) {
+		add("printf", texto, "", "");
+	}
+	
 	public static void limpar() {
 		instancia.pilha.clear();
 	}
 	
+	
+	public String to_string() {
+		String retorno = "";
+		
+		for (ConstrucaoDeQuatroEnderecos codigo : this.pilha)
+			retorno +=  codigo.getOperador() + " " +
+						codigo.getElementoAEsquerda() + " " +
+						codigo.getElementoADireita() + " " +
+						codigo.getResultado() + "\r\n";
+		
+		return retorno; 
+	}
 
 }
