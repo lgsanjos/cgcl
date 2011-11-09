@@ -20,6 +20,10 @@ public class GeradorDeAssembly {
 		
 		for (ConstrucaoDeQuatroEnderecos construcao : codigoIntermediario) {
 			
+			if (construcao.getOperador().equalsIgnoreCase("call")) {
+				
+			}
+			
 		}
 	}
 }
