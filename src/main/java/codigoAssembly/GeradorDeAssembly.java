@@ -4,6 +4,7 @@ import java.util.List;
 
 import codigoAssembly.estrutura.BlocoAssembly;
 import codigoAssembly.estrutura.CodigoAssembly;
+import codigoAssembly.estrutura.StringAssembly;
 import codigoIntermediario.CodigoIntermediario;
 import codigoIntermediario.ConstrucaoDeQuatroEnderecos;
 
@@ -13,7 +14,6 @@ public class GeradorDeAssembly {
 	private int contadorDeInstrucao;
 	private BlocoAssembly blocoAtual;
 	
-	
 	private GeradorDeAssembly() {
 		this.carregaInstrucoes();
 		this.reseta();
@@ -21,7 +21,7 @@ public class GeradorDeAssembly {
 	
 	private boolean nomeDoOperadorAtualEh(String nome) {
 		if (this.codigoIntermediario != null && this.codigoIntermediario.get(contadorDeInstrucao) != null)
-			return this.codigoIntermediario.get(contadorDeInstrucao).getOperador().equalsIgnoreCase("label");
+			return this.codigoIntermediario.get(contadorDeInstrucao).getOperador().equalsIgnoreCase(nome);
 		
 		return false;
 	}
@@ -54,47 +54,58 @@ public class GeradorDeAssembly {
 	
 	private void traduzLabel() {
 		String nomeDoLabel = this.instrucaoAtual().getElementoAEsquerda();
-		blocoAtual = CodigoAssembly.getInstancia().getBloco(nomeDoLabel);
+
+		blocoAtual = CodigoAssembly.getInstancia().getBloco("_" + nomeDoLabel + ":");
+		blocoAtual.addPushl("%ebp");
+		blocoAtual.addMovl("%esp", "%ebp");
 	}
 	
 	private void traduzCall() {
 		String nomeMetodo = instrucaoAtual().getElementoAEsquerda();
-		int quantidadeParametros = Integer.parseInt(instrucaoAtual().getElementoADireita());
-		blocoAtual.addInstrucao("call", nomeMetodo, "");
+		//int quantidadeParametros = Integer.parseInt(instrucaoAtual().getElementoADireita());
+		blocoAtual.addInstrucaoCall(nomeMetodo);
+	}
+	
+	private void traduzNoOperation() {
+		blocoAtual.addInstrucaoNop();
+	}
+	
+	private void traduzPrintf() {
+		String conteudo = instrucaoAtual().getElementoAEsquerda();
+		String id = StringAssembly.novaString(conteudo);
+		blocoAtual.addDeclaracaoString(id, conteudo);
+		
+		blocoAtual.addPushl(id);
+		blocoAtual.addInstrucaoCall("printf");
+	}
+	
+	private void traduzParam() {
+		
 	}
 	
 	public void traduzir() {
 		CodigoAssembly.limpar();
-		
+
 		while (instrucaoAtual() != null) {
-			
+
 			if (nomeDoOperadorAtualEh("label"))
 				this.traduzLabel();
-			
+
 			if (nomeDoOperadorAtualEh("call"))
 				this.traduzCall();
-				
-				
-			
+
+			if (nomeDoOperadorAtualEh("nop"))
+				this.traduzNoOperation();
+
+			if (nomeDoOperadorAtualEh("printf"))
+				this.traduzPrintf();
+
+			if (nomeDoOperadorAtualEh("param"))
+				this.traduzParam();
+
 			this.proximaInstrucao();
 		}
-			
+
 	}
-	
-	public void gerarBlocoPrincipal() {
-		BlocoAssembly main =  CodigoAssembly.getInstancia().getBloco("_main");
-		
-		main.addInstrucao("pushl", "%ebp", "");
-		main.addInstrucao("movl", "%esp", "%ebp");
-		
-		List<ConstrucaoDeQuatroEnderecos> codigoIntermediario = CodigoIntermediario.getCodigo();
-		
-		for (ConstrucaoDeQuatroEnderecos construcao : codigoIntermediario) {
-			
-			if (construcao.getOperador().equalsIgnoreCase("call")) {
-				
-			}
-			
-		}
-	}
+
 }
