@@ -1,6 +1,6 @@
 package analise.sintatica;
 
-import analise.CompiladorTestCase;
+import util.CompiladorTestCase;
 import analise.exceptions.InvalidTokenException;
 import analise.exceptions.ProducaoSintaticaException;
 

@@ -44,6 +44,10 @@ public class CodigoIntermediario {
 		add("label", label, "", "");
 	}
 	
+	public static void addLabel(String label, Integer quantidadeDeParametros) {
+		add("label", label, quantidadeDeParametros.toString(), "");
+	}	
+	
 	public static String jumpIfFalse(String expression) {
 		String label = Labels.geraLabel(); 
 		add("jit", expression, "", label);

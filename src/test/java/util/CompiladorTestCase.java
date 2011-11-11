@@ -3,6 +3,8 @@ package util;
 import java.io.IOException;
 import java.io.InputStream;
 
+import codigoIntermediario.GeradorDeCodigoIntermediario;
+
 import junit.framework.TestCase;
 import utils.Utils;
 import analise.lexica.AnaliseLexica;
@@ -31,7 +33,13 @@ public class CompiladorTestCase extends TestCase {
 			e.printStackTrace();
 			return "";
 		}		
-	}    
+	}
+	
+	protected void saveToOutputFile(String content, String filename) {
+		filename = System.getProperty("user.dir") + "/output/" + filename;
+		System.out.println(filename);
+		//Utils.saveToFile(content, filename);
+	}
     
     protected AnaliseLexica buildAnaliseLexica(String codigoFonte){
 		AnaliseLexica analisador = new AnaliseLexica(codigoFonte);
@@ -54,7 +62,20 @@ public class CompiladorTestCase extends TestCase {
 		} catch (Exception e) {
 			return null;
 		}
-    	
     }
+    
+	protected void gerarCodigoIntermediarioDoArquivo(String nomeArquivo) {
+		
+		String codigoFonte = this.loadResourceNamed(nomeArquivo);
+				
+		AnalisadorSemantico semantico = this.buildAnalisadorSemantico(codigoFonte);
+		assertTrue(semantico.analisar());
+		assertEquals(0, semantico.getListaDeErros().size());
+		
+		ArvoreSintaticaAbstrataNo noRaiz = null;
+		noRaiz = semantico.getArvoreSintaticaAnotada();
+		
+		GeradorDeCodigoIntermediario.traduz(noRaiz);
+	}    
 
 }

@@ -1,6 +1,6 @@
 package analise.semantica;
 
-import analise.CompiladorTestCase;
+import util.CompiladorTestCase;
 
 public class AnalisadorSemanticoTest extends CompiladorTestCase {
 	

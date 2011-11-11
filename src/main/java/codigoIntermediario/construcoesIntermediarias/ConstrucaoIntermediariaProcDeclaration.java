@@ -24,7 +24,14 @@ public class ConstrucaoIntermediariaProcDeclaration extends	ConstrucaoIntermedia
 		
 		if (no.getNome().equalsIgnoreCase("procedureDecl")) {
 			String nome = no.getListaDeNos().get(1).getToken().getValue();
-			CodigoIntermediario.addLabel(nome);
+			
+			int contadorDeParametro = 0;
+			ArvoreSintaticaAbstrataNo paramPart = no.getListaDeNos().getLast();
+			for (ArvoreSintaticaAbstrataNo paramDef : paramPart.getListaDeNos())
+				if (paramDef.getNome().equalsIgnoreCase("paramDef"))
+					contadorDeParametro ++;
+					
+			CodigoIntermediario.addLabel(nome, contadorDeParametro);
 		}
 		
 		return "";

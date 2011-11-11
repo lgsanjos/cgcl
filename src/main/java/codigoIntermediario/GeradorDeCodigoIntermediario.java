@@ -24,7 +24,7 @@ public class GeradorDeCodigoIntermediario {
 	private void processaNo(ArvoreSintaticaAbstrataNo no) {
 						
 		if (isBlocoPrincipal(no)) {
-			CodigoIntermediario.addLabel("main");
+			CodigoIntermediario.addLabel("_main");
 		}
 		
 		if (no.getNome().equalsIgnoreCase("procedureDecl")) {
