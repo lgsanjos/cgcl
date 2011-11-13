@@ -1,0 +1,8 @@
+module helloWorld
+
+	proc decl()
+	begin
+	end; 
+begin
+  decl();
+end. 

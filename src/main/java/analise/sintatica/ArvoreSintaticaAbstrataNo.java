@@ -81,7 +81,7 @@ public class ArvoreSintaticaAbstrataNo {
 		return (this.listaDeNosFilhos.size());
 	}
 	
-	public String print() {
+	public String toString() {
 		return ArvoreSinstaticaAbstrataNoHelper.printNosFilhos(this);
 	}
 

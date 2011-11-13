@@ -3,14 +3,15 @@ package util;
 import java.io.IOException;
 import java.io.InputStream;
 
-import codigoIntermediario.GeradorDeCodigoIntermediario;
-
 import junit.framework.TestCase;
 import utils.Utils;
 import analise.lexica.AnaliseLexica;
-import analise.semantica.AnalisadorSemantico;
+import analise.semantica.AnaliseSemantica;
 import analise.sintatica.AnaliseSintatica;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
+import codigoAssembly.GeradorDeAssembly;
+import codigoIntermediario.CodigoIntermediario;
+import codigoIntermediario.GeradorDeCodigoIntermediario;
 import coretypes.gcl.GCLTokenTypes;
 
 public class CompiladorTestCase extends TestCase {
@@ -37,8 +38,8 @@ public class CompiladorTestCase extends TestCase {
 	
 	protected void saveToOutputFile(String content, String filename) {
 		filename = System.getProperty("user.dir") + "/output/" + filename;
-		System.out.println(filename);
-		//Utils.saveToFile(content, filename);
+		//System.out.println(filename);
+		Utils.saveToFile(content, filename);
 	}
     
     protected AnaliseLexica buildAnaliseLexica(String codigoFonte){
@@ -54,11 +55,11 @@ public class CompiladorTestCase extends TestCase {
     	return new AnaliseSintatica( this.buildAnaliseLexica(codigoFonte));
     }
     
-    protected AnalisadorSemantico buildAnalisadorSemantico(String codigoFonte) {
+    protected AnaliseSemantica buildAnalisadorSemantico(String codigoFonte) {
     	ArvoreSintaticaAbstrataNo no;
     	try {
-			no = this.buildAnaliseSintatica(codigoFonte).gerarArvore();
-			return new AnalisadorSemantico(no);
+			no = this.buildAnaliseSintatica(codigoFonte).analisar();
+			return new AnaliseSemantica(no);
 		} catch (Exception e) {
 			return null;
 		}
@@ -68,7 +69,7 @@ public class CompiladorTestCase extends TestCase {
 		
 		String codigoFonte = this.loadResourceNamed(nomeArquivo);
 				
-		AnalisadorSemantico semantico = this.buildAnalisadorSemantico(codigoFonte);
+		AnaliseSemantica semantico = this.buildAnalisadorSemantico(codigoFonte);
 		assertTrue(semantico.analisar());
 		assertEquals(0, semantico.getListaDeErros().size());
 		
@@ -76,6 +77,11 @@ public class CompiladorTestCase extends TestCase {
 		noRaiz = semantico.getArvoreSintaticaAnotada();
 		
 		GeradorDeCodigoIntermediario.traduz(noRaiz);
-	}    
+	}
+	
+	protected void gerarCodigoAssemblyDoArquivo(String nomeArquivo) {
+		this.gerarCodigoIntermediarioDoArquivo(nomeArquivo);
+		GeradorDeAssembly.traduz(CodigoIntermediario.getCodigo());
+	}
 
 }

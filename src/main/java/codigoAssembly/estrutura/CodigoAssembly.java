@@ -1,6 +1,7 @@
 package codigoAssembly.estrutura;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class CodigoAssembly {
 
@@ -19,14 +20,15 @@ public class CodigoAssembly {
 	}
 	
 	public static void limpar() {
-		instancia.codigo.clear();
+		if (instancia != null)
+			instancia.codigo.clear();
 	}
 	
 	private boolean existeBloco(String nomeBloco) {
 		return this.codigo.containsKey(nomeBloco);
 	}
 	private void criaBloco(String nomeBloco) {
-		this.codigo.put(nomeBloco, new BlocoAssembly());
+		this.codigo.put(nomeBloco, new BlocoAssembly(nomeBloco));
 	}
 	
 	public BlocoAssembly getBloco(String nomeBloco) {
@@ -34,6 +36,22 @@ public class CodigoAssembly {
 			criaBloco(nomeBloco);
 		
 		return this.codigo.get(nomeBloco);
+	}
+	
+	public String to_string() {
+		String retorno = "";
+		
+		BlocoAssembly text = getBloco(".text");
+		BlocoAssembly data = getBloco(".data");
+		
+		retorno += text.toString();
+		
+		for (Entry<String, BlocoAssembly> bloco : codigo.entrySet())
+			if (! bloco.getKey().equalsIgnoreCase(".text") && ! bloco.getKey().equalsIgnoreCase(".data"))
+				retorno += bloco.getValue().toString();
+			
+		retorno += data.toString();		
+		return retorno;	
 	}
 	
 }

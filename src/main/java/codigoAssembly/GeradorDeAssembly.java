@@ -5,17 +5,18 @@ import java.util.List;
 import codigoAssembly.estrutura.BlocoAssembly;
 import codigoAssembly.estrutura.CodigoAssembly;
 import codigoAssembly.estrutura.StringAssembly;
-import codigoIntermediario.CodigoIntermediario;
 import codigoIntermediario.ConstrucaoDeQuatroEnderecos;
 
 public class GeradorDeAssembly {
+	
+	private static GeradorDeAssembly instancia = new GeradorDeAssembly();  
 	
 	private List<ConstrucaoDeQuatroEnderecos> codigoIntermediario;
 	private int contadorDeInstrucao;
 	private BlocoAssembly blocoAtual;
 	
 	private GeradorDeAssembly() {
-		this.carregaInstrucoes();
+		codigoIntermediario = null;
 		this.reseta();
 	}
 	
@@ -26,13 +27,13 @@ public class GeradorDeAssembly {
 		return false;
 	}
 	
-	public void carregaInstrucoes() {
-		this.codigoIntermediario = CodigoIntermediario.getCodigo();
+	public void carregaInstrucoes(List<ConstrucaoDeQuatroEnderecos> codigoIntermediario) {
 		this.reseta();
+		this.codigoIntermediario = codigoIntermediario;
 	}
 	
 	private ConstrucaoDeQuatroEnderecos instrucaoAtual() {
-		if (this.codigoIntermediario.size() > this.contadorDeInstrucao)
+		if (this.codigoIntermediario.size() <= this.contadorDeInstrucao)
 			return null;
 		
 		ConstrucaoDeQuatroEnderecos proximo;
@@ -55,14 +56,19 @@ public class GeradorDeAssembly {
 	private void traduzLabel() {
 		String nomeDoLabel = this.instrucaoAtual().getElementoAEsquerda();
 
-		blocoAtual = CodigoAssembly.getInstancia().getBloco("_" + nomeDoLabel + ":");
+		if (! nomeDoLabel.endsWith(":")) 
+			nomeDoLabel += ":";
+		
+		if (blocoAtual != null)
+			blocoAtual.addRet();
+		
+		blocoAtual = CodigoAssembly.getInstancia().getBloco(nomeDoLabel);
 		blocoAtual.addPushl("%ebp");
 		blocoAtual.addMovl("%esp", "%ebp");
 	}
 	
 	private void traduzCall() {
 		String nomeMetodo = instrucaoAtual().getElementoAEsquerda();
-		//int quantidadeParametros = Integer.parseInt(instrucaoAtual().getElementoADireita());
 		blocoAtual.addInstrucaoCall(nomeMetodo);
 	}
 	
@@ -81,6 +87,14 @@ public class GeradorDeAssembly {
 	
 	private void traduzParam() {
 		
+	}
+	
+	private void posExecuta() {
+		// SEMPRE todo código deverá ter uma _main
+		CodigoAssembly.getInstancia().getBloco(".text").addGlobal("_main");
+		
+		// SEMPRE no final do último bloco deverá existir um ret
+		blocoAtual.addRet();		
 	}
 	
 	public void traduzir() {
@@ -105,7 +119,13 @@ public class GeradorDeAssembly {
 
 			this.proximaInstrucao();
 		}
-
+		
+		posExecuta();
+	}
+	
+	public static void traduz(List<ConstrucaoDeQuatroEnderecos> codigoIntermediario) {
+		instancia.carregaInstrucoes(codigoIntermediario);
+		instancia.traduzir();
 	}
 
 }

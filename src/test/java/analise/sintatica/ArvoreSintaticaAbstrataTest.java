@@ -16,7 +16,7 @@ public class ArvoreSintaticaAbstrataTest extends CompiladorTestCase {
 		raiz.adicionaNoFilho("identificador", new Token(GCLTokenTypes.IDENTIFIER, "simplesPacas"));
 		raiz.adicionaNoFilho(".", new Token(GCLTokenTypes.SYMBOL, "."));
 		
-		String printGerado = raiz.print();
+		String printGerado = raiz.toString();
 		String printTemplate = this.loadResourceNamed("asa_simplesPacas.txt");
 		boolean assertTemplateIgual;
 		assertTemplateIgual = printGerado.trim().equalsIgnoreCase(printTemplate.trim());
@@ -35,7 +35,7 @@ public class ArvoreSintaticaAbstrataTest extends CompiladorTestCase {
 		block.adicionaNoFilho("end", new Token(GCLTokenTypes.KEYWORD, "end"));
 		raiz.adicionaNoFilho(".", new Token(GCLTokenTypes.SYMBOL, "."));
 
-		String printGerado = raiz.print();
+		String printGerado = raiz.toString();
 		String printTemplate = this.loadResourceNamed("asa_simples.txt");
 		boolean assertTemplateIgual;
 		
@@ -51,9 +51,9 @@ public class ArvoreSintaticaAbstrataTest extends CompiladorTestCase {
 		// ArvoreSintaticaAbstrataNo raiz = this.analisador.gerarArvore();
 
 		try {
-			ArvoreSintaticaAbstrataNo raiz = this.analisador.gerarArvore();
+			ArvoreSintaticaAbstrataNo raiz = this.analisador.analisar();
 
-			String printGerado = raiz.print();
+			String printGerado = raiz.toString();
 			String printTemplate = this.loadResourceNamed("asa_simples.txt");
 			boolean assertTemplateIgual;
 			assertTemplateIgual = printGerado.trim().equalsIgnoreCase(
@@ -74,9 +74,9 @@ public class ArvoreSintaticaAbstrataTest extends CompiladorTestCase {
 		this.analisador = this.buildAnaliseSintatica(source);
 
 		try {
-			ArvoreSintaticaAbstrataNo raiz = this.analisador.gerarArvore();
+			ArvoreSintaticaAbstrataNo raiz = this.analisador.analisar();
 
-			String printGerado = raiz.print();
+			String printGerado = raiz.toString();
 			String printTemplate = this.loadResourceNamed("asa_simplesPacas.txt");
 			
 			boolean assertTemplateIgual;
@@ -102,7 +102,7 @@ public class ArvoreSintaticaAbstrataTest extends CompiladorTestCase {
 		block.adicionaNoFilho("end", new Token(GCLTokenTypes.KEYWORD, "end"));
 		raiz.adicionaNoFilho(".", new Token(GCLTokenTypes.SYMBOL, "."));
 
-		String printGerado = raiz.print();
+		String printGerado = raiz.toString();
 		String printTemplate = this.loadResourceNamed("asa_simples.txt");
 		boolean assertTemplateIgual;
 		
@@ -117,9 +117,9 @@ public class ArvoreSintaticaAbstrataTest extends CompiladorTestCase {
 		this.analisador = this.buildAnaliseSintatica(source);
 
 		try {
-			ArvoreSintaticaAbstrataNo raiz = this.analisador.gerarArvore();
+			ArvoreSintaticaAbstrataNo raiz = this.analisador.analisar();
 
-			String printGerado = raiz.print();
+			String printGerado = raiz.toString();
 			System.out.println(printGerado);
 			
 		} catch (InvalidTokenException et) {

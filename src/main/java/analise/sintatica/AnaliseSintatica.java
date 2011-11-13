@@ -89,8 +89,7 @@ public class AnaliseSintatica {
 		return this.pilhaDeTokensVazia();
 	}
 
-	public ArvoreSintaticaAbstrataNo gerarArvore() throws ProducaoSintaticaException, InvalidTokenException{
-
+	public ArvoreSintaticaAbstrataNo analisar() throws ProducaoSintaticaException, InvalidTokenException{
 		this.valida();
 		return raizDaArvoreSintaticaAbstrata;
 	  			

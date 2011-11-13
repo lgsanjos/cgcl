@@ -7,9 +7,15 @@ import java.util.List;
 public class BlocoAssembly {
 	
 	private LinkedList<InstrucaoAssembly> codigo;
+	private String nome;
 	
-	public BlocoAssembly() {
-		this.codigo = new LinkedList<InstrucaoAssembly>(); 
+	public BlocoAssembly(String nome) {
+		this.codigo = new LinkedList<InstrucaoAssembly>();
+		this.nome = nome;
+	}
+	
+	public String getNome() {
+		return this.nome;
 	}
 	
 	public List<InstrucaoAssembly> getCodigo() {
@@ -17,11 +23,15 @@ public class BlocoAssembly {
 	}
 	
 	public void addInstrucaoCall(String nomeMetodo) {
-		addInstrucao("call", "_" + nomeMetodo, "");
+		addInstrucao("call", nomeMetodo, "");
 	}
 	
 	public void addInstrucaoNop() {
 		addInstrucao("nop", "", "");
+	}
+	
+	public void addGlobal(String nome) {
+		addInstrucao(".global", nome, "");
 	}
 	
 	public void addDeclaracaoString(String identificador, String texto) {
@@ -39,6 +49,10 @@ public class BlocoAssembly {
 		addInstrucao("movl", esquerdo, direito);
 	}
 	
+	public void addRet() {
+		addInstrucao("ret", "", "");
+	}
+	
 	private void addInstrucao(String operacao, String param1, String param2) {
 		InstrucaoAssembly instrucao = new InstrucaoAssembly();
 		instrucao.setOperacao(operacao);
@@ -46,6 +60,25 @@ public class BlocoAssembly {
 		instrucao.setParametro2(param2);
 		
 		this.codigo.addLast(instrucao);
+	}
+	
+	@Override
+	public String toString() {
+		String retorno = this.getNome() + "\r\n";
+		
+		for (InstrucaoAssembly linha : codigo) {
+
+			retorno += "\t"  + linha.getOperacao();
+			if (! linha.getParametro1().isEmpty()) 
+				retorno += " " + linha.getParametro1();
+			
+			if (! linha.getParametro2().isEmpty()) 
+				retorno += ", " + linha.getParametro2();
+			
+			retorno += "\r\n";
+		}	
+				
+		return retorno + "\r\n";
 	}
 
 }

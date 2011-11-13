@@ -1,0 +1,3 @@
+label decl 0 
+label _main:  
+call decl 0 

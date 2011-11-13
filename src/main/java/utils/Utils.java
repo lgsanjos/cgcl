@@ -73,7 +73,7 @@ public class Utils {
     
 	public static void saveToFile(String content, String filename) {
     	try {
-    		filename = (Utils.getCurrentPath(System.out) + "/output/" +  filename.trim());
+    		//filename = (Utils.getCurrentPath(System.out) + "/output/" +  filename.trim());
     		BufferedWriter out = new BufferedWriter(new FileWriter(filename));
     		out.write(content);
     		out.close();

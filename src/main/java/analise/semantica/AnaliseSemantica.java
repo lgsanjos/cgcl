@@ -7,13 +7,13 @@ import analise.semantica.validacoes.*;
 import analise.sintatica.ArvoreSintaticaAbstrataNo;
 import coretypes.StringList;
 
-public class AnalisadorSemantico {
+public class AnaliseSemantica {
 	
 	private ArvoreSintaticaAbstrataNo no;
 	private StringList ListaDeErros;
 	private LinkedList<AnaliseSemanticaAcaoAbstrata> acoes;
 	
-	public AnalisadorSemantico(ArvoreSintaticaAbstrataNo no) {
+	public AnaliseSemantica(ArvoreSintaticaAbstrataNo no) {
 		
 		this.ListaDeErros = new StringList();
 
@@ -28,7 +28,7 @@ public class AnalisadorSemantico {
 		this.no = no;
 	}
 
-	public AnalisadorSemantico() {
+	public AnaliseSemantica() {
 		this(null);
 	}
 	

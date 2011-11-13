@@ -1,0 +1,9 @@
+label printTexto 1 
+:= numero  _temp1
+param _temp1  
+printf 'Hello -> '%d'world'  
+label _main:  
+:= 2  _temp2
+param _temp2  
+call printTexto 1 
+nop   
