@@ -156,7 +156,7 @@ public class AnaliseLexicaIntegracaoTest extends TestCase {
 		assertTrue(analisador.getNextToken().getValue().equals("range"));
 		assertTrue(analisador.getNextToken().getValue().equals("["));
 		assertTrue(analisador.getNextToken().getValue().equals("1"));
-		assertTrue(analisador.getNextToken().getValue().equals(".."));
+		assertTrue(analisador.getNextToken().getValue().equals("to"));
 		assertTrue(analisador.getNextToken().getValue().equals("size"));
 		assertTrue(analisador.getNextToken().getValue().equals("]"));
 		assertTrue(analisador.getNextToken().getValue().equals("sizer"));

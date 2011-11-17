@@ -98,7 +98,15 @@ public class AnalisadorSemanticoTest extends CompiladorTestCase {
 		analisador.analisar();
 		
 		assertEquals(1, analisador.getListaDeErros().size());
-	}	
+	}
+	
+	public void testArquivoSearch() {
+		String codigoFonte = this.loadResourceNamed("search.gcl");
+		AnaliseSemantica analisador = this.buildAnalisadorSemantico(codigoFonte);
+		analisador.analisar();
+		
+		assertEquals(0, analisador.getListaDeErros().size());
+	}		
 	
 	public void testFalhaChamadaDeProcedureComParametrosErrados() {
 		String codigoFonte = this.loadResourceNamed("semantica/callProcedureComParamsErrados.gcl");

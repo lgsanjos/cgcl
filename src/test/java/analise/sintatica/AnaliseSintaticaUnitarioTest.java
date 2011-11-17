@@ -40,13 +40,13 @@ public class AnaliseSintaticaUnitarioTest extends CompiladorTestCase {
     	String source = "module oi begin end;";
     	
     	this.analisador = this.buildAnaliseSintatica(source);
-    	//assertFalse( this.analisador.valida() );	
 		try {
-			assertTrue(this.analisador.valida());
+			this.analisador.valida();
+			fail("deveria ter dado excecao");
 		} catch (InvalidTokenException et) {
 			fail(et.getMessage());
 		} catch (ProducaoSintaticaException ep) {
-			fail(ep.getMessage());
+			assertTrue(true);
 		} 
     }
        
@@ -54,11 +54,10 @@ public class AnaliseSintaticaUnitarioTest extends CompiladorTestCase {
     	String source = "module oi @ begin end.";
     	
     	this.analisador = this.buildAnaliseSintatica(source);
-    	//assertFalse( this.analisador.valida() );	
 		try {
-			assertTrue(this.analisador.valida());
+			this.analisador.valida();
 		} catch (InvalidTokenException et) {
-			fail(et.getMessage());
+			assertTrue(true);
 		} catch (ProducaoSintaticaException ep) {
 			fail(ep.getMessage());
 		} 

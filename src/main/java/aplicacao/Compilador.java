@@ -16,11 +16,12 @@ import codigoAssembly.estrutura.CodigoAssembly;
 import codigoIntermediario.CodigoIntermediario;
 import codigoIntermediario.ConstrucaoDeQuatroEnderecos;
 import codigoIntermediario.GeradorDeCodigoIntermediario;
+import coretypes.gcl.GCLTokenTypes;
 
 public class Compilador {
 	
-	private String nomeArquivoEntrada;
-	private String nomeArquivoSaida;
+	private String nomeArquivoEntrada = "";
+	private String nomeArquivoSaida = "";
 	private Boolean emitirArvoreSintatica = false;
 	private Boolean emitirCodigoIntermediario = false;
 	private Boolean emitirCodigoAssembly = false;
@@ -52,10 +53,10 @@ public class Compilador {
 	
 	private String nomeArquivoSaida() {
 		if (this.nomeArquivoSaida.isEmpty()) {
-			nomeArquivoSaida = this.nomeArquivoEntrada.replaceFirst(".gcl", "");
+			this.nomeArquivoSaida = this.nomeArquivoEntrada.replaceFirst(".gcl", "");
 		}
 		
-		return "./" + nomeArquivoSaida;
+		return "./" + this.nomeArquivoSaida;
 	}
 	
 	private String carregaArquivoDeEntrada() throws IOException {
@@ -76,8 +77,12 @@ public class Compilador {
 	
 	private ArvoreSintaticaAbstrataNo gerarArvoreSintaticaAbstrata(String codigoFonte) throws ProducaoSintaticaException, InvalidTokenException {
 		AnaliseLexica analisadorLexico = new AnaliseLexica(codigoFonte);
+		analisadorLexico.addTokenClassException(GCLTokenTypes.COMMENT);
+		analisadorLexico.addTokenClassException(GCLTokenTypes.ENDOFLINE);
+		analisadorLexico.addTokenClassException(GCLTokenTypes.WHITESPACE);
 		AnaliseSintatica analisadorSintatico = new AnaliseSintatica(analisadorLexico);
-		return  analisadorSintatico.analisar();
+		
+		return analisadorSintatico.analisar();
 	}
 	
 	private void executaAnaliseSemantica(ArvoreSintaticaAbstrataNo raizArvoreSintaticaAbstrata) throws AnaliseSemanticaException {
@@ -94,28 +99,48 @@ public class Compilador {
 	
 	private void gerarSaidaCodigoIntermediario() {
 		if (this.emitirCodigoIntermediario)
-			Utils.saveToFile(CodigoIntermediario.getInstancia().toString(), this.nomeArquivoSaida() + "_ci");		
+			Utils.saveToFile(CodigoIntermediario.getInstancia().to_string(), this.nomeArquivoSaida() + "_ci");		
 	}
 	
 	private void gerarSaidaCodigoAssembly() {
 		if (this.emitirCodigoAssembly)
-			Utils.saveToFile(CodigoAssembly.getInstancia().toString(), this.nomeArquivoSaida() + "_asm");		
+			Utils.saveToFile(CodigoAssembly.getInstancia().to_string(), this.nomeArquivoSaida() + "_asm");		
+	}
+	
+	private ArvoreSintaticaAbstrataNo executaAnaliseLexicaESintatica() throws IOException, ProducaoSintaticaException, InvalidTokenException {
+		Log.debbug("carregando arquivo de entrada...");
+		String codigoFonte = carregaArquivoDeEntrada();
+		Log.debbug("arquivo de entrada carregado com sucesso");
+		
+		ArvoreSintaticaAbstrataNo raizArvoreSintaticaAbstrata = this.gerarArvoreSintaticaAbstrata(codigoFonte);
+		return raizArvoreSintaticaAbstrata;
 	}
 	
 	public void compilar() throws ProducaoSintaticaException, InvalidTokenException, IOException, AnaliseSemanticaException {
-		String codigoFonte = carregaArquivoDeEntrada();
+		Log.debbug("Inciando compilacao");
 		
-		ArvoreSintaticaAbstrataNo raizArvoreSintaticaAbstrata = this.gerarArvoreSintaticaAbstrata(codigoFonte);
+		Log.debbug("executando analise sintatica...");
+		ArvoreSintaticaAbstrataNo raizArvoreSintaticaAbstrata = this.executaAnaliseLexicaESintatica();
 		this.gerarSaidaArvoreSintatica(raizArvoreSintaticaAbstrata);
+		Log.debbug("analise sintatica executada com sucesso");
 		
+		
+		Log.debbug("executando analise semantica...");
 		this.executaAnaliseSemantica(raizArvoreSintaticaAbstrata);
-
+		Log.debbug("analise semantica executada com sucesso");
+		
+		
+		Log.debbug("gerando codigo intermediario...");
 		GeradorDeCodigoIntermediario.traduz(raizArvoreSintaticaAbstrata);
 		List<ConstrucaoDeQuatroEnderecos> codigoIntermediario = CodigoIntermediario.getCodigo();
 		this.gerarSaidaCodigoIntermediario();
+		Log.debbug("codigo intermediario executado com sucesso");
 		
+		
+		Log.debbug("gerando codigo assembly...");
 		GeradorDeAssembly.traduz(codigoIntermediario);
 		this.gerarSaidaCodigoAssembly();
+		Log.debbug("codigo assembly executado com sucesso");
 
 	}
 		

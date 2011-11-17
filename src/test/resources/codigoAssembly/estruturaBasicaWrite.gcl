@@ -1,0 +1,5 @@
+module helloWorld
+
+begin
+  write "Hello world";
+end. 

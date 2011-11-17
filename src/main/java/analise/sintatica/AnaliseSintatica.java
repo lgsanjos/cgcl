@@ -6,7 +6,8 @@ import analise.exceptions.InvalidTokenException;
 import analise.exceptions.ProducaoSintaticaException;
 import analise.exceptions.ProducaoSintaticaLoggedException;
 import analise.lexica.AnaliseLexica;
-import analise.sintatica.producoes.*;
+import analise.sintatica.producoes.ProducoesEnum;
+import analise.sintatica.producoes.ProducoesFactory;
 import coretypes.Token;
 import coretypes.TokenList;
 
@@ -82,9 +83,9 @@ public class AnaliseSintatica {
 
 		while (this.hasTokenParaProcessar()) {
 		}
-		if ( this.validaSintaxeEGeraASA() ){
+		
+		if (this.validaSintaxeEGeraASA())
 			this.limpaPilhaDeTokens();
-		}
 		
 		return this.pilhaDeTokensVazia();
 	}
@@ -92,7 +93,6 @@ public class AnaliseSintatica {
 	public ArvoreSintaticaAbstrataNo analisar() throws ProducaoSintaticaException, InvalidTokenException{
 		this.valida();
 		return raizDaArvoreSintaticaAbstrata;
-	  			
 	}
 
 }

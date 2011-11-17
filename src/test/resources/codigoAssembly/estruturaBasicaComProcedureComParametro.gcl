@@ -1,0 +1,8 @@
+module helloWorld
+
+	proc decl(integer meuPar)
+	begin
+	end; 
+begin
+  decl(2);
+end. 

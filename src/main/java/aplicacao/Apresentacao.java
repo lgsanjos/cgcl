@@ -3,17 +3,16 @@ package aplicacao;
 public class Apresentacao {
 	
 	private static void showAbout(){
-		  System.out.println("**** Guarded Command Language Compiler ****");
-		  System.out.println("Universidade Estadual de Maringá");
-		  System.out.println("Trabalho de Compiladores 2011");
-		  System.out.println("Professor: Anderson Faustino da Silva");
-		  System.out.println("Aluno: Luiz Guilherme S. Anjos RA: 45220");
-		  System.out.println("Aluno: Fabrício Noda RA: 39854");
-		  System.out.println("*******************************************");
+		System.out.println("Universidade Estadual de Maringá");
+		System.out.println("Trabalho de Compiladores 2011");
+		System.out.println("Professor: Anderson Faustino da Silva");
+		System.out.println("Aluno: Luiz Guilherme S. Anjos RA: 45220");
+		System.out.println("Aluno: Fabrício Noda RA: 39854");
+		System.out.println("*******************************************");
 	}
 		
 	private static void showWelcome(){
-      System.out.println("**** Guarded Command Language Compiler ****");
+		System.out.println("**** Guarded Command Language Compiler ****");
 	}
 	
 	private static void showHelp(){
@@ -55,40 +54,64 @@ public class Apresentacao {
 				
 		return false;		
 	}
+	
+	private static void verificaNivelDeLog(String[] args) {
+		if (possuiOpcaoNoArray("-err", args))
+			Log.setNivel(Nivel.ERROR);
+		
+		if (possuiOpcaoNoArray("-inf", args))
+			Log.setNivel(Nivel.INFO);
+
+		if (possuiOpcaoNoArray("-deb", args))
+			Log.setNivel(Nivel.DEBBUG);		
+	}
 
 	public static void main(String[] args) {
+		Log.setNivel(Nivel.INFO);
 		
+		showWelcome();
 		if (args.length == 0) {
-			showWelcome();
 			showAbout();
 			showHelp();
+			return;
 		}
-	
+
 		try {
 			Compilador cgcl = new Compilador(nomeDoArquivoDeEntrada(args));
-
+		
+			verificaNivelDeLog(args);
+			
 			if (possuiOpcaoNoArray("-a", args)) {
 				showWelcome();
 				showAbout();
-			}	
+				return;
+			}
+			
+			if (possuiOpcaoNoArray("-h", args)) {
+				showWelcome();
+				showHelp();
+				return;
+			}			
 			
 			if (possuiOpcaoNoArray("-da", args))
 				cgcl.emitirArvoreSintatica();
-			
+
 			if (possuiOpcaoNoArray("-di", args))
 				cgcl.emitirCodigoIntermediario();
-			
+
 			if (possuiOpcaoNoArray("-s", args))
 				cgcl.emitirCodigoAssembly();
-			
+
 			if (possuiOpcaoNoArray("-i", args))
 				cgcl.otimizarInline();
-			
+
 			if (! nomeDoArquivoDeSaida(args).isEmpty())
-				cgcl.setNomeDoArquivoDeSaida(nomeDoArquivoDeSaida(args));			
+				cgcl.setNomeDoArquivoDeSaida(nomeDoArquivoDeSaida(args));
+			
+			cgcl.compilar();
 			
 		} catch(Exception e) {
-			System.out.println("Exception: " + e.getClass().getName() + ", " + e.getMessage());
+			Log.error(e.getClass().getName() + ", " + e.getMessage());
 		}
 
 	}

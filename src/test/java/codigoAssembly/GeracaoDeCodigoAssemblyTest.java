@@ -22,6 +22,7 @@ public class GeracaoDeCodigoAssemblyTest extends CompiladorTestCase {
 		saveToOutputFile(codigoAssembly, "estruturaBasicaParaExecutar_assembly");
 		
 		assertEquals(1, CodigoIntermediario.getCodigo().size());
+		assertTrue(comparaResourceComOutput("codigoAssembly/estruturaBasicaParaExecutar.asm", "estruturaBasicaParaExecutar_assembly"));
 	}
 	
 	public void testEstruturaAssemblyBasicaComProcedureSemParametro() {
@@ -35,6 +36,7 @@ public class GeracaoDeCodigoAssemblyTest extends CompiladorTestCase {
 		saveToOutputFile(codigoAssembly, "estruturaBasicaComProcedureSemParametro_assembly");
 		
 		assertEquals(3, CodigoIntermediario.getCodigo().size());
+		assertTrue(comparaResourceComOutput("codigoAssembly/estruturaBasicaComProcedureSemParametro.asm", "estruturaBasicaComProcedureSemParametro_assembly"));
 	}
 	
 	public void testEstruturaAssemblyBasicaComProcedureComParametro() {

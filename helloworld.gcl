@@ -1,0 +1,13 @@
+module atribuicaoGuarded
+
+	proc search ()
+	begin
+	  skip;
+	  skip;
+	  skip;
+	end;
+	
+begin
+	search();
+	
+end. 

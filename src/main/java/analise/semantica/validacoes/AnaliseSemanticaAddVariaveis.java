@@ -10,7 +10,7 @@ public class AnaliseSemanticaAddVariaveis extends AnaliseSemanticaAcaoAbstrata {
 	@Override
 	public void executa(ArvoreSintaticaAbstrataNo no) throws AnaliseSemanticaException {
 		
-		if (no.getNome().equalsIgnoreCase("variableDef")) {
+		if (no.getNome().equalsIgnoreCase("variableDef") && ! no.getNoPai().getNome().equalsIgnoreCase("paramDef")) {
 			String tipagem = "";			
 		
 			for (ArvoreSintaticaAbstrataNo filho : no.getListaDeNos()) {			

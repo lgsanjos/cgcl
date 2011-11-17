@@ -36,8 +36,16 @@ public class CompiladorTestCase extends TestCase {
 		}		
 	}
 	
+	protected String getOutputPath() {
+		return System.getProperty("user.dir") + "/output/";
+	}
+	
+	protected String getResourcePath() {
+		return System.getProperty("user.dir") + "/src/test/resources/";
+	}	
+	
 	protected void saveToOutputFile(String content, String filename) {
-		filename = System.getProperty("user.dir") + "/output/" + filename;
+		filename = getOutputPath() + filename;
 		//System.out.println(filename);
 		Utils.saveToFile(content, filename);
 	}
@@ -70,6 +78,7 @@ public class CompiladorTestCase extends TestCase {
 		String codigoFonte = this.loadResourceNamed(nomeArquivo);
 				
 		AnaliseSemantica semantico = this.buildAnalisadorSemantico(codigoFonte);
+		assertNotNull(semantico);
 		assertTrue(semantico.analisar());
 		assertEquals(0, semantico.getListaDeErros().size());
 		
@@ -82,6 +91,21 @@ public class CompiladorTestCase extends TestCase {
 	protected void gerarCodigoAssemblyDoArquivo(String nomeArquivo) {
 		this.gerarCodigoIntermediarioDoArquivo(nomeArquivo);
 		GeradorDeAssembly.traduz(CodigoIntermediario.getCodigo());
+	}
+	
+	protected boolean comparaArquivos(String arquivoEsperado, String arquivo) {
+		try {
+			String conteudoEsperado = Utils.loadFromFile(arquivoEsperado);
+			String conteudo = Utils.loadFromFile(arquivo);
+			
+			return conteudoEsperado.equals(conteudo);
+		} catch (IOException e) {
+			return false;
+		}
+	}
+	
+	protected boolean comparaResourceComOutput(String nomeArquivoResource, String nomeArquivoOutput) {
+		return comparaArquivos(getResourcePath() + nomeArquivoResource, getOutputPath() + nomeArquivoOutput);
 	}
 
 }
