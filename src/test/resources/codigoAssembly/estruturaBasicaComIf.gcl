@@ -1,0 +1,11 @@
+module helloWorld 
+begin
+  integer result;
+  integer a;
+  integer b;
+  a := 1;
+  b := 1;	
+  
+  if a = b -> result :=  1;
+  fi;
+end. 

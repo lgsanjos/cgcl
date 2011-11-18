@@ -39,6 +39,21 @@ public class GeracaoDeCodigoAssemblyTest extends CompiladorTestCase {
 		assertTrue(comparaResourceComOutput("codigoAssembly/estruturaBasicaComProcedureSemParametro.asm", "estruturaBasicaComProcedureSemParametro_assembly"));
 	}
 	
+	public void testEstruturaAssemblyBasicaComIf() {
+		
+		gerarCodigoAssemblyDoArquivo("codigoAssembly/estruturaBasicaComIf.gcl");
+		
+		String codigoIntermediario = CodigoIntermediario.getInstancia().to_string();
+		String codigoAssembly = CodigoAssembly.getInstancia().to_string();
+		
+		saveToOutputFile(codigoIntermediario, "estruturaBasicaComIf_intermediario");
+		saveToOutputFile(codigoAssembly, "estruturaBasicaComIf_assembly");
+		
+		assertTrue(comparaResourceComOutput("codigoAssembly/estruturaBasicaComIf.asm", "estruturaBasicaComIf_assembly"));
+	}
+	
+	
+	
 	public void testEstruturaAssemblyBasicaComProcedureComParametro() {
 		
 		gerarCodigoAssemblyDoArquivo("codigoAssembly/estruturaBasicaComProcedureComParametro.gcl");
