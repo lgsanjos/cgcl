@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CodigoIntermediario {
+public class CodigoIntermediario {	
 	
 	private static CodigoIntermediario instancia = new CodigoIntermediario();
 	private LinkedList<ConstrucaoDeQuatroEnderecos> pilha;
